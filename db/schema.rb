@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081127135904) do
+ActiveRecord::Schema.define(:version => 20081129005159) do
+
+  create_table "abuses", :force => true do |t|
+    t.string   "email"
+    t.string   "title"
+    t.string   "referer"
+    t.string   "description"
+    t.boolean  "confirmed",     :default => false
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
