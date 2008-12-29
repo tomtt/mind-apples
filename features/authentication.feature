@@ -9,3 +9,11 @@ Feature: Logging in
     And I fill in "Password" with "letmein"
     And I press "Log in"
     Then I should see "Log In"
+
+  Scenario: Log in as regular user
+    Given my username is "anna" and my password is "frooble"
+    And I am on the login page
+    When I fill in "Login" with "anna"
+    And I fill in "Password" with "frooble"
+    And I press "Log in"
+    Then I should see "Log out"
