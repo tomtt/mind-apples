@@ -10,3 +10,5 @@ require 'webrat/rails'
 # Comment out the next two lines if you're not using RSpec's matchers (should / should_not) in your steps.
 require 'cucumber/rails/rspec'
 require 'webrat/rspec-rails'
+
+require File.join(RAILS_ROOT, "spec", "factory_girl_defs")
