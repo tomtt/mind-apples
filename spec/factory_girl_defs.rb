@@ -9,5 +9,5 @@ Factory.define :user do |f|
   f.login                   'jdoe'
   f.password                'doe_a_deer'
   f.password_confirmation   'doe_a_deer'
-  f.email_address           { Factory.next(:email_address) }
+  f.email                   { Factory.next(:email_address) }
 end
