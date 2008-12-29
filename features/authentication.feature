@@ -8,4 +8,4 @@ Feature: Logging in
     When I fill in "Login" with "jdoe"
     And I fill in "Password" with "letmein"
     And I press "Log in"
-    Then I should see "Login"
+    Then I should see "Log In"
