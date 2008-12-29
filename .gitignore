@@ -8,3 +8,4 @@ doc/api
 doc/app
 doc/plugins
 coverage/*
+public/stylesheets/*.css
