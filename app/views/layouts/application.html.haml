@@ -1,0 +1,22 @@
+!!! strict
+%html{ 'xmlns' => "http://www.w3.org/1999/xhtml", 'xml:lang' => "en", 'lang' => "en" }
+  %head
+    %meta{ 'http-equiv' => "content-type",  'content' => "text/html; charset=utf-8" }
+    %title
+      Mindapples new site concept
+    = stylesheet_link_tag 'reset'
+    = stylesheet_link_tag 'text'
+    = stylesheet_link_tag '960'
+    = stylesheet_link_tag 'mindapples'
+  %body
+    %h1
+      Mindapples new site concept
+    .container_12
+      .grid_1
+        &nbsp;
+      .grid_10
+        #content
+          = show_flashes
+          = yield
+      .clear
+        &nbsp;
