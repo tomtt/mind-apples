@@ -8,7 +8,7 @@ Feature: Logging in
     When I fill in "Login" with "jdoe"
     And I fill in "Password" with "letmein"
     And I press "Log in"
-    Then I should see "Log In"
+    Then I should see "Couldn't log you in as 'jdoe'"
 
   Scenario: Log in as regular user
     Given my username is "anna" and my password is "frooble"
