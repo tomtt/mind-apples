@@ -9,4 +9,16 @@ module ApplicationHelper
     output += "</div>\n"
     output
   end
+
+  def when_logged_in(&block)
+    if logged_in?
+      concat(capture(&block), block.binding)
+    end
+  end
+
+  def when_not_logged_in(&block)
+    unless logged_in?
+      concat(capture(&block), block.binding)
+    end
+  end
 end

@@ -14,9 +14,18 @@
     .container_12
       .grid_1
         &nbsp;
-      .grid_10
+      .grid_8
         #content
           = show_flashes
           = yield
+      .grid_2
+        #sidebar
+          This is the sidebar
+          - when_logged_in do
+            #login-box
+              = link_to current_user
+          - when_not_logged_in do
+            #login-box
+              = link_to 'login', login_path
       .clear
         &nbsp;

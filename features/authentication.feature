@@ -16,4 +16,4 @@ Feature: Logging in
     When I fill in "Login" with "anna"
     And I fill in "Password" with "frooble"
     And I press "Log in"
-    Then I should see "Log out"
+    Then I should see "anna"
