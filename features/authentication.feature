@@ -17,3 +17,4 @@ Feature: Logging in
     And I fill in "Password" with "frooble"
     And I press "Log in"
     Then I should see "anna"
+    And I should see a link to my profile

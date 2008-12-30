@@ -23,7 +23,7 @@
           This is the sidebar
           - when_logged_in do
             #login-box
-              = link_to current_user
+              = link_to current_user, user_path(current_user)
           - when_not_logged_in do
             #login-box
               = link_to 'login', login_path
