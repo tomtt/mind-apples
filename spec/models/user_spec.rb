@@ -218,6 +218,10 @@ describe User do
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
 
+  it 'returns its login as a string' do
+    Factory.create(:user, :login => 'womble').to_s.should == 'womble'
+  end
+
 protected
   def create_user(options = {})
     record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
