@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081229013527) do
+ActiveRecord::Schema.define(:version => 20090101141816) do
+
+  create_table "surveys", :force => true do |t|
+    t.text     "apple_1"
+    t.text     "apple_2"
+    t.text     "apple_3"
+    t.text     "apple_4"
+    t.text     "apple_5"
+    t.integer  "health_check"
+    t.text     "suggested_people"
+    t.string   "age_range"
+    t.string   "country"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
