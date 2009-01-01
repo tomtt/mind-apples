@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090101141816) do
+ActiveRecord::Schema.define(:version => 20090101150947) do
 
   create_table "surveys", :force => true do |t|
     t.text     "apple_1"
@@ -18,13 +18,15 @@ ActiveRecord::Schema.define(:version => 20090101141816) do
     t.text     "apple_4"
     t.text     "apple_5"
     t.integer  "health_check"
-    t.text     "suggested_people"
+    t.text     "famous_fives"
     t.string   "age_range"
     t.string   "country"
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "brain_dump"
+    t.string   "gender"
   end
 
   create_table "users", :force => true do |t|

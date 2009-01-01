@@ -9,7 +9,7 @@ describe Survey do
       :apple_4 => "value for apple_4",
       :apple_5 => "value for apple_5",
       :health_check => "1",
-      :suggested_people => "value for suggested_people",
+      :famous_fives => "value for famous_fives",
       :age_range => "value for age_range",
       :country => "value for country",
       :name => "value for name",

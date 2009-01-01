@@ -1,32 +1,25 @@
 = form.error_messages
 %p
-  = form.label :apple_1
-  %br
-  = form.text_field :apple_1
-%p
-  = form.label :apple_2
-  %br
-  = form.text_field :apple_2
-%p
-  = form.label :apple_3
-  %br
-  = form.text_field :apple_3
-%p
-  = form.label :apple_4
-  %br
-  = form.text_field :apple_4
-%p
-  = form.label :apple_5
-  %br
-  = form.text_field :apple_5
+  = form.label 'Important bit. What are your five?'
+  %ol
+    %li
+      = form.text_field :apple_1
+    %li
+      = form.text_field :apple_2
+    %li
+      = form.text_field :apple_3
+    %li
+      = form.text_field :apple_4
+    %li
+      = form.text_field :apple_5
 %p
   = form.label :health_check
   %br
   = form.text_field :health_check
 %p
-  = form.label :suggested_people
+  = form.label :famous_fives
   %br
-  = form.text_field :suggested_people
+  = form.text_field :famous_fives
 %p
   = form.label :age_range
   %br

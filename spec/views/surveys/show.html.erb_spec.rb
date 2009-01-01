@@ -11,7 +11,7 @@ describe "/surveys/show.html.erb" do
       :apple_4 => "value for apple_4",
       :apple_5 => "value for apple_5",
       :health_check => "1",
-      :suggested_people => "value for suggested_people",
+      :famous_fives => "value for famous_fives",
       :age_range => "value for age_range",
       :country => "value for country",
       :name => "value for name",
@@ -27,7 +27,7 @@ describe "/surveys/show.html.erb" do
     response.should have_text(/value\ for\ apple_4/)
     response.should have_text(/value\ for\ apple_5/)
     response.should have_text(/1/)
-    response.should have_text(/value\ for\ suggested_people/)
+    response.should have_text(/value\ for\ famous_fives/)
     response.should have_text(/value\ for\ age_range/)
     response.should have_text(/value\ for\ country/)
     response.should have_text(/value\ for\ name/)

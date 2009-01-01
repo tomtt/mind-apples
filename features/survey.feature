@@ -20,7 +20,7 @@ Feature: Filling in the survey
     And I fill in "survey[apple_4]" with "Reading the football papers"
     And I fill in "survey[apple_5]" with "Tidying and filing"
     And I fill in "survey[health_check]" with "3"
-    And I fill in "survey[suggested_people]" with "David Beckham  Melvyn Bragg  Stephen Fry  June Sarpong  Stephen Fry"
+    And I fill in "survey[famous_fives]" with "David Beckham  Melvyn Bragg  Stephen Fry  June Sarpong  Stephen Fry"
     And I fill in "survey[age_range]" with "35-44"
     And I fill in "survey[country]" with "UK"
     And I fill in "survey[name]" with "Andy Gibson"

@@ -1,0 +1,4 @@
+%h1 Take the Mindapples Test
+
+- form_for(@survey) do |f|
+  = render(:partial => 'form', :locals => {:form => f, :submit_message => 'Submit' })

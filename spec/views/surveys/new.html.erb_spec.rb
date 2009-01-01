@@ -12,7 +12,7 @@ describe "/surveys/new.html.erb" do
       :apple_4 => "value for apple_4",
       :apple_5 => "value for apple_5",
       :health_check => "1",
-      :suggested_people => "value for suggested_people",
+      :famous_fives => "value for famous_fives",
       :age_range => "value for age_range",
       :country => "value for country",
       :name => "value for name",
@@ -30,7 +30,7 @@ describe "/surveys/new.html.erb" do
       with_tag("textarea#survey_apple_4[name=?]", "survey[apple_4]")
       with_tag("textarea#survey_apple_5[name=?]", "survey[apple_5]")
       with_tag("input#survey_health_check[name=?]", "survey[health_check]")
-      with_tag("textarea#survey_suggested_people[name=?]", "survey[suggested_people]")
+      with_tag("textarea#survey_famous_fives[name=?]", "survey[famous_fives]")
       with_tag("input#survey_age_range[name=?]", "survey[age_range]")
       with_tag("input#survey_country[name=?]", "survey[country]")
       with_tag("input#survey_name[name=?]", "survey[name]")
