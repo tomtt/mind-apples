@@ -8,4 +8,5 @@ doc/api
 doc/app
 doc/plugins
 coverage/*
+vendor/gems/*/coverage
 public/stylesheets/*.css
