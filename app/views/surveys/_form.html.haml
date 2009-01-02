@@ -13,27 +13,40 @@
     %li
       = form.text_field :apple_5
 %p
-  = form.label :health_check
+  = form.label "Brain dump. And anything else you'd like to tell us? What else do you need to stay mentally healthy?"
+  %br
+  = form.text_area :brain_dump
+%p
+  = form.label "Health check. How would you rate your mental health? (1 is bad, 5 good)"
   %br
   = form.text_field :health_check
 %p
-  = form.label :famous_fives
+  = form.label "Famous fives. Which well-known people would you most like us to contact about their five-a-days?"
   %br
   = form.text_field :famous_fives
 %p
-  = form.label :age_range
+  = form.label "Venus and Mars. What's your gender?"
   %br
-  = form.text_field :age_range
+  = form.label "gender_f", "Female"
+  = form.radio_button(:gender, "f")
+  = form.label "gender_m", "Male"
+  = form.radio_button(:gender, "m")
+  = form.label "gender_c", "It's complicated"
+  = form.radio_button(:gender, "c")
 %p
-  = form.label :country
+  = form.label "Age check. How old are you?"
+  %br
+  = form.select :age_range, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
+%p
+  = form.label "Passport control. What country are you from?"
   %br
   = form.text_field :country
 %p
-  = form.label :name
+  = form.label "Be proud. What's your name? (very optional)"
   %br
   = form.text_field :name
 %p
-  = form.label :email
+  = form.label "Leave your email and we we'll get in touch when the new website is up."
   %br
   = form.text_field :email
 %p
