@@ -61,4 +61,5 @@ Rails::Initializer.run do |config|
              :lib    => "factory_girl",
              :source => "http://gems.github.com"
   config.gem "haml"
+  config.gem "rspec-rails", :lib => false
 end
