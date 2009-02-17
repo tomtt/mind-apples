@@ -11,7 +11,10 @@ Feature: Filling in the survey
     And I fill in "survey[apple_4]" with "Reading the football papers"
     And I fill in "survey[apple_5]" with "Tidying and filing"
     And I press "Submit"
-
+    Then there should exist a survey whose "apple_1" is "Playing the piano"
+    And I should be redirected to the survey's private url
+    And I should see "Thank you"
+        
   Scenario: Filling in just my five-a-day leaving all details
     Given I am on the survey page
     When I fill in "survey[apple_1]" with "Playing the piano"
@@ -27,3 +30,6 @@ Feature: Filling in the survey
     And I fill in "survey[name]" with "Andy Gibson"
     And I fill in "survey[email]" with "andy@sociability.org.uk"
     And I press "Submit"
+    Then there should exist a survey whose "apple_1" is "Playing the piano"
+    And I should be redirected to the survey's private url
+    And I should see "Thank you"
