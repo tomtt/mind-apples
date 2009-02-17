@@ -76,4 +76,12 @@ class SurveysController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def private
+    @survey = Survey.find_by_id_and_private_auth(params[:id], params[:auth])
+    unless @survey
+      flash[:error] = 'Could not access the private page for that survey'
+      redirect_to(survey_path(params[:id]))
+    end
+  end
 end

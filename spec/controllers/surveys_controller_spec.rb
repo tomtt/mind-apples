@@ -170,4 +170,28 @@ describe SurveysController do
 
   end
 
+  describe "showing the private survey page" do
+    it "should expose the survey as survey when the correct auth string is passed" do
+      Survey.stub!(:find_by_id_and_private_auth).and_return(mock_survey)
+      get :private
+      assigns(:survey).should == mock_survey
+    end
+
+    it "should find the survey by id and auth code" do
+      Survey.should_receive(:find_by_id_and_private_auth).with("37", "myauthcode")
+      get :private, :id => 37, :auth => "myauthcode"
+    end
+
+    it "should redirect to the survey page if the survey is not found" do
+      Survey.stub!(:find_by_id_and_private_auth).and_return(nil)
+      get :private, :id => 37
+      response.should redirect_to(survey_path(37))
+    end
+
+    it "should set the error flash" do
+      Survey.stub!(:find_by_id_and_private_auth).and_return(nil)
+      get :private, :id => 37
+      flash[:error].should =~ /could not access/i
+    end
+  end
 end
