@@ -16,3 +16,11 @@ config.action_view.cache_template_extensions         = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# To allow debugger to be used when using passenger
+if File.exists?(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
+  require 'ruby-debug'
+  Debugger.wait_connection = true
+  Debugger.start_remote
+  File.delete(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
+end
