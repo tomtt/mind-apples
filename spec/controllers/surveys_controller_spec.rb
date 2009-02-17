@@ -3,7 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe SurveysController do
 
   def mock_survey(stubs={})
-    @mock_survey ||= mock_model(Survey, stubs)
+    unless @mock_survey
+      @mock_survey = mock_model(Survey, stubs)
+      @mock_survey.stub!(:private_auth).and_return("MyAuthCode")
+    end
+    @mock_survey
   end
   
   describe "responding to GET index" do
@@ -83,7 +87,7 @@ describe SurveysController do
       it "should redirect to the created survey" do
         Survey.stub!(:new).and_return(mock_survey(:save => true))
         post :create, :survey => {}
-        response.should redirect_to(survey_url(mock_survey))
+        response.should redirect_to(private_survey_url(mock_survey, :auth => "MyAuthCode"))
       end
       
     end

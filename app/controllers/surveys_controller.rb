@@ -42,7 +42,7 @@ class SurveysController < ApplicationController
     @survey = Survey.new(params[:survey])
     if @survey.save
       flash[:notice] = 'Survey was successfully created.'
-      redirect_to survey_path(@survey)
+      redirect_to private_survey_path(@survey, :auth => @survey.private_auth)
     else
       render :action => "new"
     end
