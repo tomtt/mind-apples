@@ -38,19 +38,13 @@ class SurveysController < ApplicationController
   end
 
   # POST /surveys
-  # POST /surveys.xml
   def create
     @survey = Survey.new(params[:survey])
-
-    respond_to do |format|
-      if @survey.save
-        flash[:notice] = 'Survey was successfully created.'
-        format.html { redirect_to(@survey) }
-        format.xml  { render :xml => @survey, :status => :created, :location => @survey }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @survey.errors, :status => :unprocessable_entity }
-      end
+    if @survey.save
+      flash[:notice] = 'Survey was successfully created.'
+      redirect_to survey_path(@survey)
+    else
+      render :action => "new"
     end
   end
 
