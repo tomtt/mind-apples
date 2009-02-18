@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090217152909) do
+ActiveRecord::Schema.define(:version => 20090218163452) do
 
   create_table "surveys", :force => true do |t|
     t.text     "apple_1"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(:version => 20090217152909) do
     t.text     "brain_dump"
     t.string   "gender"
     t.string   "private_auth"
+    t.integer  "respondent_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "users", :force => true do |t|
