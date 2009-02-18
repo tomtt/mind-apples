@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :surveys, :member => { :private => :get }
   map.take_the_test '/survey', :controller => 'surveys', :action => 'new'
   
-  map.root  :controller => 'pages', :action => 'home'
+  map.root :controller => 'surveys', :action => 'new'
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
