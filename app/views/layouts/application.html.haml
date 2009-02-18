@@ -23,7 +23,11 @@
           This is the sidebar
           - when_logged_in do
             #login-box
+              - if current_user.admin?
+                You are admin
+                %br
               = link_to current_user, user_path(current_user)
+              = link_to 'logout', logout_path
           - when_not_logged_in do
             #login-box
               = link_to 'login', login_path
