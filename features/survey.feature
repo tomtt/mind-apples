@@ -33,3 +33,5 @@ Feature: Filling in the survey
     Then there should exist a survey whose "apple_1" is "Playing the piano"
     And I should be redirected to the survey's private url
     And I should see "Thank you"
+
+  Scenario: Referral code
