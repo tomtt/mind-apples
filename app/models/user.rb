@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
     (@_list.include?(role_in_question.to_s) )
   end
 
+  def admin?
+    has_role?("admin")
+  end
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
