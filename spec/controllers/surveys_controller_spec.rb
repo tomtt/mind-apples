@@ -177,7 +177,7 @@ describe SurveysController do
   describe "showing the private survey page" do
     it "should expose the survey as survey when the correct auth string is passed" do
       Survey.stub!(:find_by_id_and_private_auth).and_return(mock_survey)
-      get :your_eyes_only
+      get :your_eyes_only, :auth => "dummy"
       assigns(:survey).should == mock_survey
     end
 
@@ -196,6 +196,12 @@ describe SurveysController do
       Survey.stub!(:find_by_id_and_private_auth).and_return(nil)
       get :your_eyes_only, :id => 37
       flash[:error].should =~ /could not access/i
+    end
+
+    it 'should redirect to the survey page if the authorization code is an empty string' do
+      Survey.stub!(:find_by_id_and_private_auth).and_return(mock_survey)
+      get :your_eyes_only, :id => 37, :auth => ""
+      response.should redirect_to(survey_path(37))
     end
   end
 

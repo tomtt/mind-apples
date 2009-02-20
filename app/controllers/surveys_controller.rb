@@ -78,7 +78,10 @@ class SurveysController < ApplicationController
   end
 
   def your_eyes_only
-    @survey = Survey.find_by_id_and_private_auth(params[:id], params[:auth])
+    @survey = nil
+    if params[:auth] && !params[:auth].empty?
+      @survey = Survey.find_by_id_and_private_auth(params[:id], params[:auth])
+    end
     unless @survey
       flash[:error] = 'Could not access the private page for that survey'
       redirect_to(survey_path(params[:id]))
