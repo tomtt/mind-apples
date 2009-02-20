@@ -42,7 +42,7 @@ class SurveysController < ApplicationController
     @survey = Survey.new(params[:survey])
     if @survey.save
       flash[:notice] = 'Survey was successfully created.'
-      redirect_to private_survey_path(@survey, :auth => @survey.private_auth)
+      redirect_to your_eyes_only_survey_path(@survey, :auth => @survey.private_auth)
     else
       render :action => "new"
     end
@@ -77,7 +77,7 @@ class SurveysController < ApplicationController
     end
   end
 
-  def private
+  def your_eyes_only
     @survey = Survey.find_by_id_and_private_auth(params[:id], params[:auth])
     unless @survey
       flash[:error] = 'Could not access the private page for that survey'
