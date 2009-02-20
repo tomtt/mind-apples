@@ -1,0 +1,42 @@
+<h1>Listing surveys</h1>
+
+<p>Found <%= @surveys.size %> surveys</p>
+
+<table>
+  <tr>
+    <th>Apple 1</th>
+    <th>Apple 2</th>
+    <th>Apple 3</th>
+    <th>Apple 4</th>
+    <th>Apple 5</th>
+    <th>Health check</th>
+    <th>Suggested people</th>
+    <th>Age range</th>
+    <th>Country</th>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+
+<% for survey in @surveys %>
+  <tr>
+    <td><%=h survey.apple_1 %></td>
+    <td><%=h survey.apple_2 %></td>
+    <td><%=h survey.apple_3 %></td>
+    <td><%=h survey.apple_4 %></td>
+    <td><%=h survey.apple_5 %></td>
+    <td><%=h survey.health_check %></td>
+    <td><%=h survey.famous_fives %></td>
+    <td><%=h survey.age_range %></td>
+    <td><%=h survey.country %></td>
+    <td><%=h survey.name %></td>
+    <td><%=h survey.email %></td>
+    <td><%= link_to 'Show', survey %></td>
+    <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+    <td><%= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New survey', new_survey_path %>

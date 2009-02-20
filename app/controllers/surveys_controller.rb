@@ -84,4 +84,13 @@ class SurveysController < ApplicationController
       redirect_to(survey_path(params[:id]))
     end
   end
+
+  def search
+    @surveys = Survey.containing_phrase(params[:q])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @surveys }
+    end
+  end
 end

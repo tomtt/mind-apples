@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :surveys, :member => { :private => :get }
+  map.resources :surveys, :member => { :private => :get }, :collection => { :search => :get }
   map.take_the_test '/survey', :controller => 'surveys', :action => 'new'
   
   map.root :controller => 'surveys', :action => 'new'
