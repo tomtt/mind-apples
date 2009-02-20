@@ -2,6 +2,9 @@
   This is the private page for your survey
 %p
   Thank you for telling us your daily fives
+#edit_survey_form
+  - form_for(@survey) do |f|
+    = render(:partial => '/surveys/form', :locals => {:form => f, :submit_message => 'Update' })
 %p
   Apple 1:
   = @survey.apple_1
