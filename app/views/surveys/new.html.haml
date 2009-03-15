@@ -1,4 +1,7 @@
 %h1 Take the Mindapples Test
-
+%h2 
+  Please note that this is just a demo site. The
+  = link_to "real mindapples is at mindapples.org", "http://mindapples.org"
+  \.
 - form_for(@survey) do |f|
   = render(:partial => 'form', :locals => {:form => f, :submit_message => 'Submit' })
