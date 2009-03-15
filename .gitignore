@@ -10,3 +10,4 @@ doc/plugins
 coverage/*
 vendor/gems/*/coverage
 public/stylesheets/*.css
+public/features
