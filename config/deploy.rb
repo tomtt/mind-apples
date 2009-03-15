@@ -29,6 +29,7 @@ role :web, host
 role :db,  host, :primary => true
 
 after "deploy:update_code", "config:copy_shared_configurations"
+after "deploy", "features:generate_feature_html_files"
 
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
@@ -74,5 +75,12 @@ namespace :config do
     %w[database.yml].each do |f|
       run "ln -nsf #{shared_path}/config/#{f} #{release_path}/config/#{f}"
     end
+  end
+end
+
+namespace :features do
+  desc "Create html files of features"
+  task :generate_feature_html_files, :roles => [:app] do
+    run "#{current_path}/script/cucumber -f Cucumber::Formatter::HtmlFiles #{current_path}/features"
   end
 end
