@@ -44,7 +44,7 @@ module Cucumber
       include Cucumber::Feature
 
       FEATURE_HTML_PATH = File.join(RAILS_ROOT, 'public', 'features')
-      TRAC_TICKETS_URL = "https://extranet.unboxedconsulting.com/trac/lather/ticket"
+      TRAC_TICKETS_URL = "https://example.com/trac/mindapples/ticket"
 
       def initialize(step_mother, io, options)
         super(step_mother)
