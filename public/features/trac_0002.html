@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Cucumber</title>
+    <link href="/stylesheets/cucumber.css" type="text/css" rel="stylesheet"/>
+    <link href="/stylesheets/tablesorter.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="cucumber">
+      <div class="feature">
+        <h2>Feature: Filling in the survey</h2>
+        <p>
+In order to share my five-a-day          <br/>
+As a user          <br/>
+I want to be able to fill them in on a form along with my details          <br/>
+        </p>
+        <div class="scenario">
+          <h3>Scenario: Filling in just my five-a-day without leaving details</h3>
+          <ol>
+            <li class="passed">Given I am on the survey page</li>
+            <li class="passed">When I fill in &quot;survey[apple_1]&quot; with &quot;Playing the piano&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_2]&quot; with &quot;Being in nature&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_3]&quot; with &quot;Interesting conversation&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_4]&quot; with &quot;Reading the football papers&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_5]&quot; with &quot;Tidying and filing&quot;</li>
+            <li class="passed">And I press &quot;Submit&quot;</li>
+            <li class="passed">Then there should exist a survey whose &quot;apple_1&quot; is &quot;Playing the piano&quot;</li>
+            <li class="passed">And I should be redirected to the survey's private url</li>
+            <li class="passed">And I should see &quot;Thank you&quot;</li>
+          </ol>
+        </div>
+        <div class="scenario">
+          <h3>Scenario: Filling in just my five-a-day leaving all details</h3>
+          <ol>
+            <li class="passed">Given I am on the survey page</li>
+            <li class="passed">When I fill in &quot;survey[apple_1]&quot; with &quot;Playing the piano&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_2]&quot; with &quot;Being in nature&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_3]&quot; with &quot;Interesting conversation&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_4]&quot; with &quot;Reading the football papers&quot;</li>
+            <li class="passed">And I fill in &quot;survey[apple_5]&quot; with &quot;Tidying and filing&quot;</li>
+            <li class="passed">And I fill in &quot;survey[health_check]&quot; with &quot;3&quot;</li>
+            <li class="passed">And I fill in &quot;survey[famous_fives]&quot; with &quot;David Beckham  Melvyn Bragg  Stephen Fry  June Sarpong  Stephen Fry&quot;</li>
+            <li class="passed">And I choose &quot;Male&quot;</li>
+            <li class="passed">And I select &quot;35-44&quot; from &quot;survey[age_range]&quot;</li>
+            <li class="passed">And I fill in &quot;survey[country]&quot; with &quot;UK&quot;</li>
+            <li class="passed">And I fill in &quot;survey[name]&quot; with &quot;Andy Gibson&quot;</li>
+            <li class="passed">And I fill in &quot;survey[email]&quot; with &quot;andy@sociability.org.uk&quot;</li>
+            <li class="passed">And I press &quot;Submit&quot;</li>
+            <li class="passed">Then there should exist a survey whose &quot;apple_1&quot; is &quot;Playing the piano&quot;</li>
+            <li class="passed">And I should be redirected to the survey's private url</li>
+            <li class="passed">And I should see &quot;Thank you&quot;</li>
+          </ol>
+        </div>
+        <div class="scenario">
+          <h3>Scenario: Referral code</h3>
+          <ol>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

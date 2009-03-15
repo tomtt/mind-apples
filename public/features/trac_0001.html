@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Cucumber</title>
+    <link href="/stylesheets/cucumber.css" type="text/css" rel="stylesheet"/>
+    <link href="/stylesheets/tablesorter.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="cucumber">
+      <div class="feature">
+        <h2>Feature: Logging in</h2>
+        <p>
+In order to access my profile          <br/>
+As a user          <br/>
+I want to login with my details| do          <br/>
+        </p>
+        <div class="scenario">
+          <h3>Scenario: Try to login with non existing account</h3>
+          <ol>
+            <li class="passed">Given I am on the login page</li>
+            <li class="passed">When I fill in &quot;Login&quot; with &quot;jdoe&quot;</li>
+            <li class="passed">And I fill in &quot;Password&quot; with &quot;letmein&quot;</li>
+            <li class="passed">And I press &quot;Log in&quot;</li>
+            <li class="passed">Then I should see &quot;Couldn't log you in as 'jdoe'&quot;</li>
+          </ol>
+        </div>
+        <div class="scenario">
+          <h3>Scenario: Use wrong password</h3>
+          <ol>
+            <li class="passed">Given I am on the login page</li>
+            <li class="passed">And my username is &quot;anna&quot; and my password is &quot;frooble&quot;</li>
+            <li class="passed">When I fill in &quot;Login&quot; with &quot;anna&quot;</li>
+            <li class="passed">And I fill in &quot;Password&quot; with &quot;letmein&quot;</li>
+            <li class="passed">And I press &quot;Log in&quot;</li>
+            <li class="passed">Then I should see &quot;Couldn't log you in as 'anna'&quot;</li>
+          </ol>
+        </div>
+        <div class="scenario">
+          <h3>Scenario: Log in as regular user</h3>
+          <ol>
+            <li class="passed">Given I am on the login page</li>
+            <li class="passed">And my username is &quot;anna&quot; and my password is &quot;frooble&quot;</li>
+            <li class="passed">When I fill in &quot;Login&quot; with &quot;anna&quot;</li>
+            <li class="passed">And I fill in &quot;Password&quot; with &quot;frooble&quot;</li>
+            <li class="passed">And I press &quot;Log in&quot;</li>
+            <li class="passed">Then I should see &quot;anna&quot;</li>
+            <li class="passed">And I should see a link to my profile</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
