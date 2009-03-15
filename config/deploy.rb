@@ -43,7 +43,7 @@ namespace :deploy do
 
   db_params = {
     "adapter"=>"mysql",
-    "database"=>"#{application}_#{rails_env}",
+    "database"=>"#{application}_production",
     "username"=>"root",
     "password"=>"",
     "host"=>"localhost",
@@ -57,7 +57,7 @@ namespace :deploy do
   end
 
   task :my_generate_database_yml, :roles => :app do
-    database_configuration = "#{rails_env}:\n"
+    database_configuration = "production:\n"
     db_params.each do |param, default_val|
       val=self.send("db_#{param}")
       database_configuration<<"  #{param}: #{val}\n"
