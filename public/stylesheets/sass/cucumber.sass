@@ -1,0 +1,92 @@
+body
+  :font-family arial
+  :background-color black
+  :margin 10px 0pt 15px
+  :font-size 8pt
+  :width 100%
+  :text-align left
+
+
+.cucumber
+  :background black
+  :color white
+  :padding 1em
+
+  .passed
+    :color green
+
+  .undefined, .pending
+    :color yellow
+
+  .failed
+    :color red
+
+  .skipped, .outline
+    :color cyan
+
+  .param
+    :font-weight bold
+
+  a
+    :color inherit
+
+    &:hover
+      :text-decoration underline
+
+    &:visited
+      :font-weight normal
+
+  ol
+    :list-style none
+
+  .stats
+    :margin 2em
+
+  .summary ul.features li
+    :display inline
+
+  .backtrace
+    :margin-top 0
+    :margin-bottom 0
+    :margin-left 1em
+
+  .ticket-reference
+    :text-align right
+
+  table
+    &.features
+      :border-collapse collapse
+
+    td
+      :border 1px solid white
+      :padding 3px
+
+
+.status-count, .percentage-passing, .scenario-count
+  :text-align right
+
+
+th
+  :border 1px solid white
+  :padding 3px
+
+
+table.percent_graph
+  :height 12px
+  :border #808080 1px solid
+  :empty-cells show
+
+  td
+    :padding 0
+
+    &.covered
+      :height 10px
+      :background #00f000
+
+    &.uncovered
+      :height 10px
+      :background #e00000
+
+    &.NA
+      :height 10px
+      :background #eaeaea
