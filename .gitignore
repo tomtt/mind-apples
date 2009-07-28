@@ -1,0 +1,12 @@
+config/database.yml
+*~
+*.cache
+*.log
+.DS_Store
+db/cstore/**
+doc/api
+doc/app
+doc/plugins
+coverage/*
+vendor/gems/*/coverage
+public/stylesheets/*.css
