@@ -23,3 +23,6 @@ end
 
 require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
+
+require File.join(RAILS_ROOT, "spec", "factories")
+require File.join(RAILS_ROOT, "spec", "shared_helper")

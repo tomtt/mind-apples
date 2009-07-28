@@ -1,0 +1,104 @@
+body {
+  font-family:arial;
+  background-color: black;
+  margin:10px 0pt 15px;
+  font-size: 8pt;
+  width: 100%;
+  text-align: left;
+}
+
+.cucumber {
+  background: black;
+  color: white;
+  padding: 1em;
+}
+.cucumber .passed {
+  color: green;
+}
+.cucumber .undefined {
+  color: yellow;
+}
+.cucumber .pending {
+  color: yellow;
+}
+.cucumber .failed {
+  color: red;
+}
+.cucumber .skipped {
+  color: cyan;
+}
+.cucumber .outline {
+  color: cyan;
+}
+.cucumber .param {
+  font-weight: bold;
+}
+.cucumber a {
+  color: inherit;
+}
+.cucumber a:hover {
+  text-decoration: underline;
+}
+.cucumber a:visited {
+  font-weight: normal;
+}
+.cucumber ol {
+  list-style: none;
+}
+.cucumber .stats {
+  margin: 2em;
+}
+.cucumber .summary ul.features li {
+  display: inline;
+}
+.cucumber .backtrace {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1em;
+}
+
+.cucumber .ticket-reference, .status-count, .percentage-passing, .scenario-count {
+  text-align: right;
+}
+
+.cucumber table.features {
+  border-collapse: collapse;
+}
+
+.cucumber table td,th {
+  border: 1px solid white;
+  padding: 3px;
+}
+
+table.percent_graph {
+ height: 12px;
+ border: #808080 1px solid;
+ empty-cells: show;
+}
+table.percent_graph td {
+ padding: 0;
+}
+table.percent_graph td.covered {
+ height: 10px;
+ background: #00f000;
+}
+table.percent_graph td.uncovered {
+ height: 10px;
+ background: #e00000;
+}
+table.percent_graph td.NA {
+ height: 10px;
+ background: #eaeaea;
+}
+
+table.multi-line {
+  border-collapse: collapse;
+  border-style: none;
+  margin-left: 2em;
+}
+
+table.multi-line td {
+  border-style: none;
+  padding: 0;
+  padding-right: 1em;
+}
