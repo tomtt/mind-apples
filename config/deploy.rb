@@ -29,7 +29,7 @@ role :web, host
 role :db,  host, :primary => true
 
 after "deploy:update_code", "config:copy_shared_configurations"
-after "deploy", "features:generate_feature_html_files"
+# after "deploy", "features:generate_feature_html_files"
 
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
