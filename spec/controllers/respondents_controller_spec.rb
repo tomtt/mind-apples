@@ -23,4 +23,17 @@ describe RespondentsController do
       get :new
     end
   end
+
+  describe "create" do
+    it "should generate a page code" do
+      PageCode.should_receive(:code)
+      post(:create, "respondent" => {})
+    end
+
+    it "should assign the page code to the respondent" do
+      PageCode.stub!(:code).and_return 'abzABz09'
+      post(:create, "respondent" => {})
+      controller.resource.page_code.should == 'abzABz09'
+    end
+  end
 end
