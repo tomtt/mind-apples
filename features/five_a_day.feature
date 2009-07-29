@@ -3,8 +3,12 @@ Feature: Asking for five a day
   As the evil overlord
   I want respondents to enter suggestions
 
-  Scenario: Social Butterfly fills in the survey
+  Scenario: Social Butterfly visits homepage
     When I go to the homepage
+    Then I should be on the "take the survey" page
+
+  Scenario: Social Butterfly fills in the survey
+    When I go to the "take the survey" page
     And I fill in "survey[apple_1]" with "Playing the piano"
     And I fill in "survey[apple_2]" with "Being in nature"
     And I fill in "survey[apple_3]" with "Interesting conversation"
