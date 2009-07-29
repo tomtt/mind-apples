@@ -12,6 +12,8 @@ module NavigationHelpers
       '/'
     when /^the "take the survey" page$/
       new_respondent_path
+    when /^the "about" page$/
+      about_path
 
     # Add more mappings here.
     # Here is a more fancy example:

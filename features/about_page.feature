@@ -4,5 +4,5 @@ Feature: About page
   I want there to be a page with some blurb
 
   Scenario: Front page place holder
-    When I go to the homepage
+    When I go to the "about" page
     Then I should see "About Mindapples"
