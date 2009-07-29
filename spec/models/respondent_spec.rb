@@ -19,4 +19,12 @@ describe Respondent do
   it "should create a new instance given valid attributes" do
     Respondent.create!(@valid_attributes)
   end
+
+  describe "initializing mindapples" do
+    it "should assign itself five mindapples" do
+      respondent = Respondent.new
+      respondent.initialize_mindapples
+      respondent.should have(5).mind_apples
+    end
+  end
 end
