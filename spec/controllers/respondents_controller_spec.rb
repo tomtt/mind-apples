@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RespondentsController do
   def build_mock_respondent
-    mock_model(Respondent, :initialize_mindapples => nil)
+    mock_model(Respondent, :ensure_corrent_number_of_mindapples => nil)
   end
 
   describe "new" do
@@ -23,7 +23,7 @@ describe RespondentsController do
 
     it "should assign mind apples to the respondent" do
       Respondent.stub!(:new).and_return @mock_respondent
-      @mock_respondent.should_receive(:initialize_mindapples)
+      @mock_respondent.should_receive(:ensure_corrent_number_of_mindapples)
       get :new
     end
   end
@@ -38,6 +38,23 @@ describe RespondentsController do
       PageCode.stub!(:code).and_return 'abzABz09'
       post(:create, "respondent" => {})
       controller.resource.page_code.should == 'abzABz09'
+    end
+
+    it "should not allow a constructed form to create more than five mindapples" do
+      pending
+      post(:create, "respondent" =>
+           {
+             "mindapples_attributes" =>
+             {
+               "0" => {"suggestion" => "apple"},
+               "1" => {"suggestion" => "banana"},
+               "2" => {"suggestion" => "coconut"},
+               "3" => {"suggestion" => "date"},
+               "4" => {"suggestion" => "elderberry"},
+               "5" => {"suggestion" => "fig"}
+             }
+           })
+      controller.resource.mindapples.size.should == 5
     end
 
     describe "when saved" do

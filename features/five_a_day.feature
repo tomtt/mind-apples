@@ -1,3 +1,4 @@
+@committed
 Feature: Asking for five a day
   In order to gather suggestions
   As the evil overlord

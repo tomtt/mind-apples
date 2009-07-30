@@ -14,7 +14,7 @@ class RespondentsController < ApplicationController
 
   def new_resource(attributes = (params[resource_name] || {}))
     resource = resource_service.new attributes
-    resource.initialize_mindapples
+    resource.ensure_corrent_number_of_mindapples
     resource
   end
 

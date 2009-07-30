@@ -9,9 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090729125818) do
+ActiveRecord::Schema.define(:version => 20090730150030) do
 
-  create_table "mind_apples", :force => true do |t|
+  create_table "mindapples", :force => true do |t|
     t.text     "suggestion"
     t.integer  "respondent_id"
     t.datetime "created_at"

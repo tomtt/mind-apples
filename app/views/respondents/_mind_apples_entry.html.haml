@@ -1,4 +1,0 @@
-%ol
-  = form.label "What are your five?"
-  - form.fields_for :mind_apples do |mind_apple_form|
-    = render(:partial => '/mind_apples/entry', :locals => { :form => mind_apple_form })

@@ -20,11 +20,11 @@ describe Respondent do
     Respondent.create!(@valid_attributes)
   end
 
-  describe "initializing mindapples" do
-    it "should assign itself five mindapples" do
+  describe "ensuring correct number of mindapples" do
+    it "should assign five mindapples if it has none" do
       respondent = Respondent.new
-      respondent.initialize_mindapples
-      respondent.should have(5).mind_apples
+      respondent.ensure_corrent_number_of_mindapples
+      respondent.should have(5).mindapples
     end
   end
 end

@@ -1,9 +1,9 @@
 class Respondent < ActiveRecord::Base
-  has_many :mind_apples, :dependent => :nullify
+  has_many :mindapples, :dependent => :nullify
 
-  accepts_nested_attributes_for :mind_apples
+  accepts_nested_attributes_for :mindapples
 
-  def initialize_mindapples
-    5.times { mind_apples.build }
+  def ensure_corrent_number_of_mindapples
+    5.times { mindapples.build }
   end
 end

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe MindApple do
+describe Mindapple do
   before(:each) do
     @valid_attributes = {
       :suggestion => "value for suggestion",
@@ -9,6 +9,6 @@ describe MindApple do
   end
 
   it "should create a new instance given valid attributes" do
-    MindApple.create!(@valid_attributes)
+    Mindapple.create!(@valid_attributes)
   end
 end
