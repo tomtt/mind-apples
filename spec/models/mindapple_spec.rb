@@ -4,7 +4,7 @@ describe Mindapple do
   before(:each) do
     @valid_attributes = {
       :suggestion => "value for suggestion",
-      :respondent_id => 1
+      :person_id => 1
     }
   end
 

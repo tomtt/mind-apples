@@ -1,11 +1,11 @@
-class RespondentsController < ApplicationController
-  resources_controller_for :respondents
+class PeopleController < ApplicationController
+  resources_controller_for :people
   before_filter :populate_page_code, :only => [:create]
 
   response_for :create do |format|
     format.html do
       if @resource_saved
-        redirect_to edit_respondent_path(resource)
+        redirect_to edit_person_path(resource)
       end
     end
   end
@@ -19,6 +19,6 @@ class RespondentsController < ApplicationController
   end
 
   def populate_page_code
-    params["respondent"]["page_code"] = PageCode.code
+    params["person"]["page_code"] = PageCode.code
   end
 end

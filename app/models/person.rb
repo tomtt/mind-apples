@@ -1,4 +1,4 @@
-class Respondent < ActiveRecord::Base
+class Person < ActiveRecord::Base
   has_many :mindapples, :dependent => :nullify
 
   accepts_nested_attributes_for :mindapples

@@ -11,7 +11,7 @@ module NavigationHelpers
     when /^the homepage$/
       '/'
     when /^the "take the survey" page$/
-      new_respondent_path
+      new_person_path
     when /^the "about" page$/
       about_path
 

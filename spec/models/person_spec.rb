@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Respondent do
+describe Person do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
@@ -17,14 +17,14 @@ describe Respondent do
   end
 
   it "should create a new instance given valid attributes" do
-    Respondent.create!(@valid_attributes)
+    Person.create!(@valid_attributes)
   end
 
   describe "ensuring correct number of mindapples" do
     it "should assign five mindapples if it has none" do
-      respondent = Respondent.new
-      respondent.ensure_corrent_number_of_mindapples
-      respondent.should have(5).mindapples
+      person = Person.new
+      person.ensure_corrent_number_of_mindapples
+      person.should have(5).mindapples
     end
   end
 end

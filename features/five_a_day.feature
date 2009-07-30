@@ -10,15 +10,15 @@ Feature: Asking for five a day
 
   Scenario: Social Butterfly fills in the survey
     When I go to the "take the survey" page
-    And I fill in "respondent[mind_apples_attributes][0][suggestion]" with "Playing the piano"
-    And I fill in "respondent[mind_apples_attributes][1][suggestion]" with "Being in nature"
-    And I fill in "respondent[mind_apples_attributes][2][suggestion]" with "Interesting conversation"
-    And I fill in "respondent[mind_apples_attributes][4][suggestion]" with "Tidying and filing"
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
+    And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
+    And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
+    And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Submit"
     And I fill in "Braindump" with "Amazing stuff"
     And I fill in "Health check" with "2"
     And I choose "Male"
-    And I select "35-44" from "respondent[age]"
+    And I select "35-44" from "person[age]"
     And I fill in "Location" with "UK"
     And I fill in "Occupation" with "social guru"
     And I fill in "Name" with "Andy Gibson"

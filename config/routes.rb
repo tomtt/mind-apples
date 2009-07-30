@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   map.root :controller => "pages", :action => "home"
-  map.resources :respondents
+  map.resources :people
   map.about '/about', :controller => "pages", :action => "about"
   # See how all your routes lay out with "rake routes"
 

@@ -9,16 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090730150030) do
+ActiveRecord::Schema.define(:version => 20090730151856) do
 
   create_table "mindapples", :force => true do |t|
     t.text     "suggestion"
-    t.integer  "respondent_id"
+    t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "respondents", :force => true do |t|
+  create_table "people", :force => true do |t|
     t.string   "name"
     t.text     "email"
     t.string   "page_code"
