@@ -1,1 +1,30 @@
-Respondent
+%div
+  Thank you
+.row
+  Five-a-day:
+  %ol
+    = render(resource.mind_apples)
+.row
+  Braindump:
+  = resource.braindump
+.row
+  Health check:
+  = resource.health_check
+.row
+  Gender:
+  = Gender.label(resource.gender)
+.row
+  Age:
+  = resource.age
+.row
+  Location:
+  = resource.location
+.row
+  Occupation:
+  = resource.occupation
+.row
+  Name:
+  = resource.name
+.row
+  Email:
+  = resource.email
