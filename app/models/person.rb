@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  acts_as_authentic
   has_many :mindapples, :dependent => :nullify
 
   accepts_nested_attributes_for :mindapples
