@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PagesController do
-
-  #Delete this example and add some real ones
-  it "should use PagesController" do
-    controller.should be_an_instance_of(PagesController)
+  describe "home" do
+    it "should redirect to the page to take the survey" do
+      get :home
+      response.should redirect_to(new_person_path)
+    end
   end
-
 end

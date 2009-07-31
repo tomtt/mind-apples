@@ -9,6 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20090730151856) do
+
+  create_table "mindapples", :force => true do |t|
+    t.text     "suggestion"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "people", :force => true do |t|
+    t.string   "name"
+    t.text     "email"
+    t.string   "page_code"
+    t.text     "braindump"
+    t.string   "location"
+    t.string   "gender"
+    t.string   "age"
+    t.string   "occupation"
+    t.string   "health_check"
+    t.string   "tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

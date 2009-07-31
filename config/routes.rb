@@ -30,8 +30,9 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.root :controller => "pages", :action => "about"
-
+  map.root :controller => "pages", :action => "home"
+  map.resources :people, :as => "person", :except => [:index]
+  map.about '/about', :controller => "pages", :action => "about"
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

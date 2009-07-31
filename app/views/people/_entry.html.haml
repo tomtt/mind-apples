@@ -1,0 +1,29 @@
+.row
+  = form.label :braindump
+  = form.text_area :braindump
+.row
+  = form.label :health_check
+  = form.text_field :health_check
+.row
+  = form.label :gender
+  = form.label "gender_f", "Female"
+  = form.radio_button(:gender, "f")
+  = form.label "gender_m", "Male"
+  = form.radio_button(:gender, "m")
+  = form.label "gender_c", "It's complicated"
+  = form.radio_button(:gender, "c")
+.row
+  = form.label :age
+  = form.select :age, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
+.row
+  = form.label :location
+  = form.text_field :location
+.row
+  = form.label :occupation
+  = form.text_field :occupation
+.row
+  = form.label :name
+  = form.text_field :name
+.row
+  = form.label :email
+  = form.text_field :email
