@@ -1,11 +1,11 @@
 class AddAuthlogicFieldsToPerson < ActiveRecord::Migration
   def self.up
-    add_column :people, :login, :string, :null => false
-    add_column :people, :crypted_password, :string, :null => false
-    add_column :people, :password_salt, :string, :null => false
-    add_column :people, :persistence_token, :string, :null => false
-    add_column :people, :single_access_token, :string, :null => false
-    add_column :people, :perishable_token, :string, :null => false
+    add_column :people, :login, :string, :null => false, :default => ''
+    add_column :people, :crypted_password, :string, :null => false, :default => ''
+    add_column :people, :password_salt, :string, :null => false, :default => ''
+    add_column :people, :persistence_token, :string, :null => false, :default => ''
+    add_column :people, :single_access_token, :string, :null => false, :default => ''
+    add_column :people, :perishable_token, :string, :null => false, :default => ''
     add_column :people, :login_count, :integer, :null => false, :default => 0
     add_column :people, :failed_login_count, :integer, :null => false, :default => 0
     add_column :people, :last_request_at, :datetime
