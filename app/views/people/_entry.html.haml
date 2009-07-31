@@ -1,11 +1,11 @@
 .row
-  = form.label :braindump, "Brain dump. And anything else you'd like to tell us? What else do you need to stay mentally healthy?"
+  = form.label :braindump, "Brain dump. Anything else you'd like to tell us? What else do you need to stay mentally healthy?"
   = form.text_area :braindump
 .row
-  = form.label :health_check
+  = form.label :health_check, "Health check. How would you rate your mental health? (1 is bad, 5 good)"
   = form.text_field :health_check
 .row
-  = form.label :gender, "Venus and Mars. What gender are you?"
+  = form.label :gender, "Venus and Mars. What's your gender?"
   = form.label "gender_f", "Female"
   = form.radio_button(:gender, "f")
   = form.label "gender_m", "Male"
@@ -13,17 +13,17 @@
   = form.label "gender_c", "It's complicated"
   = form.radio_button(:gender, "c")
 .row
-  = form.label :age
+  = form.label :age, "Age check. How old are you?"
   = form.select :age, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
 .row
-  = form.label :location
+  = form.label :location, "Border control. Where are you from?"
   = form.text_field :location
 .row
-  = form.label :occupation
+  = form.label :occupation, "What's your thing? What do you do for a living or to fill your time?"
   = form.text_field :occupation
 .row
-  = form.label :name
+  = form.label :name, "Be proud. What's your name? (very optional)"
   = form.text_field :name
 .row
-  = form.label :email
+  = form.label :email, "Don't go! Leave your e-mail to keep in touch with Mindapples. (never made public)"
   = form.text_field :email
