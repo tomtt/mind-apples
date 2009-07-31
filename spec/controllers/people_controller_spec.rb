@@ -30,18 +30,26 @@ describe PeopleController do
 
   describe "create" do
     it "should generate a page code" do
-      PageCode.should_receive(:code)
+      PageCode.should_receive(:code).twice
       post(:create, "person" => {})
     end
 
-    it "should assign the page code to the person" do
+    it "should assign the code as the login" do
+      PageCode.stub!(:code)
       PageCode.stub!(:code).and_return 'abzABz09'
       post(:create, "person" => {})
-      controller.resource.page_code.should == 'abzABz09'
+      controller.resource.login.should == '_abzABz09'
+    end
+
+    it "should use a 20 character long code for the password and confirmation" do
+      PageCode.stub!(:code)
+      PageCode.should_receive(:code).with(20).and_return '20charlongpass'
+      post(:create, "person" => {})
+      controller.resource.password.should == '20charlongpass'
+      controller.resource.password_confirmation.should == '20charlongpass'
     end
 
     it "should not allow a constructed form to create more than five mindapples" do
-      pending
       post(:create, "person" =>
            {
              "mindapples_attributes" =>

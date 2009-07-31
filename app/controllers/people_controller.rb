@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   resources_controller_for :people
-  before_filter :populate_page_code, :only => [:create]
+  before_filter :set_fields_to_create_valid_person, :only => [:create]
 
   response_for :create do |format|
     format.html do
@@ -18,7 +18,10 @@ class PeopleController < ApplicationController
     resource
   end
 
-  def populate_page_code
-    params["person"]["page_code"] = PageCode.code
+  def set_fields_to_create_valid_person
+    params["person"]["login"] = '_%s' % PageCode.code
+    password = PageCode.code(20)
+    params["person"]["password"] = password
+    params["person"]["password_confirmation"] = password
   end
 end
