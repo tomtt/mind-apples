@@ -1,4 +1,4 @@
 %ol
-  = form.label "What are your five?"
+  = form.label "Important bit. What are your five?"
   - form.fields_for :mindapples do |mindapple_form|
     = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })
