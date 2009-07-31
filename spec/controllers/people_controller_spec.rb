@@ -50,7 +50,6 @@ describe PeopleController do
     end
 
     it "should not allow a constructed form to create more than five mindapples" do
-      pending
       post(:create, "person" =>
            {
              "mindapples_attributes" =>
