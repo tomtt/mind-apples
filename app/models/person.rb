@@ -1,5 +1,7 @@
 class Person < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |config|
+    config.validate_email_field false
+  end
   has_many :mindapples, :dependent => :nullify
 
   accepts_nested_attributes_for :mindapples
