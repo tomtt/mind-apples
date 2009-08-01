@@ -15,4 +15,24 @@ module ApplicationHelper
     output += "</div>\n"
     output
   end
+
+  def logged_in_info
+    if current_user
+      "You are logged in as '%s'" % current_user.to_s
+    else
+      "You are not logged in"
+    end
+  end
+
+  def dev_info
+    if RAILS_ENV == 'development'
+      '<div class="logged-in-debug">' + logged_in_info + '</div>'
+    else
+      ''
+    end
+  end
+
+  def git_info
+    '<div class="git-version">version: ' + Git.master_head_sha1 + '</div>'
+  end
 end
