@@ -10,7 +10,7 @@ set :repository,  "."
 # your SCM below:
 # set :scm, :subversion
 
-set :user, "tomtt"
+set :user, "mindapples"
 set :deploy_to, "/home/#{user}/deploy/#{application}"
 set :use_sudo, false
 
