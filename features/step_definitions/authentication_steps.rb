@@ -8,6 +8,7 @@ end
 
 Given /^my password is "([^\"]*)"$/ do |password|
   @me_person.update_attributes(:password => password, :password_confirmation => password)
+  @me_persons_password = password
 end
 
 Given /^my login is "([^\"]*)"$/ do |login|
@@ -29,6 +30,13 @@ end
 
 Given /^I am not logged in$/ do
   visit logout_path
+end
+
+When /^I log in$/ do
+  visit login_path
+  fill_in("Login", :with => @me_person.login)
+  fill_in("password", :with => @me_persons_password)
+  click_button("Log in")
 end
 
 When /^I log out$/ do
