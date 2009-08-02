@@ -12,6 +12,10 @@ class PeopleController < ApplicationController
 
   protected
 
+  def find_resource
+    Person.find_by_param(params["id"])
+  end
+
   def new_resource(attributes = (params[resource_name] || {}))
     resource = resource_service.new attributes
     resource.ensure_corrent_number_of_mindapples

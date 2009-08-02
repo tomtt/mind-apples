@@ -5,6 +5,29 @@ describe PeopleController do
     mock_model(Person, :ensure_corrent_number_of_mindapples => nil)
   end
 
+  shared_examples_for "all actions finding a person" do
+    it "should find a person by param value" do
+      Person.should_receive(:find_by_param).with('param_value')
+      do_request
+    end
+  end
+
+  describe "show" do
+    def do_request
+      get 'show', :id => 'param_value'
+    end
+
+    it_should_behave_like "all actions finding a person"
+  end
+
+  describe "edit" do
+    def do_request
+      get 'edit', :id => 'param_value'
+    end
+
+    it_should_behave_like "all actions finding a person"
+  end
+
   describe "new" do
     before do
       @mock_person = build_mock_person
