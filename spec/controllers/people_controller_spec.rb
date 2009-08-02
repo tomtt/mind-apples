@@ -34,11 +34,18 @@ describe PeopleController do
       post(:create, "person" => {})
     end
 
-    it "should assign the code as the login" do
+    it "should assign the code as the page code" do
       PageCode.stub!(:code)
       PageCode.stub!(:code).and_return 'abzABz09'
       post(:create, "person" => {})
-      controller.resource.login.should == '_abzABz09'
+      controller.resource.page_code.should == 'abzABz09'
+    end
+
+    it "should assign the code as the autogen login" do
+      PageCode.stub!(:code)
+      PageCode.stub!(:code).and_return 'abzABz09'
+      post(:create, "person" => {})
+      controller.resource.login.should == 'autogen_abzABz09'
     end
 
     it "should use a 20 character long code for the password and confirmation" do
