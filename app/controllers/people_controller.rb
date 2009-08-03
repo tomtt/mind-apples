@@ -2,6 +2,14 @@ class PeopleController < ApplicationController
   resources_controller_for :people
   before_filter :set_fields_to_create_valid_person, :only => [:create]
 
+  def create
+    self.resource = new_resource
+    @resource_saved = resource.save
+    # UserSession.create!(:login => params["person"]["login"],
+    #                     :password => params["person"]["password"],
+    #                     :password_confirmation => params["person"]["password_confirmation"])
+  end
+
   response_for :create do |format|
     format.html do
       if @resource_saved
