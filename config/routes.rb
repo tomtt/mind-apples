@@ -32,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "pages", :action => "home"
   map.login '/login', :controller => "user_sessions", :action => "new"
-  map.logout '/logout', :controller => "user_sessions", :action => "delete"
+  map.logout '/logout', :controller => "user_sessions", :action => "destroy"
 
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]
