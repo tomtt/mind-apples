@@ -18,7 +18,9 @@ module ApplicationHelper
 
   def logged_in_info
     if current_user
-      "You are logged in as '%s'" % current_user.to_s
+      link_to('Your page', person_path(current_user)) +
+        " | You are logged in as '%s' | " % current_user.to_s +
+        link_to('Log out', logout_path)
     else
       "You are not logged in"
     end
