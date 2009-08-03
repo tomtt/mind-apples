@@ -5,14 +5,12 @@ class PeopleController < ApplicationController
   def create
     self.resource = new_resource
     @resource_saved = resource.save
-    # UserSession.create!(:login => params["person"]["login"],
-    #                     :password => params["person"]["password"],
-    #                     :password_confirmation => params["person"]["password_confirmation"])
   end
 
   response_for :create do |format|
     format.html do
       if @resource_saved
+        login_as_new_user
         redirect_to edit_person_path(resource)
       end
     end
@@ -37,5 +35,11 @@ class PeopleController < ApplicationController
     password = PageCode.code(20)
     params["person"]["password"] = password
     params["person"]["password_confirmation"] = password
+  end
+
+  def login_as_new_user
+    UserSession.create!(:login => params["person"]["login"],
+                        :password => params["person"]["password"],
+                        :password_confirmation => params["person"]["password_confirmation"])
   end
 end

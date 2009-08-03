@@ -2,7 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PeopleController do
   def build_mock_person
-    mock_model(Person, :ensure_corrent_number_of_mindapples => nil, :save => true)
+    mock_model(Person,
+               :ensure_corrent_number_of_mindapples => nil,
+               :save => true)
   end
 
   shared_examples_for "all actions finding a person" do
@@ -55,9 +57,8 @@ describe PeopleController do
     it "should log the new person in" do
       @mock_person = build_mock_person
       Person.stub!(:new).and_return @mock_person
+      UserSession.should_receive(:create!)
       post(:create, "person" => {})
-      pending("WIP: weird validation error needs fixing")
-      controller.send(:current_user).should == @mock_person
     end
 
     it "should generate a page code" do
@@ -111,6 +112,7 @@ describe PeopleController do
       end
 
       it "should redirect to edit page" do
+        UserSession.stub!(:create!)
         post(:create, "person" => {})
         response.should redirect_to(edit_person_path(controller.resource))
       end
