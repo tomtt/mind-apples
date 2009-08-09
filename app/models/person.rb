@@ -11,9 +11,17 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :mindapples
 
+  attr_protected :login
+
   def ensure_corrent_number_of_mindapples
     chop_superfluous_mindapples
     (5 - mindapples.size).times { mindapples.build }
+  end
+
+  def protected_login=(value)
+    if !login || login.empty? || login == '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
+      self.login = value
+    end
   end
 
   def to_s
