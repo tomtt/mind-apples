@@ -31,7 +31,7 @@ class PeopleController < ApplicationController
   def set_fields_to_create_valid_person
     page_code = PageCode.code
     params["person"]["page_code"] = page_code
-    params["person"]["login"] = '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
+    params["person"]["login"] ||= '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
     password = PageCode.code(20)
     params["person"]["password"] = password
     params["person"]["password_confirmation"] = password

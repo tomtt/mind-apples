@@ -73,7 +73,12 @@ describe PeopleController do
       controller.resource.page_code.should == 'abzABz09'
     end
 
-    it "should assign the code as the autogen login" do
+    it "should use the passed in login if there is one" do
+      post(:create, "person" => {:login => 'gandy'})
+      controller.resource.login.should == 'gandy'
+    end
+
+    it "should assign the code as the autogen login if no login was passed" do
       PageCode.stub!(:code)
       PageCode.stub!(:code).and_return 'abzABz09'
       post(:create, "person" => {})
