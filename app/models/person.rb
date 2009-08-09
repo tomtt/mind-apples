@@ -19,9 +19,13 @@ class Person < ActiveRecord::Base
   end
 
   def protected_login=(value)
-    if !login || login.empty? || login == '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
+    unless login_set_by_user?
       self.login = value
     end
+  end
+
+  def login_set_by_user?
+    login && !login.empty? && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
   end
 
   def to_s
