@@ -12,7 +12,8 @@ Given /^my password is "([^\"]*)"$/ do |password|
 end
 
 Given /^my login is "([^\"]*)"$/ do |login|
-  @me_person.update_attributes(:login => login)
+  @me_person.login = login
+  @me_person.save
 end
 
 Given /^my braindump is "([^\"]*)"$/ do |braindump|
