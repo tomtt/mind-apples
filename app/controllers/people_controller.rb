@@ -4,7 +4,14 @@ class PeopleController < ApplicationController
 
   def create
     self.resource = new_resource
+    self.resource.protected_login = params["person"]["login"]
     @resource_saved = resource.save
+  end
+
+  def update
+    self.resource = find_resource
+    self.resource.protected_login=(params["person"]["login"])
+    @resource_saved = resource.update_attributes(params[resource_name])
   end
 
   response_for :create do |format|

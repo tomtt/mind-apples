@@ -4,6 +4,7 @@ describe PeopleController do
   def build_mock_person
     mock_model(Person,
                :ensure_corrent_number_of_mindapples => nil,
+               :protected_login= => nil,
                :save => true)
   end
 
@@ -28,6 +29,21 @@ describe PeopleController do
     end
 
     it_should_behave_like "all actions finding a person"
+  end
+
+  describe "update" do
+    it "should set the login in a protected way on the updated resource" do
+      @mock_person = build_mock_person
+      Person.stub!(:find_by_param).and_return @mock_person
+      # @mock_person.stub!(:valid_password?).and_return true
+      # @mock_person.stub!(:changed?).and_return false
+      # @mock_person.stub!(:last_request_at)
+      # @mock_person.stub!(:last_request_at=)
+      # @mock_person.stub!(:persistence_token)
+      @mock_person.should_receive(:update_attributes)
+      @mock_person.should_receive(:protected_login=).with('gandy')
+      put(:update, "person" => {"login" => 'gandy'})
+    end
   end
 
   describe "new" do
@@ -73,9 +89,17 @@ describe PeopleController do
       controller.resource.page_code.should == 'abzABz09'
     end
 
-    it "should use the passed in login if there is one" do
-      post(:create, "person" => {:login => 'gandy'})
-      controller.resource.login.should == 'gandy'
+    it "should set the login in a protected way on the created resource" do
+      @mock_person = build_mock_person
+      Person.stub!(:new).and_return @mock_person
+      Person.stub!(:find).and_return @mock_person
+      @mock_person.stub!(:valid_password?).and_return true
+      @mock_person.stub!(:changed?).and_return false
+      @mock_person.stub!(:last_request_at)
+      @mock_person.stub!(:last_request_at=)
+      @mock_person.stub!(:persistence_token)
+      @mock_person.should_receive(:protected_login=).with('gandy')
+      post(:create, "person" => {"login" => 'gandy'})
     end
 
     it "should assign the code as the autogen login if no login was passed" do
