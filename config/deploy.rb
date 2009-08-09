@@ -1,5 +1,16 @@
+require 'deprec'
+
+# set :stages, %w(staging production)
+# set :default_stage, "staging"
+
 set :application, "mindapples"
 set :repository,  "."
+
+# begin
+#   require 'capistrano/ext/multistage'
+# rescue LoadError
+#   puts "Could not load capistrano multistage extension.  Make sure you have installed the capistrano-ext gem"
+# end
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -23,10 +34,15 @@ set :deploy_via, :remote_cache
 
 set :copy_remote_dir, "/home/#{user}"
 
-set :host, "216.194.126.27"
+set :host, "mindapples"
 role :app, host
 role :web, host
 role :db,  host, :primary => true
+
+set :ruby_vm_type,      :mri        # :ree, :mri
+set :web_server_type,   :apache     # :apache, :nginx
+set :app_server_type,   :passenger  # :passenger, :mongrel
+set :db_server_type,    :mysql      # :mysql, :postgresql, :sqlite
 
 after "deploy:update_code", "config:copy_shared_configurations"
 # after "deploy", "features:generate_feature_html_files"
