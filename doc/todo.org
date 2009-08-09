@@ -1,3 +1,4 @@
 * TODO
 ** Protect page_code from being set from rogue form
 ** Ensure uniqueness of page_code and login
+** Protect person edit page from being accessible to other people
