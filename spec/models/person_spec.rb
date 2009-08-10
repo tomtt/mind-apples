@@ -61,6 +61,14 @@ describe Person do
     end
   end
 
+  describe "setting page_code" do
+    it "should be protected from mass assign" do
+      person = Factory.build(:person, :page_code => 'abcdefgh')
+      person.update_attributes(:page_code => 'dangermouse')
+      person.page_code.should == 'abcdefgh'
+    end
+  end
+
   describe "to_param" do
     it "should have its login as param if it has set one" do
       Factory.create(:person, :login => 'bert').to_param.should == 'bert'

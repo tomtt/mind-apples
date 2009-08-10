@@ -5,6 +5,7 @@ class PeopleController < ApplicationController
   def create
     self.resource = new_resource
     self.resource.protected_login = params["person"]["login"]
+    self.resource.page_code = params["person"]["page_code"]
     @resource_saved = resource.save
   end
 

@@ -5,6 +5,7 @@ describe PeopleController do
     mock_model(Person,
                :ensure_corrent_number_of_mindapples => nil,
                :protected_login= => nil,
+               :page_code= => nil,
                :save => true)
   end
 
@@ -83,10 +84,12 @@ describe PeopleController do
     end
 
     it "should assign the code as the page code" do
-      PageCode.stub!(:code)
+      @mock_person = build_mock_person
+      Person.stub!(:new).and_return @mock_person
+      UserSession.stub!(:create!)
       PageCode.stub!(:code).and_return 'abzABz09'
+      @mock_person.should_receive(:page_code=).with('abzABz09')
       post(:create, "person" => {})
-      controller.resource.page_code.should == 'abzABz09'
     end
 
     it "should set the login in a protected way on the created resource" do

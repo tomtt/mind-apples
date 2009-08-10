@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :mindapples
 
-  attr_protected :login
+  attr_protected :login, :page_code
 
   def ensure_corrent_number_of_mindapples
     chop_superfluous_mindapples
