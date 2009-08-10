@@ -25,8 +25,15 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     else
-      raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-        "Now, go and add a mapping in #{__FILE__}"
+      page_name =~ /^\"(.*)\"$/
+      begin
+        if ActionController::Routing::Routes::recognize_path $1, :method => :get
+          $1
+        end
+      rescue ActionController::RoutingError
+        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
+          "Now, go and add a mapping in #{__FILE__}"
+      end
     end
   end
 end

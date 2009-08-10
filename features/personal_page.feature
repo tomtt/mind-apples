@@ -31,8 +31,8 @@ Feature: Personal page
     Then I should see "Playing the piano"
 
   Scenario: Person logs in and edits his page
-    When I follow "edit"
-    Then I should see a "Brain dump" text area with "Mindapples rocks"
+    When I follow "Edit"
+    Then I should see a "person[braindump]" text area containing "Mindapples rocks"
     When I fill in "Brain dump" with "Mindapples really rocks"
     And I press "Submit"
     Then I should see "Mindapples really rocks"
