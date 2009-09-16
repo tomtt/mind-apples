@@ -1,3 +1,6 @@
+@development
+@pivotal_1292369
+
 Feature: Personal page
   Personal page
 
@@ -6,6 +9,7 @@ Feature: Personal page
     And my login is "gandy"
     And my password is "sosocial"
     And my braindump is "Mindapples rocks"
+    And my email is "gandy@example.com"
     When I go to the login page
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "sosocial"
@@ -36,3 +40,19 @@ Feature: Personal page
     When I fill in "Brain dump" with "Mindapples really rocks"
     And I press "Submit"
     Then I should see "Mindapples really rocks"
+
+  Scenario: A hacker tries to edit another person's page
+    Given I have a personal page
+    And my login is "hacker"
+    And my password is "cybersecret"
+    And I log in
+    And I go to "/person/gandy/edit"
+    Then I should see "You do not have permission to edit this page"
+
+  Scenario: Email does not appear on personal page
+    Given I have a personal page
+    And my login is "hacker"
+    And my password is "cybersecret"
+    And I log in
+    And I go to "/person/gandy"
+    Then I should not see "gandy@example.com"
