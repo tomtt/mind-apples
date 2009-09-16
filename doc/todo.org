@@ -1,4 +1,4 @@
 * TODO
 ** Protect page_code from being set from rogue form
 ** Ensure uniqueness of page_code and login
-** Protect person edit page from being accessible to other people
+** Upgrade to rails 2.3.4 (undeprecate routes_for_controller_and_action)
