@@ -25,25 +25,67 @@ describe PeopleController do
   end
 
   describe "edit" do
-    def do_request
-      get 'edit', :id => 'param_value'
-    end
+    describe "when logged in as the user" do
+      before do
+        @mock_person = build_mock_person
+        controller.stub!(:current_user).and_return @mock_person
+      end
 
-    it_should_behave_like "all actions finding a person"
+      def do_request
+        get 'edit', :id => 'param_value'
+      end
+
+      it_should_behave_like "all actions finding a person"
+    end
   end
 
   describe "update" do
-    it "should set the login in a protected way on the updated resource" do
-      @mock_person = build_mock_person
-      Person.stub!(:find_by_param).and_return @mock_person
-      # @mock_person.stub!(:valid_password?).and_return true
-      # @mock_person.stub!(:changed?).and_return false
-      # @mock_person.stub!(:last_request_at)
-      # @mock_person.stub!(:last_request_at=)
-      # @mock_person.stub!(:persistence_token)
-      @mock_person.should_receive(:update_attributes)
-      @mock_person.should_receive(:protected_login=).with('gandy')
-      put(:update, "person" => {"login" => 'gandy'})
+    describe "when logged in as the updated user" do
+      before do
+        @mock_person = build_mock_person
+        controller.stub!(:current_user).and_return @mock_person
+      end
+
+      it "should set the login in a protected way on the updated resource" do
+        Person.stub!(:find_by_param).and_return @mock_person
+        # @mock_person.stub!(:valid_password?).and_return true
+        # @mock_person.stub!(:changed?).and_return false
+        # @mock_person.stub!(:last_request_at)
+        # @mock_person.stub!(:last_request_at=)
+        # @mock_person.stub!(:persistence_token)
+        @mock_person.should_receive(:update_attributes)
+        @mock_person.should_receive(:protected_login=).with('gandy')
+        put(:update, "person" => {"login" => 'gandy'})
+      end
+    end
+
+    describe "when logged in as a different user as the updated one" do
+      before do
+        @logged_in_person = build_mock_person
+        controller.stub!(:current_user).and_return @logged_in_person
+        @mock_person = build_mock_person
+        Person.stub!(:find_by_param).and_return @mock_person
+      end
+
+      it "should not update any attributes of the updated user" do
+        @mock_person.should_not_receive(:update_attributes)
+        put(:update, "person" => {"login" => 'gandy'})
+      end
+
+      it "should not update the login of the updated user" do
+        @mock_person.should_not_receive(:protected_login=)
+        put(:update, "person" => {"login" => 'gandy'})
+      end
+
+      it "should set the notice flash" do
+        put(:update, "person" => {"login" => 'gandy'})
+        flash[:notice].should == 'You do not have permission to edit this page'
+      end
+
+      it "should redirect to the login page" do
+        put(:update, "person" => {"login" => 'gandy'})
+        response.should redirect_to(login_path)
+      end
     end
   end
 

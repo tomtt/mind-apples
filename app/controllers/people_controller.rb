@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   resources_controller_for :people
   before_filter :set_fields_to_create_valid_person, :only => [:create]
+  before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
 
   def create
     self.resource = new_resource
@@ -22,6 +23,11 @@ class PeopleController < ApplicationController
         redirect_to edit_person_path(resource)
       end
     end
+  end
+
+  alias_method :rc_show, :show
+  def show
+    rc_show
   end
 
   protected
@@ -49,5 +55,12 @@ class PeopleController < ApplicationController
     UserSession.create!(:login => params["person"]["login"],
                         :password => params["person"]["password"],
                         :password_confirmation => params["person"]["password_confirmation"])
+  end
+
+  def redirect_unless_current_user_is_owner
+    unless current_user && current_user == self.find_resource
+      flash[:notice] = "You do not have permission to edit this page"
+      redirect_to login_path
+    end
   end
 end
