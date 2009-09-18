@@ -1,0 +1,80 @@
+Id,Story,Labels,Iteration,Iteration Start,Iteration End,Story Type,Estimate,Current State,Created at,Accepted at,Deadline,Requested By,Owned By,Description,URL,Note,Note
+1291985,User can fill in survey,"",1,"Sep 14, 2009","Sep 20, 2009",feature,3,accepted,"Sep 16, 2009","Sep 17, 2009",,Tom ten Thij,Tom ten Thij,"In order to gather suggestions
+As the evil overlord
+I want users to be able to fill in the survey
+
+- 5 suggestions
+- always 5 spaces
+- any number is welcome
+- any size is welcome, design encourages brevity",http://www.pivotaltracker.com/story/show/1291985
+1292084,User can enter meta data,"",1,"Sep 14, 2009","Sep 20, 2009",feature,3,accepted,"Sep 16, 2009","Sep 17, 2009",,Tom ten Thij,Tom ten Thij,"In order to make suggestions more personal and valuable to media
+As the evil overlord
+I want users to be able to enter meta data
+
+All of the following are optional:
+- location
+- gender
+- age
+- occupation (free text)
+- name
+- braindump
+- health check 1-5
+- email (always kept secret)
+- password
+",http://www.pivotaltracker.com/story/show/1292084
+1292369,Authentication,"",1,"Sep 14, 2009","Sep 20, 2009",feature,3,started,"Sep 16, 2009",,,Tom ten Thij,Tom ten Thij,"In order to allow users to authenticate
+As the evil overlord
+I want a user to be able to do so using a login and password",http://www.pivotaltracker.com/story/show/1292369
+1307117,Release for mindapple friends (0.0),"",1,"Sep 14, 2009","Sep 20, 2009",release,,unstarted,"Sep 18, 2009",,,Tom ten Thij,,,http://www.pivotaltracker.com/story/show/1307117
+1292096,Application can send out email,"",2,"Sep 21, 2009","Sep 27, 2009",feature,3,unstarted,"Sep 16, 2009",,,Tom ten Thij,Tom ten Thij,"In order to inform users about mindapples
+As the evil overlord
+I want the applications to be able to generate emails and send them to users",http://www.pivotaltracker.com/story/show/1292096
+1292172,User receives email with her mindapples,d:mail,2,"Sep 21, 2009","Sep 27, 2009",feature,2,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to feel that my suggestions are valued and to have a copy
+As a respondant
+I want to receive an email with my suggestions
+
+- written and formatted? so that it can be forwarded to other people",http://www.pivotaltracker.com/story/show/1292172
+1292246,User can edit her page,d:auth,2,"Sep 21, 2009","Sep 27, 2009",feature,3,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to make the page I made look as good as possible
+As a social butterfly
+I want to be able to edit the things I filled in",http://www.pivotaltracker.com/story/show/1292246,"Make sure the 'Thank you' message is only a flash (Tom ten Thij - Sep 18, 2009)","Ensure there is a login link (Tom ten Thij - Sep 18, 2009)"
+1292289,Password reset,"d:auth, d:mail",2,"Sep 21, 2009","Sep 27, 2009",feature,3,unstarted,"Sep 16, 2009",,,Tom ten Thij,Tom ten Thij,"In order to edit my page when I forgot my password
+As a respondent
+I want to be able to reset my password",http://www.pivotaltracker.com/story/show/1292289
+1292210,Meaningfull error pages,"",3,"Sep 28, 2009","Oct 4, 2009",feature,2,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to inform visitors
+As the evil overlord
+I want a meaningfull 404/422/500 page
+
+- 404: Not found
+- 422: Permission denied
+- 500: Server error",http://www.pivotaltracker.com/story/show/1292210
+1308287,Release for the public (1.0),"",3,"Sep 28, 2009","Oct 4, 2009",release,,unstarted,"Sep 18, 2009",,,Tom ten Thij,,,http://www.pivotaltracker.com/story/show/1308287
+1292145,Evil overlord can download responses,"d:auth, d:mail",3,"Sep 28, 2009","Oct 4, 2009",feature,2,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to have a backup of and analyse data
+As the evil overlord
+I want to download the responses
+
+- CSV",http://www.pivotaltracker.com/story/show/1292145
+1292309,Marking interesting responses,d:auth,3,"Sep 28, 2009","Oct 4, 2009",feature,5,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to keep track of interesting responses
+As the evil overlord
+I want to be able to mark a response as interesting",http://www.pivotaltracker.com/story/show/1292309
+1292508,maintenance page,"",4,"Oct 5, 2009","Oct 11, 2009",feature,2,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to let users know when the site is down
+As the evil overlord
+I want a nice page to appear when maintenance is being done",http://www.pivotaltracker.com/story/show/1292508
+1292191,User can tweet her mindapples,"",4,"Oct 5, 2009","Oct 11, 2009",feature,3,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to tell my friends about my mind apples
+As a social butterfly
+I want to tweet about my response
+
+- blurb
+- link to my page
+- link to take the survey
+- able to put my own words to it",http://www.pivotaltracker.com/story/show/1292191
+1292224,Donations,"",4,"Oct 5, 2009","Oct 11, 2009",feature,3,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to get monies
+As the evil overlord
+I want people to be able to give a donation",http://www.pivotaltracker.com/story/show/1292224
+1292322,Mail to original respondents,d:mail,5,"Oct 12, 2009","Oct 18, 2009",feature,5,unstarted,"Sep 16, 2009",,,Tom ten Thij,,"In order to attract the original Survey Monkey respondents
+As the evil overlord
+I want to send them a mail with their personal page
+
+Tasks:
+- Import SM data
+- Create personal pages from SM data, with single access token
+- Send emails to SM respondents who filled in email",http://www.pivotaltracker.com/story/show/1292322
