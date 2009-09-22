@@ -9,7 +9,7 @@ describe "Routing shortcuts for Tags should map" do
     @tag.stub!(:to_param).and_return('2')
     Tag.stub!(:find).and_return(@tag)
     
-    @controller.stub!(:recognized_route).and_return(ActionController::Routing::Routes.named_routes[:tag])
+    @controller.stub!(:request_path).and_return('/tags/2')
     get :show, :id => "2"
   end
   
@@ -60,7 +60,7 @@ describe "resource_service in TagsController" do
   end
 end
 
-describe "Requesting /tags using GET" do
+describe "Requesting /tags/index" do
   controller_name :tags
 
   before(:each) do
@@ -69,7 +69,7 @@ describe "Requesting /tags using GET" do
   end
   
   def do_get
-    @controller.stub!(:recognized_route).and_return(ActionController::Routing::Routes.named_routes[:tags])
+    @controller.stub!(:request_path).and_return('/tags/index')
     get :index
   end
 

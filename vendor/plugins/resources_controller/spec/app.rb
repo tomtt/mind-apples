@@ -4,6 +4,7 @@
 # Routing
 ##########
 
+ActionController::Routing::Routes.clear!
 ActionController::Routing::Routes.draw do |map|
   # this tests :resource_path (or :erp), for named routes that map to resources
   map.root :controller => 'forums', :action => 'index', :resource_path => '/forums'
@@ -18,13 +19,6 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
   
-  map.resource :account do |account|
-    account.resources :posts
-    account.resource :info do |info|
-      info.resources :tags
-    end
-  end
-  
   map.resources :users do |user|
     user.resources :interests
     user.resources :posts, :controller => 'user_posts'
@@ -35,18 +29,25 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :forums do |forum|
+    forum.resources :interests
+    forum.resources :posts, :controller => 'forum_posts' do |post|
+      post.resources :comments do |comment|
+        comment.resources :tags
+      end
+      post.resources :tags
+    end
     forum.resource :owner do |owner|
       owner.resources :posts do |post|
         post.resources :tags
       end
     end
-    forum.resources :interests
     forum.resources :tags
-    forum.resources :posts, :controller => 'forum_posts' do |post|
-      post.resources :tags
-      post.resources :comments do |comment|
-        comment.resources :tags
-      end
+  end
+  
+  map.resource :account do |account|
+    account.resources :posts
+    account.resource :info do |info|
+      info.resources :tags
     end
   end
   
@@ -62,7 +63,7 @@ ActionController::Routing::Routes.draw do |map|
     foo.resources :bars, :controller => 'forum_posts'
   end
   
-  map.connect ':controller/:action/:id'
+  map.default ':controller/:action/:id' # naming this so we can test missing segment errors
   map.connect ':controller/:action/:id.:format'
 end
 
