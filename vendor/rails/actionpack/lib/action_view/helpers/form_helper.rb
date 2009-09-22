@@ -445,6 +445,15 @@ module ActionView
       #     <% end %>
       #   <% end %>
       #
+      # Or a collection to be used:
+      #
+      #   <% form_for @person, :url => { :action => "update" } do |person_form| %>
+      #     ...
+      #     <% person_form.fields_for :projects, @active_projects do |project_fields| %>
+      #       Name: <%= project_fields.text_field :name %>
+      #     <% end %>
+      #   <% end %>
+      #
       # When projects is already an association on Person you can use
       # +accepts_nested_attributes_for+ to define the writer method for you:
       #
@@ -726,6 +735,7 @@ module ActionView
         options = options.stringify_keys
         tag_value = options.delete("value")
         name_and_id = options.dup
+        name_and_id["id"] = name_and_id["for"]
         add_default_name_and_id_for_value(tag_value, name_and_id)
         options.delete("index")
         options["for"] ||= name_and_id["id"]
@@ -860,8 +870,8 @@ module ActionView
 
       private
         def add_default_name_and_id_for_value(tag_value, options)
-          if tag_value
-            pretty_tag_value    = tag_value.to_s.gsub(/\s/, "_").gsub(/\W/, "").downcase
+          unless tag_value.nil?
+            pretty_tag_value = tag_value.to_s.gsub(/\s/, "_").gsub(/\W/, "").downcase
             specified_id = options["id"]
             add_default_name_and_id(options)
             options["id"] += "_#{pretty_tag_value}" unless specified_id
@@ -1012,18 +1022,21 @@ module ActionView
 
         def fields_for_with_nested_attributes(association_name, args, block)
           name = "#{object_name}[#{association_name}_attributes]"
-          association = @object.send(association_name)
-          explicit_object = args.first if args.first.respond_to?(:new_record?)
+          association = args.first
+
+          if association.respond_to?(:new_record?)
+            association = [association] if @object.send(association_name).is_a?(Array)
+          elsif !association.is_a?(Array)
+            association = @object.send(association_name)
+          end
 
           if association.is_a?(Array)
-            children = explicit_object ? [explicit_object] : association
             explicit_child_index = args.last[:child_index] if args.last.is_a?(Hash)
-
-            children.map do |child|
+            association.map do |child|
               fields_for_nested_model("#{name}[#{explicit_child_index || nested_child_index(name)}]", child, args, block)
             end.join
-          else
-            fields_for_nested_model(name, explicit_object || association, args, block)
+          elsif association
+            fields_for_nested_model(name, association, args, block)
           end
         end
 

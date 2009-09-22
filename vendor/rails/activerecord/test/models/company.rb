@@ -9,6 +9,8 @@ class Company < AbstractCompany
   validates_presence_of :name
 
   has_one :dummy_account, :foreign_key => "firm_id", :class_name => "Account"
+  has_many :contracts
+  has_many :developers, :through => :contracts
 
   def arbitrary_method
     "I am Jack's profound disappointment"
@@ -70,7 +72,12 @@ class Firm < Company
   has_one :account_with_select, :foreign_key => "firm_id", :select => "id, firm_id", :class_name=>'Account'
   has_one :readonly_account, :foreign_key => "firm_id", :class_name => "Account", :readonly => true
   has_one :account_using_primary_key, :primary_key => "firm_id", :class_name => "Account"
+  has_one :account_using_foreign_and_primary_keys, :foreign_key => "firm_name", :primary_key => "name", :class_name => "Account"
   has_one :deletable_account, :foreign_key => "firm_id", :class_name => "Account", :dependent => :delete
+  
+  has_one :unautosaved_account, :foreign_key => "firm_id", :class_name => 'Account', :autosave => false
+  has_many :accounts
+  has_many :unautosaved_accounts, :foreign_key => "firm_id", :class_name => 'Account', :autosave => false
 end
 
 class DependentFirm < Company
@@ -134,6 +141,7 @@ end
 
 class Account < ActiveRecord::Base
   belongs_to :firm
+  belongs_to :unautosaved_firm, :foreign_key => "firm_id", :class_name => "Firm", :autosave => false
 
   def self.destroyed_account_ids
     @destroyed_account_ids ||= Hash.new { |h,k| h[k] = [] }

@@ -145,6 +145,22 @@ class FormHelperTest < ActionView::TestCase
     assert_dom_equal('<label for="my_for">Title</label>', label(:post, :title, nil, "for" => "my_for"))
   end
 
+  def test_label_with_id_attribute_as_symbol
+    assert_dom_equal('<label for="post_title" id="my_id">Title</label>', label(:post, :title, nil, :id => "my_id"))
+  end
+
+  def test_label_with_id_attribute_as_string
+    assert_dom_equal('<label for="post_title" id="my_id">Title</label>', label(:post, :title, nil, "id" => "my_id"))
+  end
+
+  def test_label_with_for_and_id_attributes_as_symbol
+    assert_dom_equal('<label for="my_for" id="my_id">Title</label>', label(:post, :title, nil, :for => "my_for", :id => "my_id"))
+  end
+
+  def test_label_with_for_and_id_attributes_as_string
+    assert_dom_equal('<label for="my_for" id="my_id">Title</label>', label(:post, :title, nil, "for" => "my_for", "id" => "my_id"))
+  end
+
   def test_label_for_radio_buttons_with_value
     assert_dom_equal('<label for="post_title_great_title">The title goes here</label>', label("post", "title", "The title goes here", :value => "great_title"))
     assert_dom_equal('<label for="post_title_great_title">The title goes here</label>', label("post", "title", "The title goes here", :value => "great title"))
@@ -292,6 +308,16 @@ class FormHelperTest < ActionView::TestCase
   def test_radio_button_respects_passed_in_id
      assert_dom_equal('<input checked="checked" id="foo" name="post[secret]" type="radio" value="1" />',
        radio_button("post", "secret", "1", :id=>"foo")
+    )
+  end
+
+  def test_radio_button_with_booleans
+    assert_dom_equal('<input id="post_secret_true" name="post[secret]" type="radio" value="true" />',
+      radio_button("post", "secret", true)
+    )
+
+    assert_dom_equal('<input id="post_secret_false" name="post[secret]" type="radio" value="false" />',
+      radio_button("post", "secret", false)
     )
   end
 
@@ -741,6 +767,42 @@ class FormHelperTest < ActionView::TestCase
                '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #321" />' +
                '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="new comment" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+
+  def test_nested_fields_for_with_an_empty_supplied_attributes_collection
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      f.fields_for(:comments, []) do |cf|
+        concat cf.text_field(:name)
+      end
+    end
+
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+
+  def test_nested_fields_for_with_existing_records_on_a_supplied_nested_attributes_collection
+    @post.comments = Array.new(2) { |id| Comment.new(id + 1) }
+
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      f.fields_for(:comments, @post.comments) do |cf|
+        concat cf.text_field(:name)
+      end
+    end
+
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="1" />' +
+               '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #1" />' +
+               '<input id="post_comments_attributes_1_id" name="post[comments_attributes][1][id]" type="hidden" value="2" />' +
+               '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="comment #2" />' +
                '</form>'
 
     assert_dom_equal expected, output_buffer
