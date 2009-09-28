@@ -21,10 +21,20 @@ sudo gem install rails --no-rdoc --no-ri
 sudo apt-get install libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libssl-dev zlib1g zlib1g-dev lsb-base
 sudo apt-get install apache2-prefork-dev libapr1-dev libaprutil1-dev
 
-mkdir -p ~/mindapples/current
+# mkdir -p ~/mindapples/current
 sudo chown -R www-data:www-data ~/mindapples/current
 
 sudo gem install passenger
+
+(
+cat <<EOF
+   LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
+   PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.2.5
+   PassengerRuby /usr/bin/ruby1.8
+EOF
+) > /tmp/passenger_conf
+sudo mv /tmp/passenger_conf /etc/apache2/mods-available/passenger.load
+sudo a2enmod passenger
 
 (
 cat <<EOF
