@@ -57,8 +57,8 @@ namespace :deploy do
 
   namespace :web do
 
-    before "deploy", "deploy:web:disable"
-    before "deploy:migrations", "deploy:web:disable"
+    # before "deploy", "deploy:web:disable"
+    # before "deploy:migrations", "deploy:web:disable"
 
     desc "Present a maintenance page to visitors."
     task :disable, :roles => :web, :except => { :no_release => true } do
@@ -67,8 +67,8 @@ namespace :deploy do
       run "cp #{current_path}/public/maintenance/maintenance.html #{shared_path}/system/"
     end
 
-    after "deploy", "deploy:web:enable"
-    after "deploy:migrations", "deploy:web:enable"
+    # after "deploy", "deploy:web:enable"
+    # after "deploy:migrations", "deploy:web:enable"
     # Default web:enable task is fine
 
   end
