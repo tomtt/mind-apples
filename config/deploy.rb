@@ -1,4 +1,4 @@
-require 'deprec'
+# require 'deprec'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
