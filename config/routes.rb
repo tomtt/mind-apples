@@ -35,8 +35,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => "user_sessions", :action => "destroy"
 
   map.resource :user_session
-  # map.resources :people, :as => "person", :except => [:index]
-  map.resources :people, :except => [:index]
+  map.resources :people, :as => "person", :except => [:index]
   map.about '/about', :controller => "pages", :action => "about"
   # See how all your routes lay out with "rake routes"
 

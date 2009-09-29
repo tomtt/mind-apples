@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  resources_controller_for :people
+  resources_controller_for :people, :segment => 'person'
   before_filter :set_fields_to_create_valid_person, :only => [:create]
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
 
