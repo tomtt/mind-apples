@@ -1,7 +1,7 @@
 class PersonMailer < ActionMailer::Base
 
   def mindapples(sent_at = Time.now)
-    subject    'Your mindapples'
+    subject    'Your Mindapples'
     recipients ''
     from       ''
     sent_on    sent_at
