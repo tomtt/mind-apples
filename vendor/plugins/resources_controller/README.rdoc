@@ -1,14 +1,27 @@
 = resources_controller
 
-plugin to facilitate inheritance and DRYness in your resources controllers.
-See the docs at http://plugins.ardes.com/doc/resources_controller for details.
-Also see http://blog.ardes.com/resources_controller
+is a plugin to facilitate inheritance and DRYness in your resources controllers.  It introduces some abstraction to help
+you override the default RESTful funtionality in a clean and simple manner.
 
-See the CHANGLELOG for recent changes.
+See History.txt for recent changes.
+
+== Resources
+
+<b>Github</b> for code: http://github.com/ianwhite/resources_controller
+
+<b>API</b> docs: http://ianwhite.github.com/resources_controller/doc
+
+<b>Google group</b> for questions: http://groups.google.com/group/resources_controller
+
+<b>Lighthouse</b> for bugs: http://ianwhite.lighthouseapp.com/projects/10598-resources_controller
+
+<b>Blog</b> articles: http://blog.ardes.com/resources_controller
+
+<b>RailsConfEurope</b> presentation files: http://en.oreilly.com/railseurope2008/public/schedule/detail/3536
 
 == works with rails 2.x
 
-resources_controller works with rails 2.x, and is currently tested against 2.0, 2.1, and 2.2 stable branches
+resources_controller works with rails 2.x, and is currently tested against 2.0, 2.1, 2.2, and 2.3 stable branches
 
 == Specs and Coverage
 
@@ -22,7 +35,7 @@ RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
 == Continuous Integration
 
 garlic (at http://github.com/ianwhite/garlic) is used for CI.  To run the CI suite have a look at
-garlic_example.rb
+garlic.rb
 
 == Contributors
 
@@ -39,7 +52,8 @@ The following people have made contributions to resources_controller.  Please le
 * Joel Chippindale
 * Tim Pope
 * Tom ten Thij
+* Sergei Serdyuk
 
 == License
 
-Copyright (c) 2008 Ian White, MIT License
+Copyright (c) 2007-2009 Ian White, MIT License
