@@ -1,3 +1,5 @@
+# Based on http://www.hackido.com/2009/04/install-ruby-rails-on-ubuntu-904-jaunty.html
+
 sudo apt-get update
 sudo apt-get dist-upgrade
 
@@ -51,3 +53,9 @@ sudo /etc/init.d/apache2 reload
 sudo gem install mysql --no-rdoc --no-ri
 
 sudo apt-get install git-core
+
+# At this stage the server should be ready to deploy to
+
+# Setting up outbound mail and mail lists
+
+sudo apt-get install dovecot-postfix
