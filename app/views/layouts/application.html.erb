@@ -23,6 +23,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <%= show_flashes -%>
         <%= yield :layout %>
       </div>
+      <%= render :partial => '/shared/footer' %>
     </div>
     <%= dev_info %>
     <%= git_info %>

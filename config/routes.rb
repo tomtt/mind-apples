@@ -37,6 +37,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]
   map.about '/about', :controller => "pages", :action => "about"
+  map.things_to_do '/things-to-do', :controller => "pages", :action => "things_to_do"
+  map.help_us_grow '/help-us-grow', :controller => "pages", :action => "help_us_grow"
+  map.about_us '/about-us', :controller => "pages", :action => "about_us"
+  map.social_media_stuff '/social_media_stuff', :controller => "pages", :action => "social_media_stuff"
+
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
