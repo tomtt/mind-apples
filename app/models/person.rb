@@ -4,6 +4,8 @@ class Person < ActiveRecord::Base
   validates_presence_of :page_code
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
 
+  before_save :maybe_send_welcome_email
+
   acts_as_authentic do |config|
     config.validate_email_field false
   end
@@ -58,5 +60,12 @@ class Person < ActiveRecord::Base
 
   def chop_one_mindapple
     mindapples.delete(mindapples.first)
+  end
+
+  def maybe_send_welcome_email
+    if !email.blank? && !has_received_welcome_mail
+      PersonMailer.deliver_mindapples(self)
+      self.has_received_welcome_mail = true
+    end
   end
 end
