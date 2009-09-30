@@ -1,3 +1,5 @@
+@committed
+
 Feature: Setting login
   In order to have a more personalized page
   As a social butterfly

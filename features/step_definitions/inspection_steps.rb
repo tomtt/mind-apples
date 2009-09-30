@@ -17,3 +17,12 @@ end
 Then /^I should see an? "([^\"]*)" text area$/ do |name|
   response.body.should have_tag("textarea[name='#{name}']")
 end
+
+Then /^I should see a link to "([^\"]*)"$/ do |link_href|
+  response.should have_tag("a", :attributes => { :href => link_href })
+end
+
+Then /^I should not see a link to "([^\"]*)"$/ do |link_href|
+  xpath = "//a[@href='#{link_href}']"
+  response.should_not have_xpath(xpath)
+end
