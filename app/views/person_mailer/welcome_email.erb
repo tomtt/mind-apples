@@ -2,6 +2,6 @@ PersonMailer#welcome_email
 
 Find me in app/views/person_mailer/welcome_email.erb
 
-<% @mindapples.each do |mindapple| %>
+<%- @mindapples.each do |mindapple| -%>
 - <%= mindapple.suggestion %>
-<% end %>
+<%- end -%>
