@@ -8,3 +8,6 @@ Factory.define :person do |u|
   u.password              "letmein"
   u.password_confirmation "letmein"
 end
+
+Factory.define :mindapple do |m|
+end

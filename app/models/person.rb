@@ -64,7 +64,7 @@ class Person < ActiveRecord::Base
 
   def maybe_send_welcome_email
     if !email.blank? && !has_received_welcome_mail
-      PersonMailer.deliver_mindapples(self)
+      PersonMailer.deliver_welcome_email(self)
       self.has_received_welcome_mail = true
     end
   end

@@ -1,11 +1,11 @@
 class PersonMailer < ActionMailer::Base
 
-  def mindapples(person)
+  def welcome_email(person)
     subject    'Your Mindapples'
     recipients person.email
     from       ''
-
-    body       :greeting => 'Hi,'
+    body       :greeting => 'Hi,',
+               :mindapples => person.mindapples
   end
 
   def set_password(email, name, sent_at = Time.now)

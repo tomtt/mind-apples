@@ -17,16 +17,22 @@ describe PersonMailer do
     end
 
     it "should have 'Your Mindapples' in the subject" do
-      mail = PersonMailer.deliver_mindapples(@person)
+      mail = PersonMailer.deliver_welcome_email(@person)
       mail.subject.should == "Your Mindapples"
     end
 
     it "should be sent to the person's email address" do
       @person.email = 'test@example.com'
-      mail = PersonMailer.deliver_mindapples(@person)
+      mail = PersonMailer.deliver_welcome_email(@person)
       mail.should deliver_to('test@example.com')
     end
 
-    it "should contain the person's mindapples"
+    it "should contain the person's mindapples" do
+      @person.mindapples << Factory.create(:mindapple, :suggestion => "eat apples")
+      @person.mindapples << Factory.create(:mindapple, :suggestion => "drink chocolate milk")
+      mail = PersonMailer.deliver_welcome_email(@person)
+      mail.body.should include("eat apples")
+      mail.body.should include("drink chocolate milk")
+    end
   end
 end
