@@ -1,15 +1,14 @@
 class PersonMailer < ActionMailer::Base
 
-  def mindapples(sent_at = Time.now)
+  def mindapples(person)
     subject    'Your Mindapples'
-    recipients ''
+    recipients person.email
     from       ''
-    sent_on    sent_at
 
     body       :greeting => 'Hi,'
   end
 
-  def set_password(sent_at = Time.now)
+  def set_password(email, name, sent_at = Time.now)
     subject    'Setting your Mindapples password'
     recipients ''
     from       ''
