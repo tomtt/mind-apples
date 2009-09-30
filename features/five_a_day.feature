@@ -9,6 +9,7 @@ Feature: Asking for five a day
     Then I should be on the "take the survey" page
 
   Scenario: Social Butterfly fills in the survey
+    Given I have access to the inbox of "andy@example.com"
     When I go to the "take the survey" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
@@ -37,3 +38,6 @@ Feature: Asking for five a day
     And I should see "social guru"
     And I should see "Andy Gibson"
     And I should see "andy@example.com"
+    And I should receive an email
+    When I open the email
+    Then I should see "Your Mindapples" in the email subject
