@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
-  resources_controller_for :user_sessions
+  resources_controller_for :user_session, :singleton => true, :load_enclosing => false
+
   # before_filter :require_no_user, :only => [:new, :create]
   before_filter :logout_if_current_user, :only => [:create]
   before_filter :require_user, :only => :destroy
