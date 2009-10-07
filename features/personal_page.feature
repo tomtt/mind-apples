@@ -56,3 +56,8 @@ Feature: Personal page
     And I log in
     And I go to "/person/gandy"
     Then I should not see "gandy@example.com"
+
+  Scenario: Person views her own page when not logged in
+    When I go to the logout page
+    And I go to "/person/gandy"
+    Then I should see "Mindapples rocks"
