@@ -59,6 +59,7 @@ class PeopleController < ApplicationController
 
   def redirect_unless_current_user_is_owner
     unless current_user && current_user == self.find_resource
+      session[:return_to] = request.path
       flash[:notice] = "You do not have permission to edit this page"
       redirect_to login_path
     end

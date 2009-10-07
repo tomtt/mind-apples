@@ -34,7 +34,7 @@ Feature: Personal page
     And I follow "Your page"
     Then I should see "Playing the piano"
 
-  Scenario: Person logs in and edits his page
+  Scenario: Person edits his page
     When I follow "Edit"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
     When I fill in "Brain dump" with "Mindapples really rocks"
@@ -57,7 +57,16 @@ Feature: Personal page
     And I go to "/person/gandy"
     Then I should not see "gandy@example.com"
 
-  Scenario: Person views her own page when not logged in
+  Scenario: Person views his own page when not logged in
     When I go to the logout page
     And I go to "/person/gandy"
     Then I should see "Mindapples rocks"
+
+  Scenario: Person edits his page when not logged in
+    When I go to the logout page
+    And I go to "/person/gandy"
+    And I follow "edit"
+    And I fill in "Login" with "gandy"
+    And I fill in "Password" with "sosocial"
+    And I press "Log in"
+    Then I should see a "person[braindump]" text area containing "Mindapples rocks"

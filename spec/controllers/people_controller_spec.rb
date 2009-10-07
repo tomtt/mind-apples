@@ -6,7 +6,8 @@ describe PeopleController do
                :ensure_corrent_number_of_mindapples => nil,
                :protected_login= => nil,
                :page_code= => nil,
-               :save => true)
+               :save => true,
+               :update_attributes => true)
   end
 
   shared_examples_for "all actions finding a person" do
@@ -29,6 +30,7 @@ describe PeopleController do
       before do
         @mock_person = build_mock_person
         controller.stub!(:current_user).and_return @mock_person
+        Person.stub!(:find_by_param).and_return(@mock_person)
       end
 
       def do_request
@@ -36,6 +38,20 @@ describe PeopleController do
       end
 
       it_should_behave_like "all actions finding a person"
+    end
+
+    describe "when not logged in" do
+      before do
+        @mock_person = build_mock_person
+        @mock_person.stub!(:to_param).and_return('some_login')
+        controller.stub!(:current_user).and_return nil
+        Person.stub!(:find_by_param).with('some_login').and_return(@mock_person)
+      end
+
+      it "should set the return_to session value to the path for editing this user" do
+        get 'edit', :id => 'some_login'
+        session[:return_to].should == edit_person_path(@mock_person)
+      end
     end
   end
 
