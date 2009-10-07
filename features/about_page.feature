@@ -1,4 +1,4 @@
-@development
+@committed
 
 Feature: About page
   In order to explain why Mindapples
