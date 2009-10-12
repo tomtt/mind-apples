@@ -16,6 +16,21 @@ class PeopleController < ApplicationController
     @resource_saved = resource.update_attributes(params[resource_name])
   end
 
+  response_for :update do |format|
+    if @resource_saved
+      format.html do
+        flash[:notice] = "#{resource_name.humanize} was successfully updated."
+        redirect_to edit_resource_path
+      end
+      format.js
+      format.xml  { head :ok }
+    else
+      format.html { render :action => "edit" }
+      format.js   { render :action => "edit" }
+      format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
+    end
+  end
+
   response_for :create do |format|
     format.html do
       if @resource_saved

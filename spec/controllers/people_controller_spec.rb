@@ -73,6 +73,12 @@ describe PeopleController do
         @mock_person.should_receive(:protected_login=).with('gandy')
         put(:update, "person" => {"login" => 'gandy'})
       end
+
+      it "should redirect to the edit page" do
+        Person.stub!(:find_by_param).and_return @mock_person
+        put(:update, "person" => {"login" => 'gandy'})
+        response.should redirect_to(edit_person_path(@mock_person))
+      end
     end
 
     describe "when logged in as a different user as the updated one" do
