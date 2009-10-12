@@ -6,11 +6,38 @@ module Cucumber
     #
     # This gets stored internally as <tt>["invoice", "release_2"]</tt>
     #
-    class Tags
-      def self.strip_prefix(tag_name)
-        tag_name =~ /^@(.*)/ ? $1 : tag_name
+    class Tags #:nodoc:
+      class << self
+        EXCLUDE_PATTERN = /^~/
+
+        def matches?(source_tag_names, tag_names)
+          exclude_tag_names, include_tag_names = tag_names.partition{|tag_name| exclude_tag?(tag_name)}
+          exclude_tag_names.map!{|name| name[1..-1]}
+          check_at_sign_prefix(exclude_tag_names + include_tag_names)
+          !excluded?(source_tag_names, exclude_tag_names) && included?(source_tag_names, include_tag_names)
+        end
+
+        def exclude_tag?(tag_name)
+          tag_name =~ EXCLUDE_PATTERN
+        end
+        
+        private
+
+        def check_at_sign_prefix(tag_names)
+          tag_names.each{|tag_name| raise "Tag names must start with an @ sign. The following tag name didn't: #{tag_name}" unless tag_name[0..0] == '@'}
+        end
+
+        def excluded?(source_tag_names, query_tag_names)
+          source_tag_names.any? && (source_tag_names & query_tag_names).any?
+        end
+        
+        def included?(source_tag_names, query_tag_names)
+          query_tag_names.empty? || (source_tag_names & query_tag_names).any?
+        end
       end
-    
+
+      attr_reader :tag_names
+
       def initialize(line, tag_names)
         @line, @tag_names = line, tag_names
       end
@@ -23,7 +50,17 @@ module Cucumber
       end
 
       def accept_hook?(hook)
-        hook.matches_tag_names?(@tag_names)
+        self.class.matches?(@tag_names, hook.tag_names)
+      end
+
+      def count(tag)
+        # See discussion:
+        # http://github.com/weplay/cucumber/commit/2dc592acdf3f7c1a0c333a8164649936bb82d983
+        if @tag_names.respond_to?(:count) && @tag_names.method(:count).arity > 0
+          @tag_names.count(tag) # 1.9
+        else
+          @tag_names.select{|t| t == tag}.length  # 1.8
+        end
       end
 
       def to_sexp

@@ -1,7 +1,7 @@
 module Cucumber
   module Ast
     # Represents the root node of a parsed feature.
-    class Feature
+    class Feature #:nodoc:
       attr_accessor :file, :language
       attr_writer :features
       attr_reader :name
@@ -26,6 +26,10 @@ module Cucumber
         end
       end
 
+      def source_tag_names
+        @tags.tag_names
+      end
+
       def accept_hook?(hook)
         @tags.accept_hook?(hook)
       end
@@ -42,6 +46,28 @@ module Cucumber
 
       def file_colon_line(line)
         "#{@file}:#{line}"
+      end
+
+      def tag_count(tag)
+        if @tags.respond_to?(:count)
+          @tags.count(tag) # 1.9
+        else
+          @tags.select{|t| t == tag}.length  # 1.8
+        end
+      end
+
+      def feature_and_children_tag_count(tag)
+        children_tag_count = @feature_elements.inject(0){|count, feature_element| count += feature_element.tag_count(tag)}
+        children_tag_count + tag_count(tag)
+      end
+
+      def short_name
+        first_line = name.split(/\n/)[0]
+        if first_line =~ /#{language.keywords('feature', true)}:(.*)/
+          $1.strip
+        else
+          first_line
+        end
       end
 
       def to_sexp

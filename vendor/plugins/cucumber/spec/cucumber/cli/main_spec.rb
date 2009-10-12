@@ -13,6 +13,8 @@ module Cucumber
         @out = StringIO.new
         @err = StringIO.new
         Kernel.stub!(:exit).and_return(nil)
+        File.stub!(:exist?).and_return(false) # When Configuration checks for cucumber.yml
+        Dir.stub!(:[]).and_return([]) # to prevent cucumber's features dir to being laoded
       end
 
       describe "verbose mode" do
@@ -21,22 +23,13 @@ module Cucumber
           @empty_feature = Ast::Feature.new(nil, Ast::Comment.new(''), Ast::Tags.new(2, []), "Feature", [])
         end
 
-        it "should show ruby files required" do
-          @cli = Main.new(%w{--verbose --require example.rb}, @out)
-          @cli.stub!(:require)
-
-          @cli.execute!(Object.new.extend(StepMother))
-
-          @out.string.should include('example.rb')
-        end
-
         it "should show feature files parsed" do
           @cli = Main.new(%w{--verbose example.feature}, @out)
           @cli.stub!(:require)
 
           FeatureFile.stub!(:new).and_return(mock("feature file", :parse => @empty_feature))
 
-          @cli.execute!(Object.new.extend(StepMother))
+          @cli.execute!(StepMother.new)
 
           @out.string.should include('example.feature')
         end
@@ -87,11 +80,54 @@ module Cucumber
             Object.should_receive(:const_get).with('ZooModule').and_return(mock_module)
             mock_module.should_receive(:const_get).with('MonkeyFormatterClass').and_return(mock('formatter class', :new => f))
 
-            cli.execute!(Object.new.extend(StepMother))
+            cli.execute!(StepMother.new)
           end
 
         end
       end
+
+      describe "setup step sequence" do
+        
+        it "should load files and execute hooks in order" do
+          Configuration.stub!(:new).and_return(configuration = mock('configuration', :null_object => true))
+          step_mother = mock('step mother', :null_object => true)
+          configuration.stub!(:drb?).and_return false
+          cli = Main.new(%w{--verbose example.feature}, @out)
+          cli.stub!(:require)
+          
+          configuration.stub!(:support_to_load).and_return(['support'])
+          configuration.stub!(:step_defs_to_load).and_return(['step defs'])
+          
+          # Support must be loaded first to ensure post configuration hook can
+          # run before anything else.
+          step_mother.should_receive(:load_code_files).with(['support']).ordered
+          # The post configuration hook/s (if any) need to be run next to enable
+          # extensions to do their thing before features are loaded
+          step_mother.should_receive(:after_configuration).with(configuration).ordered
+          # Feature files must be loaded before step definitions are required.
+          # This is because i18n step methods are only aliased when
+          # features are loaded. If we swap the order, the requires
+          # will fail.
+          step_mother.should_receive(:load_plain_text_features).ordered
+          step_mother.should_receive(:load_code_files).with(['step defs']).ordered
+
+          cli.execute!(step_mother)
+        end
+        
+      end
+      
+    [ProfilesNotDefinedError, YmlLoadError, ProfileNotFound].each do |exception_klass|
+
+      it "rescues #{exception_klass}, prints the message to the error stream and returns true" do
+        Configuration.stub!(:new).and_return(configuration = mock('configuration'))
+        configuration.stub!(:parse!).and_raise(exception_klass.new("error message"))
+
+        main = Main.new('', out = StringIO.new, error = StringIO.new)
+        main.execute!(StepMother.new).should be_true
+        error.string.should == "error message\n"
+      end
+    end
+
 
       context "--drb" do
         before(:each) do
@@ -105,7 +141,8 @@ module Cucumber
         end
 
         it "delegates the execution to the DRB client passing the args and streams" do
-          DRbClient.should_receive(:run).with(@args, @err, @out).and_return(true)
+          @configuration.stub :drb_port => 1450
+          DRbClient.should_receive(:run).with(@args, @err, @out, 1450).and_return(true)
           @cli.execute!(@step_mother)
         end
 
@@ -128,10 +165,6 @@ module Cucumber
             @err.string.should include("WARNING: error message. Running features locally:")
           end
 
-          it "reparses the configuration since the --drb flag causes the initial parsing to short circuit" do
-            @configuration.should_receive(:parse!).exactly(:twice)
-            @cli.execute!(@step_mother)
-          end
         end
       end
     end

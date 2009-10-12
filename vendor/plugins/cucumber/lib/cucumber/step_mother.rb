@@ -1,8 +1,12 @@
-require 'cucumber/step_definition'
-require 'cucumber/world'
+require 'cucumber/constantize'
 require 'cucumber/core_ext/instance_exec'
+require 'cucumber/parser/natural_language'
+require 'cucumber/language_support/language_methods'
+require 'cucumber/language_support/step_definition_methods'
+require 'cucumber/formatter/duration'
 
 module Cucumber
+  # Raised when there is no matching StepDefinition for a step.
   class Undefined < StandardError
     attr_reader :step_name
 
@@ -24,7 +28,7 @@ module Cucumber
   class Pending < StandardError
   end
 
-  # Raised when a step matches 2 or more StepDefinition
+  # Raised when a step matches 2 or more StepDefinitions
   class Ambiguous < StandardError
     def initialize(step_name, step_definitions, used_guess)
       message = "Ambiguous match of \"#{step_name}\":\n\n"
@@ -35,80 +39,86 @@ module Cucumber
     end
   end
 
-  # Raised when 2 or more StepDefinition have the same Regexp
-  class Redundant < StandardError
-    def initialize(step_def_1, step_def_2)
-      message = "Multiple step definitions have the same Regexp:\n\n"
-      message << step_def_1.backtrace_line << "\n"
-      message << step_def_2.backtrace_line << "\n\n"
-      super(message)
-    end
-  end
+  # This is the meaty part of Cucumber that ties everything together.
+  class StepMother
+    include Constantize
+    include Formatter::Duration
+    attr_writer :options, :visitor, :log
 
-  class NilWorld < StandardError
     def initialize
-      super("World procs should never return nil")
+      @unsupported_programming_languages = []
+      @programming_languages = []
+      @language_map = {}
+      load_natural_language('en')
     end
-  end
 
-  class MultipleWorld < StandardError
-    def initialize(first_proc, second_proc)
-      message = "You can only pass a proc to #World once, but it's happening\n"
-      message << "in 2 places:\n\n"
-      message << first_proc.backtrace_line('World') << "\n"
-      message << second_proc.backtrace_line('World') << "\n\n"
-      message << "Use Ruby modules instead to extend your worlds. See the Cucumber::StepMother#World RDoc\n"
-      message << "or http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world.\n\n"
-      super(message)
-    end
-  end
+    def load_plain_text_features(feature_files)
+      features = Ast::Features.new
 
-  # This is the main interface for registering step definitions, which is done
-  # from <tt>*_steps.rb</tt> files. This module is included right at the top-level
-  # so #register_step_definition (and more interestingly - its aliases) are
-  # available from the top-level.
-  module StepMother
-    class Hook
-      def initialize(tag_names, proc)
-        @tag_names = tag_names.map{|tag| Ast::Tags.strip_prefix(tag)}
-        @proc = proc
-      end
-
-      def matches_tag_names?(tag_names)
-        @tag_names.empty? || (@tag_names & tag_names).any?
-      end
-
-      def execute_in(world, scenario, location, exception_fails_scenario = true)
-        begin
-          world.cucumber_instance_exec(false, location, scenario, &@proc)
-        rescue Exception => exception
-          if exception_fails_scenario
-            scenario.fail!(exception)
-          else
-            raise
-          end
+      start = Time.new
+      log.debug("Features:\n")
+      feature_files.each do |f|
+        feature_file = FeatureFile.new(f)
+        feature = feature_file.parse(self, options)
+        if feature
+          features.add_feature(feature)
+          log.debug("  * #{f}\n")
         end
       end
+      duration = Time.now - start
+      log.debug("Parsing feature files took #{format_duration(duration)}\n\n")
+      features
     end
 
-    class << self
-      def alias_adverb(adverb)
-        adverb = adverb.gsub(/\s/, '')
-        alias_method adverb, :register_step_definition
+    def load_code_files(step_def_files)
+      log.debug("Code:\n")
+      step_def_files.each do |step_def_file|
+        load_code_file(step_def_file)
+      end
+      log.debug("\n")
+    end
+
+    def load_code_file(step_def_file)
+      if programming_language = programming_language_for(step_def_file)
+        log.debug("  * #{step_def_file}\n")
+        programming_language.load_code_file(step_def_file)
+      else
+        log.debug("  * #{step_def_file} [NOT SUPPORTED]\n")
       end
     end
 
-    attr_writer :snippet_generator, :options, :visitor
+    # Loads and registers programming language implementation.
+    # Instances are cached, so calling with the same argument
+    # twice will return the same instance.
+    #
+    def load_programming_language(ext)
+      return @language_map[ext] if @language_map[ext]
+      programming_language_class = constantize("Cucumber::#{ext.capitalize}Support::#{ext.capitalize}Language")
+      programming_language = programming_language_class.new(self)
+      programming_language.alias_adverbs(@adverbs || [])
+      @programming_languages << programming_language
+      @language_map[ext] = programming_language
+      programming_language
+    end
 
+    # Loads a natural language. This has the effect of aliasing 
+    # Step Definition keywords for all of the registered programming 
+    # languages (if they support aliasing). See #load_programming_language
+    #
+    def load_natural_language(lang)
+      Parser::NaturalLanguage.get(self, lang)
+    end
+
+    # Returns the options passed on the command line.
     def options
       @options ||= {}
     end
 
-    def step_visited(step)
+    def step_visited(step) #:nodoc:
       steps << step unless steps.index(step)
     end
-    
-    def steps(status = nil)
+
+    def steps(status = nil) #:nodoc:
       @steps ||= []
       if(status)
         @steps.select{|step| step.status == status}
@@ -117,7 +127,11 @@ module Cucumber
       end
     end
 
-    def scenarios(status = nil)
+    def announce(msg) #:nodoc:
+      @visitor.announce(msg)
+    end
+
+    def scenarios(status = nil) #:nodoc:
       @scenarios ||= []
       if(status)
         @scenarios.select{|scenario| scenario.status == status}
@@ -126,237 +140,120 @@ module Cucumber
       end
     end
 
-    # Registers a new StepDefinition. This method is aliased
-    # to <tt>Given</tt>, <tt>When</tt> and <tt>Then</tt>.
-    #
-    # See Cucumber#alias_steps for details on how to
-    # create your own aliases.
-    #
-    # The +&proc+ gets executed in the context of a <tt>world</tt>
-    # object, which is defined by #World. A new <tt>world</tt>
-    # object is created for each scenario and is shared across
-    # step definitions within that scenario.
-    def register_step_definition(regexp, &proc)
-      step_definition = StepDefinition.new(regexp, &proc)
-      step_definitions.each do |already|
-        raise Redundant.new(already, step_definition) if already.match(regexp)
-      end
-      step_definitions << step_definition
-      step_definition
-    end
-
-    # Registers a Before proc. You can call this method as many times as you
-    # want (typically from ruby scripts under <tt>support</tt>).
-    def Before(*tag_names, &proc)
-      register_hook(:before, tag_names, proc)
-    end
-
-    def After(*tag_names, &proc)
-      register_hook(:after, tag_names, proc)
-    end
-
-    def AfterStep(*tag_names, &proc)
-      register_hook(:after_step, tag_names, proc)
-    end
-
-    def register_hook(phase, tags, proc)
-      hook = Hook.new(tags, proc)
-      hooks[phase] << hook
-      hook
-    end
-
-    def hooks
-      @hooks ||= Hash.new {|hash, phase| hash[phase] = []}
-    end
-
-    def hooks_for(phase, scenario)
-      hooks[phase].select{|hook| scenario.accept_hook?(hook)}
-    end
-
-    # Registers any number of +world_modules+ (Ruby Modules) and/or a Proc.
-    # The +proc+ will be executed once before each scenario to create an
-    # Object that the scenario's steps will run within. Any +world_modules+
-    # will be mixed into this Object (via Object#extend).
-    #
-    # This method is typically called from one or more Ruby scripts under 
-    # <tt>features/support</tt>. You can call this method as many times as you 
-    # like (to register more modules), but if you try to register more than 
-    # one Proc you will get an error.
-    #
-    # Cucumber will not yield anything to the +proc+ (like it used to do before v0.3).
-    #
-    # In earlier versions of Cucumber (before 0.3) you could not register
-    # any +world_modules+. Instead you would register several Proc objects (by 
-    # calling the method several times). The result of each +proc+ would be yielded 
-    # to the next +proc+. Example:
-    #
-    #   World do |world| # NOT SUPPORTED FROM 0.3
-    #     MyClass.new
-    #   end
-    #
-    #   World do |world| # NOT SUPPORTED FROM 0.3
-    #     world.extend(MyModule)
-    #   end
-    #
-    # From Cucumber 0.3 the recommended way to do this is:
-    #
-    #    World do
-    #      MyClass.new
-    #    end
-    #
-    #    World(MyModule)
-    #
-    def World(*world_modules, &proc)
-      if(proc)
-        raise MultipleWorld.new(@world_proc, proc) if @world_proc
-        @world_proc = proc
-      end
-      @world_modules ||= []
-      @world_modules += world_modules
-    end
-
-    def current_world
-      @current_world
-    end
-
-    def step_match(step_name, formatted_step_name=nil)
-      matches = step_definitions.map { |d| d.step_match(step_name, formatted_step_name) }.compact
+    def step_match(step_name, formatted_step_name=nil) #:nodoc:
+      matches = @programming_languages.map do |programming_language| 
+        programming_language.step_matches(step_name, formatted_step_name)
+      end.flatten
       raise Undefined.new(step_name) if matches.empty?
       matches = best_matches(step_name, matches) if matches.size > 1 && options[:guess]
       raise Ambiguous.new(step_name, matches, options[:guess]) if matches.size > 1
       matches[0]
     end
 
-    def best_matches(step_name, step_matches)
+    def best_matches(step_name, step_matches) #:nodoc:
+      no_groups      = step_matches.select {|step_match| step_match.args.length == 0}
       max_arg_length = step_matches.map {|step_match| step_match.args.length }.max
       top_groups     = step_matches.select {|step_match| step_match.args.length == max_arg_length }
 
-      if top_groups.length > 1
+      if no_groups.any?
+        longest_regexp_length = no_groups.map {|step_match| step_match.text_length }.max
+        no_groups.select {|step_match| step_match.text_length == longest_regexp_length }
+      elsif top_groups.any?
         shortest_capture_length = top_groups.map {|step_match| step_match.args.inject(0) {|sum, c| sum + c.length } }.min
         top_groups.select {|step_match| step_match.args.inject(0) {|sum, c| sum + c.length } == shortest_capture_length }
       else
         top_groups
       end
     end
-    
-    def clear!
-      step_definitions.clear
-      hooks.clear
-      steps.clear
-      scenarios.clear
+
+    def unmatched_step_definitions
+      @programming_languages.map do |programming_language| 
+        programming_language.unmatched_step_definitions
+      end.flatten
     end
 
-    def step_definitions
-      @step_definitions ||= []
+    def snippet_text(step_keyword, step_name, multiline_arg_class) #:nodoc:
+      load_programming_language('rb') if unknown_programming_language?
+      @programming_languages.map do |programming_language|
+        programming_language.snippet_text(step_keyword, step_name, multiline_arg_class)
+      end.join("\n")
     end
 
-    def snippet_text(step_keyword, step_name, multiline_arg_class)
-      @snippet_generator.snippet_text(step_keyword, step_name, multiline_arg_class)
+    def unknown_programming_language?
+      @programming_languages.empty?
     end
 
-    def before_and_after(scenario, skip_hooks=false)
+    def before_and_after(scenario, skip_hooks=false) #:nodoc:
       before(scenario) unless skip_hooks
-      @current_scenario = scenario
       yield scenario
-      @current_scenario = nil
       after(scenario) unless skip_hooks
       scenario_visited(scenario)
     end
-    
-    def before(scenario)
-      unless current_world
-        new_world!
-        execute_before(scenario)
+
+    def register_adverbs(adverbs) #:nodoc:
+      @adverbs ||= []
+      @adverbs += adverbs
+      @adverbs.uniq!
+      @programming_languages.each do |programming_language|
+        programming_language.alias_adverbs(@adverbs)
       end
     end
     
-    def after(scenario)
-      execute_after(scenario)
-      nil_world!
+    def before(scenario) #:nodoc:
+      return if options[:dry_run] || @current_scenario
+      @current_scenario = scenario
+      @programming_languages.each do |programming_language|
+        programming_language.before(scenario)
+      end
     end
     
-    def after_step
-      execute_after_step(@current_scenario)
+    def after(scenario) #:nodoc:
+      @current_scenario = nil
+      return if options[:dry_run]
+      @programming_languages.each do |programming_language|
+        programming_language.after(scenario)
+      end
     end
     
+    def after_step #:nodoc:
+      return if options[:dry_run]
+      @programming_languages.each do |programming_language|
+        programming_language.execute_after_step(@current_scenario)
+      end
+    end
+    
+    def after_configuration(configuration) #:nodoc
+      @programming_languages.each do |programming_language|
+        programming_language.after_configuration(configuration)
+      end
+    end
+
     private
 
-    def max_step_definition_length
+    def programming_language_for(step_def_file) #:nodoc:
+      if ext = File.extname(step_def_file)[1..-1]
+        return nil if @unsupported_programming_languages.index(ext)
+        begin
+          load_programming_language(ext)
+        rescue LoadError
+          @unsupported_programming_languages << ext
+          nil
+        end
+      else
+        nil
+      end
+    end
+
+    def max_step_definition_length #:nodoc:
       @max_step_definition_length ||= step_definitions.map{|step_definition| step_definition.text_length}.max
     end
 
-    # Creates a new world instance
-    def new_world!
-      return if options[:dry_run]
-      create_world!
-      extend_world
-      connect_world
-      @current_world
-    end
-
-    def create_world!
-      if(@world_proc)
-        @current_world = @world_proc.call
-        check_nil(@current_world, @world_proc)
-      else
-        @current_world = Object.new
-      end
-    end
-
-    def extend_world
-      @current_world.extend(World)
-      @current_world.extend(::Spec::Matchers) if defined?(::Spec::Matchers)
-      (@world_modules || []).each do |mod|
-        @current_world.extend(mod)
-      end
-    end
-
-    def connect_world
-      @current_world.__cucumber_step_mother = self
-      @current_world.__cucumber_visitor = @visitor
-    end
-
-    def check_nil(o, proc)
-      if o.nil?
-        begin
-          raise NilWorld.new
-        rescue NilWorld => e
-          e.backtrace.clear
-          e.backtrace.push(proc.backtrace_line("World"))
-          raise e
-        end
-      else
-        o
-      end
-    end
-
-    def nil_world!
-      @current_world = nil
-    end
-
-    def execute_before(scenario)
-      return if options[:dry_run]
-      hooks_for(:before, scenario).each do |hook|
-        hook.execute_in(@current_world, scenario, 'Before')
-      end
-    end
-
-    def execute_after(scenario)
-      return if options[:dry_run]
-      hooks_for(:after, scenario).each do |hook|
-        hook.execute_in(@current_world, scenario, 'After')
-      end
-    end
-
-    def execute_after_step(scenario)
-      return if options[:dry_run]
-      hooks_for(:after_step, scenario).each do |hook|
-        hook.execute_in(@current_world, scenario, 'AfterStep', false)
-      end
-    end
-
-    def scenario_visited(scenario)
+    def scenario_visited(scenario) #:nodoc:
       scenarios << scenario unless scenarios.index(scenario)
+    end
+
+    def log
+      @log ||= Logger.new(STDOUT)
     end
   end
 end

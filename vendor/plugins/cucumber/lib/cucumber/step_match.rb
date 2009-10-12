@@ -1,23 +1,42 @@
 module Cucumber
-  class StepMatch
-    attr_reader :step_definition, :args
+  class StepMatch #:nodoc:
+    attr_reader :step_definition
 
-    def initialize(step_definition, step_name, formatted_step_name, args)
-      @step_definition, @step_name, @formatted_step_name, @args = step_definition, step_name, formatted_step_name, args
+    def initialize(step_definition, step_name, formatted_step_name, step_arguments)
+      @step_definition, @step_name, @formatted_step_name, @step_arguments = step_definition, step_name, formatted_step_name, step_arguments
+    end
+
+    def args
+      @step_arguments.map{|g| g.val}
     end
 
     def name
       @formatted_step_name
     end
 
-    def invoke(world, multiline_arg)
-      all_args = @args.dup
-      all_args << multiline_arg if multiline_arg
-      @step_definition.invoke(world, all_args)
+    def invoke(multiline_arg)
+      all_args = args
+      all_args << multiline_arg.dup if multiline_arg
+      @step_definition.invoke(all_args)
     end
 
-    def format_args(format = lambda{|a| a})
-      @formatted_step_name || @step_definition.format_args(@step_name, format)
+    # Formats the matched arguments of the associated Step. This method
+    # is usually called from visitors, which render output.
+    #
+    # The +format+ can either be a String or a Proc.
+    #
+    # If it is a String it should be a format string according to
+    # <tt>Kernel#sprinf</tt>, for example:
+    #
+    #   '<span class="param">%s</span></tt>'
+    #
+    # If it is a Proc, it should take one argument and return the formatted
+    # argument, for example:
+    #
+    #   lambda { |param| "[#{param}]" }
+    #
+    def format_args(format = lambda{|a| a}, &proc)
+      @formatted_step_name || replace_arguments(@step_name, @step_arguments, format, &proc)
     end
     
     def file_colon_line
@@ -31,9 +50,32 @@ module Cucumber
     def text_length
       @step_definition.text_length
     end
+
+    def replace_arguments(string, step_arguments, format, &proc)
+      s = string.dup
+      offset = 0
+      step_arguments.each do |step_argument|
+        next if step_argument.pos.nil?
+        replacement = if block_given?
+          proc.call(step_argument.val)
+        elsif Proc === format
+          format.call(step_argument.val)
+        else
+          format % step_argument.val
+        end
+
+        s[step_argument.pos + offset, step_argument.val.jlength] = replacement
+        offset += replacement.length - step_argument.val.jlength
+      end
+      s
+    end
+
+    def inspect #:nodoc:
+      sprintf("#<%s:0x%x>", self.class, self.object_id)
+    end
   end
   
-  class NoStepMatch
+  class NoStepMatch #:nodoc:
     attr_reader :step_definition, :name
 
     def initialize(step, name)

@@ -1,23 +1,48 @@
 module Cucumber
   module Ast
-    # Holds the data of a table parsed from a feature file:
+    # Step Definitions that match a plain text Step with a multiline argument table
+    # will receive it as an instance of Table. A Table object holds the data of a 
+    # table parsed from a feature file and lets you access and manipulate the data
+    # in different ways.
     #
-    #   | a | b |
-    #   | c | d |
+    # For example:
     #
-    # This gets parsed into a Table holding the values <tt>[['a', 'b'], ['c', 'd']]</tt>
+    #   Given I have:
+    #     | a | b |
+    #     | c | d |
+    #
+    # And a matching StepDefinition:
+    #
+    #   Given /I have:/ do |table|
+    #     data = table.raw
+    #   end
+    #
+    # This will store <tt>[['a', 'b'], ['c', 'd']]</tt> in the <tt>data</tt> variable.
     #
     class Table
+      class Different < StandardError
+        attr_reader :table
+        
+        def initialize(table)
+          super('Tables were not identical')
+          @table = table
+        end
+      end
+      
       include Enumerable
       
       NULL_CONVERSIONS = Hash.new(lambda{ |cell_value| cell_value }).freeze
 
       attr_accessor :file
 
-      def self.default_arg_name
+      def self.default_arg_name #:nodoc:
         "table"
       end
 
+      # Creates a new instance. +raw+ should be an Array of Array of String.
+      # You don't typically create your own Table objects - Cucumber will do
+      # it internally and pass them to your Step Definitions.
+      #
       def initialize(raw, conversion_procs = NULL_CONVERSIONS.dup)
         @cells_class = Cells
         @cell_class = Cell
@@ -28,21 +53,23 @@ module Cucumber
         @conversion_procs = conversion_procs
       end
 
-      # Creates a copy of this table, inheriting the column mappings.
+      # Creates a copy of this table, inheriting any column mappings.
+      # registered with #map_headers!
+      #
       def dup
         self.class.new(raw.dup, @conversion_procs.dup)
       end
 
       # Returns a new, transposed table. Example:
       #
-      # | a | 7 | 4 |
-      # | b | 9 | 2 |
+      #   | a | 7 | 4 |
+      #   | b | 9 | 2 |
       #
       # Gets converted into the following:
       #
-      # | a | b |
-      # | 7 | 9 |
-      # | 4 | 2 |
+      #   | a | b |
+      #   | 7 | 9 |
+      #   | 4 | 2 |
       #
       def transpose
         self.class.new(raw.transpose, @conversion_procs.dup)
@@ -65,7 +92,7 @@ module Cucumber
       def hashes
         @hashes ||= cells_rows[1..-1].map do |row|
           row.to_hash
-        end.freeze
+        end
       end
       
       # Converts this table into a Hash where the first column is
@@ -83,7 +110,7 @@ module Cucumber
       def rows_hash
         return @rows_hash if @rows_hash
         verify_table_width(2)
-        @rows_hash = self.transpose.hashes[0].freeze
+        @rows_hash = self.transpose.hashes[0]
       end
 
       # Gets the raw data of this table. For example, a Table built from
@@ -109,11 +136,11 @@ module Cucumber
         raw[1..-1]
       end
 
-      def each_cells_row(&proc)
+      def each_cells_row(&proc) #:nodoc:
         cells_rows.each(&proc)
       end
 
-      def accept(visitor)
+      def accept(visitor) #:nodoc:
         return if $cucumber_interrupted
         cells_rows.each do |row|
           visitor.visit_table_row(row)
@@ -121,29 +148,71 @@ module Cucumber
         nil
       end
 
+      # Matches +pattern+ against the header row of the table.
+      # This is used especially for argument transforms.
+      #
+      # Example:
+      #  | column_1_name | column_2_name |
+      #  | x             | y             |
+      #
+      #  table.match(/table:column_1_name,column_2_name/) #=> non-nil
+      #  
+      # Note: must use 'table:' prefix on match
+      def match(pattern)
+        header_to_match = "table:#{headers.join(',')}"
+        pattern.match(header_to_match)
+      end
+
       # For testing only
       def to_sexp #:nodoc:
         [:table, *cells_rows.map{|row| row.to_sexp}]
       end
 
-      # Redefines the table headers. This makes it
-      # possible to use prettier header names in the features. Example:
+      # Redefines the table headers. This makes it possible to use
+      # prettier and more flexible header names in the features.  The
+      # keys of +mappings+ are Strings or regular expressions
+      # (anything that responds to #=== will work) that may match
+      # column headings in the table.  The values of +mappings+ are
+      # desired names for the columns.
+      #
+      # Example:
       #
       #   | Phone Number | Address |
       #   | 123456       | xyz     |
       #   | 345678       | abc     |
       #
-      # A StepDefinition receiving this table can then map the columns:
+      # A StepDefinition receiving this table can then map the columns 
+      # with both Regexp and String:
       #
-      #   mapped_table = table.map_columns('Phone Number' => :phone, 'Address' => :address)
-      #   hashes = mapped_table.hashes
+      #   table.map_headers!(/phone( number)?/i => :phone, 'Address' => :address)
+      #   table.hashes
       #   # => [{:phone => '123456', :address => 'xyz'}, {:phone => '345678', :address => 'abc'}]
       #
-      def map_headers!(mappings)
+      # You may also pass in a block if you wish to convert all of the headers:
+      #
+      #   table.map_headers! { |header| header.downcase }
+      #   table.hashes.keys
+      #   # => ['phone number', 'address']
+      #
+      # When a block is passed in along with a hash then the mappings in the hash take precendence:
+      #
+      #   table.map_headers!('Address' => 'ADDRESS') { |header| header.downcase }
+      #   table.hashes.keys
+      #   # => ['phone number', 'ADDRESS']
+      #
+      def map_headers!(mappings={}, &block)
         header_cells = cell_matrix[0]
+
+        if block_given?
+          header_values = header_cells.map { |cell| cell.value } - mappings.keys
+          mappings = mappings.merge(Hash[*header_values.zip(header_values.map(&block)).flatten])
+        end
+
         mappings.each_pair do |pre, post|
-          header_cell = header_cells.detect{|cell| cell.value == pre}
-          header_cell.value = post
+          mapped_cells = header_cells.select{|cell| pre === cell.value}
+          raise "No headers matched #{pre.inspect}" if mapped_cells.empty?
+          raise "#{mapped_cells.length} headers matched #{pre.inspect}: #{mapped_cells.map{|c| c.value}.inspect}" if mapped_cells.length > 1
+          mapped_cells[0].value = post
           if @conversion_procs.has_key?(pre)
             @conversion_procs[post] = @conversion_procs.delete(pre)
           end
@@ -151,7 +220,7 @@ module Cucumber
       end
 
       # Returns a new Table where the headers are redefined. See #map_headers!
-      def map_headers(mappings)
+      def map_headers(mappings={})
         table = self.dup
         table.map_headers!(mappings)
         table
@@ -190,17 +259,17 @@ module Cucumber
       #
       # Since all tables that are passed to StepDefinitions always have String
       # objects in their cells, you may want to use #map_column! before calling
-      # #diff!
+      # #diff!. You can use #map_column! on either of the tables.
       #
       # An exception is raised if there are missing rows or columns, or
       # surplus rows. An error is <em>not</em> raised for surplus columns.
       # Whether to raise or not raise can be changed by setting values in
       # +options+ to true or false:
       #
-      #   * <tt>missing_row</tt>: Raise on missing rows (defaults to true)
-      #   * <tt>surplus_row</tt>: Raise on surplus rows (defaults to true)
-      #   * <tt>missing_col</tt>: Raise on missing columns (defaults to true)
-      #   * <tt>surplus_col</tt>: Raise on surplus columns (defaults to false)
+      # * <tt>missing_row</tt> : Raise on missing rows (defaults to true)
+      # * <tt>surplus_row</tt> : Raise on surplus rows (defaults to true)
+      # * <tt>missing_col</tt> : Raise on missing columns (defaults to true)
+      # * <tt>surplus_col</tt> : Raise on surplus columns (defaults to false)
       #
       # The +other_table+ argument can be another Table, an Array of Array or
       # an Array of Hash (similar to the structure returned by #hashes).
@@ -212,6 +281,7 @@ module Cucumber
         options = {:missing_row => true, :surplus_row => true, :missing_col => true, :surplus_col => false}.merge(options)
 
         other_table = ensure_table(other_table)
+        other_table.convert_columns!
         ensure_green!
 
         original_width = cell_matrix[0].length
@@ -270,7 +340,7 @@ module Cucumber
           insert_row_pos  && options[:surplus_row] ||
           missing_col     && options[:missing_col] ||
           surplus_col     && options[:surplus_col]
-        raise 'Tables were not identical' if should_raise
+        raise Different.new(self) if should_raise
       end
 
       def to_hash(cells) #:nodoc:
@@ -288,11 +358,11 @@ module Cucumber
         cells_rows.index(cells)
       end
 
-      def verify_column(column_name)
+      def verify_column(column_name) #:nodoc:
         raise %{The column named "#{column_name}" does not exist} unless raw[0].include?(column_name)
       end
       
-      def verify_table_width(width)
+      def verify_table_width(width) #:nodoc:
         raise %{The table must have exactly #{width} columns} unless raw[0].size == width
       end
 
@@ -311,43 +381,43 @@ module Cucumber
         Table.new(raw_with_replaced_args)
       end
 
-      def has_text?(text)
+      def has_text?(text) #:nodoc:
         raw.flatten.compact.detect{|cell_value| cell_value.index(text)}
       end
 
-      def cells_rows
+      def cells_rows #:nodoc:
         @rows ||= cell_matrix.map do |cell_row|
           @cells_class.new(self, cell_row)
         end
       end
 
-      def headers
+      def headers #:nodoc:
         raw.first
       end
-
-      def header_cell(col)
+      
+      def header_cell(col) #:nodoc:
         cells_rows[0][col]
       end
 
-      def cell_matrix
+      def cell_matrix #:nodoc:
         @cell_matrix
       end
 
-      def col_width(col)
+      def col_width(col) #:nodoc:
         columns[col].__send__(:width)
       end
 
-      def to_s(options = {})
+      def to_s(options = {}) #:nodoc:
         options = {:color => true, :indent => 2, :prefixes => TO_S_PREFIXES}.merge(options)
         io = StringIO.new
 
         c = Term::ANSIColor.coloring?
         Term::ANSIColor.coloring = options[:color]
-        f = Formatter::Pretty.new(nil, io, options)
-        f.instance_variable_set('@indent', options[:indent])
-        f.visit_multiline_arg(self)
+        formatter = Formatter::Pretty.new(nil, io, options)
+        formatter.instance_variable_set('@indent', options[:indent])
+        TreeWalker.new(nil, [formatter]).visit_multiline_arg(self)
+        
         Term::ANSIColor.coloring = c
-
         io.rewind
         s = "\n" + io.read + (" " * (options[:indent] - 2))
         s
@@ -361,7 +431,7 @@ module Cucumber
 
       protected
 
-      def inspect_rows(missing_row, inserted_row)
+      def inspect_rows(missing_row, inserted_row) #:nodoc:
         missing_row.each_with_index do |missing_cell, col|
           inserted_cell = inserted_row[col]
           if(missing_cell.value != inserted_cell.value && (missing_cell.value.to_s == inserted_cell.value.to_s))
@@ -371,7 +441,7 @@ module Cucumber
         end
       end
 
-      def create_cell_matrix(raw)
+      def create_cell_matrix(raw) #:nodoc:
         @cell_matrix = raw.map do |raw_row|
           line = raw_row.line rescue -1
           raw_row.map do |raw_cell|
@@ -380,7 +450,7 @@ module Cucumber
         end
       end
 
-      def convert_columns!
+      def convert_columns! #:nodoc:
         cell_matrix.transpose.each do |col|
           conversion_proc = @conversion_procs[col[0].value]
           col[1..-1].each do |cell|
@@ -389,7 +459,7 @@ module Cucumber
         end
       end
 
-      def require_diff_lcs
+      def require_diff_lcs #:nodoc:
         begin
           require 'diff/lcs'
         rescue LoadError => e
@@ -398,23 +468,23 @@ module Cucumber
         end
       end
 
-      def clear_cache!
+      def clear_cache! #:nodoc:
         @hashes = @rows_hash = @rows = @columns = nil
       end
 
-      def columns
+      def columns #:nodoc:
         @columns ||= cell_matrix.transpose.map do |cell_row|
           @cells_class.new(self, cell_row)
-        end.freeze
+        end
       end
 
-      def new_cell(raw_cell, line)
+      def new_cell(raw_cell, line) #:nodoc:
         @cell_class.new(raw_cell, self, line)
       end
 
       # Pads our own cell_matrix and returns a cell matrix of same
       # column width that can be used for diffing
-      def pad!(other_cell_matrix)
+      def pad!(other_cell_matrix) #:nodoc:
         clear_cache!
         cols = cell_matrix.transpose
         unmapped_cols = other_cell_matrix.transpose
@@ -452,38 +522,38 @@ module Cucumber
         (mapped_cols + unmapped_cols).transpose
       end
 
-      def ensure_table(table_or_array)
+      def ensure_table(table_or_array) #:nodoc:
         return table_or_array if Table === table_or_array
         table_or_array = hashes_to_array(table_or_array) if Hash === table_or_array[0]
         table_or_array = enumerable_to_array(table_or_array) unless Array == table_or_array[0]
         Table.new(table_or_array)
       end
 
-      def hashes_to_array(hashes)
+      def hashes_to_array(hashes) #:nodoc:
         header = hashes[0].keys
         [header] + hashes.map{|hash| header.map{|key| hash[key]}}
       end
 
-      def enumerable_to_array(rows)
+      def enumerable_to_array(rows) #:nodoc:
         rows.map{|row| row.map{|cell| cell}}
       end
 
-      def ensure_green!
+      def ensure_green! #:nodoc:
         each_cell{|cell| cell.status = :passed}
       end
 
-      def each_cell(&proc)
+      def each_cell(&proc) #:nodoc:
         cell_matrix.each{|row| row.each(&proc)}
       end
 
-      def mark_as_missing(col)
+      def mark_as_missing(col) #:nodoc:
         col.each do |cell|
           cell.status = :undefined
         end
       end
 
       # Represents a row of cells or columns of cells
-      class Cells
+      class Cells #:nodoc:
         include Enumerable
         attr_reader :exception
 
@@ -505,7 +575,7 @@ module Cucumber
         end
 
         def to_hash #:nodoc:
-          @to_hash ||= @table.to_hash(self).freeze
+          @to_hash ||= @table.to_hash(self)
         end
 
         def value(n) #:nodoc:
@@ -539,7 +609,7 @@ module Cucumber
         end
       end
 
-      class Cell
+      class Cell #:nodoc:
         attr_reader :line, :table
         attr_accessor :status, :value
 
@@ -566,7 +636,7 @@ module Cucumber
         end
       end
       
-      class SurplusCell < Cell
+      class SurplusCell < Cell #:nodoc:
         def status
           :comment
         end

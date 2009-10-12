@@ -127,6 +127,26 @@ Feature: Cucumber command line
 
       """
 
+  Scenario: Use @-notation to specify a file containing feature file list
+    When I run cucumber -q @list-of-features.txt
+    Then it should pass with
+      """
+      # Feature comment
+      @one
+      Feature: Sample
+
+        # Scenario comment
+        @three
+        Scenario: Passing
+          Given passing
+            | a | b |
+            | c | d |
+
+      1 scenario (1 passed)
+      1 step (1 passed)
+
+      """
+
   @mri186
   Scenario: Run all with progress formatter
     When I run cucumber -q --format progress features/sample.feature
@@ -152,6 +172,7 @@ Feature: Cucumber command line
   Scenario: Run Norwegian
     Given I am in i18n/no
     When I run cucumber -q --language no features
+    Then STDERR should be empty
     Then it should pass with
       """
       # language: no
@@ -180,7 +201,7 @@ Feature: Cucumber command line
       """
 
   Scenario: --dry-run
-    When I run cucumber --dry-run --no-snippets features/*.feature --tags ~@lots
+    When I run cucumber --dry-run --no-source features/*.feature --tags ~@lots
     Then it should pass with
       """
       Feature: Calling undefined step
@@ -311,6 +332,25 @@ Feature: Cucumber command line
             | state   |
             | failing |
 
+      @sample_one
+      Feature: Tag samples
+
+        @sample_two @sample_four
+        Scenario: Passing
+          Given missing
+
+        @sample_three
+        Scenario Outline: 
+          Given <state>
+
+          Examples: 
+            | state   |
+            | missing |
+
+        @sample_three @sample_four
+        Scenario: Skipped
+          Given missing
+
       Feature: undefined multiline args
       
         Scenario: pystring
@@ -323,14 +363,14 @@ Feature: Cucumber command line
           Given a table
             | table   |
             | example |
-      
-      23 scenarios (17 skipped, 5 undefined, 1 passed)
-      39 steps (30 skipped, 9 undefined)
+
+      26 scenarios (17 skipped, 8 undefined, 1 passed)
+      42 steps (30 skipped, 12 undefined)
 
       """
 
   Scenario: Multiple formatters and outputs
-    When I run cucumber --format progress --out tmp/progress.txt --format pretty --out tmp/pretty.txt  --dry-run features/lots_of_undefined.feature
+    When I run cucumber --format progress --out tmp/progress.txt --format pretty --out tmp/pretty.txt --no-source --dry-run features/lots_of_undefined.feature
     And "examples/self_test/tmp/progress.txt" should contain
       """
       UUUUU
@@ -402,7 +442,7 @@ Feature: Cucumber command line
 
 
   Scenario: Run with a tag that exists on 2 scenarios
-    When I run cucumber -q features --tags three
+    When I run cucumber -q features --tags @three
     Then it should pass with
       """
       # Feature comment
@@ -427,7 +467,7 @@ Feature: Cucumber command line
 
   @mri186
   Scenario: Run with a tag that exists on 1 feature
-    When I run cucumber -q features --tags one
+    When I run cucumber -q features --tags @one
     Then it should fail with
       """
       # Feature comment
@@ -465,7 +505,7 @@ Feature: Cucumber command line
       """
 
   Scenario: Run with a negative tag
-    When I run cucumber -q features/sample.feature --dry-run -t ~four
+    When I run cucumber -q features/sample.feature --no-source --dry-run --tags ~@four
     Then it should pass with
       """
       # Feature comment
@@ -487,6 +527,67 @@ Feature: Cucumber command line
       2 steps (1 skipped, 1 undefined)
 
       """
+
+  Scenario: Run with limited tag count, blowing it on scenario
+     When I run cucumber -q features/tags_sample.feature --no-source --dry-run --tags @sample_three:1
+     Then it should fail with      
+     """
+     @sample_one
+     Feature: Tag samples
+
+       @sample_three
+       Scenario Outline: 
+         Given <state>
+
+         Examples: 
+           | state   |
+           | missing |
+
+       @sample_three @sample_four
+       Scenario: Skipped
+         Given missing
+
+     2 scenarios (2 undefined)
+     2 steps (2 undefined)
+
+     @sample_three occurred 2 times, but the limit was set to 1
+       features/tags_sample.feature:9
+       features/tags_sample.feature:16
+
+     """
+
+   Scenario: Run with limited tag count, blowing it via feature inheritance
+     When I run cucumber -q features/tags_sample.feature --no-source --dry-run --tags @sample_one:1
+     Then it should fail with
+     """
+     @sample_one
+     Feature: Tag samples
+
+       @sample_two @sample_four
+       Scenario: Passing
+         Given missing
+
+       @sample_three
+       Scenario Outline: 
+         Given <state>
+
+         Examples: 
+           | state   |
+           | missing |
+
+       @sample_three @sample_four
+       Scenario: Skipped
+         Given missing
+
+     3 scenarios (3 undefined)
+     3 steps (3 undefined)
+
+     @sample_one occurred 3 times, but the limit was set to 1
+       features/tags_sample.feature:5
+       features/tags_sample.feature:9
+       features/tags_sample.feature:16
+
+     """
 
   Scenario: Reformat files with --autoformat
     When I run cucumber --autoformat tmp/formatted features
@@ -517,9 +618,14 @@ Feature: Cucumber command line
 
       """
 
+  Scenario: Generate PDF with pdf formatter
+	When I run cucumber --format pdf --out tmp/sample.pdf --dry-run features/sample.feature
+	Then STDERR should be empty
+	Then "examples/self_test/tmp/sample.pdf" should match "Pages 2"
+
   Scenario: Run feature elements which match a name using -n
     When I run cucumber -n Pisang -q features/
-    Then it should pass with
+	Then it should pass with
       """
       Feature: search examples
 

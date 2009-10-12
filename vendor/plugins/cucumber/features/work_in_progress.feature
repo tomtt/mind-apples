@@ -52,6 +52,7 @@ Feature: Cucumber --work-in-progress switch
   @mri186
   Scenario: Pass with Failing Scenarios
     When I run cucumber -q -w -t @failing features/wip.feature
+    Then STDERR should be empty
     Then it should pass with
       """
       Feature: WIP
@@ -69,6 +70,8 @@ Feature: Cucumber --work-in-progress switch
       1 scenario (1 failed)
       1 step (1 failed)
 
+      The --wip switch was used, so the failures were expected. All is good.
+
       """
 
   Scenario: Pass with Undefined Scenarios
@@ -83,6 +86,8 @@ Feature: Cucumber --work-in-progress switch
 
       1 scenario (1 undefined)
       1 step (1 undefined)
+
+      The --wip switch was used, so the failures were expected. All is good.
 
       """
 
@@ -102,6 +107,8 @@ Feature: Cucumber --work-in-progress switch
 
       1 scenario (1 pending)
       1 step (1 pending)
+
+      The --wip switch was used, so the failures were expected. All is good.
 
       """
 

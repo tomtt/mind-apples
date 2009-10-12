@@ -1,9 +1,9 @@
-require 'cucumber/step_definition'
 require 'cucumber/core_ext/string'
+require 'cucumber/step_match'
 
 module Cucumber
   module Ast
-    class Step
+    class Step #:nodoc:
       attr_reader :line, :keyword, :name, :multiline_arg
       attr_writer :step_collection, :options
       attr_accessor :feature_element, :exception
@@ -16,6 +16,11 @@ module Cucumber
 
       def background?
         false
+      end
+
+      def status
+        # Step always has status skipped, because Step is always in a ScenarioOutline
+        :skipped
       end
 
       def step_invocation
@@ -107,7 +112,7 @@ module Cucumber
         name_with_arguments_replaced = @name
         argument_hash.each do |name, value|
           value ||= ''
-          name_with_arguments_replaced = name_with_arguments_replaced.gsub(name, value) if value
+          name_with_arguments_replaced = name_with_arguments_replaced.gsub(name, value)
         end
         name_with_arguments_replaced
       end

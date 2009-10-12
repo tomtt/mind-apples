@@ -1,12 +1,16 @@
 module Cucumber
   module Ast
-    class Features
+    class Features #:nodoc:
       include Enumerable
 
       attr_reader :duration
 
       def initialize
         @features = []
+      end
+
+      def [](index)
+        @features[index]
       end
 
       def each(&proc)
@@ -26,6 +30,11 @@ module Cucumber
         end
         @duration = Time.now - start
       end
+
+      def tag_count(tag)
+        @features.inject(0){|count, feature| count += feature.feature_and_children_tag_count(tag)}
+      end
+
     end
   end
 end

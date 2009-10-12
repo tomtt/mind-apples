@@ -1,9 +1,23 @@
+require 'cucumber/step_match'
+require 'cucumber/ast/table'
+
 module Cucumber
   module Ast
-    class StepInvocation
+    class StepInvocation #:nodoc:
+      BACKTRACE_FILTER_PATTERNS = [
+        /vendor\/rails|lib\/cucumber|bin\/cucumber:|lib\/rspec|gems\//
+      ]
+
       attr_writer :step_collection, :background
       attr_reader :name, :matched_cells, :status, :reported_exception
       attr_accessor :exception
+
+      class << self
+        SEVERITY = [:passed, :undefined, :pending, :skipped, :failed]
+        def worst_status(statuses)
+          SEVERITY[statuses.map{|status| SEVERITY.index(status)}.max]
+        end
+      end
 
       def initialize(step, name, multiline_arg, matched_cells)
         @step, @name, @multiline_arg, @matched_cells = step, name, multiline_arg, matched_cells
@@ -25,7 +39,15 @@ module Cucumber
       end
 
       def visit_step_result(visitor)
-        visitor.visit_step_result(keyword, @step_match, @multiline_arg, @status, @reported_exception, source_indent, @background)
+        visitor.visit_step_result(
+          keyword,
+          @step_match,
+          (@different_table || @multiline_arg),
+          @status,
+          @reported_exception,
+          source_indent,
+          @background
+        )
       end
 
       def invoke(step_mother, options)
@@ -33,8 +55,7 @@ module Cucumber
         unless @skip_invoke || options[:dry_run] || @exception || @step_collection.exception
           @skip_invoke = true
           begin
-            step_mother.current_world.__cucumber_current_step = self if step_mother.current_world # Nil in Pure Java
-            @step_match.invoke(step_mother.current_world, @multiline_arg)
+            @step_match.invoke(@multiline_arg)
             step_mother.after_step
             status!(:passed)
           rescue Pending => e
@@ -43,6 +64,10 @@ module Cucumber
           rescue Undefined => e
             failed(options, e, false)
             status!(:undefined)
+          rescue Cucumber::Ast::Table::Different => e
+            @different_table = e.table
+            failed(options, e, false)
+            status!(:failed)
           rescue Exception => e
             failed(options, e, false)
             status!(:failed)
@@ -67,6 +92,7 @@ module Cucumber
       end
 
       def failed(options, e, clear_backtrace)
+        e = filter_backtrace(e)
         e.set_backtrace([]) if clear_backtrace
         e.backtrace << @step.backtrace_line unless @step.backtrace_line.nil?
         @exception = e
@@ -75,6 +101,32 @@ module Cucumber
         else
           @reported_exception = nil
         end
+      end
+
+      def filter_backtrace(e)
+        return e if Cucumber.use_full_backtrace
+        pwd = /#{Dir.pwd}\//m
+        (e.backtrace || []).each{|line| line.gsub!(pwd, "./")}
+        
+        filtered = (e.backtrace || []).reject do |line|
+          BACKTRACE_FILTER_PATTERNS.detect { |p| line =~ p }
+        end
+        
+        if Cucumber::JRUBY && e.class.name == 'NativeException'
+          # JRuby's NativeException ignores #set_backtrace.
+          # We're fixing it.
+          e.instance_eval do
+            def set_backtrace(backtrace)
+              @backtrace = backtrace
+            end
+
+            def backtrace
+              @backtrace
+            end
+          end
+        end
+        e.set_backtrace(filtered)
+        e
       end
 
       def status!(status)
