@@ -19,7 +19,7 @@ class PeopleController < ApplicationController
   response_for :update do |format|
     if @resource_saved
       format.html do
-        flash[:notice] = "#{resource_name.humanize} was successfully updated."
+        flash[:notice] = "Thank you for updating your Mindapples page."
         redirect_to edit_resource_path
       end
       format.js

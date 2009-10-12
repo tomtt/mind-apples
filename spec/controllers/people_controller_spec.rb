@@ -60,6 +60,7 @@ describe PeopleController do
       before do
         @mock_person = build_mock_person
         controller.stub!(:current_user).and_return @mock_person
+        Person.stub!(:find_by_param).and_return @mock_person
       end
 
       it "should set the login in a protected way on the updated resource" do
@@ -75,9 +76,13 @@ describe PeopleController do
       end
 
       it "should redirect to the edit page" do
-        Person.stub!(:find_by_param).and_return @mock_person
         put(:update, "person" => {"login" => 'gandy'})
         response.should redirect_to(edit_person_path(@mock_person))
+      end
+
+      it "should flash a thank you message" do
+        put(:update, "person" => {"login" => 'gandy'})
+        flash[:notice].should =~ /thank you/i
       end
     end
 
