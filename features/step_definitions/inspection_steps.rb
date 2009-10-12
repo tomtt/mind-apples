@@ -26,3 +26,7 @@ Then /^I should not see a link to "([^\"]*)"$/ do |link_href|
   xpath = "//a[@href='#{link_href}']"
   response.should_not have_xpath(xpath)
 end
+
+Then /^I should see an? "([^"]*)" select field with "([^"]*)" selected$/ do |field, value|
+  field_labeled(field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{value}/
+end
