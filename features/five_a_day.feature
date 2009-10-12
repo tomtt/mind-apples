@@ -30,19 +30,20 @@ Feature: Asking for five a day
     And I fill in "Be proud" with "Andy Gibson"
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
     And I press "Submit"
-    Then I should see "Thank you"
-    And I should see "Playing the piano"
-    And I should see "Being in nature"
-    And I should see "Interesting conversation"
-    And I should see "Tidying and filing"
-    And I should see "Amazing stuff"
-    And I should see "2"
-    And I should see "Male"
-    And I should see "35-44"
-    And I should see "UK"
-    And I should see "social guru"
-    And I should see "Andy Gibson"
-    And I should see "andy@example.com"
+    # Then I should see "Thank you"
+    And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
+    And I should see a "person[mindapples_attributes][1][suggestion]" text field containing "Being in nature"
+    And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
+    And I should see a "person[mindapples_attributes][4][suggestion]" text field containing "Tidying and filing"
+    And I should see a "person[braindump]" text area containing "Amazing stuff"
+    And I should see a "person[health_check]" text field containing "2"
+    And the "Male" checkbox should be checked
+    And I should see an "Age" select field with "35-44" selected
+    And I should see a "person[location]" text field containing "UK"
+    And I should see a "person[occupation]" text field containing "social guru"
+    And I should see a "person[name]" text field containing "Andy Gibson"
+    And I should see a "person[email]" text field containing "andy@example.com"
+
     And I should receive an email
     When I open the email
     Then I should see "Your Mindapples" in the email subject
