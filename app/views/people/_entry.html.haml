@@ -31,3 +31,9 @@
   .row
     = form.label :login, "Pick a nickname for yourself. Careful ... you can only pick one once"
     = form.text_field :login
+.row
+  = form.label :password, "Think you may want to edit this stuff later on? Enter a password!"
+  = form.password_field :password
+.row
+  = form.label :password_confirmation, "And again to make sure there were no typos..."
+  = form.password_field :password_confirmation
