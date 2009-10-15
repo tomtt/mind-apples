@@ -8,13 +8,12 @@ class PersonMailer < ActionMailer::Base
                :mindapples => person.mindapples
   end
 
-  def set_password(email, name, sent_at = Time.now)
+  def set_password(person)
     subject    'Setting your Mindapples password'
-    recipients ''
+    recipients person.email
     from       ''
-    sent_on    sent_at
 
-    body       :greeting => 'Hi,'
+    body       :edit_password_reset_url => edit_password_reset_url(person.perishable_token)
   end
 
 end
