@@ -39,6 +39,10 @@ module Cucumber
         @regexp.inspect
       end
 
+      def text_of_regexp
+        @text_of_regexp ||= regexp_source.sub(/^\/\^?/, '').sub(/\$?\/$/, '')
+      end
+
       def ==(step_definition)
         regexp_source == step_definition.regexp_source
       end

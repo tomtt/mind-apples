@@ -118,6 +118,14 @@ module Cucumber
           end
         })
       end
+
+      it "should provide the text of a regexp" do
+        @dsl.Given /^a regexp with an argument like "([^\"]*)"$/ do
+        end
+        match = @step_mother.step_match('a regexp with an argument like "foo"')
+        match.step_definition.text_of_regexp.should ==
+          'a regexp with an argument like "([^\\"]*)"'
+      end
     end
   end
 end
