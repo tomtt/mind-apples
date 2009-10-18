@@ -32,6 +32,11 @@ var cucumberStepCompletion = {
   stepTemplateToHtmlLi: function(elementOfArray, indexInArray) {
     return "<li onMouseOver='cucumberStepCompletion.displayMatchingStepsFor(" + indexInArray + ");'>" + elementOfArray + "</li>\n";
   },
+  stepTemplateToHtmlTr: function(elementOfArray, indexInArray) {
+    var mouseOver = "onMouseOver='cucumberStepCompletion.displayMatchingStepsFor(" + indexInArray + ");'";
+    var count = cucumberStepCompletion.cucumberSteps[elementOfArray].length;
+    return "<tr " + mouseOver + "><td><div>" + elementOfArray + "</div></td><td>" + count + "</td></tr>\n";
+  },
   selectFieldFromStepTemplates: function() {
     var html = "<select id='select-step' name='step'>";
     varoptions =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
@@ -48,11 +53,19 @@ var cucumberStepCompletion = {
     html += "</ul>";
     return html;
   },
+  tableOfStepTemplates: function() {
+    var html = "<table><tr><th>Step definition</th><th>#</th></tr>\n";
+    var items = jQuery.map(cucumberStepCompletion.stepTemplates(), 
+                           cucumberStepCompletion.stepTemplateToHtmlTr);
+    html += items.join("\n");
+    html += "</table>";
+    return html;
+  },
   insertSelectField: function(divId) {
     jQuery('#' + divId).html(cucumberStepCompletion.selectFieldFromStepTemplates());
   },
   htmlForStepBrowser: function() {
-    return cucumberStepCompletion.listOfStepTemplates();
+    return cucumberStepCompletion.tableOfStepTemplates();
   },
   createStepBrowser: function() {
     var html = "<div class='cuked-it-step-browser-list'>";
