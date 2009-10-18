@@ -43,7 +43,11 @@ var cucumberStepCompletion = {
     return cucumberStepCompletion.listOfStepTemplates();
   },
   createStepBrowser: function() {
-    jQuery('.cuked-it-step-browser').html(cucumberStepCompletion.htmlForStepBrowser());
+    html = "<div class='cuked-it-step-browser-list'>";
+    html += cucumberStepCompletion.htmlForStepBrowser();
+    html += "</div>";
+    html += "<div class='cuked-it-step-browser-matching-steps'></div>";
+    jQuery('.cuked-it-step-browser').html(html);
   }
 }
 
