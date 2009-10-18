@@ -17,6 +17,9 @@ var cucumberStepCompletion = {
   stepTemplateToHtmlOption: function(elementOfArray, indexInArray) {
     return "<option value='" + elementOfArray + "'>" + elementOfArray + "</option>\n";
   },
+  stepTemplateToHtmlLi: function(elementOfArray, indexInArray) {
+    return "<li>" + elementOfArray + "</li>\n";
+  },
   selectFieldFromStepTemplates: function() {
     html = "<select id='select-step' name='step'>";
     options =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
@@ -25,7 +28,23 @@ var cucumberStepCompletion = {
     html += "</select>";
     return html;
   },
+  listOfStepTemplates: function() {
+    html = "<ul>";
+    items =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
+                        cucumberStepCompletion.stepTemplateToHtmlLi);
+    html += items.join('');
+    html += "</ul>";
+    return html;
+  },
   insertSelectField: function(divId) {
     jQuery('#' + divId).html(cucumberStepCompletion.selectFieldFromStepTemplates());
+  },
+  htmlForStepBrowser: function() {
+    return cucumberStepCompletion.listOfStepTemplates();
+  },
+  createStepBrowser: function() {
+    jQuery('.cuked-it-step-browser').html(cucumberStepCompletion.htmlForStepBrowser());
   }
 }
+
+jQuery(document).ready(cucumberStepCompletion.createStepBrowser);
