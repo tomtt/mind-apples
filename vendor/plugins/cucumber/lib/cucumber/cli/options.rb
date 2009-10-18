@@ -20,6 +20,7 @@ module Cucumber
         'stepdefs'  => ['Cucumber::Formatter::Stepdefs', "Prints All step definitions with their locations. Same as\n" +
                                                          "the usage formatter, except that steps are not printed."],
         'junit'     => ['Cucumber::Formatter::Junit',    'Generates a report similar to Ant+JUnit.'],
+        'stepdefs_json' => ['Cucumber::Formatter::StepdefsJson',    'A json representation of available steps'],
         'tag_cloud' => ['Cucumber::Formatter::TagCloud', 'Prints a tag cloud of tag usage.']
       }
       max = BUILTIN_FORMATS.keys.map{|s| s.length}.max
