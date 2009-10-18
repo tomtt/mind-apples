@@ -17,21 +17,33 @@ var cucumberStepCompletion = {
   stepTemplateToHtmlOption: function(elementOfArray, indexInArray) {
     return "<option value='" + elementOfArray + "'>" + elementOfArray + "</option>\n";
   },
+  stepMatchToHtml: function(elementOfArray, indexInArray) {
+    return "<li>" + elementOfArray + "</li>";
+  },
+  displayMatchingStepsFor: function(cucumberStep) {
+    var stepDefinition = cucumberStepCompletion.cachedSteps[cucumberStep];
+    var matchingSteps = cucumberStepCompletion.cucumberSteps[stepDefinition];
+    var matchingStepsItems = jQuery.map(matchingSteps, cucumberStepCompletion.stepMatchToHtml);
+    var html = "<b>" +  stepDefinition + " </b>(" + matchingStepsItems.length + ")\n<ul>";
+    html += matchingStepsItems.join("\n");
+    html += "</ul>";
+    jQuery('.cuked-it-step-browser-matching-steps').html(html);
+  },
   stepTemplateToHtmlLi: function(elementOfArray, indexInArray) {
-    return "<li>" + elementOfArray + "</li>\n";
+    return "<li onMouseOver='cucumberStepCompletion.displayMatchingStepsFor(" + indexInArray + ");'>" + elementOfArray + "</li>\n";
   },
   selectFieldFromStepTemplates: function() {
-    html = "<select id='select-step' name='step'>";
-    options =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
-                          cucumberStepCompletion.stepTemplateToHtmlOption);
+    var html = "<select id='select-step' name='step'>";
+    varoptions =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
+                             cucumberStepCompletion.stepTemplateToHtmlOption);
     html += options.join('');
     html += "</select>";
     return html;
   },
   listOfStepTemplates: function() {
-    html = "<ul>";
-    items =  jQuery.map(cucumberStepCompletion.stepTemplates(), 
-                        cucumberStepCompletion.stepTemplateToHtmlLi);
+    var html = "<ul>";
+    var items = jQuery.map(cucumberStepCompletion.stepTemplates(), 
+                           cucumberStepCompletion.stepTemplateToHtmlLi);
     html += items.join('');
     html += "</ul>";
     return html;
@@ -43,7 +55,7 @@ var cucumberStepCompletion = {
     return cucumberStepCompletion.listOfStepTemplates();
   },
   createStepBrowser: function() {
-    html = "<div class='cuked-it-step-browser-list'>";
+    var html = "<div class='cuked-it-step-browser-list'>";
     html += cucumberStepCompletion.htmlForStepBrowser();
     html += "</div>";
     html += "<div class='cuked-it-step-browser-matching-steps'></div>";
