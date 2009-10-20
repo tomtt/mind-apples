@@ -87,12 +87,6 @@ var cucumberStepCompletion = {
   htmlForStepBrowser: function() {
     return cucumberStepCompletion.tableOfStepTemplates();
   },
-  createStepBrowser: function() {
-    var html = "<div class='cuked-it-step-browser-list'>";
-    html += cucumberStepCompletion.htmlForStepBrowser();
-    html += "</div>";
-    jQuery('.cuked-it-step-browser').html(html);
-  },
   toggleStepExamplesFor: function(index) {
     var isCurrentlyClosed = $('#step-definition-' + index).hasClass('closed');
     var id = '#step-definition-' + index;
@@ -103,6 +97,18 @@ var cucumberStepCompletion = {
     else {
       jQuery(id + " .matching-steps").empty();
     }
+  },
+  createStepBrowser: function() {
+    var html;
+    if(typeof(cucumberStepCompletion.cucumberSteps) != "undefined") {
+      html = "<div class='cuked-it-step-browser-list'>";
+      html += cucumberStepCompletion.htmlForStepBrowser();
+      html += "</div>";
+    }
+    else {
+      html = "<div>cucumberStepCompletion.cucumberSteps was not set so the steps table could not be generated. This variable was supposed to be set by the cucumber_steps.json file.";
+    }
+    jQuery('.cuked-it-step-browser').html(html);
   }
 }
 
