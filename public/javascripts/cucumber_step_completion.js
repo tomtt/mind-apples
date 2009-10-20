@@ -107,6 +107,24 @@ var cucumberStepCompletion = {
 }
 
 jQuery(document).ready(cucumberStepCompletion.createStepBrowser);
+jQuery.tablesorter.addParser({
+  id: 'number-of-matches',
+  is: function(s) {
+    // return false so this parser is not auto detected
+    return false;
+  },
+  format: function(s) {
+    return s;
+  },
+  type: 'numeric'
+});
 jQuery(document).ready(function() {
-  jQuery('table.sorted').tablesorter();
+  jQuery('table.sorted').tablesorter({
+    sortList: [[0,0]],
+    headers: {
+      1: {
+        sorter:'number-of-matches'
+      }
+    }
+  });
 });
