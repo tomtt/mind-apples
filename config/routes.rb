@@ -11,9 +11,10 @@ ActionController::Routing::Routes.draw do |map|
 
   # Individual pages
   map.about '/about', :controller => "pages", :action => "about"
+  map.team '/about/team', :controller => "pages", :action => "team"
   map.fives '/fives', :controller => "pages", :action => "fives"
   map.help_us_grow '/help-us-grow', :controller => "pages", :action => "help_us_grow"
-  map.social_media_stuff '/social_media_stuff', :controller => "pages", :action => "social_media_stuff"
+  map.links '/links', :controller => "pages", :action => "links"
 
   # Generic routes
   map.connect ':controller/:action/:id'
