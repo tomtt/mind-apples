@@ -16,7 +16,7 @@ module NavigationHelpers
     when /^the "take the survey" page$/
       new_person_path
     when /^the "about us" page$/
-      about_us_path
+      about_path
 
     # Add more mappings here.
     # Here is a more fancy example:
