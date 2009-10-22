@@ -17,6 +17,7 @@ Feature: Setting a password
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"
     And I have a personal page
+    And my braindump is "I heart mindapples"
     And my email is "lucy@example.com"
     And my login is "lucy"
     When I go to "/person/lucy"
@@ -27,3 +28,9 @@ Feature: Setting a password
     Then I should receive 2 emails
     When I open the email with subject "Setting your Mindapples password"
     And I click the first link in the email
+    
+    And I fill in "Password" with "mynewpassword"
+    And I fill in "Password confirmation" with "mynewpassword"
+    And I press "Update my password and log me in"
+
+    Then I should see a "person[braindump]" text area containing "I heart mindapples"

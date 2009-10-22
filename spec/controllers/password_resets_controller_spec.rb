@@ -1,6 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PasswordResetsController do
+  def create_mock_person
+    mock_person = mock_model(Person,
+                             :password= => nil,
+                             :password_confirmation= => nil,
+                             :save => nil)
+    mock_person
+  end
+
   shared_examples_for "all actions loading a person using perishable token" do
     it "should find a person by persishable token" do
       Person.should_receive(:find_using_perishable_token).with('param_value')
@@ -8,7 +16,7 @@ describe PasswordResetsController do
     end
 
     it "should expose the found person as @person" do
-      mock_person = mock_model(Person)
+      mock_person = create_mock_person
       Person.stub!(:find_using_perishable_token).and_return(mock_person)
       do_request
       assigns[:person].should == mock_person
@@ -113,20 +121,54 @@ describe PasswordResetsController do
 
   describe "update" do
     def do_request
-      put :update, :id => 'param_value'
+      put :update, :id => 'param_value', :person => {}
     end
 
     it_should_behave_like "all actions loading a person using perishable token"
 
     describe "when a person was found" do
       before do
-        @mock_person = mock_model(Person)
+        @mock_person = create_mock_person
         Person.stub!(:find_using_perishable_token).and_return @mock_person
       end
 
-      it "should render update" do
-        do_request
-        response.should render_template(:update)
+      it "should set the password and confirmation and save" do
+        @mock_person.should_receive(:password=).with('betterpassword')
+        @mock_person.should_receive(:password_confirmation=).with('betterpassword')
+        @mock_person.should_receive(:save)
+        put(:update,
+            :id => 'param_value',
+            :person => {
+              :password => 'betterpassword',
+              :password_confirmation => 'betterpassword'
+            })
+      end
+
+      describe "when the person is saved successfully" do
+        before do
+          @mock_person.stub!(:save).and_return true
+        end
+
+        it "should notify the user" do
+          do_request
+          flash[:notice].should =~ /password successfully updated/i
+        end
+
+        it "should redirect to the person's account editing page" do
+          do_request
+          response.should redirect_to(edit_person_path(@mock_person))
+        end
+      end
+
+      describe "when the person could not be saved" do
+        before do
+          @mock_person.stub!(:save).and_return false
+        end
+
+        it "should render edit" do
+          do_request
+          response.should render_template(:edit)
+        end
       end
     end
   end

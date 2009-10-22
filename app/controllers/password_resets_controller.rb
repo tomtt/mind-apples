@@ -15,16 +15,17 @@ class PasswordResetsController < ApplicationController
     end
   end
 
-  # def update
-  #   @user.password = params[:user][:password]
-  #   @user.password_confirmation = params[:user][:password_confirmation]
-  #   if @user.save
-  #     flash[:notice] = "Password successfully updated"
-  #     redirect_to account_url
-  #   else
-  #     render :action => :edit
-  #   end
-  # end
+  def update
+    @person.password = params[:person][:password]
+    @person.password_confirmation = params[:person][:password_confirmation]
+    @person.save
+    if @person.save
+      flash[:notice] = "Password successfully updated"
+      redirect_to edit_person_path(@person)
+    else
+      render :action => :edit
+    end
+  end
 
   private
 
