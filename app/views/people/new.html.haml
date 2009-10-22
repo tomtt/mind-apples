@@ -1,29 +1,26 @@
 %h1
   Mindapples. 5-a-day for your mind
 
-%h3
-  Mindapples is a little place for you to share the things you do to look after your mind. 
-
-%p  
-  If eating five fruit and veg a day is good for our bodies, then what's the equivalent for our minds?
+%p
+  Mindapples is a little project to find all the things we do to look after our mental health. 
   %br
-  What five things do YOU do every day, or regularly, to look after your mind?
+  If eating five fruit and veg a day is good for our bodies, then what's the equivalent for our minds?
 
 %h3
-  Take the Mindapples test now, and then
-  = link_to('read the other fives', fives_path)
-
+  Take the Mindapples Test, and then
+  = link_to('read the fives', fives_path)
+  
 = render(:partial => 'mindapples_form')
 
-%p
+%h5
   %i
-    By completing this survey, you're giving Mindapples the right to publish your answers anonymously, online and offline. Hope that's ok...
+    A little announcement: by completing this survey, you're giving us the right to publish your answers anonymously, online and offline. Hope that's ok...
 
 %p
-  This site was built by Mindapples volunteers. Find out more
-  = link_to('about us', about_path), ","
-  read our <a href='http://blog.mindapples.org'>blog</a> and <a href='mailto:hello@mindapples.org'>say hello</a>.
+  This site was built by the Mindapples volunteers. Find out 
+  = link_to('more about us', about_path), ","
+  read our <a href='http://blog.mindapples.org'>blog</a>, or <a href='mailto:hello@mindapples.org'>say hello</a>.
   
 %p
-  And if you like us, please join us on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and 
+  And if you like us, please join us on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and do other things to 
   = link_to('help us grow', help_us_grow_path), "."
