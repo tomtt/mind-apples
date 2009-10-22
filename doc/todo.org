@@ -8,5 +8,4 @@
 *** Help us grow content app/view/pages/help_us_grow.html.haml
 *** Social media stuff content app/view/pages/social_media_stuff.html.haml
 *** Things to do content app/view/pages/things_to_do.html.haml
-*** Text on survey page app/views/people/new.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
