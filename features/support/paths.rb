@@ -15,8 +15,14 @@ module NavigationHelpers
       logout_path
     when /^the "take the survey" page$/
       new_person_path
-    when /^the "about us" page$/
+    when /^the "about" page$/
       about_path
+    when /^the "fives" page$/
+      fives_path
+    when /^the "help us grow" page$/
+      help_us_grow_path
+    when /^the "links" page$/
+      links_path
 
     # Add more mappings here.
     # Here is a more fancy example:

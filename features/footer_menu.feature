@@ -6,27 +6,25 @@ Feature: Footer menu
   As the evil overlord
   I want users to have a menu with links to all the pages
 
-  Scenario: clicking through the site using the footer menu
-    When I go to the homepage
+  Scenario Outline: clicking al the links in the footer menu of a page
+    When I go to the <page>
     And I follow "Take the test"
+    And I go to the <page>
     And I follow "Read the fives"
-    And I follow "Take the test"
+    And I go to the <page>
     And I follow "Help us grow"
-    And I follow "Take the test"
+    And I go to the <page>
     And I follow "About us"
-    And I follow "Take the test"
-    And I follow "Social media"
-    And I follow "Read the fives"
-    And I follow "Help us grow"
-    And I follow "Read the fives"
-    And I follow "About us"
-    And I follow "Read the fives"
+    And I go to the <page>
     And I follow "Links"
-    And I follow "Help us grow"
-    And I follow "About us"
-    And I follow "Help us grow"
-    And I follow "Links"
-    And I follow "About us"
-    And I follow "Links"
-    And I follow "Take the test"
+    And I go to the <page>
     Then I should see a link to "blog.mindapples.org"
+
+    Examples:
+    | page                   |
+    | homepage               |
+    | "about" page           |
+    | "take the survey" page |
+    | "fives" page           |
+    | "help us grow" page    |
+    | "links" page           |
