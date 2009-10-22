@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Individual pages
   map.about '/about', :controller => "pages", :action => "about"
-  map.team '/about/team', :controller => "pages", :action => "team"
+  map.team '/about/team', :controller => "pages", :action => "about_team"
   map.fives '/fives', :controller => "pages", :action => "fives"
   map.help_us_grow '/help-us-grow', :controller => "pages", :action => "help_us_grow"
   map.links '/links', :controller => "pages", :action => "links"
