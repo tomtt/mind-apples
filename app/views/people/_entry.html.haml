@@ -16,18 +16,18 @@
   = form.label :age, "Age check. How old are you?"
   = form.select :age, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
 .row
-  = form.label :location, "Border control. Where are you from?"
+  = form.label :location, "Passport control. Where are you from?"
   = form.text_field :location
 .row
-  = form.label :occupation, "What's your thing? What do you do for a living or to fill your time?"
+  = form.label :occupation, "Your thing. What's your main occupation, paid or otherwise?"
   = form.text_field :occupation
 .row
   = form.label :name, "Be proud. What's your name? (very optional)"
   = form.text_field :name
 .row
-  = form.label :email, "Don't go! Leave your e-mail to keep in touch with Mindapples. (never made public)"
+  = form.label :email, "Don't go! Leave your e-mail and we'll send you nice messages. (Never made public.)"
   = form.text_field :email
 - unless form.object.login_set_by_user?
   .row
-    = form.label :login, "Pick a nickname for yourself. Careful ... you can only pick one once"
+    = form.label :login, "Choose a nickname. Careful... you can only choose once."
     = form.text_field :login
