@@ -1,11 +1,11 @@
 * TODO
 ** Protect page_code from being set from rogue form
 ** Ensure uniqueness of page_code and login
+** Fix capitalisation issue on "Important bit. what five..." on fives form label.
 ** COPY
 *** Text of mindapples email app/views/person_mailer/mindapples.erb
-*** Text of reset password email app/views/person_mailer/set_password.erb
-*** About us content app/view/pages/about_us.html.haml
-*** Help us grow content app/view/pages/help_us_grow.html.haml
-*** Social media stuff content app/view/pages/social_media_stuff.html.haml
-*** Read the fives content app/view/pages/fives.html.haml
+*** Links page content app/view/pages/links.html.haml
+*** Read the fives page content app/view/pages/fives.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
+*** DESIGN
+**** Define p.float_right class (used in app/view/pages/how_we_got_here.html.haml
