@@ -11,6 +11,5 @@ Feature: Setting login
     And I press "Submit"
     And I fill in "Pick a nickname" with "spotty"
     And I press "Submit"
-    And I follow "Edit"    
     Then I should not see a "person[login]" text field
     And I should be on "/person/spotty/edit"

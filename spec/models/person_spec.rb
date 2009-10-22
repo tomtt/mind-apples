@@ -170,4 +170,18 @@ describe Person do
                                :password_confirmation => 'foo1234')
     end
   end
+
+  describe "delivering password reset instructions" do
+    it "should reset the perishable token" do
+      person = Factory.create(:person)
+      person.should_receive(:reset_perishable_token!)
+      person.deliver_password_reset_instructions!
+    end
+
+    it "should send out the email with instruction on how to set a password" do
+      person = Factory.create(:person)
+      PersonMailer.should_receive(:deliver_set_password).with(person)
+      person.deliver_password_reset_instructions!
+    end
+  end
 end

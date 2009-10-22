@@ -1,8 +1,8 @@
 module Cucumber #:nodoc:
   class VERSION #:nodoc:
     MAJOR = 0
-    MINOR = 3
-    TINY  = 91
+    MINOR = 4
+    TINY  = 0
     PATCH = nil # Set to nil for official release
 
     STRING = [MAJOR, MINOR, TINY, PATCH].compact.join('.')

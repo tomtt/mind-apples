@@ -1,15 +1,15 @@
 module Cucumber
   module Formatter
-    class Steps < Ast::Visitor
+    # The formatter used for <tt>--format steps</tt>
+    class Steps
 
       def initialize(step_mother, io, options)
-        super(step_mother)
         @io = io
         @options = options
         @step_definition_files = collect_steps(step_mother)
       end
 
-      def visit_features(features)
+      def after_features(features)
         print_summary
       end
 
@@ -22,9 +22,9 @@ module Cucumber
           
           sources = @step_definition_files[step_definition_file]
           source_indent = source_indent(sources)
-          sources.sort.each do |file_colon_line, regexp|
-            @io.print "#{regexp}".indent(2)
-            @io.print " # #{file_colon_line}".indent(source_indent - regexp.size)
+          sources.sort.each do |file_colon_line, regexp_source|
+            @io.print regexp_source.indent(2)
+            @io.print " # #{file_colon_line}".indent(source_indent - regexp_source.jlength)
             @io.puts
           end
           @io.puts
@@ -36,7 +36,7 @@ module Cucumber
       def collect_steps(step_mother)
         step_mother.step_definitions.inject({}) do |step_definitions, step_definition|
           step_definitions[step_definition.file] ||= []
-          step_definitions[step_definition.file] << [ step_definition.file_colon_line, step_definition.regexp.inspect ]
+          step_definitions[step_definition.file] << [ step_definition.file_colon_line, step_definition.regexp_source ]
           step_definitions
         end
       end

@@ -1,11 +1,16 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
-require 'cucumber/parser/i18n/language'
+require 'cucumber/parser/natural_language'
 
 module Cucumber
   module Parser
     describe Feature do
       before do
-        @parser = I18n::Language['en'].parser
+        @step_mother = StepMother.new
+        @parser = NaturalLanguage.get(@step_mother, 'en').parser
+      end
+
+      after do
+        NaturalLanguage.instance_variable_set(:@languages, nil) # So that new StepMothers can be created and have adverbs registered
       end
 
       def parse(text)
@@ -13,11 +18,11 @@ module Cucumber
       end
 
       def parse_file(file)
-        FeatureFile.new(File.dirname(__FILE__) + "/../treetop_parser/" + file).parse
+        FeatureFile.new(File.dirname(__FILE__) + "/../treetop_parser/" + file).parse(@step_mother, {})
       end
 
       def parse_example_file(file)
-        FeatureFile.new(File.dirname(__FILE__) + "/../../../examples/" + file).parse
+        FeatureFile.new(File.dirname(__FILE__) + "/../../../examples/" + file).parse(@step_mother, {})
       end
 
       describe "Comments" do
@@ -63,8 +68,8 @@ Feature: hi
           parse("# My comment\n@hello @world Feature: hi\n").to_sexp.should ==
           [:feature, nil, "Feature: hi",
             [:comment, "# My comment\n"],
-            [:tag, "hello"],
-            [:tag, "world"]]
+            [:tag, "@hello"],
+            [:tag, "@world"]]
         end
 
         it "should not take the tags as part of a multiline name feature element" do
@@ -72,7 +77,7 @@ Feature: hi
           [:feature, nil, "Feature: hi",
            [:scenario, 2, "Scenario:", "test"], 
            [:scenario, 4, "Scenario:", "another", 
-             [:tag, "hello"]]]
+             [:tag, "@hello"]]]
         end
 
         it "should parse a file with tags on a scenario" do
@@ -89,13 +94,13 @@ Feature: hi
   Scenario: Second}).to_sexp.should ==
           [:feature, nil, "Feature: hi",
             [:comment, "# FC\n  "],
-            [:tag, "ft"],
+            [:tag, "@ft"],
             [:scenario, 6, 'Scenario:', 'First',
-              [:tag, "st1"], [:tag, "st2"],
+              [:tag, "@st1"], [:tag, "@st2"],
               [:step_invocation, 7, "Given", "Pepper"]
             ],
             [:scenario, 11, 'Scenario:', 'Second',
-              [:tag, "st3"], [:tag, "st4"], [:tag, "ST5"], [:tag, "#^%&ST6**!"]]]
+              [:tag, "@st3"], [:tag, "@st4"], [:tag, "@ST5"], [:tag, "@#^%&ST6**!"]]]
         end
       end
       
@@ -348,38 +353,46 @@ Given I am a step
         it "should parse scenario_outline" do
           parse_file("scenario_outline.feature")
         end
+
+        it "should parse comments" do
+          parse_file("with_comments.feature")
+        end
       end
 
       describe "Filtering" do
         it "should filter outline tables" do
-          ff = FeatureFile.new(
-            File.dirname(__FILE__) + '/../../../examples/self_test/features/outline_sample.feature:12')
-          f = ff.parse({:lang => 'en'})
-          f.to_sexp.should ==
+          path = '/self_test/features/outline_sample.feature'
+          f = parse_example_file("#{path}:12")
+          actual_sexp = f.to_sexp
+          
+          # check path is equivalent, if not same
+          File.expand_path(actual_sexp[1]).should == File.expand_path(File.dirname(__FILE__) + "/../../../examples#{path}")
+          actual_sexp[1] = 'made/up/path.feature'
+          actual_sexp.should ==
           [:feature,
-           "./spec/cucumber/parser/../../../examples/self_test/features/outline_sample.feature",
-           "Feature: Outline Sample",
-           [:scenario_outline,
-            "Scenario Outline:",
-            "Test state",
-            [:step, 6, "Given", "<state> without a table"],
-            [:step, 7, "Given", "<other_state> without a table"],
-            [:examples,
-             "Examples:",
-             "Rainbow colours",
-             [:table,
-              [:row, 9, [:cell, "state"], [:cell, "other_state"]],
-#              [:row, 10, [:cell, "missing"], [:cell, "passing"]],
-#              [:row, 11, [:cell, "passing"], [:cell, "passing"]],
-              [:row, 12, [:cell, "failing"], [:cell, "passing"]]]]
-            # ,
-            # [:examples,
-            #  "Examples:",
-            #  "Only passing",
-            #  [:table,
-            #   [:row, 14, [:cell, "state"], [:cell, "other_state"]],
-            #   [:row, 15, [:cell, "passing"], [:cell, "passing"]]]]]
-              ]]
+            'made/up/path.feature',
+            "Feature: Outline Sample",
+            [:scenario_outline,
+              "Scenario Outline:",
+              "Test state",
+              [:step, 6, "Given", "<state> without a table"],
+              [:step, 7, "Given", "<other_state> without a table"],
+              [:examples,
+                "Examples:",
+                "Rainbow colours",
+                [:table,
+                  [:row, 9, 
+                    [:cell, "state"], 
+                    [:cell, "other_state"]
+                  ],
+                  [:row, 12, 
+                    [:cell, "failing"], 
+                    [:cell, "passing"]
+                  ]
+                ]
+              ]
+            ]
+          ]
         end
       end
     end

@@ -4,9 +4,9 @@ require 'spec/expectations'
 require 'fileutils'
 require 'forwardable'
 begin
-  gem "spork", ">= 0.5.1" # Ensure correct spork version number to avoid false-negatives.
+  require 'spork'
 rescue Gem::LoadError => ex
-  warn "WARNING: #{ex.message} You need to have the spork gem installed to run the DRb feature properly!"
+  gem 'spork', '>= 0.5.9' # Ensure correct spork version number to avoid false-negatives.
 end
 
 class CucumberWorld
@@ -39,22 +39,41 @@ class CucumberWorld
 
   # The last standard out, with the duration line taken out (unpredictable)
   def last_stdout
-    strip_duration(@last_stdout)
+    strip_1_9_paths(strip_duration(@last_stdout))
   end
 
   def strip_duration(s)
     s.gsub(/^\d+m\d+\.\d+s\n/m, "")
   end
 
+  def strip_1_9_paths(s)
+    s.gsub(/#{Dir.pwd}\/examples\/self_test\/tmp/m, ".").gsub(/#{Dir.pwd}\/examples\/self_test/m, ".")
+  end
+
   def replace_duration(s, replacement)
     s.gsub(/\d+m\d+\.\d+s/m, replacement)
+  end
+
+  def replace_junit_duration(s, replacement)
+    s.gsub(/\d+\.\d\d+/m, replacement)
+  end
+
+  def strip_ruby186_extra_trace(s)  
+    s.gsub(/^.*\.\/features\/step_definitions(.*)\n/, "")
   end
 
   def create_file(file_name, file_content)
     file_content.gsub!("CUCUMBER_LIB", "'#{cucumber_lib_dir}'") # Some files, such as Rakefiles need to use the lib dir
     in_current_dir do
+      FileUtils.mkdir_p(File.dirname(file_name)) unless File.directory?(File.dirname(file_name))
       File.open(file_name, 'w') { |f| f << file_content }
     end
+  end
+
+  def set_env_var(variable, value)
+    @original_env_vars ||= {}
+    @original_env_vars[variable] = ENV[variable] 
+    ENV[variable]  = value
   end
 
   def background_jobs
@@ -69,7 +88,6 @@ class CucumberWorld
     stderr_file = Tempfile.new('cucumber')
     stderr_file.close
     in_current_dir do
-      @last_stdout = `#{command} 2> #{stderr_file.path}`
       mode = Cucumber::RUBY_1_9 ? {:external_encoding=>"UTF-8"} : 'r'
       IO.popen("#{command} 2> #{stderr_file.path}", mode) do |io|
         @last_stdout = io.read
@@ -80,7 +98,7 @@ class CucumberWorld
     @last_stderr = IO.read(stderr_file.path)
   end
 
-  def run_spork_in_background
+  def run_spork_in_background(port = nil)
     pid = fork
     in_current_dir do
       if pid
@@ -88,12 +106,12 @@ class CucumberWorld
       else
         # STDOUT.close
         # STDERR.close
-        spork = `which spork`.strip
-        cmd = "#{Cucumber::RUBY_BINARY} -I #{Cucumber::LIBDIR} #{spork} cuc"
+        port_arg = port ? "-p #{port}" : ''
+        cmd = "#{Cucumber::RUBY_BINARY} -I #{Cucumber::LIBDIR} #{Spork::BINARY} cuc #{port_arg}"
         exec cmd
       end
     end
-    sleep 0.2
+    sleep 1.0
   end
 
   def terminate_background_jobs
@@ -102,6 +120,10 @@ class CucumberWorld
         Process.kill(Signal.list['TERM'], pid)
       end
     end
+  end
+
+  def restore_original_env_vars
+    @original_env_vars.each { |variable, value| ENV[variable] = value } if @original_env_vars
   end
 
 end
@@ -117,9 +139,5 @@ end
 
 After do
   terminate_background_jobs
-end
-
-Before('@diffxml') do
-  `diffxml --version`
-  raise "Please install diffxml from http://diffxml.sourceforge.net/" if $? != 0
+  restore_original_env_vars
 end

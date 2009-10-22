@@ -23,8 +23,9 @@ Term::ANSIColor.coloring = false if !STDOUT.tty? and not ENV.has_key?("AUTOTEST"
 
 module Cucumber
   module Formatter
-    # Defines aliases for coloured output. You can tweak the colours by defining
-    # a <tt>CUCUMBER_COLORS</tt> variable in your shell, very much like you can
+    # Defines aliases for coloured output. You don't invoke any methods from this
+    # module directly, but you can change the output colours by defining
+    # a <tt>CUCUMBER_COLORS</tt> variable in your shell, very much like how you can
     # tweak the familiar POSIX command <tt>ls</tt> with
     # <a href="http://mipsisrisc.com/rambling/2008/06/27/lscolorsls_colors-now-with-linux-support/">$LSCOLORS/$LS_COLORS</a>
     #
@@ -59,15 +60,6 @@ module Cucumber
     # Although not listed, you can also use <tt>grey</tt>
     module ANSIColor
       include Term::ANSIColor
-
-      # Not supported in Term::ANSIColor
-      def grey(m)
-        if ::Term::ANSIColor.coloring?
-          "\e[90m#{m}\e[0m"
-        else
-          m
-        end
-      end
 
       ALIASES = Hash.new do |h,k|
         if k.to_s =~ /(.*)_param/
@@ -105,6 +97,47 @@ module Cucumber
           eval(code)
         end
       end
+      
+      def self.define_grey #:nodoc:
+        begin
+          gem 'genki-ruby-terminfo'
+          require 'terminfo'
+          case TermInfo.default_object.tigetnum("colors")
+          when 0
+            raise "Your terminal doesn't support colours"
+          when 1
+            ::Term::ANSIColor.coloring = false
+            alias grey white
+          when 2..8
+            alias grey white
+          else
+            define_real_grey
+          end
+        rescue Exception => e
+          if e.class.name == 'TermInfo::TermInfoError'
+            STDERR.puts "*** WARNING ***"
+            STDERR.puts "You have the genki-ruby-terminfo gem installed, but you haven't set your TERM variable."
+            STDERR.puts "Try setting it to TERM=xterm-256color to get grey colour in output"
+            STDERR.puts "\n"
+            alias grey white
+          else
+            define_real_grey
+          end
+        end
+      end
+      
+      def self.define_real_grey #:nodoc:
+        def grey(m) #:nodoc:
+          if ::Term::ANSIColor.coloring?
+            "\e[90m#{m}\e[0m"
+          else
+            m
+          end
+        end
+      end
+      
+      define_grey
+      
     end
   end
 end

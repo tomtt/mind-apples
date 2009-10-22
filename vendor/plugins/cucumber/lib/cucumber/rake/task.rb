@@ -8,8 +8,8 @@ module Cucumber
     #
     #   Cucumber::Rake::Task.new
     #
-    # This will create a task named 'features' described as 'Run Features with 
-    # Cucumber'. It will use steps from 'features/**/*.rb' and features in 'features/**/*.feature'.
+    # This will define a task named <tt>cucumber</tt> described as 'Run Cucumber features'. 
+    # It will use steps from 'features/**/*.rb' and features in 'features/**/*.feature'.
     #
     # To further configure the task, you can pass a block:
     #
@@ -82,38 +82,13 @@ module Cucumber
         end
       end
 
-      LIB = File.expand_path(File.dirname(__FILE__) + '/../..') # :nodoc:
-
-      # TODO: remove depreated accessors for 0.4.0
-      def self.deprecate_accessor(attribute) # :nodoc:
-        attr_reader attribute
-        class_eval <<-EOF, __FILE__, __LINE__ + 1
-          def #{attribute}=(value)
-            @#{attribute} = value
-            warn("\nWARNING: Cucumber::Rake::Task##{attribute} is deprecated and will be removed in 0.4.0.  Please use profiles for complex settings: http://wiki.github.com/aslakhellesoy/cucumber/using-rake#profiles\n")
-          end
-        EOF
-      end
+      LIB = File.expand_path(File.dirname(__FILE__) + '/../..') #:nodoc:
 
       # Directories to add to the Ruby $LOAD_PATH
       attr_accessor :libs
 
       # Name of the cucumber binary to use for running features. Defaults to Cucumber::BINARY
       attr_accessor :binary
-
-      # Array of paths to specific step definition files to use
-      deprecate_accessor :step_list
-
-      # File pattern for finding step definitions. Defaults to 
-      # 'features/**/*.rb'.
-      deprecate_accessor :step_pattern
-
-      # Array of paths to specific features to run. 
-      deprecate_accessor :feature_list
-
-      # File pattern for finding features to run. Defaults to 
-      # 'features/**/*.feature'. Can be overridden by the FEATURE environment variable.
-      deprecate_accessor :feature_pattern
 
       # Extra options to pass to the cucumber binary. Can be overridden by the CUCUMBER_OPTS environment variable.
       # It's recommended to pass an Array, but if it's a String it will be #split by ' '.
@@ -133,22 +108,17 @@ module Cucumber
         @rcov_opts = String === opts ? opts.split(' ') : opts
       end
 
-      # Whether or not to fork a new ruby interpreter. Defaults to true.
+      # Whether or not to fork a new ruby interpreter. Defaults to true. You may gain
+      # some startup speed if you set it to false, but this may also cause issues with
+      # your load path and gems.
       attr_accessor :fork
 
-      # Define what profile to be used.  When used with cucumber_opts it is simply appended to it. Will be ignored when CUCUMBER_OPTS is used.
+      # Define what profile to be used.  When used with cucumber_opts it is simply appended 
+      # to it. Will be ignored when CUCUMBER_OPTS is used.
       attr_accessor :profile
-      def profile=(profile) #:nodoc:
-        @profile = profile
-        unless feature_list
-          # TODO: remove once we completely remove these from the rake task.
-          @step_list = []
-          @feature_list = [] # Don't use accessor to avoid deprecation warning.
-        end
-      end
 
       # Define Cucumber Rake task
-      def initialize(task_name = "features", desc = "Run Features with Cucumber")
+      def initialize(task_name = "cucumber", desc = "Run Cucumber features")
         @task_name, @desc = task_name, desc
         @fork = true
         @libs = ['lib']
@@ -156,84 +126,41 @@ module Cucumber
 
         yield self if block_given?
 
-        @feature_pattern = "features/**/*.feature" if feature_pattern.nil? && feature_list.nil?
-        @step_pattern    = "features/**/*.rb"      if step_pattern.nil? && step_list.nil?
-
         @binary = binary.nil? ? Cucumber::BINARY : File.expand_path(binary)
         @libs.insert(0, LIB) if binary == Cucumber::BINARY
 
         define_task
       end
 
-      def define_task # :nodoc:
+      def define_task #:nodoc:
         desc @desc
         task @task_name do
           runner.run
         end
       end
 
-      def runner(task_args = nil) # :nodoc:
+      def runner(task_args = nil) #:nodoc:
         cucumber_opts = [(ENV['CUCUMBER_OPTS'] ? ENV['CUCUMBER_OPTS'].split(/\s+/) : nil) || cucumber_opts_with_profile]
         if(@rcov)
-          RCovCucumberRunner.new(libs, binary, cucumber_opts, feature_files(task_args), rcov_opts)
+          RCovCucumberRunner.new(libs, binary, cucumber_opts, feature_files, rcov_opts)
         elsif(@fork)
-          ForkedCucumberRunner.new(libs, binary, cucumber_opts, feature_files(task_args))
+          ForkedCucumberRunner.new(libs, binary, cucumber_opts, feature_files)
         else
-          InProcessCucumberRunner.new(libs, cucumber_opts, feature_files(task_args))
+          InProcessCucumberRunner.new(libs, cucumber_opts, feature_files)
         end
       end
 
-      def cucumber_opts_with_profile # :nodoc:
+      def cucumber_opts_with_profile #:nodoc:
         @profile ? [cucumber_opts, '--profile', @profile] : cucumber_opts
       end
 
-      def feature_files(task_args = nil) # :nodoc:
-        if ENV['FEATURE']
-          FileList[ ENV['FEATURE'] ]
-        else
-          result = []
-          result += feature_list.to_a if feature_list
-          result += FileList[feature_pattern].to_a if feature_pattern
-          result = make_command_line_safe(result)
-          FileList[result]
-        end
+      def feature_files #:nodoc:
+        make_command_line_safe(FileList[ ENV['FEATURE'] || [] ])
       end
 
-      def step_files(task_args = nil) # :nodoc:
-        if ENV['STEPS']
-          FileList[ ENV['STEPS'] ]
-        else
-          result = []
-          result += Array(step_list) if step_list
-          result += Array(FileList[step_pattern]) if step_pattern
-          FileList[result]
-        end
-      end
-
-      private
       def make_command_line_safe(list)
         list.map{|string| string.gsub(' ', '\ ')}
       end
     end
-
-    class FeatureTask < Task
-
-      def initialize(task_name = "feature", desc = "Run a specified feature with Cucumber.  #{task_name}[feature_name]")
-        super(task_name, desc)
-      end
-
-      def define_task # :nodoc:
-        desc @desc
-        task @task_name, :feature_name do |t, args|
-          runner(args).run
-        end
-      end
-
-      def feature_files(task_arguments) # :nodoc:
-        FileList[File.join("features", "**", "#{task_arguments[:feature_name]}.feature")]
-      end
-
-    end
-
   end
 end

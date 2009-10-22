@@ -30,6 +30,11 @@ class Person < ActiveRecord::Base
     login && !login.empty? && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
   end
 
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    PersonMailer.deliver_set_password(self)
+  end
+
   def to_s
     to_param
   end

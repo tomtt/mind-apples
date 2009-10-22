@@ -2,24 +2,28 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 require 'cucumber/step_mother'
 require 'cucumber/ast'
 require 'cucumber/core_ext/string'
+require 'cucumber/rb_support/rb_language'
 
 module Cucumber
   module Ast
     describe ScenarioOutline do
       before do
-        @step_mother = Object.new
-        @step_mother.extend(StepMother)
+        @step_mother = StepMother.new
+        @step_mother.load_programming_language('rb')
+        @step_mother.load_natural_language('en')
+        @dsl = Object.new
+        @dsl.extend(RbSupport::RbDsl)
 
-        @step_mother.Given(/^there are (\d+) cucumbers$/) do |n|
+        @dsl.Given(/^there are (\d+) cucumbers$/) do |n|
           @initial = n.to_i
         end
-        @step_mother.When(/^I eat (\d+) cucumbers$/) do |n|
+        @dsl.When(/^I eat (\d+) cucumbers$/) do |n|
           @eaten = n.to_i
         end
-        @step_mother.Then(/^I should have (\d+) cucumbers$/) do |n|
+        @dsl.Then(/^I should have (\d+) cucumbers$/) do |n|
           (@initial - @eaten).should == n.to_i
         end
-        @step_mother.Then(/^I should have (\d+) cucumbers in my belly$/) do |n|
+        @dsl.Then(/^I should have (\d+) cucumbers in my belly$/) do |n|
           @eaten.should == n.to_i
         end
 
@@ -37,6 +41,7 @@ module Cucumber
           ],
           [
             [
+              Comment.new("#Mmmm... cucumbers\n"),
               24,
               'Examples:',
               'First table',
@@ -47,19 +52,20 @@ module Cucumber
               ]
             ]
           ]
-          
+
         )
       end
 
       it "should replace all variables and call outline once for each table row" do
-        visitor = Visitor.new(@step_mother)
+        visitor = TreeWalker.new(@step_mother)
         visitor.should_receive(:visit_table_row).exactly(3).times
         visitor.visit_feature_element(@scenario_outline)
       end
 
       it "should pretty print" do
         require 'cucumber/formatter/pretty'
-        visitor = Formatter::Pretty.new(@step_mother, STDOUT, {:comment => true})
+        formatter = Formatter::Pretty.new(@step_mother, STDOUT, {:comment => true, :tag_names => {}})
+        visitor = TreeWalker.new(@step_mother, [formatter])
         visitor.visit_feature_element(@scenario_outline)
       end
     end
