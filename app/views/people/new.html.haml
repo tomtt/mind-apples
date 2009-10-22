@@ -9,13 +9,17 @@
   What five things do you do regularly to look after your mind?
 
 %h3
-  Take the test yourself, and then <a href='/fives'>read the fives</a>
+  Take the test yourself, and then
+  = link_to('read the fives', fives_path)
 
 %p
-  You can also <a href='/about-us'>read more about us</a>, read our <a href='http://blog.mindapples.org'>blog</a> and <a href='mailto:hello@mindapples.org'>get in touch</a>.
+  You can also 
+  = link_to('read more about us', about_us_path), ","
+  read our <a href='http://blog.mindapples.org'>blog</a> and <a href='mailto:hello@mindapples.org'>get in touch</a>.
   
 %p
-  And please join us on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and <a href='/help-us-grow'>help us grow</a>.
+  And please join us on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and 
+  = link_to('help us grow', help_us_grow_path), "."
 
 = render(:partial => 'mindapples_form')
 
