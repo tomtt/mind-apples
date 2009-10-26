@@ -48,7 +48,11 @@ class PeopleController < ApplicationController
   protected
 
   def find_resource
-    Person.find_by_param(params["id"])
+    person = Person.find_by_param(params["id"])
+    # unless person
+    #   record_not_found
+    # end
+    person
   end
 
   def new_resource(attributes = (params[resource_name] || {}))
