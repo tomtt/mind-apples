@@ -30,3 +30,7 @@ end
 Then /^I should see an? "([^\"]*)" select field with "([^\"]*)" selected$/ do |field, value|
   field_labeled(field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{value}/
 end
+
+Then /^the response status should be (\d+)$/ do |code|
+  response.code.should == code
+end
