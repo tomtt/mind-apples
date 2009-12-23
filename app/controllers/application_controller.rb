@@ -9,6 +9,35 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
 
+  # # Otherwise there will be lots of exceptions due to people trying standard exploits
+  # skip_before_filter :verify_authenticity_token, :only => :render_404
+  # skip_after_filter :store_location, :only => [:render_404]
+  #
+  # def render_404
+  #   @page_title = "Sorry, we can't seem to find the page you're looking for."
+  #   respond_to do |type|
+  #     type.html { render :template => "errors/404", :layout => 'error', :status => 404 }
+  #     type.all { render :nothing => true, :status => 404 }
+  #   end
+  #   true # so we can do "render_404 and return"
+  # end
+  #
+  # protected
+  #
+  # # http://henrik.nyh.se/2008/07/rails-404
+  # def render_optional_error_file(status_code)
+  #   debugger
+  #   if status_code == :not_found
+  #     render_404 and return
+  #   else
+  #     super
+  #   end
+  # end
+  #
+  # def record_not_found
+  #   render_404
+  # end
+
   private
 
   def current_user_session

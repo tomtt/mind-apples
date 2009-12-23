@@ -1,0 +1,8 @@
+development:
+  host: mindapples.local
+production: &PRO
+  host: survey.mindapples.org
+test:
+  <<: *PRO
+cucumber:
+  <<: *PRO
