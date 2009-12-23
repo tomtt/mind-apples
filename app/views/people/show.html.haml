@@ -1,5 +1,8 @@
 .row
-  Five-a-day:
+  This is the Mindapples page for:
+  = h resource.name
+.row
+  Here's your five-a-day:
   %ol
     = render(resource.mindapples)
 .row
@@ -9,19 +12,16 @@
   Health check:
   = h resource.health_check
 .row
-  Gender:
-  = Gender.label(resource.gender)
-.row
-  Age:
-  = h resource.age
-.row
   Location:
   = h resource.location
 .row
   Occupation:
   = h resource.occupation
 .row
-  Name:
-  = h resource.name
+  Gender:
+  = Gender.label(resource.gender)
+.row
+  Age:
+  = h resource.age
 .row
   = link_to 'Edit', edit_person_path(resource)
