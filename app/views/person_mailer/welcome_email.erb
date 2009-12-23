@@ -3,7 +3,7 @@ Thanks for taking the *Mindapples Test* at mindapples.org.
 Here are the activities you chose to take care of your mind:
 
 <%- @mindapples.each do |mindapple| -%>
-- <%= mindapple.suggestion %>
+ * <%= mindapple.suggestion %>
 <%- end -%>
 
 Your suggestions have been added anonymously to the Mindapples suggestions box, and we'll use your suggestions to help other people find 5 things that work for them. Your suggestions will also become part of the Mindapples research project to the find a 5-a-day for mental health. So thank you.
@@ -11,7 +11,7 @@ Your suggestions have been added anonymously to the Mindapples suggestions box, 
 We also want to help you do your 5-a-day, so we've made you a personal page at:
 <%= @personal_page_url %>
 
-You can edit it any time, and share it with your friends, but we won't make it public unless you want us to.
+You can edit it any time, and share this link with your friends too.
 
 Thanks for being part of the Mindapples project. We'll be in touch from time to time with updates to the site and the campaign. In the meantime, follow our progress at http://blog.mindapples.org, get involved at http://mindapples.org/get-involved, and drop us a line any time at hello@mindapples.org
 
@@ -19,5 +19,3 @@ Best wishes,
 
 Andy Gibson
 Head Gardener, http://mindapples.org
-
-(Find me in app/views/person_mailer/welcome_email.erb)
