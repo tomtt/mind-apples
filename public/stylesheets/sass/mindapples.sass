@@ -2,5 +2,165 @@
   :color #ccc
   :font-size 0.7em
 
+body, html, ul, ol, form
+  margin: 0
+  padding: 0
+  
 body
-  :background-color #ddffcc
+  font:
+    family: "Trebuchet MS", Arial, Helvetica, sans-serif
+    size: 14px
+    color: #444
+  line-height: 150%
+
+
+// links: global
+
+a, a:active, a:visited
+  color: #999
+  text-decoration: none
+
+a:hover
+  border-bottom: 1px solid #ccc
+
+
+// headings: global
+
+h1
+  color: #52b
+  margin: 0 0 30px 0
+
+
+// page wrapper
+
+.page-wrapper
+  width: 900px
+  padding: 0
+  margin: 0 auto
+
+
+//Header
+
+#header
+  width: 840px
+  padding: 10px 40px
+  overflow: hidden
+  margin: 0 auto 30px auto
+  
+  .logo
+    float: left
+  
+  .menu
+    float: right
+    margin-top: 32px
+    
+    ul
+      list-style: none
+      
+      li
+        display: inline
+        margin: 0 10px
+        
+
+//Footer
+.footer
+  clear: both
+
+
+//Main
+
+#main
+  width: 840px
+  padding: 10px 30px
+  margin: 0 auto 30px auto
+
+
+//form
+
+form, input, textarea, select
+  font:
+    family: "Trebuchet MS", Arial, Helvetica, sans-serif
+    size: 12px
+   
+   
+input, textarea, select
+  color: #444
+  padding: 3px
+  border: 2px solid #ccc
+  
+submit
+  clear: both
+
+.col-odd
+  clear: both
+  width: 320px
+  float: left
+  margin-bottom: 20px
+  
+  input
+    width: 100%
+
+.col-even 
+  width: 320px
+  float: left
+  margin-bottom: 20px
+  padding-left: 55px
+  
+  input
+    width: 100%
+    
+    
+label
+  color: #1f500a
+  font:
+    size: 14px
+    weight: bold
+  display: block
+  margin-bottom: 5px
+  
+  .description
+    color: #368316
+    font:
+      weight: normal
+
+.radio-input
+  input
+    width: auto
+  label.label-radio
+    display: inline
+    color: #444
+    font-size: 13px
+
+
+//Global classes
+
+.float-left
+  float: left
+  
+.float-right
+  float: right
+  
+.clear
+  clear: both
+  
+
+//Page specifics
+
+//----Survey Page
+form.survey
+  width: 695px
+  margin: 0 auto
+  paddingL 0 25px
+  
+  .five-a-day
+    background: url('/images/sliced-apple.jpg') no-repeat 110px bottom
+    min-height: 270px
+    overflow: hidden
+    margin-bottom: 20px
+	
+.brain-dump
+  textarea
+    min-width: 700px
+    min-height: 150px
+    margin-bottom: 20px
+ 

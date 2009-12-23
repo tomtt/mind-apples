@@ -1,39 +1,40 @@
-.row
-  = form.label :braindump, "Brain dump. Anything else you'd like to tell us? What else do you need to stay mentally healthy?"
+.clear.brain-dump
+  = form.label :braindump, "Brain dump. <span class='description'>Anything else you'd like to tell us? What else do you need to stay mentally healthy?</span>"
   = form.text_area :braindump
-.row
-  = form.label :health_check, "Health check. How would you rate your mental health? (1 is bad, 5 good)"
+.col-odd.radio-input
+  = form.label :health_check, "Health check. <span class='description'>How would you rate your mental health? (1 is bad, 5 good)</span>"
   = form.text_field :health_check
-.row
-  = form.label :gender, "Venus and Mars. What's your gender?"
-  = form.label "gender_f", "Female"
+.col-even.radio-input
+  = form.label :gender, "Venus and Mars. <span class='description'>What's your gender?</span>"
+  = form.label "gender_f", "Female", :class => 'label-radio'
   = form.radio_button(:gender, "f")
-  = form.label "gender_m", "Male"
+  = form.label "gender_m", "Male", :class => 'label-radio'
   = form.radio_button(:gender, "m")
-  = form.label "gender_c", "It's complicated"
+  = form.label "gender_c", "It's complicated", :class => 'label-radio'
   = form.radio_button(:gender, "c")
-.row
-  = form.label :age, "Age check. How old are you?"
+.col-odd
+  = form.label :age, "Age check. <span class='description'>How old are you?"
   = form.select :age, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
-.row
-  = form.label :location, "Passport control. Where are you from?"
+.col-even
+  = form.label :location, "Passport control. <span class='description'>Where are you from?</span>"
   = form.text_field :location
-.row
-  = form.label :occupation, "Your thing. What's your main occupation, paid or otherwise?"
+.col-odd
+  = form.label :occupation, "Your thing. <span class='description'>What's your main occupation, paid or otherwise?</span>"
   = form.text_field :occupation
-.row
-  = form.label :name, "Be proud. What's your name? (very optional)"
+.col-even
+  = form.label :name, "Be proud. <span class='description'>What's your name? (very optional)</span>"
   = form.text_field :name
-.row
-  = form.label :email, "Don't go! Leave your e-mail and we'll send you nice messages. (Never made public.)"
+.col-odd
+  = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you nice messages. (Never made public.)</span>"
   = form.text_field :email
 - unless form.object.login_set_by_user?
-  .row
-    = form.label :login, "Pick a nickname. Careful... you can only choose once."
+  .col-even
+    = form.label :login, "Pick a nickname. <span class='description'>Careful... you can only choose once.</span>"
     = form.text_field :login
-.row
-  = form.label :password, "Think you may want to edit this stuff later on? Enter a password!"
+.col-odd
+  = form.label :password, "Think you may want to edit this stuff later on? <span class='description'>Enter a password!</span>"
   = form.password_field :password
-.row
+.col-even
   = form.label :password_confirmation, "And again to make sure there were no typos..."
   = form.password_field :password_confirmation
+%hr.clear
