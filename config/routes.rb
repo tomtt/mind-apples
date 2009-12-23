@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.team '/about/team', :controller => "pages", :action => "about_team"
   map.how_we_got_here '/about/how-we-got-here', :controller => "pages", :action => "how_we_got_here"
   map.fives '/fives', :controller => "pages", :action => "fives"
+  map.pledge '/pledge', :controller => "pages", :action => "pledge"
   map.help_us_grow '/help-us-grow', :controller => "pages", :action => "help_us_grow"
   map.links '/links', :controller => "pages", :action => "links"
   map.media '/media', :controller => "pages", :action => "media"
