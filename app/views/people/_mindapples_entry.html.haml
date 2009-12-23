@@ -1,4 +1,5 @@
-%ol
-  = form.label "Important bit. What five things do you do every day, or regularly, to look after your mind?"
-  - form.fields_for :mindapples do |mindapple_form|
-    = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })
+.five-a-day
+  = form.label "<span class='line-1'>Important bit.</span><br/><span class='line-2'>What five things do you</span><br/><span class='line-3'>do every day, or regularly,</span><br/><span class='line-4'>to look after your mind?"
+  %ol.float-right
+    - form.fields_for :mindapples do |mindapple_form|
+      = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })

@@ -24,9 +24,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       </div>
       <%= render :partial => '/shared/footer' %>
       <div class="account"><%= logged_in_info %></div>
+      <%= dev_info %>
+      <%= git_info %>
     </div>
-    <%= dev_info %>
-    <%= git_info %>
+   
   </body>
 </html>
 
