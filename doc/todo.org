@@ -2,8 +2,8 @@
 ** Protect page_code from being set from rogue form
 ** Ensure uniqueness of page_code and login
 ** Fix capitalisation issue on "Important bit. what five..." on fives form label.
+** Change 1-5 "rate your mental health" to radio buttons, to match Surveymonkey version
 ** COPY
-*** Text of mindapples email app/views/person_mailer/mindapples.erb
 *** Links page content app/view/pages/links.html.haml
 *** Read the fives page content app/view/pages/fives.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
