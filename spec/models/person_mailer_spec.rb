@@ -34,5 +34,11 @@ describe PersonMailer do
       mail.body.should include("eat apples")
       mail.body.should include("drink chocolate milk")
     end
+
+    it "should contain a link to the person's personal page" do
+      mail = PersonMailer.deliver_welcome_email(@person)
+      # ActionController::UrlWriter.person_path seems to not be accessible
+      mail.body.should include("/person/#{@person.login}")
+    end
   end
 end
