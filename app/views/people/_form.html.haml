@@ -1,4 +1,5 @@
 - form_for resource, :html => { :class => "survey"} do |person_form|
   = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
   = render(:partial => 'entry', :locals => { :form => person_form })
-  = submit_tag 'Submit'
+  = submit_tag 'Submit', :class => "submit-form"
+%br.clear

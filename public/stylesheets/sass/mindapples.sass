@@ -49,6 +49,9 @@ h1
   
   .logo
     float: left
+    
+    a:hover
+      border: none
   
   .menu
     float: right
@@ -73,7 +76,9 @@ h1
   width: 840px
   padding: 10px 30px
   margin: 0 auto 30px auto
-
+  
+.page-heading
+  padding-left: 65px
 
 //form
 
@@ -87,9 +92,6 @@ input, textarea, select
   color: #444
   padding: 3px
   border: 2px solid #ccc
-  
-submit
-  clear: both
 
 .col-odd
   clear: both
@@ -104,11 +106,10 @@ submit
   width: 320px
   float: left
   margin-bottom: 30px
-  padding-left: 55px
+  padding-left: 45px
   
   input
     width: 100%
-    
     
 label
   color: #1f500a
@@ -122,6 +123,18 @@ label
     color: #368316
     font:
       weight: normal
+      
+input.submit-form
+  text-indent: -9999px
+  background: url('/images/submit.jpg') no-repeat center
+  border: none
+  width: 90px
+  height: 61px
+  float: right
+  margin-top: -30px
+  display: block
+  padding: 0
+  margin-bottom: 20px
 
 .radio-input
   input
@@ -150,7 +163,14 @@ label
 form.survey
   width: 695px
   margin: 0 auto
-  paddingL 0 25px
+  padding: 0 25px
+  
+  hr
+    border: 0
+    width: 700px
+    background: url('/images/divider-form.gif') no-repeat center top
+    height: 7px
+    margin-bottom: 30px
   
   .five-a-day
     background: url('/images/sliced-apple.jpg') no-repeat 110px bottom
@@ -201,11 +221,11 @@ form.survey
       li.input-5
         input
           width: 385px
-    
-	
+
+
 .brain-dump
   textarea
-    width: 700px
+    width: 685px
     min-height: 150px
     height: 150px
     margin-bottom: 30px
