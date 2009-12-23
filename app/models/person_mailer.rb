@@ -6,7 +6,7 @@ class PersonMailer < ActionMailer::Base
     from       ''
     body       :greeting => 'Hi,',
                :mindapples => person.mindapples,
-               :personal_page_url => person_url(person)
+               :personal_page_url => person_url(person, :host => Mindapples::Config['host'])
   end
 
   def set_password(person)

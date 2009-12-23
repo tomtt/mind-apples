@@ -35,10 +35,10 @@ describe PersonMailer do
       mail.body.should include("drink chocolate milk")
     end
 
-    it "should contain a link to the person's personal page" do
+    it "should contain a link to the person's personal page, including the host" do
       mail = PersonMailer.deliver_welcome_email(@person)
-      # ActionController::UrlWriter.person_path seems to not be accessible
-      mail.body.should include("/person/#{@person.login}")
+      # ActionController::UrlWriter.person_url seems to not be accessible
+      mail.body.should include("http://#{Mindapples::Config['host']}/person/#{@person.login}")
     end
   end
 end
