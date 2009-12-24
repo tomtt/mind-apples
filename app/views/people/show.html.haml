@@ -1,27 +1,27 @@
 .row
-  This is the Mindapples page for:
+  Welcome to the Mindapples page for 
   = h resource.name
 .row
-  Here's your five-a-day:
+  They're doing the following activities to look after their mind:
   %ol
     = render(resource.mindapples)
 .row
-  Braindump:
+  Here's what else they had to say:
   = h resource.braindump
 .row
-  Health check:
+  They rate their mental health as
   = h resource.health_check
 .row
-  Location:
+  They're from 
   = h resource.location
 .row
-  Occupation:
+  And their occupation is
   = h resource.occupation
 .row
-  Gender:
+  They are...
   = Gender.label(resource.gender)
 .row
-  Age:
+  And they are roughly
   = h resource.age
 .row
   = link_to 'Edit', edit_person_path(resource)

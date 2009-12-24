@@ -1,21 +1,17 @@
 %h1
-  Mindapples. 5-a-day for your mind
+  5-a-day for the mind
 
 %p
-  Mindapples is a little project to find the mental health equivalent of five-a-day. 
-  %br
   If eating five fruit and veg a day is good for our bodies, what's the equivalent for our minds?
 
 %h3
-  Take the Mindapples Test and share your five, and then
-  = link_to('read the fives', fives_path)
+  Take the Mindapples Test and tell us your five...
   
 = render(:partial => 'mindapples_form')
 
-%h5
-  %i
-    *cough* By completing this survey, you're giving us the right to publish your answers anonymously, online and offline. Hope that's ok...
-
+%h3
+  Need some inspiration? 
+  = link_to('Read the fives', fives_path)  
 %p
   This site was built by the 
   = link_to('Mindapples volunteers', team_path), "."
@@ -24,5 +20,5 @@
   read our <a href='http://blog.mindapples.org'>blog</a>, or <a href='mailto:hello@mindapples.org'>say hello</a>.
   
 %p
-  Mindapples is a website, some pages on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and a growing community of people around the world doing projects to promote everyday mental health. If you like us, please  
+  Right now, Mindapples is a website, some pages on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and a growing community of people around the world supporting each other to take care of their minds. If you like us, please  
   = link_to('help us grow', help_us_grow_path), "."
