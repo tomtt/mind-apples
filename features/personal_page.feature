@@ -1,4 +1,3 @@
-@development
 @pivotal_1292369
 
 Feature: Personal page

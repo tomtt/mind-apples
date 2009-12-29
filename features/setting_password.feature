@@ -1,4 +1,4 @@
-@development
+@wip
 
 Feature: Setting a password
   In order to be able to edit my page
