@@ -1,6 +1,6 @@
 #header
   .logo
-    %a{:href => "#"}
+    %a{:href => "/"}
       %img{:src => "/images/mindapples.jpg", :alt => "Mindapples - What's your five a day?", :border =>"0"}
   .menu
     %ul
@@ -14,5 +14,6 @@
         = link_to('About us', about_path)
       %li
         = link_to('Blog', 'http://blog.mindapples.org')
-      %li 
-        = link_to('Links', links_path)
+      %li
+        .account
+          = logged_in_info
