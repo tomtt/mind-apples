@@ -15,5 +15,5 @@ Then
 
 Remember to update the Cucumber scripts in /features !!
 
-To deploy onto testing server:
+To deploy onto testing/staging server:
   cap deploy staging

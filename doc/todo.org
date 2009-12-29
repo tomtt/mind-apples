@@ -3,9 +3,12 @@
 ** Ensure uniqueness of page_code and login
 ** Fix capitalisation issue on "Important bit. what five..." on fives form label.
 ** Change 1-5 "rate your mental health" to radio buttons, to match Surveymonkey version
+** Graceful handling of forms for logged in users
+** Person/new becomes 'Take the Test' page, not homepage
 ** COPY
 *** Links page content app/view/pages/links.html.haml
 *** Read the fives page content app/view/pages/fives.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
+*** Copy to explain the pledge and introduce the project on /home
 *** DESIGN
 **** Define p.float_right class (used in app/view/pages/how_we_got_here.html.haml
