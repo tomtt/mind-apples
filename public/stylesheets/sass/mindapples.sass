@@ -26,11 +26,15 @@ a:hover
 
 // headings: global
 
-h1
+h1,h2 
   color: #52b
-  margin: 0 0 30px 0
-  font-size: 32px
 
+h3
+  color: #1f500a
+
+h1
+  margin-top: 0
+  font-size: 26px
 
 // page wrapper
 
@@ -42,8 +46,8 @@ h1
 //Header
 
 #header
-  width: 840px
-  padding: 10px 40px
+  width: 940px
+  padding: 10px 0
   overflow: hidden
   margin: 0 auto 30px auto
   
@@ -56,18 +60,30 @@ h1
   .menu
     float: right
     margin-top: 15px
+    text-align: right
     
     ul
       list-style: none
-      text-align: right
-      
+      margin-right: 10px
+
       li
         display: inline
         margin: 0 10px
-        
-        .account
-          margin-right: 20px
-          font-size: 12px
+ 
+    .account
+      margin-right: 20px
+      font-size: 12px
+      margin-top: 5px
+
+#header.with-shelf-curved
+  background: url('/images/shelf-curved.gif') no-repeat bottom center
+  width: 830px
+  padding:
+    top: 35px
+    bottom: 85px
+    left: 70px
+    right: 40px
+    
         
 
 //Footer
@@ -83,15 +99,17 @@ h1
   margin: 0 auto 30px auto
   
 .page-heading
-  padding-left: 65px
+  padding-left: 75px
+  margin-bottom: 10px
   
-.with-shelf
-  background: url('/images/shelf.gif') no-repeat top center
-  padding-bottom: 120px
-  padding-top: 20px
+  h1
+    display: inline
+    background: url('/images/arrow-below.gif') no-repeat right bottom
+    padding:
+      top: 0
+      bottom: 13px
+      right: 32px  
 
-.below-shelf
-  margin-top: -70px
 
 //form
 
@@ -105,6 +123,9 @@ input, textarea, select
   color: #444
   padding: 3px
   border: 2px solid #ccc
+
+textarea
+  resize: vertical
 
 .col-odd
   clear: both
@@ -139,7 +160,7 @@ label
       
 input.submit-form
   text-indent: -9999px
-  background: url('/images/submit.jpg') no-repeat center
+  background: url('/images/submit.gif') no-repeat center
   border: none
   width: 90px
   height: 61px
@@ -148,10 +169,12 @@ input.submit-form
   display: block
   padding: 0
   margin-bottom: 20px
+  cursor: pointer
 
 .radio-input
   input
     width: auto
+    border: none
   label.label-radio
     display: inline
     color: #444
@@ -169,6 +192,25 @@ input.submit-form
 .clear
   clear: both
   
+//Shelves - general classes
+
+.with-shelf-curved
+  background: url('/images/shelf-curved.gif') no-repeat bottom center
+  width: 830px
+  padding:
+    top: 35px
+    bottom: 85px
+    left: 70px
+    right: 40px
+    
+.with-shelf-short
+  background: url('/images/shelf-short.gif') no-repeat bottom center
+  padding:
+    top: 35px
+    bottom: 105px
+    
+.below-shelf
+  margin-top: -60pxclas
 
 //Page specifics
 
@@ -186,16 +228,19 @@ form.survey
     margin-bottom: 30px
   
   .five-a-day
-    background: url('/images/sliced-apple.gif') no-repeat 110px bottom
+    background: url('/images/sliced-apple.gif') no-repeat left bottom
+    width: 600px
     min-height: 270px
     overflow: hidden
-    margin-bottom: 30px
+    margin: 0 auto 30px auto
+    
     
     label
       font:
         size: 16px
         weight: bold
-      margin-left: 370px
+      margin-top: 10px
+      margin-left: 260px
       display: block
       
       .line-1
@@ -207,6 +252,7 @@ form.survey
     
     ol
       list-style: none
+      margin-left: 230px
     
       li
         margin: 10px 0
@@ -214,26 +260,6 @@ form.survey
       
         input
           min-width: 360px
-    
-      li.input-1
-        input
-          width: 370px
-    
-      li.input-2
-        input
-          width: 350px
-    
-      li.input-3
-        input
-          width: 335px
-    
-      li.input-4
-        input
-          width: 360px
-    
-      li.input-5
-        input
-          width: 385px
 
 
 .brain-dump
