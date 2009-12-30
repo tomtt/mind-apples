@@ -34,3 +34,9 @@ end
 Then /^the response status should be (\d+)$/ do |code|
   response.code.should == code
 end
+
+Then /^"([^\"]*)" should be selected from the "([^\"]*)" options$/ do |value, field_name|
+  checked_inputs = xpath_search("//input[@name='#{field_name}'][@checked='checked']")
+  checked_inputs.size.should == 1
+  checked_inputs.first['value'].should == value
+end
