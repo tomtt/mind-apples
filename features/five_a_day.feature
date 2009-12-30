@@ -16,9 +16,10 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Submit"
-    Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
+    Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
+    And I should see "Wrestling with bears"
 
-  Scenario: Social Butterfly fills in the survey
+  Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
@@ -34,8 +35,8 @@ Feature: Asking for five a day
     And I fill in "Be proud" with "Andy Gibson"
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
     And I press "Submit"
-    # Then I should see "Thank you"
-    And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
+    And I follow "Edit"
+    Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
     And I should see a "person[mindapples_attributes][1][suggestion]" text field containing "Being in nature"
     And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
     And I should see a "person[mindapples_attributes][4][suggestion]" text field containing "Tidying and filing"

@@ -76,9 +76,9 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy'})
       end
 
-      it "should redirect to the edit page" do
+      it "should redirect to the show page" do
         put(:update, "person" => {"login" => 'gandy'})
-        response.should redirect_to(edit_person_path(@mock_person))
+        response.should redirect_to(person_path(@mock_person))
       end
 
       it "should flash a thank you message" do
@@ -235,10 +235,10 @@ describe PeopleController do
         Person.stub!(:new_with_mindapples).and_return(@mock_person)
       end
 
-      it "should redirect to edit page" do
+      it "should redirect to show page" do
         UserSession.stub!(:create!)
         post(:create, "person" => {})
-        response.should redirect_to(edit_person_path(controller.resource))
+        response.should redirect_to(person_path(controller.resource))
       end
     end
   end

@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
     if @resource_saved
       format.html do
         flash[:notice] = "Thank you for updating your Mindapples page."
-        redirect_to edit_resource_path
+        redirect_to resource_path
       end
       format.js
       format.xml  { head :ok }
@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
     format.html do
       if @resource_saved
         login_as_new_user
-        redirect_to edit_person_path(resource)
+        redirect_to resource_path(resource)
       end
     end
   end
