@@ -20,8 +20,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <div class="page-wrapper">
       <%= render :partial => '/shared/header' %>
       <div id="main" class="with-shelf-curved below-shelf">
-        <%= show_flashes -%>
-        <%= yield :layout %>
+        <div class="content">
+          <%= show_flashes -%>
+          <%= yield :layout %>
+       </div>
       </div>
       <%= render :partial => '/shared/footer' %>
       <%= dev_info %>
