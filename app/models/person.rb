@@ -15,9 +15,14 @@ class Person < ActiveRecord::Base
 
   attr_protected :login, :page_code
 
-  def ensure_corrent_number_of_mindapples
+  def self.new_with_mindapples(attributes = {})
+    new(attributes).ensure_correct_number_of_mindapples
+  end
+
+  def ensure_correct_number_of_mindapples
     chop_superfluous_mindapples
     (5 - mindapples.size).times { mindapples.build }
+    self
   end
 
   def protected_login=(value)

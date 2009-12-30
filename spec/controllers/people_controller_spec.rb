@@ -2,12 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PeopleController do
   def build_mock_person
-    mock_model(Person,
-               :ensure_corrent_number_of_mindapples => nil,
-               :protected_login= => nil,
-               :page_code= => nil,
-               :save => true,
-               :update_attributes => true)
+    mock_person = mock_model(Person,
+                             :ensure_correct_number_of_mindapples => nil,
+                             :protected_login= => nil,
+                             :page_code= => nil,
+                             :save => true,
+                             :update_attributes => true)
+    mock_person
   end
 
   shared_examples_for "all actions finding a person" do
@@ -121,28 +122,22 @@ describe PeopleController do
       @mock_person = build_mock_person
     end
 
-    it "should create a new person" do
-      Person.should_receive(:new).and_return(@mock_person)
+    it "should create a new person with mindapples" do
+      Person.should_receive(:new_with_mindapples)
       get :new
     end
 
     it "should have the new person as the resource" do
-      Person.stub!(:new).and_return @mock_person
+      Person.stub!(:new_with_mindapples).and_return @mock_person
       get :new
       controller.resource.should == @mock_person
-    end
-
-    it "should assign mind apples to the person" do
-      Person.stub!(:new).and_return @mock_person
-      @mock_person.should_receive(:ensure_corrent_number_of_mindapples)
-      get :new
     end
   end
 
   describe "create" do
     it "should log the new person in" do
       @mock_person = build_mock_person
-      Person.stub!(:new).and_return @mock_person
+      Person.stub!(:new_with_mindapples).and_return @mock_person
       UserSession.should_receive(:create!)
       post(:create, "person" => {})
     end
@@ -154,7 +149,7 @@ describe PeopleController do
 
     it "should assign the code as the page code" do
       @mock_person = build_mock_person
-      Person.stub!(:new).and_return @mock_person
+      Person.stub!(:new_with_mindapples).and_return @mock_person
       UserSession.stub!(:create!)
       PageCode.stub!(:code).and_return 'abzABz09'
       @mock_person.should_receive(:page_code=).with('abzABz09')
@@ -163,7 +158,7 @@ describe PeopleController do
 
     it "should set the login in a protected way on the created resource" do
       @mock_person = build_mock_person
-      Person.stub!(:new).and_return @mock_person
+      Person.stub!(:new_with_mindapples).and_return @mock_person
       Person.stub!(:find).and_return @mock_person
       @mock_person.stub!(:valid_password?).and_return true
       @mock_person.stub!(:changed?).and_return false
@@ -188,7 +183,7 @@ describe PeopleController do
     end
 
     it "should use a 20 character long code for the password and confirmation" do
-      PageCode.stub!(:code)
+      PageCode.stub!(:code).and_return 'abcdef'
       PageCode.should_receive(:code).with(20).and_return '20charlongpass'
       post(:create, "person" => {})
       controller.resource.password.should == '20charlongpass'
@@ -215,7 +210,7 @@ describe PeopleController do
       before do
         @mock_person = build_mock_person
         @mock_person.stub!(:save).and_return true
-        Person.stub!(:new).and_return(@mock_person)
+        Person.stub!(:new_with_mindapples).and_return(@mock_person)
       end
 
       it "should redirect to edit page" do

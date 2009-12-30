@@ -9,6 +9,15 @@ Feature: Asking for five a day
   As the evil overlord
   I want respondents to enter suggestions
 
+  Scenario: Filling in your five a day from the form on the front page
+    When I go to the homepage
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
+    And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
+    And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
+    And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
+    And I press "Submit"
+    Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
+
   Scenario: Social Butterfly fills in the survey
     Given I have access to the inbox of "andy@example.com"
     When I go to the "take the test" page
@@ -17,7 +26,7 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I fill in "Brain dump" with "Amazing stuff"
-    And I fill in "Health check" with "2"
+    And I choose "person_health_check_2"
     And I choose "Male"
     And I select "35-44" from "person[age]"
     And I fill in "Passport control" with "UK"
@@ -31,7 +40,7 @@ Feature: Asking for five a day
     And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
     And I should see a "person[mindapples_attributes][4][suggestion]" text field containing "Tidying and filing"
     And I should see a "person[braindump]" text area containing "Amazing stuff"
-    And I should see a "person[health_check]" text field containing "2"
+    And "2" should be selected from the "person[health_check]" options
     And the "Male" checkbox should be checked
     And I should see an "Age" select field with "35-44" selected
     And I should see a "person[location]" text field containing "UK"

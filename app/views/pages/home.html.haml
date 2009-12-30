@@ -2,21 +2,24 @@
   5-a-day for your mind
 
 %h4
-  We spend more time looking after our <img src="/images/teeth.jpg" /> than we do our minds. We should take better care of ourselves. <img src="/images/mindy-smiling.gif" />
+  We spend more time looking after our 
+  = image_tag "/images/teeth.jpg"
+  than we do our minds. We should take better care of ourselves. 
+  = image_tag "/images/mindy-smiling.gif"
   %br
-  But if eating <img src="/images/5aday.jpg" />fruit and vegetables is good for our bodies, then what's the equivalent for our <img src="/images/mind.gif" />?
+  But if eating
+  = image_tag "/images/5aday.jpg"
+  fruit and vegetables is good for our bodies, then what's the equivalent for our
+  = image_tag("/images/mind.gif"), "?"
 
 %h3
   Everyone's different. So 
   = link_to('take the Mindapples test', new_person_path)
   and pick your 5-a-day.
   
-%p
-  <img src="/images/sliced-apple.gif" border="0" />
-  %i
-    (Form goes here, once Tom can fix the tech.)
-
+= render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
 %hr
+
 %h3
   Looking for inspiration? See what other people picked for their mindapples.  
   = link_to('Read the fives', fives_path)  
