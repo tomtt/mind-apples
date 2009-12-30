@@ -56,9 +56,7 @@ class PeopleController < ApplicationController
   end
 
   def new_resource(attributes = (params[resource_name] || {}))
-    resource = resource_service.new attributes
-    resource.ensure_corrent_number_of_mindapples
-    resource
+    resource = Person.new_with_mindapples(attributes)
   end
 
   def set_fields_to_create_valid_person

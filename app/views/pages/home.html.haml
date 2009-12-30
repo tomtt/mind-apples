@@ -11,12 +11,9 @@
   = link_to('take the Mindapples test', new_person_path)
   and pick your 5-a-day.
   
-%p
-  <img src="/images/sliced-apple.gif" border="0" />
-  %i
-    (Form goes here, once Tom can fix the tech.)
-
+= render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
 %hr
+
 %h3
   Looking for inspiration? See what other people picked for their mindapples.  
   = link_to('Read the fives', fives_path)  

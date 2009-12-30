@@ -9,6 +9,15 @@ Feature: Asking for five a day
   As the evil overlord
   I want respondents to enter suggestions
 
+  Scenario: Filling in your five a day from the form on the front page
+    When I go to the homepage
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
+    And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
+    And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
+    And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
+    And I press "Submit"
+    Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
+
   Scenario: Social Butterfly fills in the survey
     Given I have access to the inbox of "andy@example.com"
     When I go to the "take the test" page
