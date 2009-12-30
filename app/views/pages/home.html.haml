@@ -17,12 +17,14 @@
   today and pick your 5-a-day.
   
 = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
-%hr
+.hr.clear  
+  %hr
 
 %h3
   Looking for inspiration? 
   = link_to('Read the fives', fives_path)  
-%hr
+.hr.clear  
+  %hr
 %p
   This site was built by the 
   = link_to('Mindapples volunteers', team_path), "."

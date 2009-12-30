@@ -3,12 +3,13 @@
   = form.text_area :braindump
 .col-odd.radio-input
   = form.label :gender, "Venus and Mars. <span class='description'>What's your gender?</span>"
-  = form.label "gender_f", "Female", :class => 'label-radio'
   = form.radio_button(:gender, "f")
-  = form.label "gender_m", "Male", :class => 'label-radio'
+  = form.label "gender_f", "Female", :class => 'label-radio'
   = form.radio_button(:gender, "m")
-  = form.label "gender_c", "It's complicated", :class => 'label-radio'
+  = form.label "gender_m", "Male", :class => 'label-radio'
   = form.radio_button(:gender, "c")
+  = form.label "gender_c", "It's complicated", :class => 'label-radio'
+  
 .col-even
   = form.label :age, "Age check. <span class='description'>How old are you?</span>"
   = form.select :age, [["(This helps us compare different generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
@@ -30,7 +31,8 @@
 .col-even
   = form.label :name, "Be proud. <span class='description'>What's your name? (very optional)</span>"
   = form.text_field :name
-<hr class="clear" noshade size="0" />
+.hr.clear  
+  %hr
 .col-odd
   = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you occasional messages. (never made public)</span>"
   = form.text_field :email
@@ -44,4 +46,5 @@
 .col-even
   = form.label :password_confirmation, "<span class='description'>Password once more please, in case of typos...</span>"
   = form.password_field :password_confirmation
-<hr class="clear" noshade  size="0"/>
+.hr.clear  
+  %hr
