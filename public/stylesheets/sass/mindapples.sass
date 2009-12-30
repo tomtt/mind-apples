@@ -24,7 +24,7 @@ a:hover
   border-bottom: 1px solid #ccc
 
 
-// headings: global
+// elements: global
 
 h1,h2 
   color: #52b
@@ -35,6 +35,56 @@ h3
 h1
   margin-top: 0
   font-size: 26px
+  
+hr
+  border: 0
+  width: 700px
+  background: url('/images/divider-form.gif') no-repeat center top
+  height: 7px
+  margin-bottom: 30px
+
+
+//Global classes
+
+.float-left
+  float: left
+  
+.float-right
+  float: right
+  
+.clear
+  clear: both
+
+.description
+  color:#368316
+
+.description-light
+  color: #8fbe11
+
+.highlight
+  color: #ff4200
+
+
+//Shelves - general classes
+
+.with-shelf-curved
+  background: url('/images/shelf-curved.gif') no-repeat bottom center
+  width: 830px
+  padding:
+    top: 35px
+    bottom: 85px
+    left: 70px
+    right: 40px
+    
+.with-shelf-short
+  background: url('/images/shelf-short.gif') no-repeat bottom center
+  padding:
+    top: 35px
+    bottom: 105px
+    
+.below-shelf
+  margin-top: -60px
+
 
 // page wrapper
 
@@ -97,9 +147,12 @@ h1
   width: 940px
   padding: 10px 0
   margin: 0 auto 30px auto
-  
+  .content
+    width: 695px
+    padding: 0 25px
+    margin: 0 auto
+     
 .page-heading
-  padding-left: 75px
   margin-bottom: 10px
   
   h1
@@ -108,7 +161,10 @@ h1
     padding:
       top: 0
       bottom: 13px
-      right: 32px  
+      right: 32px 
+
+#main.with-shelf-curved
+  padding: 10px 40px 95px 70px
 
 
 //form
@@ -154,21 +210,18 @@ label
   margin-bottom: 5px
   
   .description
-    color: #368316
-    font:
-      weight: normal
+    font-weight: normal
       
 input.submit-form
   text-indent: -9999px
   background: url('/images/submit.gif') no-repeat center
   border: none
   width: 90px
-  height: 61px
+  height: 50px
   float: right
-  margin-top: -30px
+  margin-top: -20px
   display: block
   padding: 0
-  margin-bottom: 20px
   cursor: pointer
 
 .radio-input
@@ -181,36 +234,6 @@ input.submit-form
     font-size: 13px
 
 
-//Global classes
-
-.float-left
-  float: left
-  
-.float-right
-  float: right
-  
-.clear
-  clear: both
-  
-//Shelves - general classes
-
-.with-shelf-curved
-  background: url('/images/shelf-curved.gif') no-repeat bottom center
-  width: 830px
-  padding:
-    top: 35px
-    bottom: 85px
-    left: 70px
-    right: 40px
-    
-.with-shelf-short
-  background: url('/images/shelf-short.gif') no-repeat bottom center
-  padding:
-    top: 35px
-    bottom: 105px
-    
-.below-shelf
-  margin-top: -60px
 
 //Page specifics
 
@@ -218,14 +241,6 @@ input.submit-form
 form.survey
   width: 695px
   margin: 0 auto
-  padding: 0 25px
-  
-  hr
-    border: 0
-    width: 700px
-    background: url('/images/divider-form.gif') no-repeat center top
-    height: 7px
-    margin-bottom: 30px
   
   .five-a-day
     background: url('/images/sliced-apple.gif') no-repeat left bottom
@@ -242,13 +257,6 @@ form.survey
       margin-top: 10px
       margin-left: 260px
       display: block
-      
-      .line-1
-        color: #1f500a
-      .line-2, .line-3
-        color: #368316
-      .line-4
-        color: #8fbe11
     
     ol
       list-style: none
