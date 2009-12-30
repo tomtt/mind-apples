@@ -18,7 +18,7 @@ module ApplicationHelper
 
   def logged_in_info
     if current_user
-      link_to('Your mindapples', person_path(current_user)) +
+      link_to('Your mindapples page', person_path(current_user)) +
         " | Welcome back '%s' | " % current_user.to_s +
         link_to('Log out', logout_path)
     else
