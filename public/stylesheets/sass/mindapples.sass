@@ -83,6 +83,8 @@ hr
     bottom: 105px
     
 .below-shelf
+  position: relative
+  z-index: 1000
   margin-top: -60px
 
 
@@ -99,7 +101,7 @@ hr
   width: 940px
   padding: 10px 0
   overflow: hidden
-  margin: 0 auto 30px auto
+  margin: 0 auto
   
   .logo
     float: left
@@ -129,7 +131,7 @@ hr
   background: url('/images/shelf-curved.gif') no-repeat bottom center
   width: 830px
   padding:
-    top: 35px
+    top: 30px
     bottom: 85px
     left: 70px
     right: 40px
@@ -164,7 +166,7 @@ hr
       right: 32px 
 
 #main.with-shelf-curved
-  padding: 10px 40px 95px 70px
+  padding: 0 40px 95px 70px
 
 
 //form
@@ -219,7 +221,9 @@ input.submit-form
   width: 90px
   height: 50px
   float: right
+  font-size: 0
   display: block
+  line-height: 0
   padding: 0
   cursor: pointer
 
