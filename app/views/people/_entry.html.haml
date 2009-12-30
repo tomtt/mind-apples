@@ -20,13 +20,13 @@
   = form.text_field :location
 .col-odd.radio-input
   = form.label :health_check, "Health check. <span class='description'>How would you rate your mental health? (1 is bad, 5 good)</span>"
-  = form.label "health_check_1", "1", :class => 'label-radio'
+  = form.label "health_check_1", "1 (Hmmm)", :class => 'label-radio'
   = form.radio_button("health_check", "1")
   = form.radio_button("health_check", "2")
   = form.radio_button("health_check", "3")
   = form.radio_button("health_check", "4")
   = form.radio_button("health_check", "5")
-  = form.label "health_check_5", "5", :class => 'label-radio'
+  = form.label "health_check_5", "5 (Ommm)", :class => 'label-radio'
 .col-even
   = form.label :name, "Be proud. <span class='description'>What's your name? (very optional)</span>"
   = form.text_field :name

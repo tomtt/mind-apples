@@ -6,14 +6,12 @@
   = link_to 'Edit', edit_person_path(resource)
   
 %h3
-  They're doing the following activities regularly to keep their mind healthy:
+  Here are their suggestions for good things to do to keep your mind healthy:
   %ol
     = render(resource.mindapples)
 
 %h4
-  Here's what else 
-  = h resource.name
-  had to say when they took the test:
+  Here's what they also had to say when they took the test:
   = h resource.braindump
 
 %h4
@@ -22,4 +20,3 @@
   %br
   What are you doing to look after your mind?
   %br
-  = link_to('Take the Mindapples test now', new_person_path)
