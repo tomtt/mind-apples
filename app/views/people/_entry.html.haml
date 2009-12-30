@@ -30,7 +30,7 @@
 .col-even
   = form.label :name, "Be proud. <span class='description'>What's your name? (very optional)</span>"
   = form.text_field :name
-%hr.clear
+<hr class="clear" noshade />
 .col-odd
   = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you occasional messages. (never made public)</span>"
   = form.text_field :email
@@ -44,4 +44,4 @@
 .col-even
   = form.label :password_confirmation, "<span class='description'>Password once more please, in case of typos...</span>"
   = form.password_field :password_confirmation
-%hr.clear
+<hr class="clear" noshade />
