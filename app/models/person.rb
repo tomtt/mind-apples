@@ -3,6 +3,7 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :page_code
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
+  validate :login_can_not_be_changed_to_a_value_starting_with_autogen_string
 
   before_save :maybe_send_welcome_email
 
@@ -76,6 +77,13 @@ class Person < ActiveRecord::Base
     if !email.blank? && !has_received_welcome_mail
       PersonMailer.deliver_welcome_email(self)
       self.has_received_welcome_mail = true
+    end
+  end
+
+  def login_can_not_be_changed_to_a_value_starting_with_autogen_string
+    if login_changed? && !login_was.blank? && login.index(AUTOGEN_LOGIN_PREFIX) == 0
+      self.login = login_was
+      errors.add('login', "can not start with '#{AUTOGEN_LOGIN_PREFIX}'")
     end
   end
 end

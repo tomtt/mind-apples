@@ -64,6 +64,24 @@ describe Person do
       person.update_attributes(:login => 'dangermouse')
       person.login.should == 'gandy'
     end
+
+    it "should have an error when the login is changed to a value that starts with the autogen string" do
+      person = Factory.create(:person,
+                              :login => "#{Person::AUTOGEN_LOGIN_PREFIX}abcdefgh",
+                              :page_code => 'abcdefgh')
+      person.protected_login = "#{Person::AUTOGEN_LOGIN_PREFIX}anything"
+      person.save
+      person.should have(1).errors
+    end
+
+    it "should keep the original value if an attempt was made to change it to a value starting with the autogen string" do
+      person = Factory.create(:person,
+                              :login => "#{Person::AUTOGEN_LOGIN_PREFIX}abcdefgh",
+                              :page_code => 'abcdefgh')
+      person.protected_login = "#{Person::AUTOGEN_LOGIN_PREFIX}anything"
+      person.save
+      person.login.should == "#{Person::AUTOGEN_LOGIN_PREFIX}abcdefgh"
+    end
   end
 
   describe "setting page_code" do
