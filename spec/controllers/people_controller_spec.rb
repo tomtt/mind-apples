@@ -174,6 +174,12 @@ describe PeopleController do
       post(:create, "person" => {"login" => 'gandy'})
     end
 
+    it "should generate a login if the login field is blank" do
+      PageCode.stub!(:code).and_return('genlogin')
+      UserSession.should_receive(:create!).with hash_including(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
+      post(:create, "person" => {"login" => ''})
+    end
+
     it "should assign the code as the autogen login if no login was passed" do
       PageCode.stub!(:code)
       PageCode.stub!(:code).and_return 'abzABz09'
