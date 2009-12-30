@@ -66,9 +66,15 @@ class PeopleController < ApplicationController
     if !login || login.blank?
       params["person"]["login"] = '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
     end
-    password = PageCode.code(20)
-    params["person"]["password"] = password
-    params["person"]["password_confirmation"] = password
+
+    stuff_in_password_fields =
+      (params["person"]["password"] || "") +
+      (params["person"]["password_confirmation"] || "")
+    if stuff_in_password_fields.blank?
+      password = PageCode.code(20)
+      params["person"]["password"] = password
+      params["person"]["password_confirmation"] = password
+    end
   end
 
   def login_as_new_user

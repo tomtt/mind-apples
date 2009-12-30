@@ -190,6 +190,28 @@ describe PeopleController do
       controller.resource.password_confirmation.should == '20charlongpass'
     end
 
+    it "should not set a default password if the password field was filled in" do
+      post(:create, "person" => { :password => 'mypass' })
+      controller.resource.password.should == 'mypass'
+    end
+
+    it "should not set a default password if the password confirmation field was filled in" do
+      post(:create, "person" => { :password_confirmation => 'mypass' })
+      controller.resource.password_confirmation.should == 'mypass'
+    end
+
+    it "should set a default password if the password field was passed blank" do
+      PageCode.stub!(:code).and_return 'default_password'
+      post(:create, "person" => { :password => '' })
+      controller.resource.password.should == 'default_password'
+    end
+
+    it "should set a default password if the password confirmation field was passed blank" do
+      PageCode.stub!(:code).and_return 'default_password'
+      post(:create, "person" => { :password_confirmation => '' })
+      controller.resource.password_confirmation.should == 'default_password'
+    end
+
     it "should not allow a constructed form to create more than five mindapples" do
       post(:create, "person" =>
            {
