@@ -16,15 +16,12 @@ Feature: Footer menu
     And I go to the <page>
     And I follow "About us"
     And I go to the <page>
-    And I follow "Links"
-    And I go to the <page>
     Then I should see a link to "blog.mindapples.org"
 
     Examples:
-    | page                   |
-    | homepage               |
-    | "about" page           |
-    | "take the survey" page |
-    | "fives" page           |
-    | "help us grow" page    |
-    | "links" page           |
+    | page                 |
+    | homepage             |
+    | "about" page         |
+    | "take the test" page |
+    | "fives" page         |
+    | "help us grow" page  |
