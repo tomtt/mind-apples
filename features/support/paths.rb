@@ -13,7 +13,7 @@ module NavigationHelpers
       login_path
     when /^the logout page$/
       logout_path
-    when /^the "take the survey" page$/
+    when /^the "take the test" page$/
       new_person_path
     when /^the "about" page$/
       about_path

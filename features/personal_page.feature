@@ -23,14 +23,14 @@ Feature: Personal page
     And my password is "apples"
     And my braindump is "I love Mindapples"
     When I log in
-    And I follow "Your page"
+    And I follow "Your mindapples"
     Then I should see "I love Mindapples"
 
   Scenario: A new survey is filled in while somebody is already logged in
-    When I go to the homepage
+    When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I press "Submit"
-    And I follow "Your page"
+    And I follow "Your mindapples"
     Then I should see "Playing the piano"
 
   Scenario: Person edits his page

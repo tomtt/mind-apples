@@ -6,10 +6,10 @@ Feature: Setting login
   I want to pick my nickname for my page
 
   Scenario: Picking a nickname
-    When I go to the homepage
+    When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I press "Submit"
-    And I fill in "Pick a nickname" with "spotty"
+    And I fill in "Join us. Choose a username" with "spotty"
     And I press "Submit"
     Then I should not see a "person[login]" text field
     And I should be on "/person/spotty/edit"
