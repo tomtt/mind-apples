@@ -1,14 +1,15 @@
 * TODO
 ** Protect page_code from being set from rogue form
 ** Ensure uniqueness of page_code and login
-** Fix capitalisation issue on "Important bit. what five..." on fives form label.
 ** Change 1-5 "rate your mental health" to radio buttons, to match Surveymonkey version
 ** Graceful handling of forms for logged in users
-** Person/new becomes 'Take the Test' page, not homepage
+** Template missing on /password_resets (new.erb)
+** Graceful handling of missing fields in 'show' page
+** Different content for logged in and logged out users on show and home
+** 
 ** COPY
-*** Links page content app/view/pages/links.html.haml
 *** Read the fives page content app/view/pages/fives.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
-*** Copy to explain the pledge and introduce the project on /home
+*** Copy to explain the pledge process on personal pages
 *** DESIGN
 **** Define p.float_right class (used in app/view/pages/how_we_got_here.html.haml

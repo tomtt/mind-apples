@@ -1,27 +1,25 @@
-.row
-  Welcome to the Mindapples page for 
+%h1
   = h resource.name
-.row
-  They're doing the following activities to look after their mind:
+  's page on Mindapples
+
+%p
+  = link_to 'Edit', edit_person_path(resource)
+  
+%h3
+  They're doing the following activities regularly to keep their mind healthy:
   %ol
     = render(resource.mindapples)
-.row
-  Here's what else they had to say:
+
+%h4
+  Here's what else 
+  = h resource.name
+  had to say when they took the test:
   = h resource.braindump
-.row
-  They rate their mental health as
-  = h resource.health_check
-.row
-  They're from 
-  = h resource.location
-.row
-  And their occupation is
-  = h resource.occupation
-.row
-  They are...
-  = Gender.label(resource.gender)
-.row
-  And they are roughly
-  = h resource.age
-.row
-  = link_to 'Edit', edit_person_path(resource)
+
+%h4
+  = h resource.name
+  made this page by taking the Mindapples Test. 
+  %br
+  What are you doing to look after your mind?
+  %br
+  = link_to('Take the Mindapples test now', new_person_path)

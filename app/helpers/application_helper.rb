@@ -22,7 +22,8 @@ module ApplicationHelper
         " | Welcome back '%s' | " % current_user.to_s +
         link_to('Log out', logout_path)
     else
-      "You are not logged in"
+      "Already taken the test? " +
+      link_to('Log in to claim your page', login_path)
     end
   end
 
