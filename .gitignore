@@ -13,3 +13,4 @@ public/stylesheets/*.css
 db/*.sqlite3
 .project
 public/features/*
+config/initializers/personal.rb
