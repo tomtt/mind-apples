@@ -1,7 +1,7 @@
 - form_for resource, :html => { :class => "survey"} do |person_form|
   = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
   = render(:partial => 'entry', :locals => { :form => person_form })
-  %h6
+  .small-print
     *ahem* By completing this survey, you're giving us the right to publish your answers anonymously, online and offline. Hope that's ok...
   = submit_tag 'Submit', :class => "submit-form"
 %br.clear
