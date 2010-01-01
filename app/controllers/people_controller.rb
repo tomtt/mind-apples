@@ -32,11 +32,17 @@ class PeopleController < ApplicationController
   end
 
   response_for :create do |format|
-    format.html do
-      if @resource_saved
-        login_as_new_user
-        redirect_to resource_path(resource)
+    if @resource_saved
+      format.html do
+        if @resource_saved
+          login_as_new_user
+          redirect_to resource_path(resource)
+        end
       end
+    else
+      format.html { render :action => "edit" }
+      format.js   { render :action => "edit" }
+      format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
     end
   end
 

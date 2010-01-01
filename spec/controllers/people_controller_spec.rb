@@ -241,5 +241,18 @@ describe PeopleController do
         response.should redirect_to(person_path(controller.resource))
       end
     end
+
+    describe "when there are errors" do
+      before do
+        @mock_person = build_mock_person
+        @mock_person.stub!(:save).and_return false
+        Person.stub!(:new_with_mindapples).and_return(@mock_person)
+      end
+
+      it "should render 'edit'" do
+        post(:create, "person" => {})
+        response.should render_template('edit')
+      end
+    end
   end
 end
