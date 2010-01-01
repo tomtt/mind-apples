@@ -16,6 +16,12 @@ Feature: Personal page
 
   Scenario: Person logs in and sees his page
     Then I should see "Mindapples rocks"
+    And I should see "Welcome back 'gandy'"
+
+  Scenario: Person follows the link to his page
+    When I follow "About us"
+    And I follow "Your mindapples page"
+    Then I should see "Mindapples rocks"
 
   Scenario: Another person logs in while somebody is already logged in
     Given I have a personal page
@@ -57,12 +63,12 @@ Feature: Personal page
     Then I should not see "gandy@example.com"
 
   Scenario: Person views his own page when not logged in
-    When I go to the logout page
+    When I follow "Log out"
     And I go to "/person/gandy"
     Then I should see "Mindapples rocks"
 
   Scenario: Person edits his page when not logged in
-    When I go to the logout page
+    When I follow "Log out"
     And I go to "/person/gandy"
     And I follow "edit"
     And I fill in "Login" with "gandy"
