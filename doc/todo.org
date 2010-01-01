@@ -1,13 +1,14 @@
 * TODO
-** Graceful handling of forms for logged in users
-** Template missing on /password_resets (new.erb)
-** Graceful handling of missing fields in 'show' page
-** Different content for logged in and logged out users on 'show' and 'home'
-** 'show' page visible to logged out users and non-author logged in users
-** 
+** BACKEND
+*** Graceful handling of forms for logged in users
+*** Template missing on /password_resets (new.erb)
+*** Graceful handling of missing fields in 'show' page
+*** Different content for logged in and logged out users on 'show' and 'home'
+*** 'show' page visible to logged out users and non-author logged in users
+*** logout should take you back to the current page, or show page if you are on an edit page
 ** COPY
 *** Read the fives page content app/view/pages/fives.html.haml
 *** Text when editing a personal page (if any) app/views/people/edit.html.haml
 *** Copy to explain the pledge process on personal pages
-*** DESIGN
-**** Define p.float_right class (used in app/view/pages/how_we_got_here.html.haml
+** DESIGN
+*** Define p.float_right class (used in app/view/pages/how_we_got_here.html.haml
