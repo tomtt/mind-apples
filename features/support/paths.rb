@@ -23,7 +23,8 @@ module NavigationHelpers
       help_us_grow_path
     when /^the "links" page$/
       links_path
-
+    when /^my mindapples page$/
+      person_path(@me_person)
     # Add more mappings here.
     # Here is a more fancy example:
     #
@@ -36,7 +37,7 @@ module NavigationHelpers
         if ActionController::Routing::Routes::recognize_path $1, :method => :get
           $1
         end
-      rescue ActionController::RoutingError
+      rescue ActionController::RoutingError, TypeError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"
       end
