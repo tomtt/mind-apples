@@ -1,5 +1,8 @@
 Given /^I have a personal page$/ do
-  @me_person = Factory.create(:person)
+  When "I go to the \"take the test\" page"
+  And "I press \"Submit\""
+  And "I follow \"Log out\""
+  @me_person = Person.last
 end
 
 Given /^my email is "(.*)"$/ do |email|
