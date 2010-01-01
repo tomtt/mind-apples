@@ -52,3 +52,11 @@ Feature: Asking for five a day
     And I should receive an email
     When I open the email
     Then I should see "Your Mindapples" in the email subject
+
+  Scenario: Filling in the test incorrectly from the take the test page
+    When I go to the "take the test" page
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
+    And I fill in "person[password_confirmation]" with "shhh"
+    And I press "Submit"
+    Then I should see "Password doesn't match confirmation"
+    And I should see a "person[password_confirmation]" password field containing "shhh"
