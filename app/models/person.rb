@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
   before_save :maybe_send_welcome_email
+  before_save :ensure_name_is_not_blank
 
   acts_as_authentic do |config|
     config.validate_email_field false
@@ -46,6 +47,16 @@ class Person < ActiveRecord::Base
 
   def to_s
     to_param
+  end
+
+  def name_for_view
+    if name
+      name
+    else
+      if login_set_by_user?
+        login
+      end
+    end
   end
 
   def self.find_by_param(param)
@@ -89,6 +100,14 @@ class Person < ActiveRecord::Base
         self.login = login_was
       end
       errors.add('login', "can not start with '#{AUTOGEN_LOGIN_PREFIX}'")
+    end
+  end
+
+  def ensure_name_is_not_blank
+    if name.blank?
+      self.name = nil
+    else
+      self.name.strip!
     end
   end
 end
