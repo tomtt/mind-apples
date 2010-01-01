@@ -1,7 +1,4 @@
 * TODO
-** Protect page_code from being set from rogue form
-** Ensure uniqueness of page_code and login
-** Change 1-5 "rate your mental health" to radio buttons, to match Surveymonkey version
 ** Graceful handling of forms for logged in users
 ** Template missing on /password_resets (new.erb)
 ** Graceful handling of missing fields in 'show' page
