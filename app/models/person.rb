@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :page_code
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
-  validate :login_can_not_be_changed_to_a_value_starting_with_autogen_string
+  validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
   before_save :maybe_send_welcome_email
 
@@ -33,7 +33,10 @@ class Person < ActiveRecord::Base
   end
 
   def login_set_by_user?
-    login && !login.empty? && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
+    login &&
+      !login.blank? &&
+      login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code] &&
+      !errors["login"]
   end
 
   def deliver_password_reset_instructions!
@@ -80,9 +83,11 @@ class Person < ActiveRecord::Base
     end
   end
 
-  def login_can_not_be_changed_to_a_value_starting_with_autogen_string
-    if login_changed? && !login_was.blank? && login.index(AUTOGEN_LOGIN_PREFIX) == 0
-      self.login = login_was
+  def login_can_not_start_with_autogen_string_unless_page_code_matches
+    if login.index(AUTOGEN_LOGIN_PREFIX) == 0 && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
+      if login_changed?
+        self.login = login_was
+      end
       errors.add('login', "can not start with '#{AUTOGEN_LOGIN_PREFIX}'")
     end
   end
