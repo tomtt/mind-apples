@@ -1,6 +1,5 @@
 %h1
-  = h resource.name
-  's page on Mindapples
+  = h(resource.name_for_view), "'s page on Mindapples"
 
 %p
   = link_to 'Edit', edit_person_path(resource)

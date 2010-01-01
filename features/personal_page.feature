@@ -17,6 +17,7 @@ Feature: Personal page
   Scenario: Person logs in and sees his page
     Then I should see "Mindapples rocks"
     And I should see "Welcome back 'gandy'"
+    And I should see "gandy's page on Mindapples"
 
   Scenario: Person follows the link to his page
     When I follow "About us"
@@ -45,6 +46,12 @@ Feature: Personal page
     When I fill in "Brain dump" with "Mindapples really rocks"
     And I press "Submit"
     Then I should see "Mindapples really rocks"
+
+  Scenario: Person sets his name
+    When I follow "Edit"
+    And I fill in "Be proud. What's your name" with "Bob the Builder"
+    And I press "Submit"
+    Then I should see "Bob the Builder's page on Mindapples"
 
   Scenario: A hacker tries to edit another person's page
     Given I have a personal page
