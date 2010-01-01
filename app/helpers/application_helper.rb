@@ -31,6 +31,18 @@ module ApplicationHelper
     end
   end
 
+  def page_possessor(person)
+    if person.name_for_view
+      h(person.name_for_view) + "'s"
+    else
+      if current_user == person
+        'Your'
+      else
+        "Somebody's"
+      end
+    end
+  end
+
   def dev_info
     if RAILS_ENV == 'development'
       '<div class="logged-in-debug">' + logged_in_info + '</div>'
