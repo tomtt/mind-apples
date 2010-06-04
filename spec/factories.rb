@@ -7,6 +7,7 @@ Factory.define :person do |u|
   u.sequence(:page_code) {|n| "%08d" % n }
   u.password              "letmein"
   u.password_confirmation "letmein"
+  u.public_profile true
 end
 
 Factory.define :mindapple do |m|

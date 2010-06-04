@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.help_us_grow '/help-us-grow', :controller => "pages", :action => "help_us_grow"
   map.links '/links', :controller => "pages", :action => "links"
   map.media '/media', :controller => "pages", :action => "media"
+  map.terms '/terms', :controller => "pages", :action => "terms"
 
   # Generic routes
   map.connect ':controller/:action/:id'

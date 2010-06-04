@@ -9,6 +9,7 @@ Feature: Setting login
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I fill in "Join us. Choose a username" with "spotty"
+    And I check "policy"
     And I press "Submit"
     And I follow "Edit"
     Then I should not see a "person[login]" text field

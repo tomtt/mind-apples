@@ -3,6 +3,7 @@
 @pivotal_1292084
 @pivotal_1292096
 @pivotal_1292172
+@pivotal_3771421
 
 Feature: Asking for five a day
   In order to gather suggestions
@@ -36,6 +37,8 @@ Feature: Asking for five a day
     And I fill in "Your thing" with "social guru"
     And I fill in "Be proud" with "Andy Gibson"
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I choose "person_public_profile_true"
+    And I check "policy"
     And I press "Submit"
     Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
     And I should see "Being in nature"
@@ -64,3 +67,16 @@ Feature: Asking for five a day
     And I press "Submit"
     Then I should see "Password doesn't match confirmation"
     And I should see a "person[password_confirmation]" password field containing "shhh"
+  @policy
+  Scenario: Filling in the test correctly from the take the test page but without agreeing the policy
+    When I go to the "take the test" page
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
+    And I press "Submit"
+    Then I should see "Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry."
+    And I should see "Did you accept the Terms & Conditions?"
+
+  Scenario: Everybody can follow link to terms page from test page
+    When I go to the "take the test" page
+    And I follow "Terms & Conditions"
+    Then I should see "govern your access to and use of"
+   

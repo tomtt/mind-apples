@@ -46,5 +46,18 @@
 .col-even
   = form.label :password_confirmation, "<span class='description'>And one more time with the password please, in case of typos...</span>"
   = form.password_field :password_confirmation
-.hr.clear  
+.col-odd.radio-input
+  = form.label :public_profile, "Public profile. <span class='description'>Show yourself</span>"
+  = form.radio_button(:public_profile, true)
+  = form.label "public_profile_true", "Yes, I'm happy to make my profile public on Mindapples.org", :class => 'label-radio'
+  %br
+  = form.radio_button(:public_profile, false)
+  = form.label "public_profile_false", "No no, I want to stay anonymous", :class => 'label-radio'
+.col-even
+  %label{:for=>"policy", :class=>"label-radio"} 
+    %input{:type=>"checkbox", :name=>"policy", :class=>"policy_checkbox"}
+    %span{:class=>"description"} Yes yes, of course I accept the <a href="/terms" title="Terms of Service">Terms & Conditions</a>.
+  - unless @policy_checked
+    %span{:class=>"policy_checkbox red"} Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry.
+.hr.clear
   %hr

@@ -12,3 +12,15 @@ describe Mindapple do
     Mindapple.create!(@valid_attributes)
   end
 end
+
+# == Schema Information
+#
+# Table name: mindapples
+#
+#  id         :integer         not null, primary key
+#  suggestion :text
+#  person_id  :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+

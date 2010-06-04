@@ -182,6 +182,19 @@ describe Person do
       person.name_for_view.should == "ed_bever"
     end
   end
+  
+  describe "public profile" do
+    it "is saved as public as default" do
+      person_attributes = Factory.attributes_for(:person)
+      person = Person.create(person_attributes)
+      person.public_profile.should == true
+    end
+    
+    it "is saved as non public if is public_profile set to false" do
+      person = Factory.create(:person, :login => 'ed_bever', :public_profile => false)
+      person.public_profile.should == false
+    end
+  end
 
   it "should not be valid if it does not have a page code" do
     Factory.build(:person, :page_code => nil).should_not be_valid
@@ -284,3 +297,37 @@ describe Person do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  email                     :text
+#  page_code                 :string(255)
+#  braindump                 :text
+#  location                  :string(255)
+#  gender                    :string(255)
+#  age                       :string(255)
+#  occupation                :string(255)
+#  health_check              :string(255)
+#  tags                      :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  login                     :string(255)     default(""), not null
+#  crypted_password          :string(255)     default(""), not null
+#  password_salt             :string(255)     default(""), not null
+#  persistence_token         :string(255)     default(""), not null
+#  single_access_token       :string(255)     default(""), not null
+#  perishable_token          :string(255)     default(""), not null
+#  login_count               :integer         default(0), not null
+#  failed_login_count        :integer         default(0), not null
+#  last_request_at           :datetime
+#  current_login_at          :datetime
+#  last_login_at             :datetime
+#  current_login_ip          :string(255)
+#  last_login_ip             :string(255)
+#  has_received_welcome_mail :boolean
+#
+

@@ -227,7 +227,25 @@ describe PeopleController do
            })
       controller.resource.mindapples.size.should == 5
     end
+    
+    describe "validate policy checkbox" do
+      it "if is not checked" do
+        post(:create, "person" => {'email' => 'petr@petr.com'})
+        assigns[:policy_checked].should == false
+      end
+      
+      it "if is checked" do
+        post(:create, "person" => {'email' => 'petr@petr.com'}, 'policy' => true)
+        assigns[:policy_checked].should == true
+      end
+      
+      it "if is not from registration form" do
+        post(:create, "person" => {})
+        assigns[:policy_checked].should == true
+      end
 
+    end
+    
     describe "when saved" do
       before do
         @mock_person = build_mock_person

@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
   before_filter :set_fields_to_create_valid_person, :only => [:create]
+  before_filter :validate_policy_checbox
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
 
   def create
@@ -32,7 +33,7 @@ class PeopleController < ApplicationController
   end
 
   response_for :create do |format|
-    if @resource_saved
+    if @resource_saved && @policy_checked
       format.html do
         if @resource_saved
           login_as_new_user
@@ -63,6 +64,21 @@ class PeopleController < ApplicationController
 
   def new_resource(attributes = (params[resource_name] || {}))
     resource = Person.new_with_mindapples(attributes)
+  end
+  
+  def validate_policy_checbox
+    unless params[:person] && params[:person][:email]
+      @policy_checked = true
+      return
+    end
+    
+    unless params[:policy]
+      flash[:warning] = "Did you accept the Terms & Conditions?"
+      @policy_checked = false
+    else
+      flash[:warning] = ""
+      @policy_checked = true
+    end
   end
 
   def set_fields_to_create_valid_person

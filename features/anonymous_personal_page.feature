@@ -4,6 +4,7 @@ Feature: Anonymous personal page
 
   Scenario: Person sees his page
     When I go to the "take the test" page
+    And I check "policy"
     And I press "Submit"
     Then I should see "Your page on Mindapples"
 
