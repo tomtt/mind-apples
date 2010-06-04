@@ -8,6 +8,7 @@ Factory.define :person do |u|
   u.password              "letmein"
   u.password_confirmation "letmein"
   u.public_profile true
+  u.policy_checked true
 end
 
 Factory.define :mindapple do |m|

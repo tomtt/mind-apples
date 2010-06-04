@@ -231,19 +231,18 @@ describe PeopleController do
     describe "validate policy checkbox" do
       it "if is not checked" do
         post(:create, "person" => {'email' => 'petr@petr.com'})
-        assigns[:policy_checked].should == false
+        params['person']['policy_checked'].should == nil
       end
       
       it "if is checked" do
-        post(:create, "person" => {'email' => 'petr@petr.com'}, 'policy' => true)
-        assigns[:policy_checked].should == true
+        post(:create, "person" => {'email' => 'petr@petr.com', 'policy_checked' => true})
+        params['person']['policy_checked'].should == true
       end
       
       it "if is not from registration form" do
         post(:create, "person" => {})
-        assigns[:policy_checked].should == true
+        params['person']['policy_checked'].should == true
       end
-
     end
     
     describe "when saved" do

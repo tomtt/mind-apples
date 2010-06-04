@@ -220,6 +220,14 @@ describe Person do
     Factory.create(:person, :name => '  bobby  ferret ').name.should == 'bobby  ferret'
   end
 
+  it "should not be valid if it does not have a blank policy_checked" do
+    Factory.build(:person, :policy_checked => nil).should_not be_valid
+  end
+
+  it "should not be valid if it does not have a string policy_checked" do
+    Factory.build(:person, :policy_checked => "ss").should_not be_valid
+  end
+
   describe "welcome email" do
     it "should be sent when created with an email address" do
       person = Factory.build(:person, :email => 'andy@example.com')
@@ -297,37 +305,3 @@ describe Person do
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: people
-#
-#  id                        :integer         not null, primary key
-#  name                      :string(255)
-#  email                     :text
-#  page_code                 :string(255)
-#  braindump                 :text
-#  location                  :string(255)
-#  gender                    :string(255)
-#  age                       :string(255)
-#  occupation                :string(255)
-#  health_check              :string(255)
-#  tags                      :string(255)
-#  created_at                :datetime
-#  updated_at                :datetime
-#  login                     :string(255)     default(""), not null
-#  crypted_password          :string(255)     default(""), not null
-#  password_salt             :string(255)     default(""), not null
-#  persistence_token         :string(255)     default(""), not null
-#  single_access_token       :string(255)     default(""), not null
-#  perishable_token          :string(255)     default(""), not null
-#  login_count               :integer         default(0), not null
-#  failed_login_count        :integer         default(0), not null
-#  last_request_at           :datetime
-#  current_login_at          :datetime
-#  last_login_at             :datetime
-#  current_login_ip          :string(255)
-#  last_login_ip             :string(255)
-#  has_received_welcome_mail :boolean
-#
-

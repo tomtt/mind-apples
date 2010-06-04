@@ -1,6 +1,6 @@
 Given /^I have a personal page$/ do
   When "I go to the \"take the test\" page"
-  And "I check \"policy\""
+  And "I check \"person_policy_checked\""
   And "I press \"Submit\""
   And "I follow \"Log out\""
   @me_person = Person.last

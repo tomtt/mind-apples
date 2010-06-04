@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603131649) do
+ActiveRecord::Schema.define(:version => 20100604131147) do
 
   create_table "mindapples", :force => true do |t|
     t.text     "suggestion"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20100603131649) do
     t.string   "last_login_ip"
     t.boolean  "has_received_welcome_mail"
     t.boolean  "public_profile",            :default => true
+    t.boolean  "policy_checked"
   end
 
 end
