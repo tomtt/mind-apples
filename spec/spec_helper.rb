@@ -5,6 +5,7 @@ Spork.prefork do
   require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
   require 'spec'
   require 'spec/rails'
+  require 'mocha'
 
   require File.expand_path(File.join(File.dirname(__FILE__), 'factories'))
   require File.expand_path(File.join(File.dirname(__FILE__), 'shared_helper'))

@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
 
   validates_presence_of :page_code, :policy_checked
+  validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
@@ -32,7 +33,7 @@ class Person < ActiveRecord::Base
       self.login = value
     end
   end
-
+  
   def login_set_by_user?
     login &&
       !login.blank? &&

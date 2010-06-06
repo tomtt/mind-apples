@@ -9,6 +9,7 @@ Factory.define :person do |u|
   u.password_confirmation "letmein"
   u.public_profile true
   u.policy_checked true
+  u.email 'mind@apple.com'
 end
 
 Factory.define :mindapple do |m|

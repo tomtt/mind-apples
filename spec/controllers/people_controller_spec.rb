@@ -139,7 +139,7 @@ describe PeopleController do
       @mock_person = build_mock_person
       Person.stub!(:new_with_mindapples).and_return @mock_person
       UserSession.should_receive(:create!)
-      post(:create, "person" => {})
+      post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
     end
 
     it "should generate a page code" do
@@ -200,6 +200,11 @@ describe PeopleController do
       controller.resource.password_confirmation.should == 'mypass'
     end
 
+    it "should not set a default password if the login field was filled in" do
+      post(:create, "person" => { :login => 'mypass' })
+      controller.resource.password.should == nil
+    end
+
     it "should set a default password if the password field was passed blank" do
       PageCode.stub!(:code).and_return 'default_password'
       post(:create, "person" => { :password => '' })
@@ -245,6 +250,22 @@ describe PeopleController do
       end
     end
     
+    describe "if user name is filled" do
+      it "only with filled email" do
+        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
+        Person.stub!(:new_with_mindapples).and_return(person)
+        person.should_not_receive(:save)
+        post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
+      end
+      
+      it "only with filled password" do
+        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
+        Person.stub!(:new_with_mindapples).and_return(person)
+        person.should_not_receive(:save)
+        post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
+      end
+    end
+    
     describe "when saved" do
       before do
         @mock_person = build_mock_person
@@ -254,7 +275,7 @@ describe PeopleController do
 
       it "should redirect to show page" do
         UserSession.stub!(:create!)
-        post(:create, "person" => {})
+        post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
         response.should redirect_to(person_path(controller.resource))
       end
     end

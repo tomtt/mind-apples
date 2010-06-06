@@ -8,7 +8,12 @@ class PeopleController < ApplicationController
     self.resource = new_resource
     self.resource.protected_login = params["person"]["login"]
     self.resource.page_code = params["person"]["page_code"]
-    @resource_saved = resource.save
+
+    if params["person"]["login"] && params["person"]["email"] && params["person"]["password"]
+      @resource_saved = resource.save
+    elsif @generated_login
+      @resource_saved = resource.save
+    end
   end
 
   def update
@@ -75,13 +80,14 @@ class PeopleController < ApplicationController
     params["person"]["page_code"] = page_code
     login = params["person"]["login"]
     if !login || login.blank?
+      @generated_login = true
       params["person"]["login"] = '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
     end
 
     stuff_in_password_fields =
       (params["person"]["password"] || "") +
       (params["person"]["password_confirmation"] || "")
-    if stuff_in_password_fields.blank?
+    if stuff_in_password_fields.blank? && login.blank?
       password = PageCode.code(20)
       params["person"]["password"] = password
       params["person"]["password_confirmation"] = password

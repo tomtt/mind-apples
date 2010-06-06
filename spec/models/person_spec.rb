@@ -236,13 +236,15 @@ describe Person do
     end
 
     it "should not be sent when created without an email address" do
-      person = Factory.build(:person)
+      Person.any_instance.stubs(:login_set_by_user?).returns(false)
+      person = Factory.build(:person, :email=> '')
       PersonMailer.should_not_receive(:deliver_welcome_email)
       person.save!
     end
 
     it "should be sent when an email address is set" do
-      person = Factory.create(:person)
+      Person.any_instance.stubs(:login_set_by_user?).returns(false)
+      person = Factory.create(:person, :email => '')
       PersonMailer.should_receive(:deliver_welcome_email).with(person)
       person.update_attributes(:email => 'andy@example.com')
     end
