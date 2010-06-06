@@ -13,7 +13,7 @@ describe PeopleController do
 
   shared_examples_for "all actions finding a person" do
     it "should find a person by param value" do
-      Person.should_receive(:find_by_param).with('param_value')
+      Person.expects(:find_by_param).with('param_value')
       do_request
     end
   end
@@ -30,8 +30,8 @@ describe PeopleController do
     describe "when logged in as the user" do
       before do
         @mock_person = build_mock_person
-        controller.stub!(:current_user).and_return @mock_person
-        Person.stub!(:find_by_param).and_return(@mock_person)
+        controller.stubs(:current_user).returns @mock_person
+        Person.stubs(:find_by_param).returns(@mock_person)
       end
 
       def do_request
@@ -44,9 +44,9 @@ describe PeopleController do
     describe "when not logged in" do
       before do
         @mock_person = build_mock_person
-        @mock_person.stub!(:to_param).and_return('some_login')
-        controller.stub!(:current_user).and_return nil
-        Person.stub!(:find_by_param).with('some_login').and_return(@mock_person)
+        @mock_person.stubs(:to_param).returns('some_login')
+        controller.stubs(:current_user).returns nil
+        Person.stubs(:find_by_param).with('some_login').returns(@mock_person)
       end
 
       it "should set the return_to session value to the path for editing this user" do
@@ -60,19 +60,19 @@ describe PeopleController do
     describe "when logged in as the updated user" do
       before do
         @mock_person = build_mock_person
-        controller.stub!(:current_user).and_return @mock_person
-        Person.stub!(:find_by_param).and_return @mock_person
+        controller.stubs(:current_user).returns @mock_person
+        Person.stubs(:find_by_param).returns @mock_person
       end
 
       it "should set the login in a protected way on the updated resource" do
-        Person.stub!(:find_by_param).and_return @mock_person
-        # @mock_person.stub!(:valid_password?).and_return true
-        # @mock_person.stub!(:changed?).and_return false
-        # @mock_person.stub!(:last_request_at)
-        # @mock_person.stub!(:last_request_at=)
-        # @mock_person.stub!(:persistence_token)
-        @mock_person.should_receive(:update_attributes)
-        @mock_person.should_receive(:protected_login=).with('gandy')
+        Person.stubs(:find_by_param).returns @mock_person
+        # @mock_person.stubs(:valid_password?).returns true
+        # @mock_person.stubs(:changed?).returns false
+        # @mock_person.stubs(:last_request_at)
+        # @mock_person.stubs(:last_request_at=)
+        # @mock_person.stubs(:persistence_token)
+        @mock_person.expects(:update_attributes)
+        @mock_person.expects(:protected_login=).with('gandy')
         put(:update, "person" => {"login" => 'gandy'})
       end
 
@@ -90,18 +90,18 @@ describe PeopleController do
     describe "when logged in as a different user as the updated one" do
       before do
         @logged_in_person = build_mock_person
-        controller.stub!(:current_user).and_return @logged_in_person
+        controller.stubs(:current_user).returns @logged_in_person
         @mock_person = build_mock_person
-        Person.stub!(:find_by_param).and_return @mock_person
+        Person.stubs(:find_by_param).returns @mock_person
       end
 
       it "should not update any attributes of the updated user" do
-        @mock_person.should_not_receive(:update_attributes)
+        @mock_person.expects(:update_attributes).never
         put(:update, "person" => {"login" => 'gandy'})
       end
 
       it "should not update the login of the updated user" do
-        @mock_person.should_not_receive(:protected_login=)
+        @mock_person.expects(:protected_login=).never
         put(:update, "person" => {"login" => 'gandy'})
       end
 
@@ -123,12 +123,12 @@ describe PeopleController do
     end
 
     it "should create a new person with mindapples" do
-      Person.should_receive(:new_with_mindapples)
+      Person.expects(:new_with_mindapples)
       get :new
     end
 
     it "should have the new person as the resource" do
-      Person.stub!(:new_with_mindapples).and_return @mock_person
+      Person.stubs(:new_with_mindapples).returns @mock_person
       get :new
       controller.resource.should == @mock_person
     end
@@ -137,54 +137,54 @@ describe PeopleController do
   describe "create" do
     it "should log the new person in" do
       @mock_person = build_mock_person
-      Person.stub!(:new_with_mindapples).and_return @mock_person
-      UserSession.should_receive(:create!)
+      Person.stubs(:new_with_mindapples).returns @mock_person
+      UserSession.expects(:create!)
       post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
     end
 
     it "should generate a page code" do
-      PageCode.should_receive(:code).twice
+      PageCode.expects(:code).twice
       post(:create, "person" => {})
     end
 
     it "should assign the code as the page code" do
       @mock_person = build_mock_person
-      Person.stub!(:new_with_mindapples).and_return @mock_person
-      UserSession.stub!(:create!)
-      PageCode.stub!(:code).and_return 'abzABz09'
-      @mock_person.should_receive(:page_code=).with('abzABz09')
+      Person.stubs(:new_with_mindapples).returns @mock_person
+      UserSession.stubs(:create!)
+      PageCode.stubs(:code).returns 'abzABz09'
+      @mock_person.expects(:page_code=).with('abzABz09')
       post(:create, "person" => {})
     end
 
     it "should set the login in a protected way on the created resource" do
       @mock_person = build_mock_person
-      Person.stub!(:new_with_mindapples).and_return @mock_person
-      Person.stub!(:find).and_return @mock_person
-      @mock_person.stub!(:valid_password?).and_return true
-      @mock_person.stub!(:changed?).and_return false
-      @mock_person.stub!(:last_request_at)
-      @mock_person.stub!(:last_request_at=)
-      @mock_person.stub!(:persistence_token)
-      @mock_person.should_receive(:protected_login=).with('gandy')
+      Person.stubs(:new_with_mindapples).returns @mock_person
+      Person.stubs(:find).returns @mock_person
+      @mock_person.stubs(:valid_password?).returns true
+      @mock_person.stubs(:changed?).returns false
+      @mock_person.stubs(:last_request_at)
+      @mock_person.stubs(:last_request_at=)
+      @mock_person.stubs(:persistence_token)
+      @mock_person.expects(:protected_login=).with('gandy')
       post(:create, "person" => {"login" => 'gandy'})
     end
 
     it "should generate a login if the login field is blank" do
-      PageCode.stub!(:code).and_return('genlogin')
-      UserSession.should_receive(:create!).with hash_including(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
+      PageCode.stubs(:code).returns('genlogin')
+      UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
       post(:create, "person" => {"login" => ''})
     end
 
     it "should assign the code as the autogen login if no login was passed" do
-      PageCode.stub!(:code)
-      PageCode.stub!(:code).and_return 'abzABz09'
+      PageCode.stubs(:code)
+      PageCode.stubs(:code).returns 'abzABz09'
       post(:create, "person" => {})
       controller.resource.login.should == '%sabzABz09' % Person::AUTOGEN_LOGIN_PREFIX
     end
 
     it "should use a 20 character long code for the password and confirmation" do
-      PageCode.stub!(:code).and_return 'abcdef'
-      PageCode.should_receive(:code).with(20).and_return '20charlongpass'
+      PageCode.stubs(:code).returns 'abcdef'
+      PageCode.expects(:code).with(20).returns '20charlongpass'
       post(:create, "person" => {})
       controller.resource.password.should == '20charlongpass'
       controller.resource.password_confirmation.should == '20charlongpass'
@@ -206,13 +206,13 @@ describe PeopleController do
     end
 
     it "should set a default password if the password field was passed blank" do
-      PageCode.stub!(:code).and_return 'default_password'
+      PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password => '' })
       controller.resource.password.should == 'default_password'
     end
 
     it "should set a default password if the password confirmation field was passed blank" do
-      PageCode.stub!(:code).and_return 'default_password'
+      PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password_confirmation => '' })
       controller.resource.password_confirmation.should == 'default_password'
     end
@@ -253,15 +253,15 @@ describe PeopleController do
     describe "if user name is filled" do
       it "only with filled email" do
         person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
-        Person.stub!(:new_with_mindapples).and_return(person)
-        person.should_not_receive(:save)
+        Person.stubs(:new_with_mindapples).returns(person)
+        person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
       end
       
       it "only with filled password" do
         person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
-        Person.stub!(:new_with_mindapples).and_return(person)
-        person.should_not_receive(:save)
+        Person.stubs(:new_with_mindapples).returns(person)
+        person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
       end
     end
@@ -269,12 +269,12 @@ describe PeopleController do
     describe "when saved" do
       before do
         @mock_person = build_mock_person
-        @mock_person.stub!(:save).and_return true
-        Person.stub!(:new_with_mindapples).and_return(@mock_person)
+        @mock_person.stubs(:save).returns true
+        Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
 
       it "should redirect to show page" do
-        UserSession.stub!(:create!)
+        UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
         response.should redirect_to(person_path(controller.resource))
       end
@@ -283,8 +283,8 @@ describe PeopleController do
     describe "when there are errors" do
       before do
         @mock_person = build_mock_person
-        @mock_person.stub!(:save).and_return false
-        Person.stub!(:new_with_mindapples).and_return(@mock_person)
+        @mock_person.stubs(:save).returns false
+        Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
 
       it "should render 'edit'" do

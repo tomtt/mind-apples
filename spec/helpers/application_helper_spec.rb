@@ -16,13 +16,13 @@ describe ApplicationHelper do
 
     it "should be 'Your' if the person has no name for the view and he is logged in" do
       person = mock_model(Person, :name_for_view => nil)
-      stub!(:current_user).and_return person
+      stubs(:current_user).returns person
       page_possessor(person).should == "Your"
     end
 
     it "should be 'Somebody's' if the person has no name for the view and he is not logged in" do
       person = mock_model(Person, :name_for_view => nil)
-      stub!(:current_user).and_return mock_model(Person)
+      stubs(:current_user).returns mock_model(Person)
       page_possessor(person).should == "Somebody's"
     end
   end

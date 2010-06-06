@@ -231,51 +231,51 @@ describe Person do
   describe "welcome email" do
     it "should be sent when created with an email address" do
       person = Factory.build(:person, :email => 'andy@example.com')
-      PersonMailer.should_receive(:deliver_welcome_email).with(person)
+      PersonMailer.expects(:deliver_welcome_email).with(person)
       person.save!
     end
 
     it "should not be sent when created without an email address" do
       Person.any_instance.stubs(:login_set_by_user?).returns(false)
       person = Factory.build(:person, :email=> '')
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.save!
     end
 
     it "should be sent when an email address is set" do
       Person.any_instance.stubs(:login_set_by_user?).returns(false)
       person = Factory.create(:person, :email => '')
-      PersonMailer.should_receive(:deliver_welcome_email).with(person)
+      PersonMailer.expects(:deliver_welcome_email).with(person)
       person.update_attributes(:email => 'andy@example.com')
     end
 
     it "should not be sent when no email address is set" do
       person = Factory.create(:person)
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.update_attributes(:email => '')
     end
 
     it "should not be sent if a welcome email was already sent" do
       person = Factory.create(:person, :has_received_welcome_mail => true)
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.update_attributes(:email => 'aaa@example.com')
     end
 
     it "should not be sent if the email address is unset" do
       person = Factory.create(:person, :email => 'andy@example.com')
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.update_attributes(:email => '')
     end
 
     it "should only be sent once" do
       person = Factory.create(:person, :email => 'andy@example.com')
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.update_attributes(:email => 'something_else@example.com')
     end
 
     it "should not be sent if the person has invalid fields" do
       person = Factory.create(:person)
-      PersonMailer.should_not_receive(:deliver_welcome_email)
+      PersonMailer.expects(:deliver_welcome_email).never
       person.update_attributes(:email => 'andy@example.com',
                                :password => 'bla1234',
                                :password_confirmation => 'foo1234')
@@ -285,13 +285,13 @@ describe Person do
   describe "delivering password reset instructions" do
     it "should reset the perishable token" do
       person = Factory.create(:person)
-      person.should_receive(:reset_perishable_token!)
+      person.expects(:reset_perishable_token!)
       person.deliver_password_reset_instructions!
     end
 
     it "should send out the email with instruction on how to set a password" do
       person = Factory.create(:person)
-      PersonMailer.should_receive(:deliver_set_password).with(person)
+      PersonMailer.expects(:deliver_set_password).with(person)
       person.deliver_password_reset_instructions!
     end
   end

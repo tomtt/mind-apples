@@ -10,12 +10,12 @@ describe PageCode do
   end
 
   it "should call the random method as many times as the size" do
-    PageCode.should_receive(:rand).exactly(5).times.and_return(0)
+    PageCode.expects(:rand).times(5).returns(0)
     PageCode.code(5)
   end
 
   it "should use the random numbers to generate the code" do
-    PageCode.should_receive(:rand).and_return(0, 1, 25, 26, 27, 51, 52, 61)
+    PageCode.expects(:rand).times(8).returns(0, 1, 25, 26, 27, 51, 52, 61)
     PageCode.code(8).should == 'abzABZ09'
   end
 end

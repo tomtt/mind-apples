@@ -11,20 +11,20 @@ describe PasswordResetsController do
 
   shared_examples_for "all actions loading a person using perishable token" do
     it "should find a person by persishable token" do
-      Person.should_receive(:find_using_perishable_token).with('param_value')
+      Person.expects(:find_using_perishable_token).with('param_value')
       do_request
     end
 
     it "should expose the found person as @person" do
       mock_person = create_mock_person
-      Person.stub!(:find_using_perishable_token).and_return(mock_person)
+      Person.stubs(:find_using_perishable_token).returns(mock_person)
       do_request
       assigns[:person].should == mock_person
     end
 
     describe "when no person was found" do
       before do
-        Person.stub!(:find_using_perishable_token).and_return nil
+        Person.stubs(:find_using_perishable_token).returns nil
       end
 
       it "should notify the user" do
@@ -49,13 +49,13 @@ describe PasswordResetsController do
     end
 
     it "should find a person by email" do
-      Person.should_receive(:find_by_email).with(@email)
+      Person.expects(:find_by_email).with(@email)
       do_create
     end
 
     it "should expose the found person" do
       mock_person = mock_model(Person, :deliver_password_reset_instructions! => nil)
-      Person.stub!(:find_by_email).and_return mock_person
+      Person.stubs(:find_by_email).returns mock_person
       do_create
       assigns[:person].should == mock_person
     end
@@ -63,11 +63,11 @@ describe PasswordResetsController do
     describe "for user with email address" do
       before do
         @mock_person = mock_model(Person, :deliver_password_reset_instructions! => nil)
-        Person.stub!(:find_by_email).and_return @mock_person
+        Person.stubs(:find_by_email).returns @mock_person
       end
 
       it "should deliver password reset instructions" do
-        @mock_person.should_receive(:deliver_password_reset_instructions!)
+        @mock_person.expects(:deliver_password_reset_instructions!)
         do_create
       end
 
@@ -84,7 +84,7 @@ describe PasswordResetsController do
 
     describe "when there is no user with email address" do
       before do
-        Person.stub!(:find_by_email).and_return nil
+        Person.stubs(:find_by_email).returns nil
       end
 
       it "should notify the user that there is no such email address" do
@@ -109,7 +109,7 @@ describe PasswordResetsController do
     describe "when a person was found" do
       before do
         @mock_person = mock_model(Person)
-        Person.stub!(:find_using_perishable_token).and_return @mock_person
+        Person.stubs(:find_using_perishable_token).returns @mock_person
       end
 
       it "should render edit" do
@@ -129,13 +129,13 @@ describe PasswordResetsController do
     describe "when a person was found" do
       before do
         @mock_person = create_mock_person
-        Person.stub!(:find_using_perishable_token).and_return @mock_person
+        Person.stubs(:find_using_perishable_token).returns @mock_person
       end
 
       it "should set the password and confirmation and save" do
-        @mock_person.should_receive(:password=).with('betterpassword')
-        @mock_person.should_receive(:password_confirmation=).with('betterpassword')
-        @mock_person.should_receive(:save)
+        @mock_person.expects(:password=).with('betterpassword')
+        @mock_person.expects(:password_confirmation=).with('betterpassword')
+        @mock_person.expects(:save)
         put(:update,
             :id => 'param_value',
             :person => {
@@ -146,7 +146,7 @@ describe PasswordResetsController do
 
       describe "when the person is saved successfully" do
         before do
-          @mock_person.stub!(:save).and_return true
+          @mock_person.stubs(:save).returns true
         end
 
         it "should notify the user" do
@@ -162,7 +162,7 @@ describe PasswordResetsController do
 
       describe "when the person could not be saved" do
         before do
-          @mock_person.stub!(:save).and_return false
+          @mock_person.stubs(:save).returns false
         end
 
         it "should render edit" do

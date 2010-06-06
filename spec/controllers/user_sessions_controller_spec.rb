@@ -10,15 +10,15 @@ describe UserSessionsController do
 
   describe "create" do
     before do
-      controller.stub!(:require_no_user)
+      controller.stubs(:require_no_user)
     end
 
     it "should log the current logged in user out" do
       @person = Factory.create(:person)
       @mock_session = build_mock_session
-      @mock_session.stub!(:person).and_return @person
-      UserSession.stub!(:find).and_return(@mock_session)
-      @mock_session.should_receive(:destroy)
+      @mock_session.stubs(:person).returns @person
+      UserSession.stubs(:find).returns(@mock_session)
+      @mock_session.expects(:destroy)
       post(:create, "session" => {})
     end
 
@@ -26,11 +26,11 @@ describe UserSessionsController do
       before do
         @person = Factory.create(:person)
         @mock_session = build_mock_session
-        @mock_session.stub!(:save).and_return true
-        @mock_session.stub!(:person).and_return @person
-        @mock_session.stub!(:destroy)
-        UserSession.stub!(:new).and_return(@mock_session)
-        UserSession.stub!(:find).and_return(@mock_session)
+        @mock_session.stubs(:save).returns true
+        @mock_session.stubs(:person).returns @person
+        @mock_session.stubs(:destroy)
+        UserSession.stubs(:new).returns(@mock_session)
+        UserSession.stubs(:find).returns(@mock_session)
       end
 
       it "should set the flash notice with login successful" do
@@ -48,8 +48,8 @@ describe UserSessionsController do
   describe "when not saved" do
     before do
       @mock_session = build_mock_session
-      @mock_session.stub!(:save).and_return false
-      UserSession.stub!(:new).and_return(@mock_session)
+      @mock_session.stubs(:save).returns false
+      UserSession.stubs(:new).returns(@mock_session)
     end
 
     it "should render new" do
@@ -62,14 +62,14 @@ describe UserSessionsController do
     before do
       @person = Factory.create(:person)
       @mock_session = build_mock_session
-      @mock_session.stub!(:destroy)
-      @mock_session.stub!(:person).and_return @person
-      UserSession.stub!(:find).and_return(@mock_session)
-      controller.stub!(:require_user)
+      @mock_session.stubs(:destroy)
+      @mock_session.stubs(:person).returns @person
+      UserSession.stubs(:find).returns(@mock_session)
+      controller.stubs(:require_user)
     end
 
     it "should destroy the current user session" do
-      @mock_session.should_receive(:destroy)
+      @mock_session.expects(:destroy)
       delete :destroy, "session" => {}
     end
 

@@ -30,27 +30,27 @@ describe ApplicationController do
 
   describe "current user session" do
     it "should find the current user session" do
-      UserSession.should_receive(:find)
+      UserSession.expects(:find)
       get 'authenticated'
     end
 
     it "should expose the current user session as @current_user_session" do
       mock_user_session = mock_model(UserSession, :person => nil)
-      UserSession.stub!(:find).and_return(mock_user_session)
+      UserSession.expects(:find).returns(mock_user_session)
       get 'authenticated'
       assigns[:current_user_session].should == mock_user_session
     end
 
     it "should find the current user" do
       mock_user_session = mock_model(UserSession, :person => :mock_user)
-      UserSession.stub!(:find).and_return(mock_user_session)
-      mock_user_session.should_receive(:person)
+      UserSession.expects(:find).returns(mock_user_session)
+      mock_user_session.expects(:person)
       get 'authenticated'
     end
 
     it "should expose the current user as @current_user" do
       mock_user_session = mock_model(UserSession, :person => :mock_user)
-      UserSession.stub!(:find).and_return(mock_user_session)
+      UserSession.expects(:find).returns(mock_user_session)
       get 'authenticated'
       assigns[:current_user].should == :mock_user
     end
@@ -59,7 +59,7 @@ describe ApplicationController do
   describe "require user" do
     describe "when not logged in" do
       before do
-        UserSession.stub!(:find).and_return nil
+        UserSession.expects(:find).returns nil
       end
 
       it "should store the current location" do
@@ -80,7 +80,7 @@ describe ApplicationController do
 
     describe "when logged in" do
       before do
-        UserSession.stub!(:find).and_return mock_model(UserSession, :person => :mock_user)
+        UserSession.expects(:find).returns mock_model(UserSession, :person => :mock_user)
       end
 
       it "should render 'shh. secret'" do
@@ -93,7 +93,7 @@ describe ApplicationController do
   describe "require no user" do
     describe "when not logged in" do
       before do
-        UserSession.stub!(:find).and_return nil
+        UserSession.expects(:find).returns nil
       end
 
       it "should render 'hello'" do
@@ -104,7 +104,7 @@ describe ApplicationController do
 
     describe "when logged in" do
       before do
-        UserSession.stub!(:find).and_return mock_model(UserSession, :person => :mock_user)
+        UserSession.expects(:find).returns mock_model(UserSession, :person => :mock_user)
       end
 
       it "should store the current location" do
