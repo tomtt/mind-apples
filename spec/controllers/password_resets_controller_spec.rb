@@ -150,13 +150,28 @@ describe PasswordResetsController do
         end
 
         it "should notify the user" do
+          UserSession.stubs(:create)
           do_request
           flash[:notice].should =~ /password successfully updated/i
         end
 
         it "should redirect to the person's account editing page" do
+          UserSession.stubs(:create)
           do_request
           response.should redirect_to(edit_person_path(@mock_person))
+        end
+        
+        it "should reset the user session" do
+          UserSession.expects(:create).with(@mock_person, true)
+
+          @mock_person.expects(:password=).with('betterpassword')
+          @mock_person.expects(:password_confirmation=).with('betterpassword')
+          @mock_person.expects(:save).returns(true)
+          
+          put :update, :id => 'param_value', :person => {
+              :password => 'betterpassword',
+              :password_confirmation => 'betterpassword'
+            }
         end
       end
 

@@ -20,6 +20,7 @@ class PasswordResetsController < ApplicationController
     @person.password_confirmation = params[:person][:password_confirmation]
     @person.save
     if @person.save
+      reset_user_session
       flash[:notice] = "Password successfully updated"
       redirect_to edit_person_path(@person)
     else
@@ -38,5 +39,9 @@ class PasswordResetsController < ApplicationController
         "reset password process."
       redirect_to root_path
     end
+  end
+  
+  def reset_user_session
+     UserSession.create(@person, true)
   end
 end
