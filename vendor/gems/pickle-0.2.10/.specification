@@ -1,0 +1,137 @@
+--- !ruby/object:Gem::Specification 
+name: pickle
+version: !ruby/object:Gem::Version 
+  prerelease: false
+  segments: 
+  - 0
+  - 2
+  - 10
+  version: 0.2.10
+platform: ruby
+authors: 
+- Ian White
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-04-27 00:00:00 +01:00
+default_executable: 
+dependencies: []
+
+description: Easy model creation and reference in your cucumber features
+email: ian.w.white@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.rdoc
+files: 
+- .gitignore
+- History.txt
+- License.txt
+- README.rdoc
+- Rakefile
+- Rakefile.d/cucumber.rake
+- Rakefile.d/jeweller.rake
+- Rakefile.d/rcov.rake
+- Rakefile.d/rspec.rake
+- Rakefile.d/yard.rake
+- Todo.txt
+- VERSION
+- features/app/app.rb
+- features/app/blueprints.rb
+- features/app/factories.rb
+- features/app/views/notifier/email.erb
+- features/app/views/notifier/user_email.erb
+- features/email/email.feature
+- features/generator/generators.feature
+- features/path/models_page.feature
+- features/path/named_route_page.feature
+- features/pickle/create_from_active_record.feature
+- features/pickle/create_from_factory_girl.feature
+- features/pickle/create_from_machinist.feature
+- features/step_definitions/email_steps.rb
+- features/step_definitions/extra_email_steps.rb
+- features/step_definitions/fork_steps.rb
+- features/step_definitions/generator_steps.rb
+- features/step_definitions/path_steps.rb
+- features/step_definitions/pickle_steps.rb
+- features/support/email.rb
+- features/support/env.rb
+- features/support/paths.rb
+- features/support/pickle.rb
+- features/support/pickle_app.rb
+- init.rb
+- lib/pickle.rb
+- lib/pickle/adapter.rb
+- lib/pickle/config.rb
+- lib/pickle/email.rb
+- lib/pickle/email/parser.rb
+- lib/pickle/email/world.rb
+- lib/pickle/parser.rb
+- lib/pickle/parser/matchers.rb
+- lib/pickle/path.rb
+- lib/pickle/path/world.rb
+- lib/pickle/session.rb
+- lib/pickle/session/parser.rb
+- lib/pickle/version.rb
+- lib/pickle/world.rb
+- pickle.gemspec
+- rails_generators/pickle/pickle_generator.rb
+- rails_generators/pickle/templates/email.rb
+- rails_generators/pickle/templates/email_steps.rb
+- rails_generators/pickle/templates/paths.rb
+- rails_generators/pickle/templates/pickle.rb
+- rails_generators/pickle/templates/pickle_steps.rb
+- spec/pickle/adapter_spec.rb
+- spec/pickle/config_spec.rb
+- spec/pickle/email/parser_spec.rb
+- spec/pickle/email_spec.rb
+- spec/pickle/parser/matchers_spec.rb
+- spec/pickle/parser_spec.rb
+- spec/pickle/path_spec.rb
+- spec/pickle/session_spec.rb
+- spec/pickle_spec.rb
+- spec/spec_helper.rb
+has_rdoc: true
+homepage: http://github.com/ianwhite/pickle/tree
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.6
+signing_key: 
+specification_version: 3
+summary: Easy model creation and reference in your cucumber features
+test_files: 
+- spec/pickle/adapter_spec.rb
+- spec/pickle/config_spec.rb
+- spec/pickle/email/parser_spec.rb
+- spec/pickle/email_spec.rb
+- spec/pickle/parser/matchers_spec.rb
+- spec/pickle/parser_spec.rb
+- spec/pickle/path_spec.rb
+- spec/pickle/session_spec.rb
+- spec/pickle_spec.rb
+- spec/spec_helper.rb
