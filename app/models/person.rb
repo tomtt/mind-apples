@@ -3,8 +3,10 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :page_code
   validates_presence_of :policy_checked, :on => :create
-  #, :on => :create
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }
+  validates_uniqueness_of :email, :on => :create, :message => "email already taken"
+  validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? }, :message => "email already taken"
+  
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
@@ -76,6 +78,11 @@ class Person < ActiveRecord::Base
     else
       login
     end
+  end
+
+  def unique_email?
+    person = Person.find_by_email(self.email)
+    person.nil? || person.id == self.id
   end
 
   private

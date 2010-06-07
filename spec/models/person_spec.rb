@@ -227,6 +227,17 @@ describe Person do
   it "should not be valid if it does not have a string policy_checked" do
     Factory.build(:person, :policy_checked => "ss").should_not be_valid
   end
+  
+  it "should not be valid if email is already taken" do
+    person1 = Factory.create(:person, :email => "apple@mind.com")
+    Factory.build(:person, :email => "apple@mind.com").should_not be_valid
+  end
+
+  it "should not update if email is already taken" do
+    person1 = Factory.create(:person, :email => "apple@mind.com")
+    person2 = Factory.create(:person, :email => "mind@apple.com")
+    person1.update_attributes({:email => 'mind@apple.com'}).should be_false
+  end
 
   describe "welcome email" do
     it "should be sent when created with an email address" do
@@ -305,5 +316,25 @@ describe Person do
     it "should pass attributes" do
       Person.new_with_mindapples(:name => 'samson').name.should == 'samson'
     end
+  end
+  
+  describe "comparing emails" do
+    it "return true if is new email and old email different" do
+      person = Factory.create(:person, :email => 'apple@mind.com')
+      person2 = Factory.build(:person, :email=> 'mind@apple.com')
+      person2.unique_email?.should be_true
+    end
+
+    it "return true if only email that exists is mine" do
+      person = Factory.create(:person, :email => 'apple@mind.com')
+      person.unique_email?.should be_true
+    end
+    
+    it "return false if is new email and old email same" do
+      person = Factory.create(:person, :email => 'apple@mind.com')
+      person2 = Factory.build(:person, :email=> 'apple@mind.com')
+      person2.unique_email?.should be_false
+    end
+    
   end
 end
