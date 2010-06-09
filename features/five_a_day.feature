@@ -23,6 +23,7 @@ Feature: Asking for five a day
     And I should see "Wrestling with bears"
     And I should see "Welcome back"
     And I should not see "Welcome back '"
+    And I should not see "There were problems with the following fields"
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
