@@ -26,4 +26,19 @@ describe ApplicationHelper do
       page_possessor(person).should == "Somebody's"
     end
   end
+  
+  
+  describe "share_this" do
+    it "returns pregenerated html code for sharethis plugin" do
+      share_this.should include('sharethis.com')
+    end
+  
+    it "contains the keywork facebook" do
+      share_this.should include('facebook')
+    end
+
+    it "contains the keywork twitter" do
+      share_this.should include('twitter')
+    end    
+  end
 end

@@ -54,4 +54,8 @@ module ApplicationHelper
   def git_info
     '<div class="git-version">version: ' + Git.master_head_sha1 + '</div>'
   end
+  
+  def share_this
+    '<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=a0cce762-9e05-4090-a9ab-9c67d81be3de&amp;type=website&amp;post_services=facebook%2Ctwitter"></script>'
+  end
 end
