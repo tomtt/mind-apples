@@ -274,6 +274,12 @@ describe PeopleController do
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
         response.should redirect_to(person_path(controller.resource))
       end
+      
+      it "renders flash message" do
+        UserSession.stubs(:create!)
+        post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
+        flash.now[:message].should == 'Thank you for registering'
+      end
     end
 
     describe "when there are errors" do

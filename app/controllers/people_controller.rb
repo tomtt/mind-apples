@@ -42,6 +42,7 @@ class PeopleController < ApplicationController
       format.html do
         if @resource_saved
           login_as_new_user
+          flash[:message] = 'Thank you for registering'
           redirect_to resource_path(resource)
         end
       end

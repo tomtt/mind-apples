@@ -5,6 +5,7 @@
 @pivotal_1292172
 @pivotal_3771421
 @pivotal_3773892
+@pivotal_3773666
 
 Feature: Asking for five a day
   In order to gather suggestions
@@ -42,6 +43,7 @@ Feature: Asking for five a day
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
+    And I should see "Thank you for registering"
     And I should see "Being in nature"
     When I follow "Edit"
     Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
