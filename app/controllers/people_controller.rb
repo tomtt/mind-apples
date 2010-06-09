@@ -61,9 +61,9 @@ class PeopleController < ApplicationController
 
   def find_resource
     person = Person.find_by_param(params["id"])
-    # unless person
-    #   record_not_found
-    # end
+    unless person
+      render_404
+    end
     person
   end
 

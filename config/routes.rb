@@ -23,4 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+  map.connect '/this-is-a-page-that-blows-up-to-test-the-500-error', :controller => 'errors', :action => 'error500'
+  map.connect '*path', :controller => 'errors', :action => 'error500'
 end

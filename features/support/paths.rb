@@ -23,6 +23,8 @@ module NavigationHelpers
       help_us_grow_path
     when /^the "links" page$/
       links_path
+    when /^the url "this-is-a-page-that-blows-up-to-test-the-500-error"$/
+      'this-is-a-page-that-blows-up-to-test-the-500-error'
     when /^my mindapples page$/
       person_path(@me_person)
     # Add more mappings here.

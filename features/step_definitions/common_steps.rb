@@ -8,3 +8,8 @@ Then "show me the page body in a rails context in a browser" do
   end
   system "open http://mindapples.local/tmp.html"
 end
+
+Then /^I should get a "(\d+) ([^"]+)" response$/ do |http_status, message|
+debugger
+  response.status.should == "#{http_status} #{message}"
+end

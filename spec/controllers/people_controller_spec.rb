@@ -18,11 +18,11 @@ describe PeopleController do
     end
   end
 
-  describe "show" do
-    def do_request
-      get 'show', :id => 'param_value'
-    end
+  def do_request
+    get 'show', :id => 'param_value'
+  end
 
+  describe "show" do
     it_should_behave_like "all actions finding a person"
   end
 
@@ -32,10 +32,6 @@ describe PeopleController do
         @mock_person = build_mock_person
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns(@mock_person)
-      end
-
-      def do_request
-        get 'edit', :id => 'param_value'
       end
 
       it_should_behave_like "all actions finding a person"
@@ -290,6 +286,11 @@ describe PeopleController do
       it "should render 'edit'" do
         post(:create, "person" => {})
         response.should render_template('edit')
+      end
+      
+      it "render 404 error page" do
+        get :show, :id => 'something'
+        response.should render_template('errors/error_404')
       end
     end
   end
