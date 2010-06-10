@@ -62,35 +62,42 @@ describe PeopleController do
 
       it "should set the login in a protected way on the updated resource" do
         Person.stubs(:find_by_param).returns @mock_person
-        # @mock_person.stubs(:valid_password?).returns true
-        # @mock_person.stubs(:changed?).returns false
-        # @mock_person.stubs(:last_request_at)
-        # @mock_person.stubs(:last_request_at=)
-        # @mock_person.stubs(:persistence_token)
         @mock_person.expects(:update_attributes)
         @mock_person.expects(:protected_login=).with('gandy')
-        put(:update, "person" => {"login" => 'gandy'})
+        @mock_person.expects(:login_set_by_user?).returns false
+
+        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
 
       it "should redirect to the show page" do
-        put(:update, "person" => {"login" => 'gandy'})
+        PeopleController.any_instance.stubs(:password_invalid?)
+        PeopleController.any_instance.stubs(:update_logged_user)
+        put(:update, "person" => {"login" => 'gandy', 'password' => 'asdasds'})
         response.should redirect_to(person_path(@mock_person))
       end
 
       it "should flash a thank you message" do
+        PeopleController.any_instance.stubs(:password_invalid?)
         put(:update, "person" => {"login" => 'gandy'})
         flash[:notice].should =~ /thank you/i
+      end
+      
+      it "don't allow save blank password" do
+        @mock_person.expects(:login_set_by_user?).returns true
+        @mock_person.expects(:errors)
+        put(:update, "person" => {"login" => 'gandy', 'password' => '', 'password_confirmation' => ''})
       end
     end
     
     describe "udpate logged user and reset the session" do
       before(:each) do
-        @person = Factory(:person, :login => 'gandy', :password => 'topsecret', :password_confirmation => 'topsecret')
+        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
         controller.stubs(:current_user).returns @person
         Person.stubs(:find_by_param).returns @person
       end
       
       it "update user session on update" do
+        PeopleController.any_instance.stubs(:password_invalid?).returns false
         controller.expects(:update_logged_user)
         put(:update, "person" => {"login" => 'gandy'})
       end
@@ -234,6 +241,12 @@ describe PeopleController do
       controller.resource.password_confirmation.should == 'default_password'
     end
 
+    # it "don't validate email presence and uniquenes together" do
+    #   person = Factory(:person)
+    #   post(:create, "person" => { :email => '' })
+    #   flash.now[:message].should == 'noo'
+    # end
+    
     it "should not allow a constructed form to create more than five mindapples" do
       post(:create, "person" =>
            {

@@ -19,6 +19,7 @@ class PeopleController < ApplicationController
   def update
     self.resource = find_resource
     self.resource.protected_login=(params["person"]["login"])
+    return if password_invalid?
     @resource_saved = resource.update_attributes(params[resource_name])
   end
 
@@ -75,6 +76,14 @@ class PeopleController < ApplicationController
   
   def validate_policy_checked
     params['person']['policy_checked'] = true unless params[:person] && params[:person][:email]
+  end
+  
+  def password_invalid?
+    if resource.login_set_by_user? && params["person"]["password"].blank?
+      resource.errors.add(:password, "Password is too short (minimum is 4 characters)")
+      return true
+    end
+    false
   end
 
   def set_fields_to_create_valid_person
