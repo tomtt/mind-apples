@@ -82,6 +82,27 @@ describe PeopleController do
         flash[:notice].should =~ /thank you/i
       end
     end
+    
+    describe "udpate logged user and reset the session" do
+      before(:each) do
+        @person = Factory(:person, :login => 'gandy', :password => 'topsecret', :password_confirmation => 'topsecret')
+        controller.stubs(:current_user).returns @person
+        Person.stubs(:find_by_param).returns @person
+      end
+      
+      it "update user session on update" do
+        controller.expects(:update_logged_user)
+        put(:update, "person" => {"login" => 'gandy'})
+      end
+      
+      it "set new user session if password was updated" do
+        UserSession.expects(:create!).once.with(
+                    :login => 'gandy',
+                    :password => 'topsecret',
+                    :password_confirmation => 'topsecret')
+        put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
+      end
+    end
 
     describe "when logged in as a different user as the updated one" do
       before do

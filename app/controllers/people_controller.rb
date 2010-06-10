@@ -24,6 +24,7 @@ class PeopleController < ApplicationController
 
   response_for :update do |format|
     if @resource_saved
+      update_logged_user
       format.html do
         flash[:notice] = "Thank you for updating your Mindapples page."
         redirect_to resource_path
@@ -99,6 +100,13 @@ class PeopleController < ApplicationController
     UserSession.create!(:login => params["person"]["login"],
                         :password => params["person"]["password"],
                         :password_confirmation => params["person"]["password_confirmation"])
+  end
+  
+  def update_logged_user
+    return if params["person"]["password"].blank?
+    UserSession.create!(:login => resource.login,
+                        :password => resource.password,
+                        :password_confirmation => resource.password)
   end
 
   def redirect_unless_current_user_is_owner

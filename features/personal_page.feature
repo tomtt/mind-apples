@@ -54,6 +54,15 @@ Feature: Personal page
     And I press "Submit"
     Then I should see "Bob the Builder's page on Mindapples"
 
+  Scenario: Person sets his new password
+    When I follow "Edit"
+    And I fill in "person[password]" with "secretsuper"
+    And I fill in "person[password_confirmation]" with "secretsuper"
+    And I press "Submit"
+    Then I should see "Thank you for updating your Mindapples page."
+    Then I follow "Edit"
+    And I should not see "You do not have permission to edit this page"
+
   Scenario: A hacker tries to edit another person's page
     Given I have a personal page
     And my login is "hacker"

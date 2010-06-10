@@ -4,7 +4,6 @@
 @pivotal_1292096
 @pivotal_1292172
 @pivotal_3771421
-@pivotal_3773892
 @pivotal_3773666
 
 Feature: Asking for five a day
@@ -82,10 +81,3 @@ Feature: Asking for five a day
     When I go to the "take the test" page
     And I follow "Terms & Conditions"
     Then I should see "govern your access to and use of"
-
-  Scenario: As a social butterfly/little miss bashful I must fill in email/password confirmation if I fill in username
-    When I go to the "take the test" page
-    And I fill in "Join us. Choose a username to claim your page" with "banana_man"
-    And I check "person_policy_checked"
-    And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
