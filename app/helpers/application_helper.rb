@@ -54,8 +54,21 @@ module ApplicationHelper
   def git_info
     '<div class="git-version">version: ' + Git.master_head_sha1 + '</div>'
   end
-  
-  def share_this
-    '<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=a0cce762-9e05-4090-a9ab-9c67d81be3de&amp;type=website&amp;post_services=facebook%2Ctwitter"></script>'
+    
+  def share_this_icons
+    # genereted at http://www.addthis.com/
+
+    '<!-- AddThis Button BEGIN -->
+    
+      <div id="share_this_links" class="addthis_toolbox addthis_default_style">
+        <a class="addthis_button_facebook" addthis:url="http://mindapples.staging.tomtenthij.co.uk/"></a>
+        <a class="addthis_button_twitter" addthis:url="http://mindapples.staging.tomtenthij.co.uk/"></a>
+      </div>
+      
+      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c1213380f6109b1">
+        show_share_this_icons();
+      </script>
+      
+    <!-- AddThis Button END -->'    
   end
 end

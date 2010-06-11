@@ -13,17 +13,8 @@ Feature: Meaningful error pages
   
   Scenario: I can share something through facebook  
     When I go to "/person/visible_ninja"
-    And debugger
-    And I should see "ShareThis"
-    And I follow "ShareThis"
-    Then I should see "facebook"
-    When I follow "facebook"
-    Then I should see facebook login page in a new window
+    And I should see a ShareThis facebook link
 
   Scenario: I can share something through twitter
     When I go to "/person/visible_ninja"
-    And I should see "ShareThis"
-    And I follow "ShareThis"
-    Then I should see "twitter"
-    When I follow "twitter"
-    Then I should see twitter login page in a new window
+    And I should see a ShareThis twitter link

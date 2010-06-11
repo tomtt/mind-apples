@@ -40,3 +40,11 @@ Then /^"([^\"]*)" should be selected from the "([^\"]*)" options$/ do |value, fi
   checked_inputs.size.should == 1
   checked_inputs.first['value'].should == value
 end
+
+When /^I should see a ShareThis facebook link$/ do
+  response.should have_selector("a", :class=> 'addthis_button_facebook')
+end
+
+When /^I should see a ShareThis twitter link$/ do
+  response.should have_selector("a", :class=> 'addthis_button_twitter')
+end
