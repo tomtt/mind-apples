@@ -2,6 +2,10 @@ class PasswordResetsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
   # before_filter :require_no_user
 
+  def index
+    redirect_to login_url
+  end
+  
   def create
     @person = Person.find_by_email(params[:email])
     if @person

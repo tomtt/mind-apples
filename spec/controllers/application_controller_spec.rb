@@ -145,7 +145,6 @@ describe ApplicationController do
 
   describe "catch standard errors" do
     it "when is raised error 500" do
-      pending
       get :show, :id => 'something'
       response.should render_template('errors/error_500')
     end

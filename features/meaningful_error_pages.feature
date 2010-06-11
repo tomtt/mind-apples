@@ -1,4 +1,3 @@
-@wip
 @pivotal_1292210
 
 Feature: Meaningful error pages
