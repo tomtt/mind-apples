@@ -14,10 +14,22 @@ Feature: Personal page
     And I fill in "Password" with "sosocial"
     And I press "Log in"
 
+	@current
   Scenario: Person logs in and sees his page
     Then I should see "Mindapples rocks"
     And I should see "Welcome back 'gandy'"
     And I should see "gandy's page on Mindapples"
+	Then I should not see a link to "Take the Mindapples test"
+	Then I should not see "and pick your 5-a-day. "
+	
+	@current
+  Scenario: Person views his own page when not logged in
+    When I follow "Log out"
+    And I go to "/person/gandy"
+    Then I should see "Mindapples rocks"
+	Then I should see a link to "Take the Mindapples test"
+	Then I should see "and pick your 5-a-day. "
+
 
   Scenario: Person follows the link to his page
     When I follow "About us"
@@ -82,11 +94,6 @@ Feature: Personal page
     And I log in
     And I go to "/person/gandy"
     Then I should not see "gandy@example.com"
-
-  Scenario: Person views his own page when not logged in
-    When I follow "Log out"
-    And I go to "/person/gandy"
-    Then I should see "Mindapples rocks"
 
   Scenario: Person edits his page when not logged in
     When I follow "Log out"
