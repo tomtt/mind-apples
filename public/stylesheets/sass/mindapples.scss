@@ -1,0 +1,34 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font: {
+    family: helvetica neue, arial, sans;
+    size: 62.5%;
+  }
+}
+
+@mixin main_section {
+  width: 960px;
+  padding: 0 22px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.page_wrapper {
+  width: 100%;
+  text-align: center;
+
+  #header {
+    @include main_section;
+  }
+  
+  .page_main {
+    @include main_section;
+    background-color: white;
+  }
+}
+
