@@ -15,3 +15,4 @@ db/*.sqlite3
 public/features/*
 config/initializers/personal.rb
 public/tmp.html
+.sass-cache
