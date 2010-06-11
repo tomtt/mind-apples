@@ -1,0 +1,21 @@
+# PLANET ARGON approved database.yml file
+login: &login
+  adapter: mysql
+  host: localhost
+  username: mind_apples
+
+development:
+  database: mind_apples_development
+  <<: *login
+    
+test: &TEST
+  database: mind_apples_test
+  <<: *login
+
+production:
+  database: mind_apples_production
+  <<: *login
+
+
+cucumber:
+  <<: *TEST
