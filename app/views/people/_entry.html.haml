@@ -36,7 +36,10 @@
 .col-odd
   = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you occasional messages. </span><span class='description-light'>(never made public)</span>"
   = form.text_field :email
-- unless form.object.login_set_by_user?
+-if form.object.login_set_by_user?
+  %div{:class => 'col-evend hide'}
+    = form.text_field :login
+-else
   .col-even
     = form.label :login, "Join us. <span class='description'>Choose a username to claim your page </span><span class='description-light'>(careful, you can only choose once)</span>"
     = form.text_field :login

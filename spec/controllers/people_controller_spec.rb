@@ -62,9 +62,9 @@ describe PeopleController do
 
       it "should set the login in a protected way on the updated resource" do
         Person.stubs(:find_by_param).returns @mock_person
+        PeopleController.any_instance.stubs(:password_invalid?).returns false
         @mock_person.expects(:update_attributes)
         @mock_person.expects(:protected_login=).with('gandy')
-        @mock_person.expects(:login_set_by_user?).returns false
 
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
@@ -86,6 +86,15 @@ describe PeopleController do
         @mock_person.expects(:login_set_by_user?).returns true
         @mock_person.expects(:errors)
         put(:update, "person" => {"login" => 'gandy', 'password' => '', 'password_confirmation' => ''})
+      end
+      
+      it "find resource only for existed login" do
+        nil_person = mock('nil_person', :nil? => true)
+        Person.stubs(:find_by_param).returns(nil_person)
+        mock_person = mock('person')
+        ApplicationController.any_instance.stubs(:current_user).returns(mock_person)
+        
+        put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
     

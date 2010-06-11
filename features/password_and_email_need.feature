@@ -56,6 +56,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    And I should see "Email can't be blank"
 
   Scenario: I'm not able save blank password on edit page if I fill in username
     When I go to the homepage

@@ -58,3 +58,19 @@ Feature: Handle taken email gracefully
     Then I should see "Email can't be blank"
     Then I should not see "Email email already taken"
 
+  Scenario: Editing your five with validate email format
+    When I go to the homepage
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
+    And I press "Submit"
+    Then I follow "edit"
+    And I fill in "Join us. Choose a username to claim your page" with "banana_man"
+    And I fill in "person[password]" with "secretsuper"
+    And I fill in "person[password_confirmation]" with "secretsuper"
+    And I check "person_policy_checked"
+    And I fill in "Don't go! Leave your e-mail" with "asas"
+    And I press "Submit"
+    And I should not see "Thank you for updating your Mindapples page."
+    Then I should see "Email is invalid"
+    Then I should not see "Email can't be blank"
+    Then I should not see "Email email already taken"
+

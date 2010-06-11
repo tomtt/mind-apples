@@ -18,9 +18,9 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login=(params["person"]["login"])
+    self.resource.protected_login= (params["person"]["login"])
     return if password_invalid?
-    @resource_saved = resource.update_attributes(params[resource_name])
+    @resource_saved = self.resource.update_attributes(params[resource_name])
   end
 
   response_for :update do |format|
@@ -64,6 +64,7 @@ class PeopleController < ApplicationController
 
   def find_resource
     person = Person.find_by_param(params["id"])
+    person = current_user if person.nil? && !current_user.nil?
     unless person
       render_404
     end
@@ -85,7 +86,7 @@ class PeopleController < ApplicationController
     end
     false
   end
-
+  
   def set_fields_to_create_valid_person
     page_code = PageCode.code
     params["person"]["page_code"] = page_code

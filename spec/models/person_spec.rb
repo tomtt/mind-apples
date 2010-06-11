@@ -227,7 +227,23 @@ describe Person do
   it "should not be valid if it does not have a string policy_checked" do
     Factory.build(:person, :policy_checked => "ss").should_not be_valid
   end
-  
+
+  it "should not be valid if email doesn't contain @" do
+    Factory.build(:person, :email => "applemind.com").should_not be_valid
+  end
+
+  it "should not be valid if email doesn't contain domain name" do
+    Factory.build(:person, :email => "apple@.com").should_not be_valid
+  end
+
+  it "should not be valid if email doesn't contain local-part" do
+    Factory.build(:person, :email => "@mind.com").should_not be_valid
+  end
+
+  it "should not be valid if email doesn't contain international domain name" do
+    Factory.build(:person, :email => "asdas@mind").should_not be_valid
+  end
+
   it "should not be valid if email is already taken" do
     person1 = Factory.create(:person, :email => "apple@mind.com")
     Factory.build(:person, :email => "apple@mind.com").should_not be_valid

@@ -8,6 +8,7 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? && !person.email.blank? }, :message => "email already taken"
   
   validates_format_of :login, :with => /^[^_]/, :message => 'can not begin with an underscore'
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :if => Proc.new { |person| person.login_set_by_user? && !person.email.blank? }
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
   before_save :maybe_send_welcome_email
