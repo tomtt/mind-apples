@@ -15,21 +15,50 @@ Feature: Personal page
     And I press "Log in"
 
 	@current
-  Scenario: Person logs in and sees his page
-    Then I should see "Mindapples rocks"
-    And I should see "Welcome back 'gandy'"
-    And I should see "gandy's page on Mindapples"
-	Then I should not see a link to "Take the Mindapples test"
-	Then I should not see "and pick your 5-a-day. "
+  Scenario: Person logs in and sees his page and the page is public	
+	Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks"
+	When I follow "Log out"
+    When I go to the login page
+    And I fill in "Login" with "butterfly"
+    And I fill in "Password" with "sosocial"
+    And I press "Log in"
 	
-	@current
-  Scenario: Person views his own page when not logged in
-    When I follow "Log out"
-    And I go to "/person/gandy"
     Then I should see "Mindapples rocks"
-	Then I should see a link to "Take the Mindapples test"
-	Then I should see "and pick your 5-a-day. "
+    And I should see "Welcome back 'butterfly'"
+    And I should see "butterfly's page on Mindapples"
+	Then I should not see a link to "Take the Mindapples test"
+	And I should not see "and pick your 5-a-day. "
 
+	@current
+  Scenario: Person logs in and sees his page and the page is not public
+	Given a person "SocialButterfly" exists with public_profile: false, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks"
+	When I follow "Log out"
+  	When I go to the login page
+  	And I fill in "Login" with "butterfly"
+  	And I fill in "Password" with "sosocial"
+  	And I press "Log in"
+
+  	Then I should see "Mindapples rocks"
+  	And I should see "Welcome back 'butterfly'"
+  	And I should see "butterfly's page on Mindapples"
+	Then I should not see a link to "Take the Mindapples test"
+	And I should not see "and pick your 5-a-day. "
+
+  Scenario: Person views another's page and the page is public
+	Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly"
+    When I follow "Log out"
+    And I go to "/person/butterfly"
+	And I should see a link to "Take the Mindapples test"
+	And I should see "and pick your 5-a-day. "
+	And I should not see "You don't have permission to see this page"
+
+  Scenario: Person views another's page and the page is not public
+	Given a person "Miss Bashful" exists with public_profile: false, login: "bashful"
+    When I follow "Log out"
+    And I go to "/person/bashful"
+    Then I should not see "Mindapples rocks"
+	And I should not see a link to "Take the Mindapples test"
+	And I should see "You don't have permission to see this page"
 
   Scenario: Person follows the link to his page
     When I follow "About us"

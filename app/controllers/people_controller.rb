@@ -3,6 +3,7 @@ class PeopleController < ApplicationController
   before_filter :set_fields_to_create_valid_person, :only => [:create]
   before_filter :validate_policy_checked, :only => [:create]
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
+  before_filter :redirect_unless_profile_page_is_public, :only => [:show]  
 
   def create
     self.resource = new_resource
@@ -18,9 +19,9 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login= (params["person"]["login"])
+    self.resource.protected_login=(params["person"]["login"])
     return if password_invalid?
-    @resource_saved = self.resource.update_attributes(params[resource_name])
+    @resource_saved = resource.update_attributes(params[resource_name])
   end
 
   response_for :update do |format|
@@ -62,12 +63,12 @@ class PeopleController < ApplicationController
 
   protected
 
-  def find_resource
+  def find_resource    
     person = Person.find_by_param(params["id"])
-    person = current_user if person.nil? && !current_user.nil?
     unless person
       render_404
     end
+    
     person
   end
 
@@ -86,7 +87,7 @@ class PeopleController < ApplicationController
     end
     false
   end
-  
+
   def set_fields_to_create_valid_person
     page_code = PageCode.code
     params["person"]["page_code"] = page_code
@@ -126,4 +127,19 @@ class PeopleController < ApplicationController
       redirect_to login_path
     end
   end
+  
+  def redirect_unless_profile_page_is_public
+    person = self.find_resource
+    if(person)
+      if(current_user==person || person.public_profile)
+        return true
+      else
+        flash[:notice] = "You don't have permission to see this page"
+        redirect_to root_path        
+      end
+    else
+      # we do nothing as find_resource called render_404 
+    end
+  end
+  
 end
