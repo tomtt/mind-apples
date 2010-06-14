@@ -38,6 +38,13 @@ describe PasswordResetsController do
       end
     end
   end
+  
+  describe "index" do
+    it "redirects to login" do
+      get :index
+      response.should be_redirect
+    end
+  end
 
   describe "create" do
     before do
