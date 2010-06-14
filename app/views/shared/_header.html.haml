@@ -1,11 +1,10 @@
 #header
-  .logo
-    %a{:href => "/"}
-      %img{:src => "/images/mindapples.gif", :alt => "Mindapples - What's your five a day?", :border =>"0"}
+  %a.logo{:href => root_path}
+    %img{:src => "/images/header/main_logo.png", :alt => "Mindapples - love your mind?"}
   .menu
     %ul
       %li
-        = link_to('Home', '/')
+        = link_to('Home', root_path)
       %li
         = link_to('Take the test', new_person_path)
       %li

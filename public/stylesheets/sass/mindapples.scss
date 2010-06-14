@@ -1,12 +1,29 @@
+/* Generic */
+
 * {
   margin: 0px;
   padding: 0px;
 }
+a img {
+  border: none;
+}
+
+.git-version {
+  display: none;
+}
+
+/* Layout */
 
 body {
   font: {
     family: helvetica neue, arial, sans;
     size: 62.5%;
+  }
+  background: { 
+    image: url(/images/layout/bg-mid.gif);
+    position: center center;
+    repeat: repeat-y;
+    color: #035118;
   }
 }
 
@@ -16,19 +33,42 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  position: relative;
 }
 
-.page_wrapper {
+.outer_page_wrapper {
   width: 100%;
-  text-align: center;
+  background: {
+    image: url(/images/layout/bg-top.jpg);
+    position: top center;
+    repeat: no-repeat;
+  }
 
-  #header {
-    @include main_section;
-  }
-  
-  .page_main {
-    @include main_section;
-    background-color: white;
-  }
+  .inner_page_wrapper {
+    width: 100%;
+    text-align: center;
+    background: {
+      image: url(/images/layout/bg-bottom.jpg);
+      position: bottom center;
+      repeat: no-repeat;
+    }
+
+    #header {
+      @include main_section;
+      height: 177px;
+      
+      .logo {
+        position: absolute;
+        top: 0px;
+        left: 37px;
+      }
+    }
+
+    .page_main {
+      @include main_section;
+      background-color: white;    
+      min-height: 2300px;
+    } 
+  } 
 }
 
