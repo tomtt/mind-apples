@@ -16,20 +16,9 @@ module ApplicationHelper
     output
   end
 
-  def logged_in_info
-    if current_user
-      link_to('Your mindapples page', person_path(current_user)) +
-        if current_user.login_set_by_user?
-          " | Welcome back '%s' | " % current_user.to_s
-        else
-          " | Welcome back | "
-        end +
-        link_to('Log out', logout_path)
-    else
-      "Already taken the test? " +
-      link_to('Log in to claim your page', login_path)
-    end
-  end
+
+
+  
 
   def page_possessor(person)
     if person.name_for_view

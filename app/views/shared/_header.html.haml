@@ -1,19 +1,6 @@
 #header
   %a.logo{:href => root_path}
     %img{:src => "/images/header/main_logo.png", :alt => "Mindapples - love your mind?"}
-  .menu
-    %ul
-      %li
-        = link_to('Home', root_path)
-      %li
-        = link_to('Take the test', new_person_path)
-      %li
-        = link_to('Read the fives', fives_path)
-      %li
-        = link_to('About us', about_path)
-      %li
-        = link_to('Help us grow', help_us_grow_path)
-      %li
-        = link_to('Blog', 'http://blog.mindapples.org')
-    .account
-      = logged_in_info
+  
+  = render :partial => 'shared/login_controls'
+    
