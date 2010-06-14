@@ -1,7 +1,5 @@
 %li
   = h mindapple.suggestion
-  = mindapple.fans.size 
-  people liked this
 
   %div{:id => "like_section_#{mindapple.id}"}
     = render(:partial => 'pages/like_links', :locals => {:mindapple => mindapple})

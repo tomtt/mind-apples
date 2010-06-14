@@ -8,7 +8,7 @@ Feature: Mindapples Home Page
   Scenario: As a curious cat I can see the What? section
 	When I go to the homepage
 	Then I should see the "green_question_mark.png" image with alt "question mark"
-	And I should see "What's the 5 a day for your mind?"
+	And I should see "What’s the 5 a day for your mind?"
 	And I should see the "green_comment_bubble.png" image with alt "comment bubble"
 	And I should see "Share what works for you"
 	And I should see the "two_green_arrows.png" image with alt "two arrows"
@@ -77,5 +77,4 @@ Feature: Mindapples Home Page
 	#     And I press "Submit"
 	# And show me the page
 	# And I should be on my edit page
-	
 	

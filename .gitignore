@@ -16,3 +16,5 @@ config/initializers/personal.rb
 public/tmp.html
 .sass-cache
 public/system
+public/stylesheets/mindapples.css
+

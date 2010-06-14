@@ -91,7 +91,8 @@ class PeopleController < ApplicationController
 
   def favourites
     begin
-      person = Person.find(params[:id])
+      person = Person.find(:first, :conditions => ["login = ?", params[:login]]) # this find doesn't raise an exception when the record is not found
+      raise ActiveRecord::RecordNotFound if person.nil? 
       @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash_error_message(:notice, "Unknown person, cound't find its favourites", root_path)
@@ -157,7 +158,7 @@ class PeopleController < ApplicationController
     unless current_user && current_user == self.find_resource
       session[:return_to] = request.path
       flash[:notice] = "You do not have permission to edit this page"
-      redirect_to login_path
+      redirect_to root_path
     end
   end
   
