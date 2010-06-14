@@ -67,8 +67,14 @@ body {
     .page_main {
       @include main_section;
       background-color: white;    
-      min-height: 2300px;
-    } 
+      min-height: 1446px;
+      margin-bottom: 211px;
+    }
+    
+    #footer {
+      @include main_section;
+      height: 126px;
+    }
   } 
 }
 
