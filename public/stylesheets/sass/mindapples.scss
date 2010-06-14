@@ -98,6 +98,7 @@ body {
         top: 0px;
         left: 37px;
       }
+
       
       .login_controls {
         position: absolute;
@@ -123,7 +124,7 @@ body {
 
     .page_main {
       @include main_section;
-      background-color: white;    
+      background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
       font-size: 1.2em;
