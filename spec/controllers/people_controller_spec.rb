@@ -28,13 +28,7 @@ describe PeopleController do
 
     describe "when logged in as the user" do
       
-      describe "when visiting my own page and the page is not public" do
-        before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
-          controller.stubs(:current_user).returns @person 
-          Person.stubs(:find_by_param).returns(@person)       
-        end
-        
+      shared_examples_for "The user is the owner of a profile page" do 
         it "doesn't redirect to the home page" do
           get 'show', :id => @person.login
           response.should_not redirect_to(root_path)
@@ -43,7 +37,31 @@ describe PeopleController do
         it "doesn't display a flash error message" do
           get 'show', :id => @person.login
           flash[:notice].should == nil
-        end          
+        end                  
+      end
+      
+      shared_examples_for "The user is not the owner of a profile page" do 
+        it "redirects to the home page" do
+          get 'show', :id => @person.login
+          response.should redirect_to(root_path)
+        end
+    
+        it "displays a flash error message" do
+          get 'show', :id => @person.login
+          flash[:notice].should == "You don't have permission to see this page"
+        end                  
+      end
+      
+      
+      describe "when visiting my own page and the page is not public" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          controller.stubs(:current_user).returns @person 
+          Person.stubs(:find_by_param).returns(@person)       
+        end
+                
+        it_should_behave_like "The user is the owner of a profile page"          
+
       end
           
       describe "when visiting my own page and the page is public" do
@@ -53,16 +71,7 @@ describe PeopleController do
           Person.stubs(:find_by_param).returns(@person)       
         end
         
-        it "doesn't redirect to the home page" do
-          get 'show', :id => @person.login
-          response.should_not redirect_to(root_path)
-        end
-          
-        it "doesn't display a flash error message" do
-          get 'show', :id => @person.login
-          flash[:notice].should == nil
-        end          
-          
+        it_should_behave_like "The user is the owner of a profile page"
       end
     end
     
@@ -75,16 +84,8 @@ describe PeopleController do
           controller.stubs(:current_user).returns nil
           Person.stubs(:find_by_param).with('testThis').returns(@person)             
         end
-        
-        it "redirects to the home page" do
-          get 'show', :id => @person.login
-          response.should redirect_to(root_path)
-        end
-    
-        it "displays a flash error message" do
-          get 'show', :id => @person.login
-          flash[:notice].should == "You don't have permission to see this page"
-        end          
+
+        it_should_behave_like "The user is not the owner of a profile page"
       end
     
       describe "when visiting a profile's page and the page is public" do
@@ -95,16 +96,7 @@ describe PeopleController do
           Person.stubs(:find_by_param).with('testThis').returns(@person)             
         end
         
-        it "doesn't redirect to the home page" do
-          get 'show', :id => @person.login
-          response.should_not redirect_to(root_path)
-        end
-          
-        it "doesn't display a flash error message" do
-          get 'show', :id => @person.login
-          flash[:notice].should == nil
-        end          
-          
+        it_should_behave_like "The user is the owner of a profile page"
       end
     end    
   end
