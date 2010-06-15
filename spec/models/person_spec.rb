@@ -27,6 +27,12 @@ describe Person do
       person.ensure_correct_number_of_mindapples.should == person
     end
   end
+  
+  it "password_saved is false in default" do
+    person = Factory(:person, :login => 'testme')
+    person.password_saved.should be_false
+    Person.find_by_login('testme').password_saved.should be_false
+  end
 
   describe "setting login" do
     it "should set the login if it currently is empty" do
