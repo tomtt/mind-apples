@@ -1,0 +1,33 @@
+<p>
+  <b>Author:</b>
+  <%=h @blogfeed.author %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @blogfeed.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @blogfeed.content %>
+</p>
+
+<p>
+  <b>Teaser:</b>
+  <%=h @blogfeed.teaser %>
+</p>
+
+<p>
+  <b>Published:</b>
+  <%=h @blogfeed.published %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @blogfeed.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_blogfeed_path(@blogfeed) %> |
+<%= link_to 'Back', blogfeeds_path %>

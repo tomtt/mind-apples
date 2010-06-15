@@ -1,0 +1,35 @@
+<h1>New blogfeed</h1>
+
+<% form_for(@blogfeed) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.label :teaser %><br />
+    <%= f.text_field :teaser %>
+  </p>
+  <p>
+    <%= f.label :published %><br />
+    <%= f.date_select :published %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', blogfeeds_path %>
