@@ -78,6 +78,15 @@ Feature: Personal page
     Then I should see "Thank you for updating your Mindapples page."
     Then I follow "Edit"
     And I should not see "You do not have permission to edit this page"
+@policy
+  Scenario: Person edit his policy
+    When I follow "Edit"
+    And I uncheck "person_policy_checked"
+    And I fill in "person[password]" with "secretsuper"
+    And I fill in "person[password_confirmation]" with "secretsuper"
+    And I press "Submit"
+    Then I should not see "Thank you for updating your Mindapples page."
+    And I should see "Policy checked can't be blank"
 
   Scenario: A hacker tries to edit another person's page
     Given I have a personal page
