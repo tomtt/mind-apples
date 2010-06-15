@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :blogfeeds
+
   # Resources
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]

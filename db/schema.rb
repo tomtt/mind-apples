@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100604131147) do
+ActiveRecord::Schema.define(:version => 20100614104549) do
+
+  create_table "blog_feeds", :force => true do |t|
+    t.string   "author"
+    t.string   "title"
+    t.text     "content"
+    t.string   "teaser"
+    t.date     "published"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mindapples", :force => true do |t|
     t.text     "suggestion"
