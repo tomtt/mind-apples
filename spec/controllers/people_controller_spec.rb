@@ -18,12 +18,87 @@ describe PeopleController do
     end
   end
 
+
   def do_request
     get 'show', :id => 'param_value'
   end
 
   describe "show" do
     it_should_behave_like "all actions finding a person"
+
+    describe "when logged in as the user" do
+      
+      shared_examples_for "The user is the owner of a profile page" do 
+        it "doesn't redirect to the home page" do
+          get 'show', :id => @person.login
+          response.should_not redirect_to(root_path)
+        end
+          
+        it "doesn't display a flash error message" do
+          get 'show', :id => @person.login
+          flash[:notice].should == nil
+        end                  
+      end
+      
+      shared_examples_for "The user is not the owner of a profile page" do 
+        it "redirects to the home page" do
+          get 'show', :id => @person.login
+          response.should redirect_to(root_path)
+        end
+    
+        it "displays a flash error message" do
+          get 'show', :id => @person.login
+          flash[:notice].should == "You don't have permission to see this page"
+        end                  
+      end
+      
+      
+      describe "when visiting my own page and the page is not public" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          controller.stubs(:current_user).returns @person 
+          Person.stubs(:find_by_param).returns(@person)       
+        end
+                
+        it_should_behave_like "The user is the owner of a profile page"          
+
+      end
+          
+      describe "when visiting my own page and the page is public" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => true) 
+          controller.stubs(:current_user).returns @person 
+          Person.stubs(:find_by_param).returns(@person)       
+        end
+        
+        it_should_behave_like "The user is the owner of a profile page"
+      end
+    end
+    
+    describe "when not logged in as the user" do
+      
+      describe "when visiting a profile's page and the page is not public" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person.stubs(:to_param).returns('testThis')
+          controller.stubs(:current_user).returns nil
+          Person.stubs(:find_by_param).with('testThis').returns(@person)             
+        end
+
+        it_should_behave_like "The user is not the owner of a profile page"
+      end
+    
+      describe "when visiting a profile's page and the page is public" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => true) 
+          @person.stubs(:to_param).returns('testThis')
+          controller.stubs(:current_user).returns nil
+          Person.stubs(:find_by_param).with('testThis').returns(@person)             
+        end
+        
+        it_should_behave_like "The user is the owner of a profile page"
+      end
+    end    
   end
 
   describe "edit" do
@@ -33,10 +108,10 @@ describe PeopleController do
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns(@mock_person)
       end
-
+  
       it_should_behave_like "all actions finding a person"
     end
-
+  
     describe "when not logged in" do
       before do
         @mock_person = build_mock_person
@@ -44,14 +119,14 @@ describe PeopleController do
         controller.stubs(:current_user).returns nil
         Person.stubs(:find_by_param).with('some_login').returns(@mock_person)
       end
-
+  
       it "should set the return_to session value to the path for editing this user" do
         get 'edit', :id => 'some_login'
         session[:return_to].should == edit_person_path(@mock_person)
       end
     end
   end
-
+  
   describe "update" do
     describe "when logged in as the updated user" do
       before do
@@ -59,23 +134,23 @@ describe PeopleController do
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns @mock_person
       end
-
+  
       it "should set the login in a protected way on the updated resource" do
         Person.stubs(:find_by_param).returns @mock_person
         PeopleController.any_instance.stubs(:password_invalid?).returns false
         @mock_person.expects(:update_attributes)
         @mock_person.expects(:protected_login=).with('gandy')
-
+  
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
-
+  
       it "should redirect to the show page" do
         PeopleController.any_instance.stubs(:password_invalid?)
         PeopleController.any_instance.stubs(:update_logged_user)
         put(:update, "person" => {"login" => 'gandy', 'password' => 'asdasds'})
         response.should redirect_to(person_path(@mock_person))
       end
-
+  
       it "should flash a thank you message" do
         PeopleController.any_instance.stubs(:password_invalid?)
         put(:update, "person" => {"login" => 'gandy'})
@@ -89,7 +164,8 @@ describe PeopleController do
       end
       
       it "find resource only for existed login" do
-        nil_person = mock('nil_person', :nil? => true)
+        nil_person = mock('nil_person')
+        nil_person.stubs(:nil?).returns(true)
         Person.stubs(:find_by_param).returns(nil_person)
         mock_person = mock('person')
         ApplicationController.any_instance.stubs(:current_user).returns(mock_person)
@@ -119,7 +195,7 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
-
+  
     describe "when logged in as a different user as the updated one" do
       before do
         @logged_in_person = build_mock_person
@@ -127,46 +203,46 @@ describe PeopleController do
         @mock_person = build_mock_person
         Person.stubs(:find_by_param).returns @mock_person
       end
-
+  
       it "should not update any attributes of the updated user" do
         @mock_person.expects(:update_attributes).never
         put(:update, "person" => {"login" => 'gandy'})
       end
-
+  
       it "should not update the login of the updated user" do
         @mock_person.expects(:protected_login=).never
         put(:update, "person" => {"login" => 'gandy'})
       end
-
+  
       it "should set the notice flash" do
         put(:update, "person" => {"login" => 'gandy'})
         flash[:notice].should == 'You do not have permission to edit this page'
       end
-
+  
       it "should redirect to the login page" do
         put(:update, "person" => {"login" => 'gandy'})
         response.should redirect_to(login_path)
       end
     end
   end
-
+  
   describe "new" do
     before do
       @mock_person = build_mock_person
     end
-
+  
     it "should create a new person with mindapples" do
       Person.expects(:new_with_mindapples)
       get :new
     end
-
+  
     it "should have the new person as the resource" do
       Person.stubs(:new_with_mindapples).returns @mock_person
       get :new
       controller.resource.should == @mock_person
     end
   end
-
+  
   describe "create" do
     it "should log the new person in" do
       @mock_person = build_mock_person
@@ -174,12 +250,12 @@ describe PeopleController do
       UserSession.expects(:create!)
       post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
     end
-
+  
     it "should generate a page code" do
       PageCode.expects(:code).twice
       post(:create, "person" => {})
     end
-
+  
     it "should assign the code as the page code" do
       @mock_person = build_mock_person
       Person.stubs(:new_with_mindapples).returns @mock_person
@@ -188,7 +264,7 @@ describe PeopleController do
       @mock_person.expects(:page_code=).with('abzABz09')
       post(:create, "person" => {})
     end
-
+  
     it "should set the login in a protected way on the created resource" do
       @mock_person = build_mock_person
       Person.stubs(:new_with_mindapples).returns @mock_person
@@ -201,20 +277,20 @@ describe PeopleController do
       @mock_person.expects(:protected_login=).with('gandy')
       post(:create, "person" => {"login" => 'gandy'})
     end
-
+  
     it "should generate a login if the login field is blank" do
       PageCode.stubs(:code).returns('genlogin')
       UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
       post(:create, "person" => {"login" => ''})
     end
-
+  
     it "should assign the code as the autogen login if no login was passed" do
       PageCode.stubs(:code)
       PageCode.stubs(:code).returns 'abzABz09'
       post(:create, "person" => {})
       controller.resource.login.should == '%sabzABz09' % Person::AUTOGEN_LOGIN_PREFIX
     end
-
+  
     it "should use a 20 character long code for the password and confirmation" do
       PageCode.stubs(:code).returns 'abcdef'
       PageCode.expects(:code).with(20).returns '20charlongpass'
@@ -222,34 +298,34 @@ describe PeopleController do
       controller.resource.password.should == '20charlongpass'
       controller.resource.password_confirmation.should == '20charlongpass'
     end
-
+  
     it "should not set a default password if the password field was filled in" do
       post(:create, "person" => { :password => 'mypass' })
       controller.resource.password.should == 'mypass'
     end
-
+  
     it "should not set a default password if the password confirmation field was filled in" do
       post(:create, "person" => { :password_confirmation => 'mypass' })
       controller.resource.password_confirmation.should == 'mypass'
     end
-
+  
     it "should not set a default password if the login field was filled in" do
       post(:create, "person" => { :login => 'mypass' })
       controller.resource.password.should == nil
     end
-
+  
     it "should set a default password if the password field was passed blank" do
       PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password => '' })
       controller.resource.password.should == 'default_password'
     end
-
+  
     it "should set a default password if the password confirmation field was passed blank" do
       PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password_confirmation => '' })
       controller.resource.password_confirmation.should == 'default_password'
     end
-
+  
     # it "don't validate email presence and uniquenes together" do
     #   person = Factory(:person)
     #   post(:create, "person" => { :email => '' })
@@ -311,7 +387,7 @@ describe PeopleController do
         @mock_person.stubs(:save).returns true
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
-
+  
       it "should redirect to show page" do
         UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
@@ -324,14 +400,14 @@ describe PeopleController do
         flash.now[:message].should == 'Thank you for registering'
       end
     end
-
+  
     describe "when there are errors" do
       before do
         @mock_person = build_mock_person
         @mock_person.stubs(:save).returns false
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
-
+  
       it "should render 'edit'" do
         post(:create, "person" => {})
         response.should render_template('edit')
@@ -343,4 +419,5 @@ describe PeopleController do
       end
     end
   end
+    
 end
