@@ -1,24 +1,26 @@
-%h1
-  5-a-day for your mind
-  = image_tag("/images/mind.gif"), " + "
-  = image_tag("/images/apple.jpg"), " = "
-  = image_tag "/images/mindy-smiling.gif"
+.paper
+  .inner-top
+    %h1
+      5-a-day for your mind
+      = image_tag("/images/mind.gif"), " + "
+      = image_tag("/images/apple.jpg"), " = "
+      = image_tag "/images/mindy-smiling.gif"
 
-%h4
-  If eating
-  = image_tag "/images/5aday.jpg"
-  fruit and veg is good for our bodies, what's the equivalent for our
-  = image_tag("/images/mind.gif"), "s?"
+    %h4
+      If eating
+      = image_tag "/images/5aday.jpg"
+      fruit and veg is good for our bodies, what's the equivalent for our
+      = image_tag("/images/mind.gif"), "s?"
 
-%h3
-  Everyone's different.
-  %br
-  = link_to('Take the Mindapples test', new_person_path)
-  today and pick your 5-a-day.
+    %h3
+      Everyone's different.
+      %br
+      = link_to('Take the Mindapples test', new_person_path)
+      today and pick your 5-a-day.
   
-= render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
-.hr.clear  
-  %hr
+    = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
+    .hr.clear  
+      %hr
 
 %h3
   Looking for inspiration? 

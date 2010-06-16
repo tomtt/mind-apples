@@ -18,11 +18,11 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Submit"
-    Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should see "Here are their mindapples"
     And I should see "Wrestling with bears"
     And I should see "Welcome back"
     And I should not see "Welcome back '"
-    And I should not see "There were problems with the following fields"
+    And I should not see "Oh dear, there "
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
@@ -43,7 +43,7 @@ Feature: Asking for five a day
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
-    And I should see "Thank you for registering"
+    And I should see "Thanks for sharing your mindapples."
     And I should see "Being in nature"
     When I follow "Edit"
     Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
@@ -68,7 +68,7 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I fill in "person[password_confirmation]" with "shhh"
     And I press "Submit"
-    Then I should see "Password doesn't match confirmation"
+    Then I should see "Looks like your password and confirmation don't match"
     And I should see a "person[password_confirmation]" password field containing "shhh"
 
   Scenario: Filling in the test correctly from the take the test page but without agreeing the policy
@@ -81,4 +81,4 @@ Feature: Asking for five a day
     When I go to the "take the test" page
     And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
     And I follow "Terms & Conditions"
-    Then I should see "govern your access to and use of"
+    Then I should see "our Web Site at mindapples.org you signify"

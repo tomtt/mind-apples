@@ -10,7 +10,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "Join us. Choose a username to claim your page" with "banana_man"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should not see "Here are their mindapples"
 
   Scenario: As a social butterfl I must fill in email/password confirmation if I fill in username
     When I go to the "take the test" page
@@ -19,7 +19,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should not see "Here are their mindapples"
 
   Scenario: As a social butterfly/little miss bashful I must fill in email/password confirmation if I fill in username
     When I go to the "take the test" page
@@ -27,7 +27,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should not see "Here are their mindapples"
 
   Scenario: As a little miss bashful I don't have to fill in email if I don't fill in username
     When I go to the homepage
@@ -41,7 +41,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "Join us. Choose a username to claim your page" with "banana_man"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should not see "Here are their mindapples"
 
   Scenario: As a little miss bashful I must fill in email/password confirmation if I fill in username
     When I go to the homepage
@@ -56,8 +56,8 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
-    And I should see "Email can't be blank"
+    Then I should not see "Here are their mindapples"
+    And I should see "We need your email address to create your account."
 
   Scenario: I'm not able save blank password on edit page if I fill in username
     When I go to the homepage
@@ -73,5 +73,5 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should see "Password is too short (minimum is 4 characters)"
-    Then I should not see "Here are their suggestions for good things to do to keep your mind healthy"
+    Then I should see "Please choose a valid password (minimum is 4 characters)"
+    Then I should not see "Here are their mindapples"
