@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: blog_feeds
+#
+#  id         :integer(4)      not null, primary key
+#  author     :string(255)
+#  title      :string(255)
+#  content    :text
+#  teaser     :string(255)
+#  published  :date
+#  url        :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe BlogFeed do

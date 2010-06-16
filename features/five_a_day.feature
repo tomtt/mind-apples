@@ -79,5 +79,6 @@ Feature: Asking for five a day
 
   Scenario: Everybody can follow link to terms page from test page
     When I go to the "take the test" page
+    And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
     And I follow "Terms & Conditions"
     Then I should see "govern your access to and use of"

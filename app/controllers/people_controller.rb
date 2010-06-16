@@ -1,10 +1,10 @@
 class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
   before_filter :set_fields_to_create_valid_person, :only => [:create]
-  before_filter :validate_policy_checked, :only => [:create]
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
-  before_filter :redirect_unless_profile_page_is_public, :only => [:show]  
-
+  before_filter :redirect_unless_profile_page_is_public, :only => [:show]
+  before_filter :convert_policy_checked_value, :only => [:create, :update]
+  
   def create
     self.resource = new_resource
     self.resource.protected_login = params["person"]["login"]
@@ -63,21 +63,17 @@ class PeopleController < ApplicationController
 
   protected
 
-  def find_resource    
+  def find_resource
     person = Person.find_by_param(params["id"])
     unless person
       render_404
     end
-    
+
     person
   end
 
   def new_resource(attributes = (params[resource_name] || {}))
     resource = Person.new_with_mindapples(attributes)
-  end
-  
-  def validate_policy_checked
-    params['person']['policy_checked'] = true unless params[:person] && params[:person][:email]
   end
   
   def password_invalid?
@@ -135,11 +131,15 @@ class PeopleController < ApplicationController
         return true
       else
         flash[:notice] = "You don't have permission to see this page"
-        redirect_to root_path        
+        redirect_to root_path
       end
     else
       # we do nothing as find_resource called render_404 
     end
+  end
+  
+  def convert_policy_checked_value
+    params['person']['policy_checked'] = true if params['person'] && params['person']['policy_checked'] == "1"
   end
   
 end

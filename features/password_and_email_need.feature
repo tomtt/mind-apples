@@ -37,6 +37,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Submit"
     Then I follow "Edit"
+    And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
     And I fill in "Join us. Choose a username to claim your page" with "banana_man"
     And I check "person_policy_checked"
     And I press "Submit"
