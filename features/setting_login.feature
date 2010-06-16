@@ -32,5 +32,5 @@ Feature: Setting login
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I fill in "Join us. Choose a username" with "_pluk"
     And I press "Submit"
-    Then I should see "Login can not begin with an underscore"
+    Then I should see "Sorry, usernames cannot begin with an underscore. Please choose again."
     And I should see a "person[login]" text field
