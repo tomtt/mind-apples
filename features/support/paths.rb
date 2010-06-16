@@ -15,6 +15,8 @@ module NavigationHelpers
       logout_path
     when /^the "take the test" page$/
       new_person_path
+    when /^the full form page$/
+      '/people/new'      
     when /^the "about" page$/
       about_path
     when /^the "fives" page$/
@@ -27,6 +29,9 @@ module NavigationHelpers
       'this-is-a-page-that-blows-up-to-test-the-500-error'
     when /^my mindapples page$/
       person_path(@me_person)
+    when /^my edit page$/
+      edit_person_path(@me_person)
+      
     # Add more mappings here.
     # Here is a more fancy example:
     #

@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]
   map.resources :password_resets
-
+  
   # Named routes
   map.root :controller => "pages", :action => "home"
   map.login '/login', :controller => "user_sessions", :action => "new"
@@ -26,5 +26,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   map.connect '/this-is-a-page-that-blows-up-to-test-the-500-error', :controller => 'errors', :action => 'error500'
-  map.connect '*path', :controller => 'errors', :action => 'error500'
+  # map.connect '*path', :controller => 'errors', :action => 'error500'
 end

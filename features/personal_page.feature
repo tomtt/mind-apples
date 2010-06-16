@@ -14,8 +14,6 @@ Feature: Personal page
     And I fill in "Password" with "sosocial"
     And I press "Log in"
 
-  @current
-
   Scenario: Person logs in and sees his page and the page is public 
     Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks"
     When I follow "Log out"

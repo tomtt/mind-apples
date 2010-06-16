@@ -41,10 +41,26 @@ Then /^"([^\"]*)" should be selected from the "([^\"]*)" options$/ do |value, fi
   checked_inputs.first['value'].should == value
 end
 
+Then /^I should see an? "([^\"]*)" submit button$/ do |name|
+  response.body.should have_tag("input[name='#{name}'][type='submit']")
+end
+
+Then /^I should not see an? "([^\"]*)" submit button$/ do |name|
+  response.body.should_not have_tag("input[name='#{name}'][type='submit']")
+end
+
 When /^I should see a ShareThis facebook link$/ do
   response.should have_selector("a", :class=> 'addthis_button_facebook')
 end
 
 When /^I should see a ShareThis twitter link$/ do
   response.should have_selector("a", :class=> 'addthis_button_twitter')
+end
+
+Then /^I should see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|
+  response.should have_xpath("//img[@src='#{image_path}'][@alt='#{alt_text}']")
+end
+
+Then /^I should not see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|
+  response.should have_xpath("//img[@src='#{image_path}'][@alt='#{alt_text}']")
 end

@@ -18,11 +18,7 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Submit"
-    Then I should see "Here are their mindapples"
-    And I should see "Wrestling with bears"
-    And I should see "Welcome back"
-    And I should not see "Welcome back '"
-    And I should not see "Oh dear, there "
+	Then I should be on the full form page
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
