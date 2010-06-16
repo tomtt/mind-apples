@@ -17,19 +17,24 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <%= yield :head %>
   </head>
 
-  <body>
-    <div class="page-wrapper">
+<body>
+  <div class="outer_page_wrapper">
+    <div class="inner_page_wrapper">
       <%= render :partial => '/shared/header' %>
-      <div id="main" class="with-shelf-curved below-shelf">
+    
+      <div class="page_main">
+        <%= render :partial => '/shared/main_menu' %>
         <div class="content">
           <%= show_flashes -%>
           <%= yield :layout %>
-       </div>
+        </div>
       </div>
+    
       <%= render :partial => '/shared/footer' %>
       <%= git_info %>
     </div>
-   
-  </body>
+  </div>
+ 
+</body>
 </html>
 
