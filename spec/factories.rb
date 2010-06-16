@@ -17,7 +17,7 @@ Factory.define :person do |u|
   u.password              "letmein"
   u.password_confirmation "letmein"
   u.public_profile true
-  u.policy_checked true
+  u.policy_checked nil
   u.email 'mind@apple.com'
 end
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100614104549) do
+ActiveRecord::Schema.define(:version => 20100615153309) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(:version => 20100614104549) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "login",                     :default => "",   :null => false
-    t.string   "crypted_password",          :default => "",   :null => false
-    t.string   "password_salt",             :default => "",   :null => false
-    t.string   "persistence_token",         :default => "",   :null => false
-    t.string   "single_access_token",       :default => "",   :null => false
-    t.string   "perishable_token",          :default => "",   :null => false
-    t.integer  "login_count",               :default => 0,    :null => false
-    t.integer  "failed_login_count",        :default => 0,    :null => false
+    t.string   "login",                     :default => "",    :null => false
+    t.string   "crypted_password",          :default => "",    :null => false
+    t.string   "password_salt",             :default => "",    :null => false
+    t.string   "persistence_token",         :default => "",    :null => false
+    t.string   "single_access_token",       :default => "",    :null => false
+    t.string   "perishable_token",          :default => "",    :null => false
+    t.integer  "login_count",               :default => 0,     :null => false
+    t.integer  "failed_login_count",        :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20100614104549) do
     t.boolean  "has_received_welcome_mail"
     t.boolean  "public_profile",            :default => true
     t.boolean  "policy_checked"
+    t.boolean  "password_saved",            :default => false
   end
 
 end

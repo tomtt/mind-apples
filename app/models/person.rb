@@ -1,8 +1,45 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id                        :integer(4)      not null, primary key
+#  name                      :string(255)
+#  email                     :text
+#  page_code                 :string(255)
+#  braindump                 :text
+#  location                  :string(255)
+#  gender                    :string(255)
+#  age                       :string(255)
+#  occupation                :string(255)
+#  health_check              :string(255)
+#  tags                      :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  login                     :string(255)     default(""), not null
+#  crypted_password          :string(255)     default(""), not null
+#  password_salt             :string(255)     default(""), not null
+#  persistence_token         :string(255)     default(""), not null
+#  single_access_token       :string(255)     default(""), not null
+#  perishable_token          :string(255)     default(""), not null
+#  login_count               :integer(4)      default(0), not null
+#  failed_login_count        :integer(4)      default(0), not null
+#  last_request_at           :datetime
+#  current_login_at          :datetime
+#  last_login_at             :datetime
+#  current_login_ip          :string(255)
+#  last_login_ip             :string(255)
+#  has_received_welcome_mail :boolean(1)
+#  public_profile            :boolean(1)      default(TRUE)
+#  policy_checked            :boolean(1)
+#  password_saved            :boolean(1)      default(FALSE)
+#
+
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
 
+  validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }
+
   validates_presence_of :page_code
-  validates_presence_of :policy_checked
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }
   validates_uniqueness_of :email, :on => :create, :unless => Proc.new { |person| person.email.nil? }, :message => "email already taken"
   validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? && !person.email.blank? }, :message => "email already taken"
@@ -121,4 +158,5 @@ class Person < ActiveRecord::Base
       self.name.strip!
     end
   end
+  
 end

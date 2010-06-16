@@ -20,8 +20,8 @@ config.action_mailer.delivery_method = :test
 
 require File.dirname(__FILE__) + '/../../spec/factories'
 
-config.gem "cucumber",    :lib => false,        :version => ">=0.3.91" unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber'))
-config.gem "webrat",      :lib => false,        :version => ">=0.4.4" unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
+config.gem "cucumber",    :lib => false,        :version => ">=0.6.3" unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber'))
+config.gem "webrat",      :lib => false,        :version => ">=0.7.1" unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
 config.gem "rspec",       :lib => false,        :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem "rspec-rails", :lib => 'spec/rails', :version => ">=1.2.6" unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 config.gem 'fakeweb'

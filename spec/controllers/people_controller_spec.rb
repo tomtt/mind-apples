@@ -347,24 +347,7 @@ describe PeopleController do
            })
       controller.resource.mindapples.size.should == 5
     end
-    
-    describe "validate policy checkbox" do
-      it "if is not checked" do
-        post(:create, "person" => {'email' => 'petr@petr.com'})
-        params['person']['policy_checked'].should == nil
-      end
-      
-      it "if is checked" do
-        post(:create, "person" => {'email' => 'petr@petr.com', 'policy_checked' => true})
-        params['person']['policy_checked'].should == true
-      end
-      
-      it "if is not from registration form" do
-        post(:create, "person" => {})
-        params['person']['policy_checked'].should == true
-      end
-    end
-    
+
     describe "if user name is filled" do
       it "only with filled email" do
         person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
@@ -407,17 +390,59 @@ describe PeopleController do
         @mock_person.stubs(:save).returns false
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
-  
+
       it "should render 'edit'" do
         post(:create, "person" => {})
         response.should render_template('edit')
       end
-      
+
       it "render 404 error page" do
         get :show, :id => 'something'
         response.should render_template('errors/error_404')
       end
     end
   end
-    
+
+  describe "convert_policy_checked_value" do
+    context "create" do
+      it "save checked checkbox as true" do
+        post(:create, "person" => {'policy_checked' => "1"})
+        params['person']['policy_checked'].should == true
+      end
+
+      it "dont save unchecked checkbox as true" do
+        post(:create, "person" => {'policy_checked' => "0"})
+        params['person']['policy_checked'].should_not == true
+      end
+
+      it "dont save nil checkbox param as true" do
+        post(:create, "person" => {})
+        params['person']['policy_checked'].should be_nil
+      end
+    end
+
+    context "update" do
+      before do
+        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
+        controller.stubs(:current_user).returns @person
+        Person.stubs(:find_by_param).returns @person
+      end
+      
+      it "save checked checkbox as true" do
+        post(:update, "person" => {"login" => 'gandy', 'policy_checked' => "1"})
+        params['person']['policy_checked'].should == true
+      end
+
+      it "dont save unchecked checkbox as true" do
+        post(:update, "person" => {'policy_checked' => "0"})
+        params['person']['policy_checked'].should_not == true
+      end
+
+      it "dont save nil checkbox param as true" do
+        post(:update, "person" => {})
+        params['person']['policy_checked'].should be_nil
+      end
+    end
+  end
+
 end
