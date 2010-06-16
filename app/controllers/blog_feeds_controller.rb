@@ -1,6 +1,7 @@
 class BlogFeedsController < ApplicationController
   # GET /blogfeeds
   # GET /blogfeeds.xml
+  
   def index
     @blogfeeds = BlogFeed.all
 
