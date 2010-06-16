@@ -129,7 +129,7 @@ Feature: Personal page
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
-    And I should see "Policy checked can't be blank"
+    And I should see "Please accept the Terms & Conditions"
 
   Scenario: A hacker tries to edit another person's page
     Given I have a personal page
