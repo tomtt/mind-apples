@@ -79,3 +79,18 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I press "Submit"
     Then I should see "Please choose a valid password (minimum is 4 characters)"
     Then I should not see "Here are their mindapples"
+@login
+  Scenario: I'm not able save already existed login
+    Given person exists with login: "banana_man"
+    When I go to the homepage
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
+    And I press "Submit"
+
+    And I fill in "Join us. Choose a username for your Mindapples account.(careful, you can only choose once)" with "banana_man"
+    And I fill in "person[password]" with "supersecret"
+    And I fill in "person[password_confirmation]" with "supersecret"
+    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I check "person_policy_checked"
+    And I press "Submit"
+    Then I should see "That username has already been taken. Please choose again."
+    Then I should not see "Here are their mindapples"

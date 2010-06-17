@@ -54,6 +54,7 @@ class Person < ActiveRecord::Base
   acts_as_authentic do |config|
     config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
     config.merge_validates_confirmation_of_password_field_options :message => "Looks like your password and confirmation don't match."
+    config.merge_validates_uniqueness_of_login_field_options :message => "That username has already been taken. Please choose again."
     config.validate_email_field false
   end
 
