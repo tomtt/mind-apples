@@ -13,7 +13,7 @@ Feature: Setting a password
     And I fill in "person[password]" with "opensesame"
     And I fill in "person[password_confirmation]" with "opensesame"
     And I press "Submit"
-    Then I should be on "/person/spotty/edit"
+    Then I should be on full form edit page
 
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"

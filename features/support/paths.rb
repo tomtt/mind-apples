@@ -31,6 +31,8 @@ module NavigationHelpers
       person_path(@me_person)
     when /^my edit page$/
       edit_person_path(@me_person)
+    when /^full form edit page$/
+      '/person'     
       
     # Add more mappings here.
     # Here is a more fancy example:
