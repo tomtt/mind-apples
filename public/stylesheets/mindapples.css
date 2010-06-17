@@ -1,0 +1,184 @@
+/* Generic */
+* {
+  margin: 0px;
+  padding: 0px; }
+
+a img {
+  border: none; }
+
+ul {
+  list-style-type: none; }
+
+.git-version {
+  display: none; }
+
+.simple_button_1 {
+  height: 24px;
+  line-height: 24px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 22px 0 9px;
+  background-image: url(/images/icons/small_white_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: #89C33E; }
+
+.simple_button_2 {
+  height: 24px;
+  line-height: 24px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 22px 0 9px;
+  background-image: url(/images/icons/small_white_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: #067D29; }
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.foreground {
+  position: absolute; }
+
+/* Layout */
+body {
+  font-family: helvetica neue, arial, sans;
+  font-size: 62.5%;
+  background-image: url(/images/layout/bg-mid.gif);
+  background-position: center center;
+  background-repeat: repeat-y;
+  background-color: #035118; }
+
+.outer_page_wrapper {
+  width: 100%;
+  background-image: url(/images/layout/bg-top.jpg);
+  background-position: top center;
+  background-repeat: no-repeat; }
+  .outer_page_wrapper .inner_page_wrapper {
+    width: 100%;
+    text-align: center;
+    background-image: url(/images/layout/bg-bottom.jpg);
+    background-position: bottom center;
+    background-repeat: no-repeat; }
+    .outer_page_wrapper .inner_page_wrapper #header {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      height: 177px; }
+      .outer_page_wrapper .inner_page_wrapper #header .logo {
+        position: absolute;
+        top: 0px;
+        left: 37px; }
+      .outer_page_wrapper .inner_page_wrapper #header .login_controls {
+        position: absolute;
+        width: 294px;
+        height: 130px;
+        top: 23px;
+        right: -30px; }
+        .outer_page_wrapper .inner_page_wrapper #header .login_controls .background {
+          background-image: url(/images/header/login_box_bg.png); }
+        .outer_page_wrapper .inner_page_wrapper #header .login_controls .foreground {
+          padding: 43px 0 0 98px; }
+          .outer_page_wrapper .inner_page_wrapper #header .login_controls .foreground a {
+            display: block;
+            width: 45px;
+            margin-bottom: 4px; }
+    .outer_page_wrapper .inner_page_wrapper .page_main {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      background-color: white;
+      min-height: 1446px;
+      margin-bottom: 211px;
+      padding-top: 23px; }
+    .outer_page_wrapper .inner_page_wrapper #footer {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      height: 126px; }
+
+.nav_bar {
+  background-image: url(/images/nav_bar/menu_bar.gif);
+  width: 943px;
+  height: 45px;
+  margin: 0px 10px 10px; }
+  .nav_bar #main_tabnav ul {
+    margin-left: 15px; }
+    .nav_bar #main_tabnav ul li {
+      display: block;
+      float: left;
+      margin-left: -2px; }
+      .nav_bar #main_tabnav ul li a, .nav_bar #main_tabnav ul li span {
+        height: 50px;
+        line-height: 50px;
+        margin-top: -3px;
+        display: block;
+        text-align: center;
+        font-family: helvetica neue, arial, sans;
+        font-weight: bold;
+        font-size: 1.5em;
+        color: white;
+        text-decoration: none; }
+    .nav_bar #main_tabnav ul .home a, .nav_bar #main_tabnav ul .home span {
+      width: 71px; }
+    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active {
+      background-image: url(/images/nav_bar/home_active.png); }
+    .nav_bar #main_tabnav ul .about_us a, .nav_bar #main_tabnav ul .about_us span {
+      width: 83px; }
+    .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active {
+      background-image: url(/images/nav_bar/about_us_active.png); }
+    .nav_bar #main_tabnav ul .get_involved a, .nav_bar #main_tabnav ul .get_involved span {
+      width: 110px; }
+    .nav_bar #main_tabnav ul .get_involved a.active, .nav_bar #main_tabnav ul .get_involved span.active {
+      background-image: url(/images/nav_bar/get_involved_active.png); }
+    .nav_bar #main_tabnav ul .blog a, .nav_bar #main_tabnav ul .blog span {
+      width: 58px; }
+    .nav_bar #main_tabnav ul .blog a.active, .nav_bar #main_tabnav ul .blog span.active {
+      background-image: url(/images/nav_bar/blog_active.png); }
+
+/* Page Elements */
+.paper {
+  font-size: 1.2em;
+  line-height: 1.65em;
+  float: right;
+  width: 425px;
+  color: white;
+  background-image: url(/images/layout/bg-bottom-five-a-day.png);
+  background-repeat: no-repeat;
+  background-position: bottom; }
+  .paper .inner-top {
+    padding: 40px 30px 0;
+    margin-bottom: 61px;
+    overflow: hidden;
+    background-image: url(/images/layout/bg-top-five-a-day.png);
+    background-repeat: no-repeat;
+    background-position: top; }
+  .paper a {
+    color: #83ac44;
+    background-color: #CDE5AE;
+    text-decoration: none;
+    padding: 0 2px; }
+  .paper a:hover {
+    background-color: white; }
+  .paper h1 {
+    margin-bottom: 0.8em; }
+  .paper h4 {
+    font-size: 1.4em;
+    color: #CDE5AE; }
