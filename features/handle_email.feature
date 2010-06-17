@@ -43,6 +43,7 @@ Feature: Handle taken email gracefully
     And I should not see "Thank you for sharing your mindapples."
     Then I should see "That e-mail address is already taken. Please choose again."
 
+	@current
   Scenario: Editing your five with already taken email
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
