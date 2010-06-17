@@ -40,20 +40,23 @@ class Person < ActiveRecord::Base
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => 'Please accept the Terms & Conditions'
 
   validates_presence_of :page_code
-  validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }
+  validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user?}, :message => 'We need your email address to create your account.'
   validates_uniqueness_of :email, :on => :create, :unless => Proc.new { |person| person.email.nil? }, :message => "That e-mail address is already taken. Please choose again."
   validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? && !person.email.blank? }, :message => "That e-mail address is already taken. Please choose again."
-  
+
   validates_format_of :login, :with => /^[^_]/, :message => 'Sorry, usernames cannot begin with an underscore. Please choose again.'
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :if => Proc.new { |person| person.login_set_by_user? && !person.email.blank? }
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :if => Proc.new { |person| person.login_set_by_user? && !person.email.blank? }, :message => 'That doesn\'t look like a valid e-mail address. Please try again.'
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
 
   acts_as_authentic do |config|
+    config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
+    config.merge_validates_confirmation_of_password_field_options :message => "Looks like your password and confirmation don't match."
     config.validate_email_field false
   end
+
   has_many :mindapples, :dependent => :nullify
 
   accepts_nested_attributes_for :mindapples
