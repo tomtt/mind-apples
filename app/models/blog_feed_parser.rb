@@ -5,7 +5,7 @@ class BlogFeedParser
     feed_source = FeedTools::Feed.open(url_of_feed_source)
     return self.parse_feed(feed_source)
   end
-  
+
   private
   def self.parse_feed(feed_source)
     feeds = []
