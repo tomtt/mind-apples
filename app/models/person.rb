@@ -41,8 +41,8 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :page_code
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }
-  validates_uniqueness_of :email, :on => :create, :unless => Proc.new { |person| person.email.nil? }, :message => "email already taken"
-  validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? && !person.email.blank? }, :message => "email already taken"
+  validates_uniqueness_of :email, :on => :create, :unless => Proc.new { |person| person.email.nil? }, :message => "That e-mail address is already taken. Please choose again."
+  validates_uniqueness_of :email, :on => :update, :if => Proc.new { |person| !person.unique_email? && !person.email.blank? }, :message => "That e-mail address is already taken. Please choose again."
   
   validates_format_of :login, :with => /^[^_]/, :message => 'Sorry, usernames cannot begin with an underscore. Please choose again.'
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :if => Proc.new { |person| person.login_set_by_user? && !person.email.blank? }
