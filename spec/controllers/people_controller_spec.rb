@@ -380,7 +380,7 @@ describe PeopleController do
       it "renders flash message" do
         UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
-        flash.now[:message].should == 'Thank you for registering'
+        flash.now[:message].should == 'Thanks for sharing your mindapples.'
       end
     end
   
