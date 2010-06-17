@@ -6,28 +6,20 @@ describe BlogFeedParser do
     xml_filename = File.join(Rails.root, 'spec', 'test_data', 'feed.xml')
     xml = File.read(xml_filename)
     FakeWeb.register_uri(:any, "http://mindapples.org/feed", :body => xml)
-
-    parsed_data = BlogFeedParser.read('http://mindapples.org/feed')
-    @data = parsed_data.first
+    @parsed_data = BlogFeedParser.read('http://mindapples.org/feed')
+    @data = @parsed_data.first
   end
 
   it "reads the data from the FEED_URL" do
-    parsed_data = BlogFeedParser.read('http://mindapples.org/feed')
-    parsed_data.size.should == 10
+    @parsed_data.size.should == 3
   end
 
   describe "preparing data" do
-    before(:all) do
-      parsed_data = BlogFeedParser.read('http://mindapples.org/feed')
-      @data = parsed_data.first
-    end
-
     it "contains title" do
       @data[:title].should == 'The missing middle of modern meditation'
     end
 
     it "contains author" do
-      pending
       @data[:author].should == '21awake'
     end
 

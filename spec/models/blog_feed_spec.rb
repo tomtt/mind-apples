@@ -32,18 +32,10 @@ describe BlogFeed do
   end
 
   it "has got url feed constant" do
-     BlogFeed::FEED_URL.should == "http://mindapples.org/feed/"
+    BlogFeed::FEED_URL.should == "http://mindapples.org/feed/"
   end
 
   describe "import_feeds" do
-    it "import_feeds importing feeds into db" do
-      xml_filename = File.join(Rails.root, 'spec', 'test_data', 'feed.xml')
-      xml = File.read(xml_filename)
-      FakeWeb.register_uri(:any, "http://mindapples.org/feed", :body => xml)
-
-      BlogFeed.import_feeds
-      BlogFeed.all.size.should == 10
-    end
 
     it "import_feeds importing only valid feeds into db" do
       invalid_feed = {
