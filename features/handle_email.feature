@@ -1,4 +1,4 @@
-@pivotal_2034096
+@pivotal_2034096 
 
 Feature: Handle taken email gracefully
   In order to not confuse users
