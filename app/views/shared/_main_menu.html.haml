@@ -1,15 +1,22 @@
-.menu
-  %ul
-    %li
-      = link_to('Home', root_path)
-    %li
-      = link_to('Take the test', new_person_path)
-    %li
-      = link_to('Read the fives', fives_path)
-    %li
-      = link_to('About us', about_path)
-    %li
-      = link_to('Help us grow', help_us_grow_path)
-    %li
-      = link_to('Blog', 'http://blog.mindapples.org')
+.nav_bar
+  - render_tabnav :main do
+    - add_tab do |t|
+      - t.named 'Home'
+      - t.links_to root_path()
+      - t.highlights_on :controller => :pages, :action => :home
+      - t.html= {:class => 'home'}
+    - add_tab do |t|
+      - t.named 'About us'
+      - t.links_to about_path
+      - t.highlights_on :controller => :pages, :action => :about
+      - t.html= {:class => 'about_us'}
+    - add_tab do |t|
+      - t.named 'Get Involved'
+      - t.highlights_on :controller => :people, :action => :help_us_grow
+      - t.html= {:class => 'get_involved'}
+    - add_tab do |t|
+      - t.named 'Blog'
+      - t.html= {:class => 'blog'}
+    
+
 

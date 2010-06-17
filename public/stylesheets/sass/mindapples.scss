@@ -7,12 +7,12 @@
 a img {
   border: none;
 }
-
+ul {
+  list-style-type: none;
+}
 .git-version {
   display: none;
 }
-
-
 
 @mixin simple_button {
   height: 24px;
@@ -127,52 +127,7 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
-      font-size: 1.2em;
-      line-height: 1.65em;
-      
-      .paper {
-        float: right;
-        width: 425px;
-        color: white;
-        background: {
-          image: url(/images/layout/bg-bottom-five-a-day.png);
-          repeat: no-repeat;
-          position: bottom;
-        }
-        
-        .inner-top {
-          padding: 40px 30px 0;
-          margin-bottom: 61px;
-          overflow: hidden;
-          background: {
-            image: url(/images/layout/bg-top-five-a-day.png);
-            repeat: no-repeat;
-            position: top;
-          }
-        }
-        
-        a {
-          color: #83ac44;
-          background-color: #CDE5AE;
-          text-decoration: none;
-          padding: 0 2px;
-        }
-        
-        a:hover {
-          background-color: white;
-        }
-        
-        h1 {
-          margin-bottom: 0.8em;
-        }
-        
-        
-        h4 {
-          font-size: 1.4em;
-          color: #CDE5AE;
-        }
-        
-      }
+      padding-top: 23px;
     }
     
     #footer {
@@ -180,5 +135,104 @@ body {
       height: 126px;
     }
   } 
+}
+
+
+.nav_bar {
+  background-image: url(/images/nav_bar/menu_bar.gif);
+  width: 943px;
+  height: 45px;
+  margin: 0px 10px 10px;
+  
+  #main_tabnav ul {
+    margin-left: 15px;
+    
+    li {
+      display: block;
+      float: left;
+      margin-left: -2px;
+      
+      a, span {
+        height: 50px;
+        line-height: 50px;
+        margin-top: -3px;
+        display: block;
+        text-align: center;
+        font: {
+          family: helvetica neue, arial, sans;
+          weight: bold;
+          size: 1.5em;
+        }
+        color: white;
+        text-decoration: none;
+      }
+    }
+    
+    .home {
+      a, span { width: 71px; }
+      a.active, span.active { background-image: url(/images/nav_bar/home_active.png); }
+    }
+    .about_us {
+      a, span { width: 83px; }
+      a.active, span.active { background-image: url(/images/nav_bar/about_us_active.png); }
+    }
+    .get_involved {
+      a, span { width: 110px; }
+      a.active, span.active { background-image: url(/images/nav_bar/get_involved_active.png); }
+    }
+    .blog {
+      a, span { width: 58px; }
+      a.active, span.active { background-image: url(/images/nav_bar/blog_active.png); }
+    }
+    
+  }
+}
+
+/* Page Elements */
+
+.paper {
+  font-size: 1.2em;
+  line-height: 1.65em;
+  float: right;
+  width: 425px;
+  color: white;
+  background: {
+    image: url(/images/layout/bg-bottom-five-a-day.png);
+    repeat: no-repeat;
+    position: bottom;
+  }
+  
+  .inner-top {
+    padding: 40px 30px 0;
+    margin-bottom: 61px;
+    overflow: hidden;
+    background: {
+      image: url(/images/layout/bg-top-five-a-day.png);
+      repeat: no-repeat;
+      position: top;
+    }
+  }
+  
+  a {
+    color: #83ac44;
+    background-color: #CDE5AE;
+    text-decoration: none;
+    padding: 0 2px;
+  }
+  
+  a:hover {
+    background-color: white;
+  }
+  
+  h1 {
+    margin-bottom: 0.8em;
+  }
+  
+  
+  h4 {
+    font-size: 1.4em;
+    color: #CDE5AE;
+  }
+  
 }
 
