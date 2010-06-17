@@ -120,6 +120,24 @@ describe Person do
     end
   end
 
+  describe  "uniqueness of login" do
+    it "is valid if there is no same login" do
+      Factory.create(:person, :login => "pluk").should be_valid
+    end
+
+    it "is invalid if there is same login" do
+      Factory(:person, :login => 'pluk')
+      Factory.build(:person, :login => "pluk").should_not be_valid
+    end
+    
+    it "is invalid for update if ther is same login" do
+      Factory(:person, :login => 'pluk')
+      person = Factory(:person, :login => "applesmind", :email => 'apple@minds.com')
+      person.login = 'pluk'
+      person.save.should be_false
+    end
+  end
+
   describe "setting page_code" do
     it "should be protected from mass assign" do
       person = Factory.build(:person, :page_code => 'abcdefgh')
