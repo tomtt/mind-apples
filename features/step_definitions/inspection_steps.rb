@@ -58,9 +58,12 @@ When /^I should see a ShareThis twitter link$/ do
 end
 
 Then /^I should see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|
-  response.should have_xpath("//img[@src='#{image_path}'][@alt='#{alt_text}']")
+  response.should have_xpath("//img/@src[contains(., '#{image_path}')]")
+  response.should have_xpath("//img[@alt='#{alt_text}']")  
 end
 
 Then /^I should not see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|
-  response.should have_xpath("//img[@src='#{image_path}'][@alt='#{alt_text}']")
+  response.should_not have_xpath("//img/@src[contains(., '#{image_path}')]")
+  response.should_not have_xpath("//img[@alt='#{alt_text}']")  
+
 end

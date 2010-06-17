@@ -1,8 +1,8 @@
+= if current_user.nil?
+  = render(:partial => '/pages/what_section')
+
 .paper
   .inner-top
-
-    = if current_user.nil?
-      = render(:partial => '/pages/what_section')
 
     %h1
       5-a-day for your mind

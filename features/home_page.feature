@@ -7,13 +7,13 @@ Feature: Mindapples Home Page
 
   Scenario: As a curious cat I can see the What? section
 	When I go to the homepage
-	# Then I should see the "question_mark.jpeg" image with alt ""
+	Then I should see the "green_question_mark.png" image with alt "question mark"
 	And I should see "What's the 5 a day for your mind?"
-	# And I should see the "comment_bubble.jpeg" image with alt ""
+	And I should see the "green_comment_bubble.png" image with alt "comment bubble"
 	And I should see "Share what works for you"
-	# And I should see the "two_arrows.jpeg" image with alt ""
+	And I should see the "two_green_arrows.png" image with alt "two arrows"
 	And I should see "Discover new things to do" 
-	# And I should see the "green_heart.jpeg" image with alt ""
+	And I should see the "green_heart.png" image with alt "heart"
 	And I should see "Love your mind"
 
   Scenario: As a curious cat I can see the 5 a day section
@@ -36,13 +36,13 @@ Feature: Mindapples Home Page
   	And I press "Log in"
 
 	And I go to the homepage
-	# Then I should not see the "question_mark.jpeg" image with alt ""
+	Then I should not see the "green_question_mark.png" image with alt "question mark"
 	And I should not see "What's the 5 a day for your mind?"
-	# And I should not see the "comment_bubble.jpeg" image with alt ""
+	And I should not see the "green_comment_bubble.png" image with alt "comment bubble"
 	And I should not see "Share what works for you"
-	# And I should not see the "two_arrows.jpeg" image with alt ""
+	And I should not see the "two_green_arrows.png" image with alt "two arrows"
 	And I should not see "Discover new things to do"
-	# And I should not see the "green_heart.jpeg" image with alt ""
+	And I should not see the "green_heart.png" image with alt "heart"
 	And I should not see "Love your mind"
 
   Scenario: As a logged in user I can't see the 5 a day section
