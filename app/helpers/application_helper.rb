@@ -16,10 +16,6 @@ module ApplicationHelper
     output
   end
 
-
-
-  
-
   def page_possessor(person)
     if person.name_for_view
       h(person.name_for_view) + "'s"
@@ -58,6 +54,6 @@ module ApplicationHelper
         show_share_this_icons();
       </script>
       
-    <!-- AddThis Button END -->'    
+    <!-- AddThis Button END -->'
   end
 end
