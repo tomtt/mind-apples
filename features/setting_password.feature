@@ -21,8 +21,7 @@ Feature: Setting a password
     And my braindump is "I heart mindapples"
     And my login is "lucy"
     And my email is "lucy@example.com"
-    When I go to "/person/lucy"
-    And I follow "edit"
+	And I go to the login page
     And I fill in "Enter your email to receive instructions on how to set your password" with "lucy@example.com"
     And I press "Send email"
 
