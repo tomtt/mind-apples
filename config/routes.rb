@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :blogfeeds
+  map.resources :blog_feeds
 
   # Resources
   map.resource :user_session

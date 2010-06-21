@@ -36,8 +36,9 @@ describe BlogFeed do
   end
 
   describe "import_feeds" do
-
+    
     it "import_feeds importing only valid feeds into db" do
+      BlogFeed.delete_all
       invalid_feed = {
         :author => "Andy Gibsonr",
         :title => "",
@@ -85,4 +86,23 @@ describe BlogFeed do
     Factory.build(:blog_feed, :url => '').should_not be_valid
   end
   
+  describe "latest" do
+    before(:all) do
+      BlogFeed.delete_all
+      @news1 = Factory(:blog_feed, :title => '1 very unique title', :published => 2.days.ago.to_date)
+      @news2 = Factory(:blog_feed, :title => '2 very unique title', :published => 1.days.ago.to_date)
+      @news3 = Factory(:blog_feed, :title => '3 unique title', :published => 3.days.ago.to_date)
+    end
+
+    it "returns 2 latest blog records" do
+      BlogFeed.latest(2).size.should == 2
+    end
+
+    it "returns the most recent blog posts" do
+      blog_posts = BlogFeed.latest(2)
+
+      blog_posts.first.should == @news2
+      blog_posts.last.should == @news1
+    end
+  end
 end
