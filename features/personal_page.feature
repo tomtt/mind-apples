@@ -146,10 +146,10 @@ Feature: Personal page
     Then I should not see "gandy@example.com"
 
   Scenario: Person edits his page when not logged in
-    When I follow "Log out"
-    And I go to "/person/gandy"
-    And I follow "edit"
+    When I follow "Log out"	
+    And I go to the login page
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
+    And debugger
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"

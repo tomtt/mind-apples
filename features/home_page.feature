@@ -18,7 +18,9 @@ Feature: Mindapples Home Page
 
   Scenario: As a curious cat I can see the 5 a day section
 	When I go to the homepage
-    Then I should see a "person[mindapples_attributes][0][suggestion]" text field
+	Then I should see "5-a-day for your mind"
+	And I should see "What five things do you do every day, or regularly, to look after your mind?"
+    And I should see a "person[mindapples_attributes][0][suggestion]" text field
     And I should see a "person[mindapples_attributes][1][suggestion]" text field
     And I should see a "person[mindapples_attributes][2][suggestion]" text field
     And I should see a "person[mindapples_attributes][4][suggestion]" text field
@@ -44,7 +46,7 @@ Feature: Mindapples Home Page
 	And I should not see "Discover new things to do"
 	And I should not see the "green_heart.png" image with alt "heart"
 	And I should not see "Love your mind"
-
+	
   Scenario: As a logged in user I can't see the 5 a day section
 	Given I have a personal page
 	And my login is "gandy"
@@ -57,7 +59,9 @@ Feature: Mindapples Home Page
 	And I press "Log in"
 	And I go to the homepage
 
-  	Then I should not see a "person[mindapples_attributes][0][suggestion]" text field
+	Then I should not see "5-a-day for your mind"
+	And I should not see "What five things do you do every day, or regularly, to look after your mind?"
+  	And I should not see a "person[mindapples_attributes][0][suggestion]" text field
   	And I should not see a "person[mindapples_attributes][1][suggestion]" text field
   	And I should not see a "person[mindapples_attributes][2][suggestion]" text field
   	And I should not see a "person[mindapples_attributes][4][suggestion]" text field

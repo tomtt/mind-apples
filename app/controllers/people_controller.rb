@@ -60,6 +60,33 @@ class PeopleController < ApplicationController
   def show
     rc_show
   end
+  
+  def likes
+    if current_user
+      begin
+        @mindapple = Mindapple.find(params[:id])
+        like_mindapple
+      rescue ActiveRecord::RecordNotFound
+        like_flash_error_message(:notice, "Unknown mindapple, cound't finish like operation", root_path)
+      end      
+    else
+      like_flash_error_message(:notice, "You must be logged in to like a mindapple", root_path)
+    end      
+  end
+  
+  def unlikes
+    if current_user
+      begin
+        @mindapple = Mindapple.find(params[:id])
+        unlike_mindapple
+      rescue ActiveRecord::RecordNotFound
+        like_flash_error_message(:notice, "Unknown mindapple, cound't finish unlike operation", root_path)
+      end      
+    else
+      like_flash_error_message(:notice, "You must be logged in to unlike a mindapple", root_path)
+    end      
+    
+  end
 
   protected
 
@@ -140,6 +167,42 @@ class PeopleController < ApplicationController
   
   def convert_policy_checked_value
     params['person']['policy_checked'] = true if params['person'] && params['person']['policy_checked'] == "1"
+  end
+  
+  def like_mindapple
+    if !current_user.mindapples.include?(@mindapple)
+      if !current_user.liked_mindapples.include?(@mindapple)
+        current_user.liked_mindapples << @mindapple
+        current_user.save     
+        respond_to do |format|
+          format.js {render :partial => 'likes.js.rjs'}
+          format.html {redirect_to(root_path) }
+        end           
+      else
+        like_flash_error_message(:notice, "You can't like a mindapple more than once", root_path)
+      end      
+    else
+      like_flash_error_message(:notice, "You can't like one of your mindapples", root_path)
+    end    
+  end
+  
+  def like_flash_error_message(error_key, message, redirection_target)
+    flash[error_key] = message
+    redirect_to(redirection_target) if redirection_target    
+  end
+  
+  def unlike_mindapple
+    if current_user.liked_mindapples.include?(@mindapple)
+      current_user.liked_mindapples.delete(@mindapple)
+      current_user.save
+      respond_to do |format|
+        format.js {render :partial => 'unlikes.js.rjs'}
+        format.html {redirect_to(root_path) }
+      end
+
+    else
+      like_flash_error_message(:notice, "You can't unlike a mindapple if you didn't previously like it", root_path)
+    end
   end
   
 end

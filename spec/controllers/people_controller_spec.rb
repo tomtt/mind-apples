@@ -444,5 +444,293 @@ describe PeopleController do
       end
     end
   end
+  
+  describe "like mindapples actions" do
+    
+    before(:each) do
+      @person = Factory.create(:person, :email => "abcdef@ghijk.com")
+      @owned_mindapple = Factory.create(:mindapple)
+      @others_mindapple = Factory.create(:mindapple)
+            
+      @person.mindapples << @owned_mindapple
+    end
+    
+    describe "like" do
+      describe "when logged in" do
+
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          controller.stubs(:current_user).returns @person 
+          Person.stubs(:find_by_param).returns(@person)                 
+        end
+        
+        it "should be successful" do        
+          mindapple = Factory.create(:mindapple)
+          put :likes, :id => mindapple
+                    
+          response.should be_success
+        end
+              
+        it "adds a mindapple as liked by a user only if the user is not the owner" do
+          mindapple = Factory.create(:mindapple)
+          put :likes, :id => mindapple
+          
+          @person.liked_mindapples.size.should == 1
+        end
+        
+        it "doesn't add a mindapple more than once" do
+          mindapple = Factory.create(:mindapple)
+          @person.liked_mindapples << mindapple
+          
+          put :likes, :id => mindapple
+          
+          @person.liked_mindapples.size.should == 1
+        end
+        
+        it "redirects to the homepage if trying to add a mindapple more than once" do
+          mindapple = Factory.create(:mindapple)
+          @person.liked_mindapples << mindapple
+          
+          put :likes, :id => mindapple
+          response.should redirect_to(root_path)
+        end
+        
+        it "shows an error message if trying to add a mindapple more than once" do
+          mindapple = Factory.create(:mindapple)
+          @person.liked_mindapples << mindapple
+          
+          put :likes, :id => mindapple
+                  
+          flash[:notice].should == "You can't like a mindapple more than once"
+        end
+              
+        it "doesn't add a mindapple to a user's liked ones if the user is the owner of the mindapple" do
+          mindapple = Factory.create(:mindapple)
+          @person.mindapples << mindapple
+          put :likes, :id => mindapple
+          
+          @person.liked_mindapples.should_not include(mindapple)          
+        end
+      
+        it "redirects to the homepage if the user tries to like one of its mindapples" do
+          mindapple = Factory.create(:mindapple)
+          @person.mindapples << mindapple
+          put :likes, :id => mindapple
+          
+          response.should redirect_to(root_path)
+        end
+      
+        it "shows an error message if the user tries to like one of its mindapples" do
+          mindapple = Factory.create(:mindapple)
+          @person.mindapples << mindapple
+          put :likes, :id => mindapple
+          
+          flash[:notice].should == "You can't like one of your mindapples"
+        end
+        
+        it "doesn't add a mindapple if it doesn't exist" do
+          put :likes, :id => -1
+          
+          @person.liked_mindapples.should be_empty
+        end
+      
+        it "redirects to the homepage if trying to add a mindapple that doesn't exist" do
+          put :likes, :id => -1
+          
+          response.should redirect_to(root_path)
+        end
+      
+        it "shows an error message if trying to add a mindapple that doesn't exist" do
+          put :likes, :id => -1
+          
+          flash[:notice].should == "Unknown mindapple, cound't finish like operation"
+        end
+        
+      end
+      
+      describe "when not logged in" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person.stubs(:to_param).returns('testThis')
+          controller.stubs(:current_user).returns nil
+          Person.stubs(:find_by_param).with('testThis').returns(@person)                             
+        end
+        
+        it "redirects to the homepage" do
+          mindapple = Factory.create(:mindapple)
+          put :likes, :mindapple => mindapple
+          
+          response.should redirect_to(root_path)
+        end
+        
+        it "shows an error message" do
+          mindapple = Factory.create(:mindapple)
+          put :likes, :mindapple => mindapple          
+          
+          flash[:notice].should == "You must be logged in to like a mindapple"
+        end
+        
+        it "doesn't add a mindapple as liked by a user that doesn't own the mindapple" do
+          mindapple = Factory.create(:mindapple)
+          put :likes, :mindapple => mindapple
+          
+          @person.liked_mindapples.should be_empty
+        end
+      
+        it "doesn't add a mindapple to a user's liked ones when the user owns the mindapple" do
+          mindapple = Factory.create(:mindapple)
+          @person.mindapples << mindapple
+          put :likes, :mindapple => mindapple
+          
+          @person.liked_mindapples.should_not include(mindapple)          
+        end
+        
+        it "doesn't add a mindapple if it doesn't exist" do
+          put :likes, :mindapple => -1
+          
+          @person.liked_mindapples.should be_empty
+        end
+        
+      end
+      
+    end
+    
+    describe "unlike" do
+      describe "when logged in" do
+    
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          controller.stubs(:current_user).returns @person 
+          Person.stubs(:find_by_param).returns(@person)                 
+        end
+        
+        # it "should be successful" do        
+        #   mindapple = Factory.create(:mindapple)
+        #   put :unlikes, :id => mindapple
+        #   
+        #   response.should be_success
+        # end
+      
+        it "removes a mindapple from a user's liked_mindapples only if the user previously liked it" do
+          mindapple = Factory.create(:mindapple)
+          @person.liked_mindapples << mindapple
+          
+          put :unlikes, :id => mindapple
+          
+          @person.liked_mindapples.should_not include(mindapple)          
+        end
+    
+        it "doesn't do anything  if the user didn't previously like it" do
+          mindapple = Factory.create(:mindapple)
+          
+          put :unlikes, :id => mindapple
+          
+          @person.liked_mindapples.should be_empty          
+        end
+    
+        it "redirects to the homepage if the user didn't previously like it" do
+          mindapple = Factory.create(:mindapple)
+          
+          put :unlikes, :id => mindapple
+          
+          response.should redirect_to(root_path)
+        end
+    
+        it "shows an error message if the user didn't previously like it" do
+          mindapple = Factory.create(:mindapple)
+          
+          put :unlikes, :id => mindapple
+          
+          flash[:notice].should == "You can't unlike a mindapple if you didn't previously like it"
+        end
+    
+        it "doesn't remove a mindapple from another user's liked_mindapples" do
+          mindapple = Factory.create(:mindapple)
+          another_person = Factory.create(:person, :email => "emailTestEmail@email.com")
+          
+          another_person.liked_mindapples << mindapple
+          
+          put :unlikes, :id => mindapple
+          
+          another_person.liked_mindapples.size.should == 1          
+        end
+    
+        it "redirects to the homepage if trying to unlike another's liked_mindapples" do
+          mindapple = Factory.create(:mindapple)
+          another_person = Factory.create(:person, :email => "newEmailTestEmail@email.com")
+          
+          another_person.liked_mindapples << mindapple
+          
+          put :unlikes, :id => mindapple
+          
+          response.should redirect_to(root_path)
+        end
+    
+        # it "shows an error message if trying to unlike another's liked_mindapples" do
+        #   mindapple = Factory.create(:mindapple)
+        #   another_person = Factory.create(:person, :email => "liamEtseT@email.com")
+        #   
+        #   another_person.liked_mindapples << mindapple
+        #   
+        #   put :unlikes, :id => mindapple
+        #   
+        #   flash[:notice].should == "You can't unlike another's liked mindapples"
+        # end
+        
+      end
+      
+      describe "when not logged in" do
+        before(:each) do
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person.stubs(:to_param).returns('testThis')
+          controller.stubs(:current_user).returns nil
+          Person.stubs(:find_by_param).with('testThis').returns(@person)                             
+        end
+        
+        it "redirects to the homepage" do
+          mindapple = Factory.create(:mindapple)
+          put :unlikes, :id => mindapple
+          
+          response.should redirect_to(root_path)          
+        end
+        
+        it "doesn't remove a mindapple from a user's liked_mindapples if the user previously liked it" do
+          mindapple = Factory.create(:mindapple)
+          @person.liked_mindapples << mindapple
+          
+          put :unlikes, :id => mindapple
+          
+          @person.liked_mindapples.should include(mindapple)          
+        end
+    
+        it "doesn't do anything  if the user didn't previously like it" do
+          mindapple = Factory.create(:mindapple)
+          
+          put :unlikes, :id => mindapple
+          
+          @person.liked_mindapples.should be_empty          
+        end
+    
+        it "doesn't remove a mindapple from another user's liked_mindapples" do
+          mindapple = Factory.create(:mindapple)
+          another_person = Factory.create(:person, :email => "stset@email.com")
+          
+          another_person.liked_mindapples << mindapple
+          
+          put :unlikes, :id => mindapple
+          
+          another_person.liked_mindapples.size.should == 1          
+        end
+        
+        it "shows a error message" do
+          mindapple = Factory.create(:mindapple)
+          put :unlikes, :id => mindapple          
+          
+          flash[:notice].should == "You must be logged in to unlike a mindapple"          
+        end
+      end
+      
+    end
+  end
 
 end

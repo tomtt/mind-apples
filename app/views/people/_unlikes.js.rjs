@@ -1,0 +1,1 @@
+page.replace_html("like_section_#{params[:id]}", :partial => 'pages/like_links', :locals => {:mindapple => @mindapple})

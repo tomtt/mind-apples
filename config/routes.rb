@@ -22,6 +22,9 @@ ActionController::Routing::Routes.draw do |map|
   map.media '/media', :controller => "pages", :action => "media"
   map.terms '/terms', :controller => "pages", :action => "terms"
 
+  map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
+  map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
+  
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

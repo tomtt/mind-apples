@@ -2,7 +2,8 @@
   = page_possessor(resource), " page on Mindapples"
 
 %p
-  = link_to 'Edit', edit_person_path(resource)
+  = if current_user && current_user == resource
+    = link_to 'Edit', edit_person_path(resource)
   
 %h3
   Here are their suggestions for good things to do to keep your mind healthy:
