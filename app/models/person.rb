@@ -59,7 +59,8 @@ class Person < ActiveRecord::Base
   end
 
   has_many :mindapples, :dependent => :nullify
-
+  has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
+  
   accepts_nested_attributes_for :mindapples
 
   attr_protected :login, :page_code

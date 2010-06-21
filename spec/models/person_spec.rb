@@ -416,4 +416,27 @@ describe Person do
       person2.save.should be_true
     end
   end
+  
+  describe "associations" do
+    describe "liked mindapples" do
+      it "responds to liked_mindapples method" do
+        person = Factory.create(:person, :email => "person_test@email.com")
+        person.respond_to?('liked_mindapples').should == true
+      end
+
+      it "returns an array of a person's liked mindapples" do
+        mindapple1 = Factory.create(:mindapple)
+        mindapple2 = Factory.create(:mindapple)
+        person = Factory.create(:person, :email => "person_test2@email.com") 
+        
+        person.liked_mindapples << mindapple1
+        person.liked_mindapples << mindapple2
+        
+        person.liked_mindapples.should include(mindapple1)
+        person.liked_mindapples.should include(mindapple2)
+      end
+      
+    end
+  end
+  
 end
