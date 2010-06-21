@@ -28,7 +28,7 @@ describe BlogFeedParser do
     end
 
     it "contains teaser" do
-      @data[:teaser].should == "I have a lot of conversations about meditation.  And over the last few years, as the mainstream interest in meditation has grown and I’ve met more and more people wanting to learn the practice and the theory of meditation – and in particular mindfulness-based meditation –  the supply to satisfy the demand of that interest [...]<img src='http://stats.wordpress.com/b.gif?host=mindapples.org&blog=3742457&post=933&subd=mindapples&ref=&feed=1' border='0' alt=''/>"
+      @data[:teaser].should == "I have a lot of conversations about meditation.  And over the last few years, as the mainstream interest in meditation has grown and I’ve met more and more people wanting to learn the practice and the ..."
     end
 
     it "contains published date" do
@@ -38,6 +38,11 @@ describe BlogFeedParser do
     it "contains url" do
       @data[:url].should == 'http://mindapples.org/2010/05/31/the-missing-middle-of-modern-meditation/'
     end
+  end
+  
+  it "truncate text" do
+    text = 'I have a lot of conversations about meditation.  And over the last few years, as the mainstream interest in meditation has grown and I’ve met more and more people wanting to learn the practice and the theory of meditation – and in particular mindfulness-based meditation –  the supply to satisfy the demand of that interes'
+    BlogFeedParser.truncate(text).length.should <= 210
   end
 
 end

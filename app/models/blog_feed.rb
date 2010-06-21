@@ -25,5 +25,9 @@ class BlogFeed < ActiveRecord::Base
       BlogFeed.create(feed)
     end
   end
-  
+
+  def self.latest(count)
+    BlogFeed.find(:all, :limit => count, :order => 'published DESC')
+  end
+
 end
