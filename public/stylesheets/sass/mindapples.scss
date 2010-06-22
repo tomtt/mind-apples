@@ -236,3 +236,32 @@ body {
   
 }
 
+/* Home page */
+
+.what_section {
+  margin: 20px 0 40px;
+  overflow: auto;
+  text-align: center;
+}
+
+.what_section li {
+  color: #009523;
+  display: inline-block;
+  font: 16px/1.25 "Helvetica Neue", Arial, sans-serif;
+  list-style: none;
+  padding-left: 60px;
+  vertical-align: top;
+  width: 160px;
+}
+
+.what_section .what { padding-left: 0; }
+
+.what_section img {
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.what_section .what img { padding: 6px 0 0; }
+.what_section .share img { padding: 3px 0 0; }
+.what_section .love img { padding: 9px 0 0; }
+
