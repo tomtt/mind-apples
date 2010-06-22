@@ -27,6 +27,7 @@ class PeopleController < ApplicationController
   response_for :update do |format|
     if @resource_saved
       update_logged_user
+      delete_profile_picture unless params['delete_avatar'].nil?
       format.html do
         flash[:notice] = "Thank you for updating your Mindapples page."
         redirect_to resource_path
@@ -213,5 +214,10 @@ class PeopleController < ApplicationController
       flash_error_message(:notice, "You can't unlike a mindapple if you didn't previously like it", root_path)
     end
   end
-  
+
+  def delete_profile_picture
+    resource.avatar.destroy
+    resource.save
+  end
+
 end

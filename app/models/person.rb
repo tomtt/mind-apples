@@ -60,6 +60,10 @@ class Person < ActiveRecord::Base
 
   has_many :mindapples, :dependent => :nullify
   has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
+
+  # paperclip
+  has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "40x40>" }, :default_url => "/images/icons/missing.png"
+  # validates_attachment_size :avatar, :less_than => 500.kilobytes
   
   accepts_nested_attributes_for :mindapples
 
