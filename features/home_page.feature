@@ -67,6 +67,32 @@ Feature: Mindapples Home Page
   	And I should not see a "person[mindapples_attributes][4][suggestion]" text field
 	And I should not see a "commit" submit button
 
+	@top_apples
+  Scenario: As a not logged in user i can see the Top Apples section
+	Given I am on the homepage
+	And a mindapple "mindapple1" exists with suggestion: "mindapple1"
+	And a mindapple "mindapple2" exists with suggestion: "mindapple2"
+	And a mindapple "mindapple3" exists with suggestion: "mindapple3"
+	And a mindapple "mindapple4" exists with suggestion: "mindapple4"
+	And a mindapple "mindapple5" exists with suggestion: "mindapple5"
+	And a mindapple "mindapple6" exists with suggestion: "mindapple6"
+	
+	And 5 people liked mindapple "mindapple1"
+	And 4 people liked mindapple "mindapple2"
+	And 3 people liked mindapple "mindapple3"
+	And 2 people liked mindapple "mindapple4"
+	And 1 people liked mindapple "mindapple5"
+	And 0 people liked mindapple "mindapple6"
+	
+	Then I should see "Top Apples"
+	And I should see "mindapple1"
+	And I should see "mindapple2"
+	And I should see "mindapple3"
+	And I should see "mindapple4"
+	And I should see "mindapple5"
+	And I should not see "mindapple6"
+	
+
 	# @current
 	#   Scenario: filling out the 5-a-day survey should take you to the registration form
 	# When I go to the homepage
