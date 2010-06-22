@@ -735,13 +735,13 @@ describe PeopleController do
   
   describe "favourites" do 
     it "should return the favourites in @favourites" do
-      person = Factory.create(:person, :email => "e@mail.com")
+      person = Factory.create(:person, :email => "e@mail.com", :login => 'login_test')
       mindapple_1 = Factory.create(:mindapple)
       mindapple_2 = Factory.create(:mindapple)
       person.liked_mindapples << mindapple_1
       person.liked_mindapples << mindapple_2
       
-      get :favourites, :id => person
+      get :favourites, :login => person.login
       
       assigns[:favourites].size.should == person.liked_mindapples.size
     end
