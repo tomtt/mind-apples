@@ -221,7 +221,7 @@ describe PeopleController do
   
       it "should redirect to the login page" do
         put(:update, "person" => {"login" => 'gandy'})
-        response.should redirect_to(login_path)
+        response.should redirect_to(root_path)
       end
     end
   end

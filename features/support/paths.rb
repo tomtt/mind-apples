@@ -35,6 +35,9 @@ module NavigationHelpers
       '/person'     
     when /^my favourite mindapples page$/   
       "/person/favourites/#{@me_person.id}"
+    when /^"(.*)\" edit page$/
+      person = Person.find_by_login($1)
+      edit_person_path(person)
       
     # Add more mappings here.
     # Here is a more fancy example:

@@ -156,7 +156,7 @@ class PeopleController < ApplicationController
     unless current_user && current_user == self.find_resource
       session[:return_to] = request.path
       flash[:notice] = "You do not have permission to edit this page"
-      redirect_to login_path
+      redirect_to root_path
     end
   end
   
