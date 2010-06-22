@@ -6,6 +6,7 @@ module NavigationHelpers
   # step definition in webrat_steps.rb
   #
   def path_to(page_name)
+          # debugger
     case page_name
     when /^the homepage$/
       '/'
@@ -16,7 +17,7 @@ module NavigationHelpers
     when /^the "take the test" page$/
       new_person_path
     when /^the full form page$/
-      '/people/new'      
+      '/people/new'
     when /^the "about" page$/
       about_path
     when /^the "fives" page$/
@@ -32,8 +33,8 @@ module NavigationHelpers
     when /^my edit page$/
       edit_person_path(@me_person)
     when /^full form edit page$/
-      '/person'     
-    when /^my favourite mindapples page$/   
+      '/person'
+    when /^my favourite mindapples page$/
       "/person/#{@me_person.login}/favourites"
     when /^"(.*)\" edit page$/
       person = Person.find_by_login($1)

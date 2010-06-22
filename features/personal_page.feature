@@ -74,7 +74,7 @@ Feature: Personal page
 
   Scenario: Person follows the link to his page
     When I follow "About us"
-    And I follow "Your mindapples page"
+    And I follow "Me"
     Then I should see "Mindapples rocks"
 
   Scenario: Another person logs in while somebody is already logged in
@@ -83,7 +83,7 @@ Feature: Personal page
     And my password is "apples"
     And my braindump is "I love Mindapples"
     When I log in
-    And I follow "Your mindapples"
+    And I follow "Me"
     Then I should see "I love Mindapples"
 
 	@permission_bug
@@ -102,7 +102,7 @@ Feature: Personal page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I check "person_policy_checked"
     And I press "Submit"
-    And I follow "Your mindapples"
+    And I follow "Me"
     Then I should see "Playing the piano"
 
   Scenario: Person edits his page

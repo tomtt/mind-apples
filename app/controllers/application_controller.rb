@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   rescue_from Exception, :with => :render_500 
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
-  protected    
+  protected
   def render_404
     render :template => "errors/error_404", :status => "404 Not Found"
   end

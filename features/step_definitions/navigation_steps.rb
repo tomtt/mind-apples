@@ -24,3 +24,8 @@ When /^I follow the twitter link$/ do
   # click_link("ck_twitter")
   pending
 end
+
+Then /^I should see "([^\"]*)" link with "([^\"]*)" url$/ do |link_text, link_url|
+  response.should have_xpath("//a[@href='#{link_url}']")
+  response.should have_xpath("//a[@href='#{link_url}'][text()='#{link_text}']")
+end
