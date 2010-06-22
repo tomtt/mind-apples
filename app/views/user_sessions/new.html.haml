@@ -1,7 +1,7 @@
 %h2
   login
 - form_for @user_session, :url => user_session_path do |f|
-  = f.error_messages
+  = error_messages(f.error_messages)
   = f.label :login
   = f.text_field :login
   = f.label :password

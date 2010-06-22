@@ -147,14 +147,9 @@ Feature: Personal page
 
   Scenario: Person edits his page when not logged in
     When I follow "Log out"	
-	And I go to the login page
+    And I go to the login page
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
-	And I follow "Edit"
+    And debugger
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
-
-  Scenario: Person can't see link to edit profile page when not logged in
-    When I follow "Log out"	
-	And I go to "/person/gandy"
-	Then I should not see "edit"

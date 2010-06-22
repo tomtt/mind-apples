@@ -79,7 +79,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I press "Submit"
     Then I should see "Please choose a valid password (minimum is 4 characters)"
     Then I should not see "Here are their mindapples"
-@login
+
   Scenario: I'm not able save already existed login
     Given person exists with login: "banana_man"
     When I go to the homepage
@@ -94,3 +94,14 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I press "Submit"
     Then I should see "That username has already been taken. Please choose again."
     Then I should not see "Here are their mindapples"
+
+  Scenario: Person try log in with wrong login or password
+    Given I have a personal page
+    And my login is "gandy"
+    And my password is "sosocial"
+    And my braindump is "I love Mindapples"
+    And I go to the login page
+    And I fill in "Login" with "gandy"
+    And I fill in "Password" with "antisosocial"
+    And I press "Log in"
+    Then I should see "Sorry, we don't recognise that username and password combination. Please try again."    
