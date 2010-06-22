@@ -33,6 +33,8 @@ module NavigationHelpers
       edit_person_path(@me_person)
     when /^full form edit page$/
       '/person'     
+    when /^my favourite mindapples page$/   
+      "/person/favourites/#{@me_person.id}"
       
     # Add more mappings here.
     # Here is a more fancy example:

@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
+  map.favourites '/person/favourites/:id', :controller => 'people', :action => 'favourites'
   
   # Generic routes
   map.connect ':controller/:action/:id'

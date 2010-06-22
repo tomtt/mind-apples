@@ -98,3 +98,15 @@ end
 Then /^#{capture_model} should have (\d+) (\w+)$/ do |name, size, association|
   model!(name).send(association).size.should == size.to_i
 end
+
+Then /^#{capture_model} has (\d+) liked mindapples$/ do |name, size|
+
+  person = model(name)
+
+  (1 .. size.to_i).each do 
+    ma = Factory.create(:mindapple)
+    person.liked_mindapples << ma
+  end
+  
+  model(name).liked_mindapples.size.should == size.to_i
+end
