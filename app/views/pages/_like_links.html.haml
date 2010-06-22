@@ -1,3 +1,10 @@
+= if mindapple.fans.size > 0
+  = if mindapple.fans.size == 1
+    = puts "#{mindapple.fans.size} person liked this"
+  = if mindapple.fans.size > 1
+    = puts "#{mindapple.fans.size} people liked this"
+
+
 = if current_user
   = if !current_user.liked_mindapples.include?(mindapple) && !current_user.mindapples.include?(mindapple)
     = link_to_remote("like", {:url=>{:controller => 'people', :action => 'likes', :id => mindapple.id}}, :href=>"person/likes/#{mindapple.id}", :method=>'put')
