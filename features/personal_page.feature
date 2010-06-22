@@ -151,5 +151,5 @@ Feature: Personal page
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
-    And debugger
+	And I follow "Edit"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
