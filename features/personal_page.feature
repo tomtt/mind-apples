@@ -74,7 +74,7 @@ Feature: Personal page
 
   Scenario: Person follows the link to his page
     When I follow "About us"
-    And I follow "Your mindapples page"
+    And I follow "Me"
     Then I should see "Mindapples rocks"
 
   Scenario: Another person logs in while somebody is already logged in
@@ -83,26 +83,26 @@ Feature: Personal page
     And my password is "apples"
     And my braindump is "I love Mindapples"
     When I log in
-    And I follow "Your mindapples"
+    And I follow "Me"
     Then I should see "I love Mindapples"
 
-	@permission_bug
+  @permission_bug
   Scenario: Trying to edit another's page while logged in will take me to the homepage
     Given I have a personal page
-	And a person "SocialButterfly" exists with public_profile: true, login: "butterfly"
+    And a person "SocialButterfly" exists with public_profile: true, login: "butterfly"
     And my login is "anna"
     And my password is "apples"
     And my braindump is "I love Mindapples"
     When I log in
-	And I go to "butterfly" edit page
-	Then I should be on the homepage
-		
+    And I go to "butterfly" edit page
+    Then I should be on the homepage
+    
   Scenario: A new survey is filled in while somebody is already logged in
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I check "person_policy_checked"
     And I press "Submit"
-    And I follow "Your mindapples"
+    And I follow "Me"
     Then I should see "Playing the piano"
 
   Scenario: Person edits his page
@@ -157,10 +157,10 @@ Feature: Personal page
     Then I should not see "gandy@example.com"
 
   Scenario: Person edits his page when not logged in
-    When I follow "Log out"	
+    When I follow "Log out" 
     And I go to the login page
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
-	And I follow "Edit"
+    And I follow "Edit"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"

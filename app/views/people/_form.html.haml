@@ -1,4 +1,4 @@
-- form_for resource, :html => { :class => "survey"} do |person_form|
+- form_for resource, :html => { :class => "survey", :multipart => true} do |person_form|
   = error_messages_for(:person)
   = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
   = render(:partial => 'entry', :locals => { :form => person_form })

@@ -134,16 +134,16 @@ describe PeopleController do
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns @mock_person
       end
-  
+
       it "should set the login in a protected way on the updated resource" do
         Person.stubs(:find_by_param).returns @mock_person
         PeopleController.any_instance.stubs(:password_invalid?).returns false
         @mock_person.expects(:update_attributes)
         @mock_person.expects(:protected_login=).with('gandy')
-  
+
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
-  
+
       it "should redirect to the show page" do
         PeopleController.any_instance.stubs(:password_invalid?)
         PeopleController.any_instance.stubs(:update_logged_user)
@@ -156,13 +156,13 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy'})
         flash[:notice].should =~ /thank you/i
       end
-      
+
       it "don't allow save blank password" do
         @mock_person.expects(:login_set_by_user?).returns true
         @mock_person.expects(:errors)
         put(:update, "person" => {"login" => 'gandy', 'password' => '', 'password_confirmation' => ''})
       end
-      
+
       it "find resource only for existed login" do
         nil_person = mock('nil_person')
         nil_person.stubs(:nil?).returns(true)
@@ -173,20 +173,20 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
-    
+
     describe "udpate logged user and reset the session" do
       before(:each) do
         @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
         controller.stubs(:current_user).returns @person
         Person.stubs(:find_by_param).returns @person
       end
-      
+
       it "update user session on update" do
         PeopleController.any_instance.stubs(:password_invalid?).returns false
         controller.expects(:update_logged_user)
         put(:update, "person" => {"login" => 'gandy'})
       end
-      
+
       it "set new user session if password was updated" do
         UserSession.expects(:create!).once.with(
                     :login => 'gandy',
@@ -195,7 +195,26 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
-  
+    
+    describe "profile picture" do
+      before(:each) do
+        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
+        controller.stubs(:current_user).returns @person
+        Person.stubs(:find_by_param).returns @person
+        PeopleController.any_instance.stubs(:password_invalid?).returns false
+      end
+      
+      it "delete if delete_checkbox is in params" do
+         PeopleController.any_instance.expects(:delete_profile_picture).once
+         put(:update, "person" => {"login" => 'gandy'}, 'delete_avatar' => 1)
+      end
+      
+      it "don't delete if delete_checkbox is not int params" do
+         PeopleController.any_instance.expects(:delete_profile_picture).never
+         put(:update, "person" => {"login" => 'gandy'})
+      end
+    end
+
     describe "when logged in as a different user as the updated one" do
       before do
         @logged_in_person = build_mock_person
@@ -203,12 +222,12 @@ describe PeopleController do
         @mock_person = build_mock_person
         Person.stubs(:find_by_param).returns @mock_person
       end
-  
+
       it "should not update any attributes of the updated user" do
         @mock_person.expects(:update_attributes).never
         put(:update, "person" => {"login" => 'gandy'})
       end
-  
+
       it "should not update the login of the updated user" do
         @mock_person.expects(:protected_login=).never
         put(:update, "person" => {"login" => 'gandy'})

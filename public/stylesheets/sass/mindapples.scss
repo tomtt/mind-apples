@@ -98,7 +98,6 @@ body {
         top: 0px;
         left: 37px;
       }
-
       
       .login_controls {
         position: absolute;
@@ -127,7 +126,52 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
-      padding-top: 23px;
+      font-size: 1.2em;
+      line-height: 1.65em;
+      
+      .paper {
+        float: right;
+        width: 425px;
+        color: white;
+        background: {
+          image: url(/images/layout/bg-bottom-five-a-day.png);
+          repeat: no-repeat;
+          position: bottom;
+        }
+        
+        .inner-top {
+          padding: 40px 30px 0;
+          margin-bottom: 61px;
+          overflow: hidden;
+          background: {
+            image: url(/images/layout/bg-top-five-a-day.png);
+            repeat: no-repeat;
+            position: top;
+          }
+        }
+        
+        a {
+          color: #83ac44;
+          background-color: #CDE5AE;
+          text-decoration: none;
+          padding: 0 2px;
+        }
+        
+        a:hover {
+          background-color: white;
+        }
+        
+        h1 {
+          margin-bottom: 0.8em;
+        }
+        
+        
+        h4 {
+          font-size: 1.4em;
+          color: #CDE5AE;
+        }
+        
+      }
     }
     
     #footer {
@@ -235,4 +279,33 @@ body {
   }
   
 }
+
+/* Home page */
+
+.what_section {
+  margin: 20px 0 40px;
+  overflow: auto;
+  text-align: center;
+}
+
+.what_section li {
+  color: #009523;
+  display: inline-block;
+  font: 16px/1.25 "Helvetica Neue", Arial, sans-serif;
+  list-style: none;
+  padding-left: 60px;
+  vertical-align: top;
+  width: 160px;
+}
+
+.what_section .what { padding-left: 0; }
+
+.what_section img {
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.what_section .what img { padding: 6px 0 0; }
+.what_section .share img { padding: 3px 0 0; }
+.what_section .love img { padding: 9px 0 0; }
 

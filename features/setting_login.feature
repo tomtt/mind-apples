@@ -9,7 +9,7 @@ Feature: Setting login
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I fill in "Join us. Choose a username" with "spotty"
-    And I fill in "Don't go! Leave your e-mail and we'll send you occasional messages. (never made public)" with "apple@mind.com"
+    And I fill in "Don't go! Leave your e-mail and we'll send you your mindapples. (never made public)" with "apple@mind.com"
     And I fill in "person_password" with "bigsecret"
     And I fill in "person_password_confirmation" with "bigsecret"
     And I check "person_policy_checked"

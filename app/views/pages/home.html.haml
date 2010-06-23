@@ -1,49 +1,14 @@
-= if current_user.nil?
+- if current_user.nil?
   = render(:partial => '/pages/what_section')
 
-= if current_user.nil?
+- if current_user.nil?
   .paper
     .inner-top
-
       %h1
-        5-a-day for your mind
-        = image_tag("/images/mind.gif"), " + "
-        = image_tag("/images/apple.jpg"), " = "
-        = image_tag "/images/mindy-smiling.gif"
-
-      %h4
-        If eating
-        = image_tag "/images/5aday.jpg"
-        fruit and veg is good for our bodies, what's the equivalent for our
-        = image_tag("/images/mind.gif"), "s?"
-
+        What are your mindapples?
       %h3
-        Everyone's different.
-        %br
-        = link_to('Take the Mindapples test', new_person_path)
-        today and pick your 5-a-day.
-    
       = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
-
-      .hr.clear  
+      .hr.clear
         %hr
 
-%h3
-  Looking for inspiration? 
-  = link_to('Read the fives', fives_path)  
-.hr.clear  
-  %hr
-%p
-  This site was built by the 
-  = link_to('Mindapples volunteers', team_path), "."
-  Find out more 
-  = link_to('about us', about_path), ","
-  read our
-  = link_to('blog', 'http://mindapples.wordpress.com'), ", or"
-  = link_to('say hello', 'mailto:hello@mindapples.org'), "."
-
 = render :partial => 'blog_feeds/index'
-
-%p
-  Mindapples is group of volunteers, a website, some pages on <a href='http://www.facebook.com/pages/Mindapples/38139955790'>Facebook</a>, <a href='http://twitter.com/mindapples'>Twitter</a> and <a href='http://www.flickr.com/photos/tags/mindapples/'>Flickr</a>, and a growing community of people around the world supporting each other to take care of their minds. If you like us, please  
-  = link_to('help us grow', help_us_grow_path), "."

@@ -6,66 +6,65 @@ Feature: Mindapples Home Page
   I want to see the Mindapples home page
 
   Scenario: As a curious cat I can see the What? section
-	When I go to the homepage
-	Then I should see the "green_question_mark.png" image with alt "question mark"
-	And I should see "What's the 5 a day for your mind?"
-	And I should see the "green_comment_bubble.png" image with alt "comment bubble"
-	And I should see "Share what works for you"
-	And I should see the "two_green_arrows.png" image with alt "two arrows"
-	And I should see "Discover new things to do" 
-	And I should see the "green_heart.png" image with alt "heart"
-	And I should see "Love your mind"
+  When I go to the homepage
+  Then I should see the "green_question_mark.png" image with alt "question mark"
+  And I should see "What are your mindapples?"
+  And I should see the "green_comment_bubble.png" image with alt "comment bubble"
+  And I should see "Share what works for you"
+  And I should see the "two_green_arrows.png" image with alt "two arrows"
+  And I should see "Discover new things to do" 
+  And I should see the "green_heart.png" image with alt "heart"
+  And I should see "Love your mind"
 
   Scenario: As a curious cat I can see the 5 a day section
-	When I go to the homepage
-	Then I should see "5-a-day for your mind"
-	And I should see "What five things do you do every day, or regularly, to look after your mind?"
-    And I should see a "person[mindapples_attributes][0][suggestion]" text field
-    And I should see a "person[mindapples_attributes][1][suggestion]" text field
-    And I should see a "person[mindapples_attributes][2][suggestion]" text field
-    And I should see a "person[mindapples_attributes][4][suggestion]" text field
-	And I should see a "commit" submit button
+  When I go to the homepage
+  Then I should see "What are your mindapples?"
+  And I should see a "person[mindapples_attributes][0][suggestion]" text field
+  And I should see a "person[mindapples_attributes][1][suggestion]" text field
+  And I should see a "person[mindapples_attributes][2][suggestion]" text field
+  And I should see a "person[mindapples_attributes][4][suggestion]" text field
+  And I should see a "commit" submit button
 
   Scenario: As a logged in user I can't see the What? section
-  	Given I have a personal page
-  	And my login is "gandy"
-  	And my password is "sosocial"
-  	And my braindump is "Mindapples rocks"
-  	And my email is "gandy@example.com"
-  	When I go to the login page
-  	And I fill in "Login" with "gandy"
-  	And I fill in "Password" with "sosocial"
-  	And I press "Log in"
+    Given I have a personal page
+    And my login is "gandy"
+    And my password is "sosocial"
+    And my braindump is "Mindapples rocks"
+    And my email is "gandy@example.com"
+    When I go to the login page
+    And I fill in "Login" with "gandy"
+    And I fill in "Password" with "sosocial"
+    And I press "Log in"
 
-	And I go to the homepage
-	Then I should not see the "green_question_mark.png" image with alt "question mark"
-	And I should not see "What's the 5 a day for your mind?"
-	And I should not see the "green_comment_bubble.png" image with alt "comment bubble"
-	And I should not see "Share what works for you"
-	And I should not see the "two_green_arrows.png" image with alt "two arrows"
-	And I should not see "Discover new things to do"
-	And I should not see the "green_heart.png" image with alt "heart"
-	And I should not see "Love your mind"
-	
+  And I go to the homepage
+  Then I should not see the "green_question_mark.png" image with alt "question mark"
+  And I should not see "What's the 5 a day for your mind?"
+  And I should not see the "green_comment_bubble.png" image with alt "comment bubble"
+  And I should not see "Share what works for you"
+  And I should not see the "two_green_arrows.png" image with alt "two arrows"
+  And I should not see "Discover new things to do"
+  And I should not see the "green_heart.png" image with alt "heart"
+  And I should not see "Love your mind"
+  
   Scenario: As a logged in user I can't see the 5 a day section
-	Given I have a personal page
-	And my login is "gandy"
-	And my password is "sosocial"
-	And my braindump is "Mindapples rocks"
-	And my email is "gandy@example.com"
-	When I go to the login page
-	And I fill in "Login" with "gandy"
-	And I fill in "Password" with "sosocial"
-	And I press "Log in"
-	And I go to the homepage
+  Given I have a personal page
+  And my login is "gandy"
+  And my password is "sosocial"
+  And my braindump is "Mindapples rocks"
+  And my email is "gandy@example.com"
+  When I go to the login page
+  And I fill in "Login" with "gandy"
+  And I fill in "Password" with "sosocial"
+  And I press "Log in"
+  And I go to the homepage
 
-	Then I should not see "5-a-day for your mind"
-	And I should not see "What five things do you do every day, or regularly, to look after your mind?"
-  	And I should not see a "person[mindapples_attributes][0][suggestion]" text field
-  	And I should not see a "person[mindapples_attributes][1][suggestion]" text field
-  	And I should not see a "person[mindapples_attributes][2][suggestion]" text field
-  	And I should not see a "person[mindapples_attributes][4][suggestion]" text field
-	And I should not see a "commit" submit button
+  Then I should not see "What are your mindapples?"
+  And I should not see a "person[mindapples_attributes][0][suggestion]" text field
+  And I should not see a "person[mindapples_attributes][1][suggestion]" text field
+  And I should not see a "person[mindapples_attributes][2][suggestion]" text field
+  And I should not see a "person[mindapples_attributes][4][suggestion]" text field
+  And I should not see a "commit" submit button
+
 
 	@top_apples
   Scenario: As a not logged in user i can see the Top Apples section
@@ -103,5 +102,3 @@ Feature: Mindapples Home Page
 	#     And I press "Submit"
 	# And show me the page
 	# And I should be on my edit page
-	
-	

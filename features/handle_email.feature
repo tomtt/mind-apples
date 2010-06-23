@@ -48,7 +48,7 @@ Feature: Handle taken email gracefully
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I press "Submit"
-    And I fill in "Join us. Choose a username for your Mindapples account" with "banana_man"
+    And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"
@@ -62,7 +62,7 @@ Feature: Handle taken email gracefully
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I press "Submit"
-    And I fill in "Join us. Choose a username for your Mindapples account" with "banana_man"
+    And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"

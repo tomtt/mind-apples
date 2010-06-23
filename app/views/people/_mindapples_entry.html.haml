@@ -1,14 +1,5 @@
 .with-shelf-short
   .five-a-day
-    %label
-      Important bit.
-      %span.description
-        What five things do
-        %br
-        you do every day, or regularly,
-      %br
-      %span.description-light
-        to look after your mind?
     %ol
       - form.fields_for :mindapples do |mindapple_form|
         = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })

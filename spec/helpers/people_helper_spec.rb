@@ -1,11 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+include PeopleHelper
+
 describe PeopleHelper do
 
-  #Delete this example and add some real ones or delete this file
-  it "should be included in the object returned by #helper" do
-    included_modules = (class << helper; self; end).send :included_modules
-    included_modules.should include(PeopleHelper)
+  #paper clip don't return nil for blank picture
+  it "return true for missing picture" do
+    picture_missing?('/avatars/medium/missing.png').should == true
+  end
+
+  it "return true for missing picture" do
+    picture_missing?('/avatars/medium/smile.png').should == false
   end
 
 end
