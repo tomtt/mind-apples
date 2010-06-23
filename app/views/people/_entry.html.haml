@@ -1,5 +1,5 @@
 .clear.brain-dump.below-shelf
-  = form.label :braindump, "Brain dump. <span class='description'>Anything else you'd like to tell us? What else do you need to stay mentally healthy?</span>"
+  = form.label :braindump, "Brain dump. <span class='description'>Anything else you'd like to tell us? What else do you need to stay mentally well?</span>"
   = form.text_area :braindump
 .col-odd.radio-input
   = form.label :gender, "Venus and Mars. <span class='description'>What's your gender?</span>"
@@ -17,7 +17,7 @@
   = form.label :occupation, "Your thing. <span class='description'>What's your occupation, paid or not?</span>"
   = form.text_field :occupation
 .col-even
-  = form.label :location, "Passport control. <span class='description'>Where do you live?</span>"
+  = form.label :location, "Passport control. <span class='description'>Which country are you from?</span>"
   = form.text_field :location
 .col-odd.radio-input
   = form.label :health_check, "Health check. <span class='description'>How would you rate your mental health? </span><span class='description-light'>(1 is bad, 5 good)</span>"
@@ -34,14 +34,14 @@
 .hr.clear  
   %hr
 .col-odd
-  = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you occasional messages. </span><span class='description-light'>(never made public)</span>"
+  = form.label :email, "Don't go! <span class='description'>Leave your e-mail and we'll send you your mindapples. </span><span class='description-light'>(never made public)</span>"
   = form.text_field :email
 -if form.object.login_set_by_user?
   %div{:class => 'col-evend hide'}
     = form.text_field :login
 -else
   .col-even
-    = form.label :login, "Join us. Choose a username for your Mindapples account.(careful, you can only choose once)"
+    = form.label :login, "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)"
     = form.text_field :login
 .col-odd
   = form.label :password, "Smile please. <span class='description'>Choose a profile picture.</span>"
@@ -52,12 +52,12 @@
   = form.label :password, "Come back. <span class='description'>Pick a password to edit your mindapples later.</span>"
   = form.password_field :password
 .col-odd
-  = form.label :password_confirmation, "<span class='description'>Once more with the password please, in case of typos...</span>"
+  = form.label :password_confirmation, "<span class='description'>Again with the password please, in case of typos.</span>"
   = form.password_field :password_confirmation
 .col-even.radio-input
   = form.label :public_profile, "Show yourself. <span class='description'>Are you happy for others to see your profile?</span>"
   = form.radio_button(:public_profile, true)
-  = form.label "public_profile_true", "Yes, I'm happy to make my profile public on Mindapples.org", :class => 'label-radio'
+  = form.label "public_profile_true", "Yes, I'm happy to make my profile public.", :class => 'label-radio'
   %br
   = form.radio_button(:public_profile, false)
   = form.label "public_profile_false", "No, I want to stay anonymous please", :class => 'label-radio'

@@ -11,36 +11,28 @@ Feature: Proper layouts structure
 
 #Registration form copy changes
 
-  # Scenario: Homepage 5-a-day form
-  #   When I go to the edit page
-  #   I should not see "What else do you need to stay mentally healthy?"
-  #   And I should see "What else do you need to stay mentally well?"
-#   
-#   Scenario: Homepage 5-a-day form
-#     When I go to the edit page
-#     I should not see "Leave your e-mail and we'll send you occasional messages. "
-#     And I should see "Leave your e-mail and we'll send you your mindapples. "
-# 
-#   Scenario: Homepage 5-a-day form
-#     When I go to the edit page
-#     I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
-#     And I should see "Choose a username to claim your Mindapples account"
-# 
-#   Scenario: Homepage 5-a-day form
-#     When I go to the edit page
-#     I should not see "Once more with the password please, in case of typos..."
-#     And I should see "Again with the password please, in case of typos."
-# 
-#   Scenario: Homepage 5-a-day form
-#     When I go to the edit page
-#     I should not see "Yes, I'm happy to make my profile public on Mindapples.org"
-#     And I should see "Yes, I'm happy to make my profile public"
-# 
-#   Scenario: Homepage 5-a-day form
-#     When I go to the edit page
-#     I should not see "Where do you live?"
-#     And I should see "Which country are you from?"
-# 
+  Scenario: Homepage 5-a-day form
+    Given I have a personal page
+    And my login is "anna"
+    And my password is "apples"
+    And my braindump is "I love Mindapples"
+    When I log in
+    And I go to "anna" edit page
+    And I should not see "What else do you need to stay mentally healthy?"
+    And I should see "What else do you need to stay mentally well?"
+
+    And I should not see "Leave your e-mail and we'll send you occasional messages. "
+    And I should see "Leave your e-mail and we'll send you your mindapples. "
+
+    And I should not see "Once more with the password please, in case of typos..."
+    And I should see "Again with the password please, in case of typos."
+
+    And I should not see "Yes, I'm happy to make my profile public on Mindapples.org"
+    And I should see "Yes, I'm happy to make my profile public"
+
+    And I should not see "Where do you live?"
+    And I should see "Which country are you from?"
+
 # #Top menu links
 # 
   Scenario: About us menu link
@@ -56,6 +48,8 @@ Feature: Proper layouts structure
     And I follow "Take the test"
     Then I should see "Take the Mindapples Test"
     And I should be on "/person/new"
+    And I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
+    And I should see "Choose a username to claim your Mindapples account"
 
   # Scenario: Explore menu link
   #   When I go to the homepage
