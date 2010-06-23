@@ -9,7 +9,7 @@ describe PeopleHelper do
     picture_missing?('/avatars/medium/missing.png').should == true
   end
 
-  it "return true for missing picture" do
+  it "return false for missing picture" do
     picture_missing?('/avatars/medium/smile.png').should == false
   end
 

@@ -35,6 +35,7 @@ class PeopleController < ApplicationController
       format.js
       format.xml  { head :ok }
     else
+      validate_image
       format.html { render :action => "edit" }
       format.js   { render :action => "edit" }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
@@ -96,7 +97,7 @@ class PeopleController < ApplicationController
       @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash_error_message(:notice, "Unknown person, cound't find its favourites", root_path)
-    end      
+    end
   end
 
   protected
@@ -199,7 +200,7 @@ class PeopleController < ApplicationController
   
   def flash_error_message(error_key, message, redirection_target)
     flash[error_key] = message
-    redirect_to(redirection_target) if redirection_target    
+    redirect_to(redirection_target) if redirection_target
   end
   
   def unlike_mindapple
@@ -219,6 +220,17 @@ class PeopleController < ApplicationController
   def delete_profile_picture
     resource.avatar.destroy
     resource.save
+  end
+
+  def validate_image
+    return unless resource.errors.invalid?(:avatar_file_size)
+
+    avatar = Person.find_by_login(resource.login).avatar
+    if avatar.url == Person.new.avatar.url
+      resource.avatar = Person.new.avatar
+    else
+      resource.avatar = avatar
+    end
   end
 
 end
