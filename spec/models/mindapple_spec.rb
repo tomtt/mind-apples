@@ -138,9 +138,11 @@ describe Mindapple do
     it "returns the N most recent mindapples if there are N or more than N in the top-N" do
       most_recent = Mindapple.most_recent(@max)
       
-      most_recent.should include(@mindapple_3_5)
-      most_recent.should include(@mindapple_2_5)
-      most_recent.should include(@mindapple_1_5)
+      people_ids = most_recent.map {|e| e.person_id}
+      
+      people_ids.should include(@person1.id)
+      people_ids.should include(@person2.id)
+      people_ids.should include(@person3.id)
     end
     
   end
