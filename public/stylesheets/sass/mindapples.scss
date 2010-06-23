@@ -204,7 +204,7 @@ body {
         font: {
           family: helvetica neue, arial, sans;
           weight: bold;
-          size: 1.5em;
+          size: 1.2em;
         }
         color: white;
         text-decoration: none;
@@ -269,19 +269,20 @@ body {
   
   h1 {
     font-size: 1.8em;
-    margin-bottom: 0.4em !important;
+    margin-bottom: 0 !important;
   }
   
   p {
+    background: url(/images/arrows/white_down.png) no-repeat right center;
     color: #CDE5AE;
     font-size: 1.3em;
-    margin-bottom: 0.8em;
-    padding-right: 50px;
+    padding: 10px 50px 20px 0;
   }
 
   li {
     background: url(/images/white_apple.png) no-repeat 0 4px;
     color: #009523;
+    font-weight: bold;
     list-style-position: inside;
     padding: 5px 0 5px 8px;
   }
@@ -312,11 +313,11 @@ body {
 .what_section li {
   color: #009523;
   display: inline-block;
-  font: 16px/1.25 "Helvetica Neue", Arial, sans-serif;
+  font: bold 16px/1.25 "Helvetica Neue", Arial, sans-serif;
   list-style: none;
-  padding-left: 60px;
+  padding-left: 80px;
   vertical-align: top;
-  width: 160px;
+  width: 140px;
 }
 
 .what_section .what { padding-left: 0; }
@@ -330,3 +331,11 @@ body {
 .what_section .share img { padding: 3px 0 0; }
 .what_section .love img { padding: 9px 0 0; }
 
+.what_section .share,
+.what_section .love {
+  background: url(/images/arrows/green_over.png) no-repeat 0 20%;
+}
+
+.what_section .discover {
+  background: url(/images/arrows/green_under.png) no-repeat 0 60%;
+}
