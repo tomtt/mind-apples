@@ -21,6 +21,7 @@ Feature: Profile photo
     And I fill all mandatory fields
     And I should see "Smile please. Choose a profile picture."
     And I should not see a profile picture "missing.png"
+    And I should not see "Remove this picture"
     And I should see "person[avatar]" field
     When I upload the picture "smile.jpg"
     And I press "Submit"
@@ -34,7 +35,7 @@ Feature: Profile photo
     And I should see "Smile please. Choose a profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
-    And I should see "I don't want use this picture anymore."
+    And I should see "Remove this picture"
     Then I check "delete_avatar"
     And I press "Submit"
     And I should see "Thank you for updating your Mindapples page."
@@ -48,7 +49,7 @@ Feature: Profile photo
     And I should see "Smile please. Choose a profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
-    And I should see "I don't want use this picture anymore."
+    And I should see "Remove this picture"
     And I upload the picture "smile2.jpg"
     And I press "Submit"
     Then I should see "Thank you for updating your Mindapples page."
@@ -74,7 +75,7 @@ Feature: Profile photo
     And I should see "Smile please. Choose a profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
-    And I should see "I don't want use this picture anymore."
+    And I should see "Remove this picture"
     And I upload the picture "wallpaper.jpg"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
