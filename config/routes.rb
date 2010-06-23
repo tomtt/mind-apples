@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.links '/links', :controller => "pages", :action => "links"
   map.media '/media', :controller => "pages", :action => "media"
   map.terms '/terms', :controller => "pages", :action => "terms"
+  map.services '/services', :controller => "pages", :action => "services"
 
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'

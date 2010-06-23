@@ -15,17 +15,26 @@
       - t.highlights_on :controller => :people, :action => :help_us_grow
       - t.html= {:class => 'get_involved'}
     - add_tab do |t|
-      - t.named 'Blog'
-      - t.links_to 'http://mindapples.wordpress.com'
-      - t.html= {:class => 'blog'}
-    - add_tab do |t|
       - t.named 'Take the test'
       - t.links_to new_person_path
       - t.highlights_on :controller => :people, :action => :new
       - t.html= {:class => 'person'}
     - add_tab do |t|
+      - t.named 'Explore'
+      - t.links_to fives_path
+      - t.highlights_on :controller => :pages, :action => :fives
+      - t.html= {:class => 'five'}
+    - add_tab do |t|
+      - t.named 'Services'
+      - t.links_to services_path
+      - t.highlights_on :controller => :pages, :action => :services
+      - t.html= {:class => 'services'}
+    - add_tab do |t|
       - t.named 'Help us grow'
       - t.links_to grow_path
-      - t.highlights_on :controller => :page, :action => :grow
+      - t.highlights_on :controller => :pages, :action => :grow
       - t.html= {:class => 'grow'}
-
+    - add_tab do |t|
+      - t.named 'Blog'
+      - t.links_to 'http://mindapples.wordpress.com'
+      - t.html= {:class => 'blog'}

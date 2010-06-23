@@ -53,19 +53,19 @@ Feature: Proper layouts structure
     And I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
     And I should see "Choose a username to claim your Mindapples account."
 
-  # Scenario: Explore menu link
-  #   When I go to the homepage
-  #   Then I should see "Explore"
-  #   When I follow "Explore"
-  #   Then I should see "Search"
-  #   And I should be on '/fives'
-  # 
-  # Scenario: Services menu link
-  #   When I go to the homepage
-  #   Then I should see "Services"
-  #   When I follow "Services"
-  #   Then I should see "Mindapples services"
-  #   And I should be on '/services'
+  Scenario: Explore menu link
+    When I go to the homepage
+    Then I should see "Explore"
+    When I follow "Explore"
+    Then I should see "Search"
+    And I should be on "/fives"
+  
+  Scenario: Services menu link
+    When I go to the homepage
+    Then I should see "Services"
+    When I follow "Services"
+    Then I should see "Mindapples services"
+    And I should be on "/services"
     
   Scenario: Help us grow menu link
     When I go to the homepage
