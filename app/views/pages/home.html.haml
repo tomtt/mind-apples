@@ -1,14 +1,11 @@
-= if current_user.nil?
+- if current_user.nil?
   = render(:partial => '/pages/what_section')
 
-= if current_user.nil?
+- if current_user.nil?
   .paper
     .inner-top
-
       %h1
-
         What are your mindapples?
-
       %h3
       = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
       .hr.clear
