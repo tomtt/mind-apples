@@ -1,3 +1,5 @@
+@pivotal_3999918
+
 #Homepage copy check
 Feature: Proper layouts structure
   In order to explain why Mindapples
@@ -49,7 +51,7 @@ Feature: Proper layouts structure
     Then I should see "Take the Mindapples Test"
     And I should be on "/person/new"
     And I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
-    And I should see "Choose a username to claim your Mindapples account"
+    And I should see "Choose a username to claim your Mindapples account."
 
   # Scenario: Explore menu link
   #   When I go to the homepage
