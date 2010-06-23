@@ -1,5 +1,3 @@
-.with-shelf-short
-  .five-a-day
-    %ol
-      - form.fields_for :mindapples do |mindapple_form|
-        = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })
+%ol
+  - form.fields_for :mindapples do |mindapple_form|
+    = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })

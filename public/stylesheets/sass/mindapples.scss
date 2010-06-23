@@ -126,6 +126,7 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
+      padding-top: 10px;
       font-size: 1.2em;
       line-height: 1.65em;
       
@@ -142,7 +143,6 @@ body {
         .inner-top {
           padding: 40px 30px 0;
           margin-bottom: 61px;
-          overflow: hidden;
           background: {
             image: url(/images/layout/bg-top-five-a-day.png);
             repeat: no-repeat;
@@ -183,18 +183,17 @@ body {
 
 
 .nav_bar {
-  background-image: url(/images/nav_bar/menu_bar.gif);
+  background: url(/images/nav_bar/menu_bar.gif) no-repeat;
   width: 943px;
-  height: 45px;
-  margin: 0px 10px 10px;
+  margin: 10px;
   
   #main_tabnav ul {
     margin-left: 15px;
+    overflow: auto;
     
     li {
       display: block;
       float: left;
-      margin-left: -2px;
       
       a, span {
         height: 50px;
@@ -249,7 +248,7 @@ body {
   .inner-top {
     padding: 40px 30px 0;
     margin-bottom: 61px;
-    overflow: hidden;
+    position: relative;
     background: {
       image: url(/images/layout/bg-top-five-a-day.png);
       repeat: no-repeat;
@@ -269,15 +268,37 @@ body {
   }
   
   h1 {
-    margin-bottom: 0.8em;
+    font-size: 1.8em;
+    margin-bottom: 0.4em !important;
   }
   
-  
-  h4 {
-    font-size: 1.4em;
+  p {
     color: #CDE5AE;
+    font-size: 1.3em;
+    margin-bottom: 0.8em;
+    padding-right: 50px;
   }
-  
+
+  li {
+    background: url(/images/white_apple.png) no-repeat 0 4px;
+    color: #009523;
+    list-style-position: inside;
+    padding: 5px 0 5px 8px;
+  }
+
+  input[type=text] {
+    border: none;
+    font-size: 1.5em;
+    margin-left: 13px;
+    padding: 2px;
+    width: 290px;
+  }
+
+  input[type=image] {
+    bottom: -70px;
+    position: absolute;
+    right: 20px;
+  }
 }
 
 /* Home page */

@@ -4,11 +4,9 @@
 - if current_user.nil?
   .paper
     .inner-top
-      %h1
-        What are your mindapples?
-      %h3
+      %h1 What are your mindapples?
+      %p What 5 things do you do every day, or regularly to look after your mind...
+
       = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
-      .hr.clear
-        %hr
 
 = render :partial => 'blog_feeds/index'
