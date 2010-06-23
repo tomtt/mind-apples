@@ -20,7 +20,7 @@ Feature: Profile photo
     Given I am on my edit page
     And I fill all mandatory fields
     And I should see "Smile please. Choose a profile picture."
-    And I should see a profile picture "missing.png"
+    And I should not see a profile picture "missing.png"
     And I should see "person[avatar]" field
     When I upload the picture "smile.jpg"
     And I press "Submit"

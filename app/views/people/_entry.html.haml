@@ -46,7 +46,8 @@
 .col-odd
   = form.label :password, "Smile please. <span class='description'>Choose a profile picture.</span>"
   = form.file_field :avatar
-  = image_tag resource.avatar.url(:medium)
+  - unless picture_missing?(resource.avatar.url)
+    = image_tag resource.avatar.url(:medium)
   %input{:type=>"checkbox", :name=>"delete_avatar", :value=>1, :checked=>false} I don't want use this picture anymore.
 .col-even
   = form.label :password, "Come back. <span class='description'>Pick a password to edit your mindapples later.</span>"
