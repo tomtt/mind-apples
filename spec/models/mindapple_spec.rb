@@ -102,6 +102,7 @@ describe Mindapple do
       @person1.mindapples << @mindapple_1_4
       @person1.mindapples << @mindapple_1_5
 
+      sleep(1)# we want them to be created at a different time so we can compare
       @mindapple_2_1 = Factory.create(:mindapple)
       @mindapple_2_2 = Factory.create(:mindapple)
       @mindapple_2_3 = Factory.create(:mindapple)
@@ -114,6 +115,7 @@ describe Mindapple do
       @person2.mindapples << @mindapple_2_4
       @person2.mindapples << @mindapple_2_5
       
+      sleep(1)# we want them to be created at a different time so we can compare
       @mindapple_3_1 = Factory.create(:mindapple)
       @mindapple_3_2 = Factory.create(:mindapple)
       @mindapple_3_3 = Factory.create(:mindapple)
@@ -137,12 +139,18 @@ describe Mindapple do
 
     it "returns the N most recent mindapples if there are N or more than N in the top-N" do
       most_recent = Mindapple.most_recent(@max)
-      
       people_ids = most_recent.map {|e| e.person_id}
       
       people_ids.should include(@person1.id)
       people_ids.should include(@person2.id)
       people_ids.should include(@person3.id)
+    end
+
+    it "returns the N most recent ordered by created_at DESC" do
+      most_recent = Mindapple.most_recent(@max)
+      
+      most_recent[0].created_at.should >= most_recent[1].created_at
+      most_recent[1].created_at.should >= most_recent[2].created_at
     end
     
   end
