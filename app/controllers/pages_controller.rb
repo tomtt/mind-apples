@@ -6,7 +6,8 @@ class PagesController < ApplicationController
   def home
     @person = Person.new_with_mindapples
     @blogfeeds = BlogFeed.latest(3)
-    @most_liked = Mindapple.find(:all, :select => "mindapple_id, count(*) as total", :from => "mindapples_people", :group => "mindapple_id", :order => "total", :limit => 5)
+    @most_liked = Mindapple.most_liked(TOP_APPLES_MAX)
+    @most_recent = Mindapple.most_recent(TOP_APPLES_MAX)    
   end
 
   def error
