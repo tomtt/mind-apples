@@ -1,10 +1,7 @@
-Given /^mind apple feed from the url "([^\"]*)"$/ do |feed_url|
-  FakeWeb.register_uri(:any, feed_url, :body => @xml)
+Given /^mind apple feed from the url "([^\"]*)" is consumed$/ do |feed_url|
   @xml_filename = File.join(Rails.root, 'spec', 'test_data', 'feed.xml')
   @xml = File.read(@xml_filename)
-end
-
-Given /^mind apple feed is consumed$/ do
+  FakeWeb.register_uri(:any, feed_url, :body => @xml)
   BlogFeed.destroy_all
   BlogFeed.import_feeds
 end
