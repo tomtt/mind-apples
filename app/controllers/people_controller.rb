@@ -223,7 +223,8 @@ class PeopleController < ApplicationController
   end
 
   def validate_image
-    return unless resource.errors.invalid?(:avatar_file_size)
+    
+    # return unless resource.errors.invalid?(:avatar_file_size)
 
     avatar = Person.find_by_login(resource.login).avatar
     if avatar.url == Person.new.avatar.url

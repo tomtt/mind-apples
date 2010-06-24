@@ -182,30 +182,21 @@ describe PeopleController do
         PeopleController.any_instance.stubs(:password_invalid?).returns false
         @mock_person.stubs(:update_attributes).returns false
         @mock_person.stubs(:login).returns 'applesmind'
-        @errors = mock('errors', :invalid? => true)
       end
 
       it "and load previous picture for avatar" do
         mock_person = @mock_person
-
-        mock_person.stubs(:errors).returns(@errors)
         mock_person.expects(:avatar).returns(mock('avatar', :url => 'different_path'))
-
         Person.stubs(:find_by_login).returns mock_person
-
         mock_person.expects(:avatar=).never
-
+        
         put(:update, "person" => {'login'=>'gandy'})
       end
 
       it "and set default picture for avatar" do
         mock_person = @mock_person
-        
-        mock_person.stubs(:errors).returns(@errors)
         mock_person.expects(:avatar).returns(mock('avatar', :url => Person.new.avatar.url))
-
         Person.stubs(:find_by_login).returns @mock_person
-
         @mock_person.expects(:avatar=)
 
         put(:update, "person" => {'login'=>'gandy'})
