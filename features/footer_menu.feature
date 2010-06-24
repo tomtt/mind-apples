@@ -2,7 +2,7 @@
 @pivotal_1381085
 
 Feature: Footer menu
-  In order to link together all the pages making up minapples
+  In order to link together all the pages making up mindapples
   As the evil overlord
   I want users to have a menu with links to all the pages
 
@@ -10,7 +10,7 @@ Feature: Footer menu
     When I go to the <page>
     And I follow "Take the test"
     And I go to the <page>
-    And I follow "Read the fives"
+    And I follow "Explore"
     And I go to the <page>
     And I follow "Help us grow"
     And I go to the <page>
@@ -24,4 +24,4 @@ Feature: Footer menu
     | "about" page         |
     | "take the test" page |
     | "fives" page         |
-    | "help us grow" page  |
+    | "grow" page          |
