@@ -25,7 +25,7 @@ Feature: Personal page
     Then I should see "Mindapples rocks"
     # And I should see "Welcome back 'butterfly'"
     And I should see "butterfly's page on Mindapples"
-    Then I should not see a link to "Take the Mindapples test"
+    Then I should not see a link to "go"
     And I should not see "and pick your 5-a-day. "
 
   Scenario: Person logs in and sees his page and the page is not public
@@ -39,15 +39,16 @@ Feature: Personal page
     Then I should see "Mindapples rocks"
     # And I should see "Welcome back 'butterfly'"
     And I should see "butterfly's page on Mindapples"
-    Then I should not see a link to "Take the Mindapples test"
+    Then I should not see a link to "go"
     And I should not see "and pick your 5-a-day. "
 
   Scenario: Person views another's page and the page is public
     Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly"
     When I follow "Log out"
     And I go to "/person/butterfly"
-    And I should see a link to "Take the Mindapples test"
-    And I should see "and pick your 5-a-day. "
+    And I should see a link to "go"
+    And I should not see "and pick your 5-a-day. "
+	And I should see "What do you do to look after your mind?"
     And I should not see "You don't have permission to see this page"
 
   Scenario: Person views another's page and the page is not public
@@ -55,22 +56,23 @@ Feature: Personal page
     When I follow "Log out"
     And I go to "/person/bashful"
     Then I should not see "Mindapples rocks"
-    And I should not see a link to "Take the Mindapples test"
+    And I should not see a link to "go"
     And I should see "You don't have permission to see this page"
 
   Scenario: Person logs in and sees his page
     Then I should see "Mindapples rocks"
     # And I should see "Welcome back 'gandy'"
     And I should see "gandy's page on Mindapples"
-    Then I should not see a link to "Take the Mindapples test"
+    Then I should not see a link to "go"
     Then I should not see "and pick your 5-a-day. "
   
-  Scenario: Person views his own page when not logged in
+  Scenario: Person views its own page when not logged in
     When I follow "Log out"
     And I go to "/person/gandy"
     Then I should see "Mindapples rocks"
-    Then I should see a link to "Take the Mindapples test"
-    Then I should see "and pick your 5-a-day. "
+    And I should see a link to "go"
+    And I should not see "and pick your 5-a-day. "
+	And I should see "What do you do to look after your mind?"
 
   Scenario: Person follows the link to his page
     When I follow "About us"
