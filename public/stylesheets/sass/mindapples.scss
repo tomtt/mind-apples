@@ -302,6 +302,34 @@ body {
   }
 }
 
+.mindapple {
+  margin-bottom: 15px;
+
+  > div {
+    background: url(/images/green_apple.png) no-repeat left bottom;
+    border: 2px solid #009523;
+    border-radius: 10px;
+    padding: 10px 15px 10px 80px;
+  }
+
+  span {
+    display: block;
+  }
+
+  .number {
+    color: #009523;
+    font-size: 1.4em;
+  }
+
+  .apple {
+    margin-bottom: 1em;
+  }
+
+  .when, .social {
+    color: #6d6f72;
+  }
+}
+
 /* Home page */
 
 .what_section {
@@ -338,4 +366,32 @@ body {
 
 .what_section .discover {
   background: url(/images/arrows/green_under.png) no-repeat 0 60%;
+}
+
+h2 {
+  background: url(/images/headings/green_bg.png) no-repeat left center;
+  color: #fff;
+  font-weight: normal;
+  line-height: 37px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+h2 span {
+  background: url(/images/headings/small_apple.png) no-repeat 5px 50%;
+  display: block;
+  padding-left: 35px;
+}
+
+.top_apples, .most_recent {
+  margin-top: 45px;
+}
+
+.top_apples h2 {
+  background-image: url(/images/headings/red_bg.png);
+}
+
+.main_content {
+  float: left;
+  width: 519px;
 }
