@@ -126,6 +126,7 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
+      padding-top: 10px;
       font-size: 1.2em;
       line-height: 1.65em;
       
@@ -142,7 +143,6 @@ body {
         .inner-top {
           padding: 40px 30px 0;
           margin-bottom: 61px;
-          overflow: hidden;
           background: {
             image: url(/images/layout/bg-top-five-a-day.png);
             repeat: no-repeat;
@@ -183,18 +183,17 @@ body {
 
 
 .nav_bar {
-  background-image: url(/images/nav_bar/menu_bar.gif);
+  background: url(/images/nav_bar/menu_bar.gif) no-repeat;
   width: 943px;
-  height: 45px;
-  margin: 0px 10px 10px;
+  margin: 10px;
   
   #main_tabnav ul {
     margin-left: 15px;
+    overflow: auto;
     
     li {
       display: block;
       float: left;
-      margin-left: -2px;
       
       a, span {
         height: 50px;
@@ -205,7 +204,7 @@ body {
         font: {
           family: helvetica neue, arial, sans;
           weight: bold;
-          size: 1.5em;
+          size: 1.2em;
         }
         color: white;
         text-decoration: none;
@@ -249,7 +248,7 @@ body {
   .inner-top {
     padding: 40px 30px 0;
     margin-bottom: 61px;
-    overflow: hidden;
+    position: relative;
     background: {
       image: url(/images/layout/bg-top-five-a-day.png);
       repeat: no-repeat;
@@ -269,15 +268,66 @@ body {
   }
   
   h1 {
-    margin-bottom: 0.8em;
+    font-size: 1.8em;
+    margin-bottom: 0 !important;
   }
   
-  
-  h4 {
-    font-size: 1.4em;
+  p {
+    background: url(/images/arrows/white_down.png) no-repeat right center;
     color: #CDE5AE;
+    font-size: 1.3em;
+    padding: 10px 50px 20px 0;
   }
-  
+
+  li {
+    background: url(/images/white_apple.png) no-repeat 0 4px;
+    color: #009523;
+    font-weight: bold;
+    list-style-position: inside;
+    padding: 5px 0 5px 8px;
+  }
+
+  input[type=text] {
+    border: none;
+    font-size: 1.5em;
+    margin-left: 13px;
+    padding: 2px;
+    width: 290px;
+  }
+
+  input[type=image] {
+    bottom: -70px;
+    position: absolute;
+    right: 20px;
+  }
+}
+
+.mindapple {
+  margin-bottom: 15px;
+
+  > div {
+    background: url(/images/green_apple.png) no-repeat left bottom;
+    border: 2px solid #009523;
+    border-radius: 10px;
+    padding: 10px 15px 10px 80px;
+  }
+
+  span {
+    display: block;
+  }
+
+  .number {
+    color: #009523;
+    font-size: 1.4em;
+  }
+
+  .apple {
+    margin-bottom: 1em;
+  }
+
+  .when, .social {
+    color: #6d6f72;
+  }
 }
 
 /* Home page */
@@ -291,11 +341,11 @@ body {
 .what_section li {
   color: #009523;
   display: inline-block;
-  font: 16px/1.25 "Helvetica Neue", Arial, sans-serif;
+  font: bold 16px/1.25 "Helvetica Neue", Arial, sans-serif;
   list-style: none;
-  padding-left: 60px;
+  padding-left: 80px;
   vertical-align: top;
-  width: 160px;
+  width: 140px;
 }
 
 .what_section .what { padding-left: 0; }
@@ -309,3 +359,39 @@ body {
 .what_section .share img { padding: 3px 0 0; }
 .what_section .love img { padding: 9px 0 0; }
 
+.what_section .share,
+.what_section .love {
+  background: url(/images/arrows/green_over.png) no-repeat 0 20%;
+}
+
+.what_section .discover {
+  background: url(/images/arrows/green_under.png) no-repeat 0 60%;
+}
+
+h2 {
+  background: url(/images/headings/green_bg.png) no-repeat left center;
+  color: #fff;
+  font-weight: normal;
+  line-height: 37px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+h2 span {
+  background: url(/images/headings/small_apple.png) no-repeat 5px 50%;
+  display: block;
+  padding-left: 35px;
+}
+
+.top_apples, .most_recent {
+  margin-top: 45px;
+}
+
+.top_apples h2 {
+  background-image: url(/images/headings/red_bg.png);
+}
+
+.main_content {
+  float: left;
+  width: 519px;
+}

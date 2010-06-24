@@ -1,6 +1,13 @@
-%li
-  = h mindapple.suggestion
+%li.mindapple
+  -# avatar goes here
 
-  %div{:id => "like_section_#{mindapple.id}"}
-    = render(:partial => 'pages/like_links', :locals => {:mindapple => mindapple})
-  %br
+  %div
+    %p.number #7450
+    %p.apple= h mindapple.suggestion
+    %p.when
+      = "Posted #{time_ago_in_words mindapple.created_at} by"
+      - unless mindapple.person.nil?
+        = link_to mindapple.person.name, mindapple.person
+
+    %div.social{ :id => "like_section_#{mindapple.id}" }
+      = render :partial => 'pages/like_links', :locals => {:mindapple => mindapple}
