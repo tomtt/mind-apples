@@ -46,7 +46,7 @@
 .col-odd
   = form.label :password, "Smile please. <span class='description'>Choose a profile picture.</span>"
   = form.file_field :avatar
-  - unless picture_missing?(resource.avatar.url)
+  - if resource.avatar.exists?
     = image_tag resource.avatar.url(:medium)
     %input{:type=>"checkbox", :name=>"delete_avatar", :value=>1, :checked=>false} Remove this picture.
 .col-even
