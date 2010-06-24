@@ -7,7 +7,7 @@
     %p.when
       = "Posted #{time_ago_in_words mindapple.created_at} by"
       - unless mindapple.person.nil?
-        = link_to mindapple.person.name, mindapple.person
+        = link_to mindapple.person
 
     %div.social{ :id => "like_section_#{mindapple.id}" }
       = render :partial => 'pages/like_links', :locals => {:mindapple => mindapple}
