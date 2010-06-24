@@ -8,13 +8,8 @@
 %img{:src => resource.avatar.url(:medium)}
 
 %h3
-  Here are their suggestions for good things to do to keep your mind healthy:
   %ol
     = render(resource.mindapples)
-
-%h4
-  Here's what they also had to say when they took the test:
-  = h resource.braindump
 
 %h4
   = h resource.name

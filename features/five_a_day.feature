@@ -38,7 +38,7 @@ Feature: Asking for five a day
     And I choose "person_public_profile_true"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
+    # Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
     And I should see "Thanks for sharing your mindapples."
     And I should see "Being in nature"
     When I follow "Edit"
