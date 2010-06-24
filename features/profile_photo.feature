@@ -66,7 +66,7 @@ Feature: Profile photo
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
     And I should not see a profile picture "wallpaper.jpg"
-    And I should see "Avatar file size is too big please use picture between 0 and 512000 bytes."
+    And I should see "Sorry, that picture's a bit big, it needs to be less than 512KB"
 
   Scenario: As a social butterfly I am not able to change my old photo with new bigger one (more than 500 kb)
     Given profile for "gandy" with picture "smile.jpg"
@@ -79,6 +79,30 @@ Feature: Profile photo
     And I upload the picture "wallpaper.jpg"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
-    And I should see "Avatar file size is too big please use picture between 0 and 512000 bytes."
+    And I should see "Sorry, that picture's a bit big, it needs to be less than 512KB."
     And I should not see a profile picture "wallpaper.jpg"
+    And I should see a profile picture "smile.jpg"
+
+  Scenario: As a social butterfly I can't see new picture in edit form when some error occur
+    Given I am on my edit page
+    And I should see "Smile please. Choose a profile picture."
+    And I should see "person[avatar]" field
+    And I should not see "Remove this picture"
+    And I upload the picture "smile.jpg"
+    And I press "Submit"
+    Then I should not see "Thank you for updating your Mindapples page."
+    And I should not see a profile picture "smile.jpg"
+    And I should not see "Remove this picture"
+
+  Scenario: As a social butterfly I can't see newly uploaded picture in edit form when some error occur
+    Given profile for "gandy" with picture "smile.jpg"
+    When I am on my edit page
+    And I should see "Smile please. Choose a profile picture."
+    And I should see a profile picture "smile.jpg"
+    And I should see "person[avatar]" field
+    And I should see "Remove this picture"
+    And I upload the picture "smile2.jpg"
+    And I press "Submit"
+    Then I should not see "Thank you for updating your Mindapples page."
+    And I should not see a profile picture "smile2.jpg"
     And I should see a profile picture "smile.jpg"
