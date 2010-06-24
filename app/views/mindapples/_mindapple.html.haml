@@ -2,7 +2,7 @@
   = image_tag mindapple.person.avatar.url :thumb
 
   %div
-    %p.number #7450
+    %p.number= "##{mindapple.id}"
     %p.apple= h mindapple.suggestion
     %p.when
       = "Posted #{time_ago_in_words mindapple.created_at} by"
