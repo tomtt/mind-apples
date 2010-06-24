@@ -41,7 +41,7 @@ describe ApplicationHelper do
     end    
     
     it "shows the shareThis icons if javascript is enabled" do
-      share_this_icons.should include ('show_share_this_icons')
+      share_this_icons.should include('show_share_this_icons')
     end
   end
 end
