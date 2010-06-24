@@ -1,7 +1,6 @@
 - if current_user.nil?
   = render(:partial => '/pages/what_section')
 
-- if current_user.nil?
   .paper
     .inner-top
       %h1 What are your mindapples?
@@ -9,17 +8,17 @@
 
       = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
 
-%div.main_content
+.main_content
   = render :partial => 'blog_feeds/index'
 
-  %div.top_apples
+  .top_apples
     %h2
       %span Top &lsquo;apples
 
     %ul
       = render :partial => 'mindapples/mindapple', :collection => @most_liked
 
-  %div.most_recent
+  .most_recent
     %h2
       %span Most recent
 

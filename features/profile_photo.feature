@@ -20,7 +20,7 @@ Feature: Profile photo
     Given I am on my edit page
     And I fill all mandatory fields
     And I should see "Smile please. Choose a profile picture."
-    And I should not see a profile picture "missing.png"
+    And I should not see the default profile picture
     And I should not see "Remove this picture"
     And I should see "person[avatar]" field
     When I upload the picture "smile.jpg"
@@ -40,7 +40,7 @@ Feature: Profile photo
     And I press "Submit"
     And I should see "Thank you for updating your Mindapples page."
     And I should not see a profile picture "smile.jpg"
-    And I should see a profile picture "missing.png"
+    And I should see the default profile picture
 
   Scenario: As a social butterfly I can replace a photo
     Given profile for "gandy" with picture "smile.jpg"
@@ -60,7 +60,7 @@ Feature: Profile photo
     Given I am on my edit page
     And I fill all mandatory fields
     And I should see "Smile please. Choose a profile picture."
-    And I should not see a profile picture "missing.png"
+    And I should not see the default profile picture
     And I should see "person[avatar]" field
     When I upload the picture "wallpaper.jpg"
     And I press "Submit"

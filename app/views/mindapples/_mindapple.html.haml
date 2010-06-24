@@ -1,13 +1,12 @@
 %li.mindapple
-  -# avatar goes here
+  = image_tag mindapple.person.avatar.url :thumb
 
   %div
-    %p.number #7450
+    %p.number= "##{mindapple.id}"
     %p.apple= h mindapple.suggestion
     %p.when
       = "Posted #{time_ago_in_words mindapple.created_at} by"
-      - unless mindapple.person.nil?
-        = link_to mindapple.person
+      = link_to mindapple.person
 
-    %div.social{ :id => "like_section_#{mindapple.id}" }
+    .social{ :id => "like_section_#{mindapple.id}" }
       = render :partial => 'pages/like_links', :locals => {:mindapple => mindapple}
