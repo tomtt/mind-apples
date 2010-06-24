@@ -36,7 +36,7 @@
 
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
-
+  DEFAULT_IMAGE_URL = "/images/icons/missing.png"
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => 'Please accept the Terms & Conditions'
 
   validates_presence_of :page_code
@@ -62,8 +62,8 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
 
   # paperclip
-  has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "40x40>" }, :default_url => "/images/icons/missing.png"
-  # validates_attachment_size :avatar, :less_than => 500.kilobytes
+  has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "40x40>" }, :default_url => DEFAULT_IMAGE_URL
+  validates_attachment_size :avatar, :less_than => 500.kilobytes, :if => Proc.new { |person| person.avatar.url != DEFAULT_IMAGE_URL }, :message => 'is too big please use picture between 0 and 512000 bytes.'
   
   accepts_nested_attributes_for :mindapples
 

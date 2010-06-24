@@ -21,6 +21,7 @@ Feature: Profile photo
     And I fill all mandatory fields
     And I should see "Smile please. Choose a profile picture."
     And I should not see a profile picture "missing.png"
+    And I should not see "Remove this picture"
     And I should see "person[avatar]" field
     When I upload the picture "smile.jpg"
     And I press "Submit"
@@ -34,7 +35,7 @@ Feature: Profile photo
     And I should see "Smile please. Choose a profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
-    And I should see "I don't want use this picture anymore."
+    And I should see "Remove this picture"
     Then I check "delete_avatar"
     And I press "Submit"
     And I should see "Thank you for updating your Mindapples page."
@@ -48,9 +49,36 @@ Feature: Profile photo
     And I should see "Smile please. Choose a profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
-    And I should see "I don't want use this picture anymore."
+    And I should see "Remove this picture"
     And I upload the picture "smile2.jpg"
     And I press "Submit"
     Then I should see "Thank you for updating your Mindapples page."
     And I should see a profile picture "smile2.jpg"
     And I should not see a profile picture "smile.jpg"
+
+  Scenario: As a social butterfly I am not able upload photo bigger than 500 kb
+    Given I am on my edit page
+    And I fill all mandatory fields
+    And I should see "Smile please. Choose a profile picture."
+    And I should not see a profile picture "missing.png"
+    And I should see "person[avatar]" field
+    When I upload the picture "wallpaper.jpg"
+    And I press "Submit"
+    Then I should not see "Thank you for updating your Mindapples page."
+    And I should not see a profile picture "wallpaper.jpg"
+    And I should see "Avatar file size is too big please use picture between 0 and 512000 bytes."
+
+  Scenario: As a social butterfly I am not able to change my old photo with new bigger one (more than 500 kb)
+    Given profile for "gandy" with picture "smile.jpg"
+    When I am on my edit page
+    And I fill all mandatory fields
+    And I should see "Smile please. Choose a profile picture."
+    And I should see a profile picture "smile.jpg"
+    And I should see "person[avatar]" field
+    And I should see "Remove this picture"
+    And I upload the picture "wallpaper.jpg"
+    And I press "Submit"
+    Then I should not see "Thank you for updating your Mindapples page."
+    And I should see "Avatar file size is too big please use picture between 0 and 512000 bytes."
+    And I should not see a profile picture "wallpaper.jpg"
+    And I should see a profile picture "smile.jpg"

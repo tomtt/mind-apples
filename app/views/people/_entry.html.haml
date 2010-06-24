@@ -48,7 +48,7 @@
   = form.file_field :avatar
   - unless picture_missing?(resource.avatar.url)
     = image_tag resource.avatar.url(:medium)
-  %input{:type=>"checkbox", :name=>"delete_avatar", :value=>1, :checked=>false} I don't want use this picture anymore.
+    %input{:type=>"checkbox", :name=>"delete_avatar", :value=>1, :checked=>false} Remove this picture.
 .col-even
   = form.label :password, "Come back. <span class='description'>Pick a password to edit your mindapples later.</span>"
   = form.password_field :password
