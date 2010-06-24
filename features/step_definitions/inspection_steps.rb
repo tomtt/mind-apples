@@ -64,3 +64,11 @@ end
 Then /^I should not see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|
   response.should_not have_xpath("//img[./@alt='#{alt_text}'][contains(./@src, '#{image_path}')]")
 end
+
+Then /^I should see an? "([^\"]*)" image button$/ do |image_path|
+  response.body.should have_tag("input[type=image][src*='#{image_path}']")
+end
+
+Then /^I should not see an? "([^\"]*)" image button$/ do |image_path|
+  response.body.should_not have_tag("input[type=image][src*='#{image_path}']")
+end

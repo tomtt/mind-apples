@@ -23,7 +23,7 @@ Feature: Mindapples Home Page
   And I should see a "person[mindapples_attributes][1][suggestion]" text field
   And I should see a "person[mindapples_attributes][2][suggestion]" text field
   And I should see a "person[mindapples_attributes][4][suggestion]" text field
-  And I should see a "commit" submit button
+  And I should see a "go.png" image button
 
   Scenario: As a logged in user I can't see the What? section
     Given I have a personal page
@@ -63,7 +63,7 @@ Feature: Mindapples Home Page
   And I should not see a "person[mindapples_attributes][1][suggestion]" text field
   And I should not see a "person[mindapples_attributes][2][suggestion]" text field
   And I should not see a "person[mindapples_attributes][4][suggestion]" text field
-  And I should not see a "commit" submit button
+  And I should not see a "go.png" image button
 
 
 	@top_apples

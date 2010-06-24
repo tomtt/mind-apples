@@ -17,7 +17,7 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
-    And I press "Submit"
+    And I press "Go"
 	Then I should be on the full form page
 
   Scenario: Social Butterfly fills in the survey from the test page

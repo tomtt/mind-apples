@@ -39,7 +39,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
-    And I press "Submit"
+    And I press "Go"
     And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
@@ -53,7 +53,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
-    And I press "Submit"
+    And I press "Go"
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
@@ -69,7 +69,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
-    And I press "Submit"
+    And I press "Go"
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with ""
@@ -84,7 +84,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     Given person exists with login: "banana_man"
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
-    And I press "Submit"
+    And I press "Go"
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "supersecret"

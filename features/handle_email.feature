@@ -47,7 +47,7 @@ Feature: Handle taken email gracefully
   Scenario: Editing your five with already taken email
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
-    And I press "Submit"
+    And I press "Go"
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
@@ -61,7 +61,7 @@ Feature: Handle taken email gracefully
   Scenario: Editing your five with validate email format
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
-    And I press "Submit"
+    And I press "Go"
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"

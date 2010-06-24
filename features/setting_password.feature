@@ -9,7 +9,7 @@ Feature: Setting a password
   Scenario: Setting a password from the personal page editing form
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
-    And I press "Submit"
+    And I press "Go"
     And I fill in "person[password]" with "opensesame"
     And I fill in "person[password_confirmation]" with "opensesame"
     And I press "Submit"
