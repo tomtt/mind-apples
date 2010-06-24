@@ -40,7 +40,6 @@ class Person < ActiveRecord::Base
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => 'Please accept the Terms & Conditions'
 
   validates_presence_of :page_code
-
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user?}, :message => 'We need your email address to create your account.'
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => "That e-mail address is already taken. Please choose again."
 
