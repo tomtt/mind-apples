@@ -305,10 +305,16 @@ body {
 .mindapple {
   margin-bottom: 15px;
 
+  img {
+    display: block;
+    float: left;
+  }
+
   > div {
     background: url(/images/green_apple.png) no-repeat left bottom;
     border: 2px solid #009523;
     border-radius: 10px;
+    margin-left: 55px;
     padding: 10px 15px 10px 80px;
   }
 

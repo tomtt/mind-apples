@@ -1,5 +1,6 @@
 %li.mindapple
-  -# avatar goes here
+  - unless mindapple.person.nil?
+    = image_tag mindapple.person.avatar.url :thumb
 
   %div
     %p.number #7450
