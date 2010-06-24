@@ -173,13 +173,13 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
-    
+
     describe "doesn't update image with invalid validation" do
       before do
         @mock_person = build_mock_person
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns @mock_person
-        PeopleController.any_instance.stubs(:password_invalid?).returns false
+        PeopleController.any_instance.stubs(:password_invalid?).returns(mock)
         @mock_person.stubs(:update_attributes).returns false
         @mock_person.stubs(:login).returns 'applesmind'
       end
@@ -189,7 +189,7 @@ describe PeopleController do
         mock_person.expects(:avatar).returns(mock('avatar', :url => 'different_path'))
         Person.stubs(:find_by_login).returns mock_person
         mock_person.expects(:avatar=).never
-        
+
         put(:update, "person" => {'login'=>'gandy'})
       end
 
@@ -437,6 +437,7 @@ describe PeopleController do
       before do
         @mock_person = build_mock_person
         @mock_person.stubs(:save).returns false
+        @mock_person.stubs(:avatar=)
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
 
@@ -476,7 +477,7 @@ describe PeopleController do
         controller.stubs(:current_user).returns @person
         Person.stubs(:find_by_param).returns @person
       end
-      
+
       it "save checked checkbox as true" do
         post(:update, "person" => {"login" => 'gandy', 'policy_checked' => "1"})
         params['person']['policy_checked'].should == true
@@ -500,42 +501,42 @@ describe PeopleController do
       @person = Factory.create(:person, :email => "abcdef@ghijk.com")
       @owned_mindapple = Factory.create(:mindapple)
       @others_mindapple = Factory.create(:mindapple)
-            
+
       @person.mindapples << @owned_mindapple
     end
-    
+
     describe "like" do
       describe "when logged in" do
 
         before(:each) do
           @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
-          controller.stubs(:current_user).returns @person 
-          Person.stubs(:find_by_param).returns(@person)                 
+          controller.stubs(:current_user).returns @person
+          Person.stubs(:find_by_param).returns(@person)
         end
-        
-        it "should be successful" do        
+
+        it "should be successful" do
           mindapple = Factory.create(:mindapple)
           put :likes, :id => mindapple
-                    
+
           response.should be_success
         end
-              
+
         it "adds a mindapple as liked by a user only if the user is not the owner" do
           mindapple = Factory.create(:mindapple)
           put :likes, :id => mindapple
-          
+
           @person.liked_mindapples.size.should == 1
         end
-        
+
         it "doesn't add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-          
+
           put :likes, :id => mindapple
-          
+
           @person.liked_mindapples.size.should == 1
         end
-        
+
         it "redirects to the homepage if trying to add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple

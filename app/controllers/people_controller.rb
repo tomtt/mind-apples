@@ -20,8 +20,11 @@ class PeopleController < ApplicationController
   def update
     self.resource = find_resource
     self.resource.protected_login=(params["person"]["login"])
-    return if password_invalid?
-    @resource_saved = resource.update_attributes(params[resource_name])
+    if password_invalid?
+      @resource_saved = false
+    else
+      @resource_saved = resource.update_attributes(params[resource_name])
+    end
   end
 
   response_for :update do |format|
@@ -52,6 +55,7 @@ class PeopleController < ApplicationController
         end
       end
     else
+      resource.avatar = Person.new.avatar
       format.html { render :action => "edit" }
       format.js   { render :action => "edit" }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
@@ -185,17 +189,17 @@ class PeopleController < ApplicationController
     if !current_user.mindapples.include?(@mindapple)
       if !current_user.liked_mindapples.include?(@mindapple)
         current_user.liked_mindapples << @mindapple
-        current_user.save     
+        current_user.save
         respond_to do |format|
           format.js {render :partial => 'likes.js.rjs'}
           format.html {redirect_to(root_path) }
-        end           
+        end
       else
         flash_error_message(:notice, "You can't like a mindapple more than once", root_path)
-      end      
+      end
     else
       flash_error_message(:notice, "You can't like one of your mindapples", root_path)
-    end    
+    end
   end
   
   def flash_error_message(error_key, message, redirection_target)
@@ -223,9 +227,6 @@ class PeopleController < ApplicationController
   end
 
   def validate_image
-    
-    # return unless resource.errors.invalid?(:avatar_file_size)
-
     avatar = Person.find_by_login(resource.login).avatar
     if avatar.url == Person.new.avatar.url
       resource.avatar = Person.new.avatar
