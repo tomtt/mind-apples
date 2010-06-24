@@ -14,8 +14,8 @@ class Mindapple < ActiveRecord::Base
   has_and_belongs_to_many :fans, :class_name => "Person"
   
   def self.most_liked(max)
-    Mindapple.find(:all, :select => "mindapple_id as id, suggestion, ma.created_at as created_at, count(*) as total",
-                         :joins => "as map inner join mindapples as ma on map.mindapple_id = ma.id",
+    Mindapple.find(:all, :select => "mindapple_id as id, suggestion, ma.created_at as created_at, people.name as author, count(*) as total",
+                         :joins => "as map inner join mindapples as ma on map.mindapple_id = ma.id inner join people on people.id = map.person_id",
                          :from => "mindapples_people",
                          :group => "mindapple_id",
                          :order => "total DESC",
