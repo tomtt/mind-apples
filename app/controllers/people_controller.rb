@@ -121,7 +121,7 @@ class PeopleController < ApplicationController
   
   def password_invalid?
     if resource.login_set_by_user? && params["person"]["password"].blank?
-      resource.errors.add(:password, "Password is too short (minimum is 4 characters)")
+      resource.errors.add('Password', " is too short (minimum is 4 characters)")
       return true
     end
     false
