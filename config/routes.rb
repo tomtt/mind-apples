@@ -22,7 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.media '/media', :controller => "pages", :action => "media"
   map.terms '/terms', :controller => "pages", :action => "terms"
   map.services '/services', :controller => "pages", :action => "services"
-
+  map.privacy '/privacy', :controller => "pages", :action => "privacy"
+  
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
   map.favourites '/person/:login/favourites', :controller => 'people', :action => 'favourites'

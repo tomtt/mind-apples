@@ -23,7 +23,7 @@ module NavigationHelpers
     when /^the "fives" page$/
       fives_path
     when /^the "help us grow" page$/
-      help_us_grow_path
+      grow_path
     when /^the "links" page$/
       links_path
     when /^the url "this-is-a-page-that-blows-up-to-test-the-500-error"$/

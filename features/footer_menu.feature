@@ -24,4 +24,4 @@ Feature: Footer menu
     | "about" page         |
     | "take the test" page |
     | "fives" page         |
-    | "grow" page          |
+    | "help us grow" page  |
