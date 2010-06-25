@@ -1,0 +1,16 @@
+- content_for :content do
+  - render_tabnav :sub do
+    - add_tab do |t|
+      - t.named 'About'
+      - t.links_to :controller => :pages, :action => :about
+    - add_tab do |t|
+      - t.named 'Team'
+      - t.links_to :controller => :pages, :action => :about_team
+    - add_tab do |t|
+      - t.named 'How we got here'
+      - t.links_to :controller => :pages, :action => :how_we_got_here
+  .sub_central
+    .inner
+      = yield
+
+= render :file => 'layouts/application'

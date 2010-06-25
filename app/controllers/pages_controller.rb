@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  layout :choose_layout
   
   TOP_APPLES_MAX = 5
   MOST_RECENT_APPLES_MAX = 5
@@ -12,5 +13,16 @@ class PagesController < ApplicationController
 
   def error
     raise 'Intentional error'
+  end
+
+  private
+
+  def choose_layout
+    case action_name
+    when "about", "about_team", "how_we_got_here"
+      "about"
+    else
+      "application"
+    end
   end
 end
