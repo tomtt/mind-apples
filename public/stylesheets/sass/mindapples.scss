@@ -258,28 +258,41 @@ body {
     font: {
       family: helvetica neue, arial, sans;
       weight: bold;
-      size: 1.2em;
+      size: 19px;
     }
     margin: 30px auto 0;
-    padding: 0 10px;
-    width: 560px;
+    overflow: auto;
+    padding-left: 10px;
+    width: 570px;
 
     li {
-      display: inline-block;
+      float: left;
+      margin-left: -35px;
+    }
+
+    li:first-child {
+      margin-left: 0;
     }
 
     a {
-      background: $darkgreen;
+      background: no-repeat center bottom;
       color: #fff;
       display: block;
-      line-height: 2.5;
-      padding: 0 10px;
+      line-height: 48px;
+      padding-right: 30px;
+      padding-top: 8px;
+      position: relative;
       text-decoration: none;
+      text-align: center;
     }
 
-    li.active a {
-      background: $lightgreen;
-    }
+    li:first-child a { background-image: url(/images/subnav/left_off.png); width: 173px; z-index: 3; }
+    li:first-child + li a { background-image: url(/images/subnav/middle_off.png); width: 183px; z-index: 2; }
+    li:first-child + li + li a { background-image: url(/images/subnav/right_off.png); width: 191px; z-index: 1; }
+
+    li.active:first-child a { background-image: url(/images/subnav/left_on.png); }
+    li:first-child + li.active a { background-image: url(/images/subnav/middle_on.png); }
+    li:first-child + li + li.active a { background-image: url(/images/subnav/right_on.png); }
   }
 }
 
