@@ -34,14 +34,6 @@
 #  password_saved            :boolean(1)      default(FALSE)
 #
 
-module Paperclip
-  def  validates_attachment_size name, options = {}
-    debugger
-    :a
-  end 
-end
-
-
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.png"
