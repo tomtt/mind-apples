@@ -5,7 +5,7 @@
     %p.number= "##{mindapple.id}"
     %p.apple= h mindapple.suggestion
     %p.when
-      = "Posted #{time_ago_in_words mindapple.created_at} by"
+      = "Posted #{time_ago_in_words mindapple.created_at} ago by"
       = link_to mindapple.person
 
     .social{ :id => "like_section_#{mindapple.id}" }
