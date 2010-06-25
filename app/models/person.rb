@@ -39,6 +39,7 @@ class Person < ActiveRecord::Base
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.png"
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
   validates_presence_of :page_code
+  validates_length_of :password_confirmation, :minimum => 1000, :if => Proc.new { |person| person.password.to_s != person.password_confirmation }, :message => :"password_confirmation.dont_match"
 
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user?}, :message => :"email.blank"
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique"
@@ -52,8 +53,8 @@ class Person < ActiveRecord::Base
 
   acts_as_authentic do |config|
     config.merge_validates_length_of_password_field_options :message => :"password.length"
-    config.merge_validates_confirmation_of_password_field_options :message => :"password_confirmation.dont_match"
     config.merge_validates_uniqueness_of_login_field_options :message => :"login.taken"
+    config.require_password_confirmation false
     config.validate_email_field false
   end
 
@@ -70,6 +71,9 @@ class Person < ActiveRecord::Base
 
   attr_protected :login, :page_code
 
+  #because we need our own validation
+  attr_accessor :password_confirmation
+
   def self.new_with_mindapples(attributes = {})
     new(attributes).ensure_correct_number_of_mindapples
   end
@@ -85,7 +89,7 @@ class Person < ActiveRecord::Base
       self.login = value
     end
   end
-  
+
   def login_set_by_user?
     login &&
       !login.blank? &&
