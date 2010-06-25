@@ -44,4 +44,14 @@ describe ApplicationHelper do
       share_this_icons.should include('show_share_this_icons')
     end
   end
+  
+  describe "render proper error header" do
+    it "for 1 error" do
+      header_error_message(1).should == "Oh dear, there was a problem:"
+    end
+
+    it "for more than 1 errors" do
+      header_error_message(4).should == "Oh dear, there were 4 problems:"
+    end
+  end
 end

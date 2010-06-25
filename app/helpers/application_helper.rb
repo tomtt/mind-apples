@@ -56,4 +56,9 @@ module ApplicationHelper
       
     <!-- AddThis Button END -->'
   end
+  
+  def header_error_message(errors_count)
+    return "Oh dear, there were #{errors_count} problems:" if errors_count > 1
+    "Oh dear, there was a problem:"
+  end
 end

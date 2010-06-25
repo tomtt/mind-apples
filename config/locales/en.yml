@@ -2,4 +2,19 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      full_messages:
+        policy_checked:
+          blank: "Please accept the Terms & Conditions"
+        email:
+          blank: "We need your email address to create your account."
+          unique: "That e-mail address is already taken. Please choose again."
+          format: "That doesn't look like a valid e-mail address. Please try again."
+        login:
+          format: "Sorry, usernames cannot begin with an underscore. Please choose again."
+          taken: "That username has already been taken. Please choose again."
+        password:
+          length: "Please choose a valid password (minimum is 4 characters)"
+        password_confirmation:
+          dont_match: "Looks like your password and confirmation don't match."
