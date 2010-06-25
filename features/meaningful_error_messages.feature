@@ -1,5 +1,4 @@
 @pivotal_3958507
-@mess
 
 Feature: Meaningful error messages
   In order to get proper error messages
@@ -14,7 +13,6 @@ Feature: Meaningful error messages
     And I should not see "There were problems with the following fields:"
     And I should not see "Policy checked Please accept the Terms & Conditions"
     And I should see "Oh dear, there was a problem"
-
 
   Scenario: "As a social butterfly I should see meaningful error messages"
     Given I am on the "take the test" page

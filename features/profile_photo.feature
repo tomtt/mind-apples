@@ -79,6 +79,7 @@ Feature: Profile photo
     And I upload the picture "wallpaper.jpg"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
+    And I should not see "Avatar file size Sorry, that picture's a bit big, it needs to be less than 512KB."
     And I should see "Sorry, that picture's a bit big, it needs to be less than 512KB."
     And I should not see a profile picture "wallpaper.jpg"
     And I should see a profile picture "smile.jpg"

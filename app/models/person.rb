@@ -34,6 +34,14 @@
 #  password_saved            :boolean(1)      default(FALSE)
 #
 
+module Paperclip
+  def  validates_attachment_size name, options = {}
+    debugger
+    :a
+  end 
+end
+
+
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.png"
@@ -62,8 +70,10 @@ class Person < ActiveRecord::Base
 
   # paperclip
   has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "40x40>" }, :default_url => DEFAULT_IMAGE_URL
-  validates_attachment_size :avatar, :less_than => 500.kilobytes, :unless => Proc.new { |person| person.avatar.original_filename.nil? }, :message => "Sorry, that picture's a bit big, it needs to be less than 512KB."
-  
+
+  #attach file validation from paper clip is not used here, because we can't use :"avatar.size" for specification of error message format.
+  validates_inclusion_of :"avatar_file_size", :in => 0..512000, :unless => Proc.new { |person| person.avatar.original_filename.nil? }, :message => :"avatar.size"
+
   accepts_nested_attributes_for :mindapples
 
   attr_protected :login, :page_code

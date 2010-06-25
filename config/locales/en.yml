@@ -18,3 +18,5 @@ en:
           length: "Please choose a valid password (minimum is 4 characters)"
         password_confirmation:
           dont_match: "Looks like your password and confirmation don't match."
+        avatar:
+          size: "Sorry, that picture's a bit big, it needs to be less than 512KB."
