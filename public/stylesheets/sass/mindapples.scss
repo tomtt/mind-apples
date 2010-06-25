@@ -1,5 +1,8 @@
 /* Generic */
 
+$darkgreen: #40863e;
+$lightgreen: #a3c65d;
+
 * {
   margin: 0px;
   padding: 0px;
@@ -126,6 +129,7 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
+      overflow: auto;
       padding-top: 10px;
       font-size: 1.2em;
       line-height: 1.65em;
@@ -237,15 +241,73 @@ body {
       a, span { width: 83px; }
       a.active, span.active { background-image: url(/images/nav_bar/about_us_active.png); }
     }
-    .get_involved {
-      a, span { width: 110px; }
-      a.active, span.active { background-image: url(/images/nav_bar/get_involved_active.png); }
-    }
     .blog {
       a, span { width: 58px; }
       a.active, span.active { background-image: url(/images/nav_bar/blog_active.png); }
     }
     
+  }
+}
+
+.sub_tabnav {
+  background: url(/images/layout/bg-center-content-top.png) no-repeat center bottom;
+  padding-bottom: 20px;
+
+  ul {
+    border-bottom: 10px solid $lightgreen;
+    font: {
+      family: helvetica neue, arial, sans;
+      weight: bold;
+      size: 1.2em;
+    }
+    margin: 30px auto 0;
+    padding: 0 10px;
+    width: 560px;
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      background: $darkgreen;
+      color: #fff;
+      display: block;
+      line-height: 2.5;
+      padding: 0 10px;
+      text-decoration: none;
+    }
+
+    li.active a {
+      background: $lightgreen;
+    }
+  }
+}
+
+.sub_central {
+  background: url(/images/layout/bg-center-content-bottom.png) no-repeat center bottom;
+  padding-bottom: 38px;
+
+  .inner {
+    background: url(/images/layout/bg-center-content.png) repeat-y center top;
+    margin: 0 auto;
+    // 1px avoids bg image gaps due to collapsing margins
+    padding: 1px 39px;
+    width: 538px;
+
+    h1 {
+      margin-bottom: 1em;
+    }
+
+    p {
+      line-height: 1.5;
+      margin-bottom: 1.5em;
+    }
+
+    ul {
+      list-style: disc;
+      margin-bottom: 1.5em;
+      margin-left: 15px;
+    }
   }
 }
 
