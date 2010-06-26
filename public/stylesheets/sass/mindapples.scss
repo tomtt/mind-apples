@@ -334,19 +334,122 @@ body {
   }
     
   .intro {
-    padding: 10px 55px;
-    margin-bottom: 20px;
+    padding: 0px 60px;
+    margin-bottom: 27px;
     color: #067D29;
-    font-size: 1.3em;
-    line-height: 1.5em;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.35em;
   }
     
   .the_test{
-    padding-top: 50px;
+    padding-top: 20px;
     background: url(/images/layout/bg-top-the-test.png) no-repeat center top;
+    color: #fff;
+    font-size: 1.1em;
     
     .inner {
       background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;  
+      
+      h1 {
+        font-size: 2.3em;
+      }
+      
+      input[type=text] {
+        border: none;
+        font-size: 1.5em;
+        margin-left: 13px;
+        padding: 2px;
+        width: 280px;
+        margin: 0;
+      }
+
+      input[type=image] {
+        bottom: -70px;
+        position: absolute;
+        right: 20px;
+      }
+      
+      label {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 7px;
+        .description {
+          font-size: 0.85em;
+          font-weight: normal;
+          color: #CDE5AE;
+        }
+      }
+      
+      .arrow_lead_in {
+        display: block;
+        background: url('/images/arrows/white_left_curve_down.png') no-repeat left top;
+        height: 57px;
+        width: 22px;
+        position: relative;
+      }
+      
+      .row_odd {
+        padding: 20px 60px;
+      }
+      
+      .row_even {
+        margin-top: 10px;
+        padding: 40px 60px;
+        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
+      }
+      
+      .col_full { margin-bottom: 10px;}
+      .col_odd { margin-bottom: 10px;}
+      .col_even { margin-bottom: 10px;}
+  
+      .five_things {      
+        .description {
+          background: url('/images/arrows/white_right_curve_south_east.png') no-repeat right top;
+          padding-right: 45px;
+          padding-top: 25px;
+          width:325px;
+          font-size: 1.35em;
+          font-weight: bold;
+          line-height: 1.4em;
+          color: #D9EDBC;
+          margin-top: -10px;
+          margin-bottom: 15px;
+        }   
+        li {
+          background: url(/images/green_whole_apple.png) no-repeat 0 5px;
+          color: white;
+          font-weight: bold;
+          list-style-position: inside;
+          padding: 3px 0 5px 8px;
+          margin-bottom: 7px;
+        }
+        input[type=text] {
+          padding: 6px;
+          width: 500px;
+          margin-left: 20px;
+        } 
+      }
+      
+      .extra_details {
+        .arrow_lead_in {
+          margin: -76px 0 20px -30px;
+        }
+        .brain_dump {
+          textarea {
+            border: 0 none;
+            width: 580px;
+            height: 63px;
+          }
+        }
+      }
+      
+      .account_details {
+        .arrow_lead_in {
+          margin: -46px 0 20px -30px;
+        }
+      }
+  
     }
   }
 }
