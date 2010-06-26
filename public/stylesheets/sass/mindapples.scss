@@ -134,7 +134,7 @@ body {
       font-size: 1.2em;
       line-height: 1.65em;
       
-      .paper {
+      .five-a-day {
         float: right;
         width: 425px;
         color: white;
@@ -324,9 +324,36 @@ body {
   }
 }
 
+.take_the_test {
+  width: 700px;
+  margin: 0 auto;
+    
+  h2 {
+    background: url(/images/headings/light_green_bg.png) no-repeat left center;
+    padding: 0 55px;
+  }
+    
+  .intro {
+    padding: 10px 55px;
+    margin-bottom: 20px;
+    color: #067D29;
+    font-size: 1.3em;
+    line-height: 1.5em;
+  }
+    
+  .the_test{
+    padding-top: 50px;
+    background: url(/images/layout/bg-top-the-test.png) no-repeat center top;
+    
+    .inner {
+      background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;  
+    }
+  }
+}
+
 /* Page Elements */
 
-.paper {
+.five-a-day {
   font-size: 1.2em;
   line-height: 1.65em;
   float: right;
