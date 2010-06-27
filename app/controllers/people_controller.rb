@@ -19,7 +19,8 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login=(params["person"]["login"])
+    self.resource.protected_login= (params["person"]["login"])
+    # self.resource.login = params["person"]["login"] if !(params["person"]["login"]).blank?
     return if password_invalid?
     @resource_saved = resource.update_attributes(params[resource_name])
   end
@@ -48,7 +49,13 @@ class PeopleController < ApplicationController
         if @resource_saved
           login_as_new_user
           flash[:message] = 'Thanks for sharing your mindapples.'
-          redirect_to resource_path(resource)
+          puts "-----------> #{session[:return_to]} ========= "
+          if @generated_login
+            redirect_to edit_resource_path(resource)
+          else
+            redirect_to resource_path(resource)
+          end
+
         end
       end
     else
@@ -103,7 +110,7 @@ class PeopleController < ApplicationController
   protected
 
   def find_resource
-    person = Person.find_by_param(params["id"])
+    person = params[:pid] ? Person.find(params[:pid]) : Person.find_by_param(params["id"])
     unless person
       render_404
     end
@@ -222,15 +229,16 @@ class PeopleController < ApplicationController
     resource.save
   end
 
-  def validate_image
-    
+  def validate_image    
     # return unless resource.errors.invalid?(:avatar_file_size)
-
-    avatar = Person.find_by_login(resource.login).avatar
-    if avatar.url == Person.new.avatar.url
-      resource.avatar = Person.new.avatar
-    else
-      resource.avatar = avatar
+    person = Person.find_by_login(resource.login)
+    if !person.nil? 
+      avatar = person.avatar
+      if avatar.url == Person.new.avatar.url
+        resource.avatar = Person.new.avatar
+      else
+        resource.avatar = avatar
+      end
     end
   end
 
