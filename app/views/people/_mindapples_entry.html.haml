@@ -1,7 +1,4 @@
 .row_odd.five_things
-  %h1 Important bit.
-  .description 
-    What five things do you do every day, or regularly, to look after your mind?
   %ol
     - form.fields_for :mindapples do |mindapple_form|
       = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })

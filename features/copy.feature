@@ -5,7 +5,7 @@ Feature: Proper layouts structure
   In order to explain why Mindapples
   As the evil overlord
   I want proper page hierarchy
-  @wip
+
   Scenario: Homepage 5-a-day form
     When I go to the homepage
     Then I should see "What are your mindapples?"
