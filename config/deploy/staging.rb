@@ -1,6 +1,8 @@
 set :rails_env, "staging"
 
-set :rails_server, "mindapples.staging.tomtenthij.co.uk"
+set :user, "mapples"
+set :deploy_to, "/home/#{user}/#{application}"
+set :rails_server, "mindapples.staging.unboxedconsulting.com"
 
 role :app, rails_server
 role :web, rails_server
