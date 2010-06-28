@@ -19,8 +19,8 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login= (params["person"]["login"])
-    # self.resource.login = params["person"]["login"] if !(params["person"]["login"]).blank?
+    self.resource.protected_login= (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
+    
     return if password_invalid?
     @resource_saved = resource.update_attributes(params[resource_name])
   end
@@ -49,7 +49,6 @@ class PeopleController < ApplicationController
         if @resource_saved
           login_as_new_user
           flash[:message] = 'Thanks for sharing your mindapples.'
-          puts "-----------> #{session[:return_to]} ========= "
           if @generated_login
             redirect_to edit_resource_path(resource)
           else
