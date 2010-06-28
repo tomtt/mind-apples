@@ -5,7 +5,7 @@ Feature: Proper layouts structure
   In order to explain why Mindapples
   As the evil overlord
   I want proper page hierarchy
-
+  @wip
   Scenario: Homepage 5-a-day form
     When I go to the homepage
     Then I should see "What are your mindapples?"
@@ -49,7 +49,7 @@ Feature: Proper layouts structure
     When I go to the homepage
     And I should see "Take the test"
     And I follow "Take the test"
-    Then I should see "Take the Mindapples Test"
+    Then I should see "Take the Mindapples test"
     And I should be on "/person/new"
     And I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
     And I should see "Choose a username to claim your Mindapples account."
