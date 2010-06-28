@@ -19,7 +19,8 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login=(params["person"]["login"])
+    self.resource.protected_login= (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
+
     if password_invalid?
       @resource_saved = false
     else
@@ -51,7 +52,11 @@ class PeopleController < ApplicationController
         if @resource_saved
           login_as_new_user
           flash[:message] = 'Thanks for sharing your mindapples.'
-          redirect_to resource_path(resource)
+          if @generated_login && params[:pid].nil?
+            redirect_to edit_resource_path(resource)
+          else
+            redirect_to resource_path(resource)
+          end
         end
       end
     else
@@ -107,7 +112,7 @@ class PeopleController < ApplicationController
   protected
 
   def find_resource
-    person = Person.find_by_param(params["id"])
+    person = params[:pid] ? Person.find(params[:pid]) : Person.find_by_param(params["id"])
     unless person
       render_404
     end
@@ -121,7 +126,7 @@ class PeopleController < ApplicationController
   
   def password_invalid?
     if resource.login_set_by_user? && params["person"]["password"].blank?
-      resource.errors.add('Password', " is too short (minimum is 4 characters)")
+      resource.errors.add('Please', " choose a valid password (minimum is 4 characters)")
       return true
     end
     false
@@ -201,12 +206,12 @@ class PeopleController < ApplicationController
       flash_error_message(:notice, "You can't like one of your mindapples", root_path)
     end
   end
-  
+
   def flash_error_message(error_key, message, redirection_target)
     flash[error_key] = message
     redirect_to(redirection_target) if redirection_target
   end
-  
+
   def unlike_mindapple
     if current_user.liked_mindapples.include?(@mindapple)
       current_user.liked_mindapples.delete(@mindapple)
@@ -227,7 +232,7 @@ class PeopleController < ApplicationController
   end
 
   def validate_image
-    avatar = Person.find_by_login(resource.login).avatar
+    avatar = Person.find_by_id(params[:pid]).avatar
     if avatar.url == Person.new.avatar.url
       resource.avatar = Person.new.avatar
     else

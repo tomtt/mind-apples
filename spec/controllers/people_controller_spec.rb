@@ -187,7 +187,7 @@ describe PeopleController do
       it "and load previous picture for avatar" do
         mock_person = @mock_person
         mock_person.expects(:avatar).returns(mock('avatar', :url => 'different_path'))
-        Person.stubs(:find_by_login).returns mock_person
+        Person.stubs(:find_by_id).returns mock_person
         mock_person.expects(:avatar=).never
 
         put(:update, "person" => {'login'=>'gandy'})
@@ -196,7 +196,7 @@ describe PeopleController do
       it "and set default picture for avatar" do
         mock_person = @mock_person
         mock_person.expects(:avatar).returns(mock('avatar', :url => Person.new.avatar.url))
-        Person.stubs(:find_by_login).returns @mock_person
+        Person.stubs(:find_by_id).returns @mock_person
         @mock_person.expects(:avatar=)
 
         put(:update, "person" => {'login'=>'gandy'})
@@ -332,7 +332,23 @@ describe PeopleController do
       UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
       post(:create, "person" => {"login" => ''})
     end
-  
+
+    context "with autogen login should redirect to" do
+      it "edit page if params didn't contains pid" do
+        PageCode.stubs(:code).returns('genlogin')
+        UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
+        post(:create, "person" => {"login" => ''})
+        response.should redirect_to(edit_person_path(controller.resource))
+      end
+
+      it "show page if params contains pid" do
+        PageCode.stubs(:code).returns('genlogin')
+        UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
+        post(:create, "person" => {"login" => ''}, 'pid' => 123)
+        response.should redirect_to(person_path(controller.resource))
+      end
+    end
+
     it "should assign the code as the autogen login if no login was passed" do
       PageCode.stubs(:code)
       PageCode.stubs(:code).returns 'abzABz09'

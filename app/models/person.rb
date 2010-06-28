@@ -172,5 +172,5 @@ class Person < ActiveRecord::Base
       self.name.strip!
     end
   end
-  
+    
 end

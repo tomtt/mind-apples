@@ -5,15 +5,17 @@ Feature: Setting a password
   In order to be able to edit my page
   As a social butterfly
   I want to be able to set a password that I can use to edit my page
-  
+
   Scenario: Setting a password from the personal page editing form
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I press "Go"
     And I fill in "person[password]" with "opensesame"
     And I fill in "person[password_confirmation]" with "opensesame"
+    And I check "person_policy_checked"
     And I press "Submit"
-    Then I should be on full form edit page
+    Then I should see "Your page on Mindapples"
+    And I should see "Thank you for updating your Mindapples page."
 
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"
@@ -21,7 +23,7 @@ Feature: Setting a password
     And my braindump is "I heart mindapples"
     And my login is "lucy"
     And my email is "lucy@example.com"
-	And I go to the login page
+    And I go to the login page
     And I fill in "Enter your email to receive instructions on how to set your password" with "lucy@example.com"
     And I press "Send email"
 

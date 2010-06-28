@@ -18,7 +18,8 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
-	Then I should be on the full form page
+    Then I should see "Yes yes, of course I accept the Terms & Conditions"
+    And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
@@ -65,7 +66,7 @@ Feature: Asking for five a day
     And I fill in "person[password_confirmation]" with "shhh"
     And I press "Submit"
     Then I should see "Looks like your password and confirmation don't match"
-    And I should see a "person[password_confirmation]" password field containing "shhh"
+    And I should not see a "person[password_confirmation]" password field containing "shhh"
 
   Scenario: Filling in the test correctly from the take the test page but without agreeing the policy
     When I go to the "take the test" page

@@ -9,7 +9,6 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     When I go to the "take the test" page
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
-                   
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should not see "Here are their mindapples"

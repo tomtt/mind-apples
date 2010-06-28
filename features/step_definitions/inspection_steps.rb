@@ -2,6 +2,10 @@ Then /^I should see an? "([^\"]*)" (text|password) field containing "([^\"]*)"$/
   response.body.should have_selector("input[type='#{type}'][name='#{name}'][value='#{value}']")
 end
 
+Then /^I should not see an? "([^\"]*)" (text|password) field containing "([^\"]*)"$/ do |name, type, value|
+  response.body.should_not have_selector("input[type='#{type}'][name='#{name}'][value='#{value}']")
+end
+
 Then /^I should see an? "([^\"]*)" text area containing "([^\"]*)"$/ do |name, value|
   response.body.should have_tag("textarea[name='#{name}']", :content => value)
 end
