@@ -90,6 +90,7 @@ Feature: Profile photo
     And I should see "person[avatar]" field
     And I should not see "Remove this picture"
     And I upload the picture "smile.jpg"
+    And I fill in "person[password]" with "secretsuper"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
     And I should not see a profile picture "smile.jpg"
@@ -103,6 +104,7 @@ Feature: Profile photo
     And I should see "person[avatar]" field
     And I should see "Remove this picture"
     And I upload the picture "smile2.jpg"
+    And I fill in "person[password]" with "secretsuper"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
     And I should not see a profile picture "smile2.jpg"

@@ -62,7 +62,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     Then I should not see "Here are their mindapples"
     And I should see "We need your email address to create your account."
 
-  Scenario: I'm not able save blank password on edit page if I fill in username
+  Scenario: I'm not able save short password on edit page if I fill in username
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
@@ -71,8 +71,8 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I press "Go"
 
     And I fill in "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" with "banana_man"
-    And I fill in "person[password]" with ""
-    And I fill in "person[password_confirmation]" with ""
+    And I fill in "person[password]" with "s"
+    And I fill in "person[password_confirmation]" with "s"
     And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"

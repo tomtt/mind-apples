@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
   def update
     self.resource = find_resource
     self.resource.protected_login= (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
-
+    
     if password_invalid?
       @resource_saved = false
     else
@@ -125,7 +125,9 @@ class PeopleController < ApplicationController
   end
   
   def password_invalid?
-    if resource.login_set_by_user? && params["person"]["password"].blank?
+    person = Person.find_by_id(params[:pid])
+
+    if person && !person.login_set_by_user? && person.login !=  params["person"]["login"] && params["person"]["password"].blank?
       resource.errors.add('Please', " choose a valid password (minimum is 4 characters)")
       return true
     end

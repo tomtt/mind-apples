@@ -164,3 +164,10 @@ Feature: Personal page
     And I press "Log in"
     And I follow "Edit"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
+
+  Scenario: Password is not mandatory if person is on edit page
+    Given I am logged in
+    And I am on my edit page
+    Then I press "Submit"
+    And I should see "Thank you for updating your Mindapples page."
+  

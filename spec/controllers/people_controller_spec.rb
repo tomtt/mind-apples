@@ -108,10 +108,10 @@ describe PeopleController do
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns(@mock_person)
       end
-  
+
       it_should_behave_like "all actions finding a person"
     end
-  
+
     describe "when not logged in" do
       before do
         @mock_person = build_mock_person
@@ -119,15 +119,53 @@ describe PeopleController do
         controller.stubs(:current_user).returns nil
         Person.stubs(:find_by_param).with('some_login').returns(@mock_person)
       end
-  
+
       it "should set the return_to session value to the path for editing this user" do
         get 'edit', :id => 'some_login'
         session[:return_to].should == edit_person_path(@mock_person)
       end
     end
   end
-  
+
   describe "update" do
+    describe "user with blank password" do
+      before(:each) do
+        @mock_person = build_mock_person
+        controller.stubs(:current_user).returns  @mock_person
+        Person.stubs(:find_by_param).returns  @mock_person
+        Person.stubs(:find_by_id).returns  @mock_person
+        Person.stubs(:find_resource).returns( @mock_person)
+      end
+      
+      it "fail if user is autogen with empty password and new login" do
+        @mock_person.stubs(:login_set_by_user?).returns false
+        @mock_person.stubs(:errors).returns(mock('error', :add))
+        @mock_person.stubs(:login).returns 'apple'
+        
+        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
+      end
+
+      it "doesn't fail if user is autogen with empty password and old login" do
+        @mock_person.stubs(:login_set_by_user?).returns false
+        mock_error = mock('error')
+        mock_error.expects(:add).never.with('Please', " choose a valid password (minimum is 4 characters)")
+        @mock_person.stubs(:errors).returns(mock_error)
+
+        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
+      end
+
+      it "doesn't fail if user is autogen with empty password" do
+        @mock_person.stubs(:login_set_by_user?).returns true
+        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
+      end
+
+      it "doesn't fail if autogen user with filled password" do
+        @mock_person.stubs(:login_set_by_user?).returns false
+        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => 'supersecret'})
+      end
+
+    end
+
     describe "when logged in as the updated user" do
       before do
         @mock_person = build_mock_person
@@ -155,12 +193,6 @@ describe PeopleController do
         PeopleController.any_instance.stubs(:password_invalid?)
         put(:update, "person" => {"login" => 'gandy'})
         flash[:notice].should =~ /thank you/i
-      end
-
-      it "don't allow save blank password" do
-        @mock_person.expects(:login_set_by_user?).returns true
-        @mock_person.expects(:errors)
-        put(:update, "person" => {"login" => 'gandy', 'password' => '', 'password_confirmation' => ''})
       end
 
       it "find resource only for existed login" do
@@ -291,7 +323,7 @@ describe PeopleController do
       controller.resource.should == @mock_person
     end
   end
-  
+
   describe "create" do
     it "should log the new person in" do
       @mock_person = build_mock_person
@@ -299,12 +331,12 @@ describe PeopleController do
       UserSession.expects(:create!)
       post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
     end
-  
+
     it "should generate a page code" do
       PageCode.expects(:code).twice
       post(:create, "person" => {})
     end
-  
+
     it "should assign the code as the page code" do
       @mock_person = build_mock_person
       Person.stubs(:new_with_mindapples).returns @mock_person
@@ -313,7 +345,7 @@ describe PeopleController do
       @mock_person.expects(:page_code=).with('abzABz09')
       post(:create, "person" => {})
     end
-  
+
     it "should set the login in a protected way on the created resource" do
       @mock_person = build_mock_person
       Person.stubs(:new_with_mindapples).returns @mock_person
@@ -326,7 +358,7 @@ describe PeopleController do
       @mock_person.expects(:protected_login=).with('gandy')
       post(:create, "person" => {"login" => 'gandy'})
     end
-  
+
     it "should generate a login if the login field is blank" do
       PageCode.stubs(:code).returns('genlogin')
       UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
@@ -619,7 +651,7 @@ describe PeopleController do
           @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
           @person.stubs(:to_param).returns('testThis')
           controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)                             
+          Person.stubs(:find_by_param).with('testThis').returns(@person)
         end
         
         it "redirects to the homepage" do
@@ -631,7 +663,7 @@ describe PeopleController do
         
         it "shows an error message" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :mindapple => mindapple          
+          put :likes, :mindapple => mindapple
           
           flash[:notice].should == "You must be logged in to like a mindapple"
         end
@@ -648,7 +680,7 @@ describe PeopleController do
           @person.mindapples << mindapple
           put :likes, :mindapple => mindapple
           
-          @person.liked_mindapples.should_not include(mindapple)          
+          @person.liked_mindapples.should_not include(mindapple)
         end
         
         it "doesn't add a mindapple if it doesn't exist" do
@@ -683,7 +715,7 @@ describe PeopleController do
           
           put :unlikes, :id => mindapple
           
-          @person.liked_mindapples.should_not include(mindapple)          
+          @person.liked_mindapples.should_not include(mindapple)
         end
     
         it "doesn't do anything  if the user didn't previously like it" do
@@ -731,18 +763,6 @@ describe PeopleController do
           
           response.should redirect_to(root_path)
         end
-    
-        # it "shows an error message if trying to unlike another's liked_mindapples" do
-        #   mindapple = Factory.create(:mindapple)
-        #   another_person = Factory.create(:person, :email => "liamEtseT@email.com")
-        #   
-        #   another_person.liked_mindapples << mindapple
-        #   
-        #   put :unlikes, :id => mindapple
-        #   
-        #   flash[:notice].should == "You can't unlike another's liked mindapples"
-        # end
-        
       end
       
       describe "when not logged in" do
@@ -766,7 +786,7 @@ describe PeopleController do
           
           put :unlikes, :id => mindapple
           
-          @person.liked_mindapples.should include(mindapple)          
+          @person.liked_mindapples.should include(mindapple)
         end
     
         it "doesn't do anything  if the user didn't previously like it" do
@@ -774,7 +794,7 @@ describe PeopleController do
           
           put :unlikes, :id => mindapple
           
-          @person.liked_mindapples.should be_empty          
+          @person.liked_mindapples.should be_empty
         end
     
         it "doesn't remove a mindapple from another user's liked_mindapples" do
@@ -785,14 +805,14 @@ describe PeopleController do
           
           put :unlikes, :id => mindapple
           
-          another_person.liked_mindapples.size.should == 1          
+          another_person.liked_mindapples.size.should == 1
         end
         
         it "shows a error message" do
           mindapple = Factory.create(:mindapple)
-          put :unlikes, :id => mindapple          
+          put :unlikes, :id => mindapple
           
-          flash[:notice].should == "You must be logged in to unlike a mindapple"          
+          flash[:notice].should == "You must be logged in to unlike a mindapple"
         end
       end
       
