@@ -69,7 +69,7 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :mindapples
 
-  attr_protected :login, :page_code
+  # attr_protected :login, :page_code
 
   #because we need our own validation
   attr_accessor :password_confirmation
