@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   rescue_from Exception do |exception|
-    render :text => exception
+    render :text => exception.message
   end
   # rescue_from Exception, :with => :render_500
   # rescue_from ActiveRecord::RecordNotFound, :with => :render_404
