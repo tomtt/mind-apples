@@ -103,4 +103,14 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "Login" with "gandy"
     And I fill in "Password" with "antisosocial"
     And I press "Log in"
-    Then I should see "Sorry, we don't recognise that username and password combination. Please try again."    
+    Then I should see "Sorry, we don't recognise that username and password combination. Please try again."
+
+  Scenario: Fields has to be populated if some erros happend after pressing submit button
+    Given I have a personal page
+    And I am on my edit page
+    And I am logged in
+    And I fill in "Join us. Choose a username" with "andyyy"
+    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I press "Submit"
+    Then I should see "Oh dear, there was a problem:"
+    And I should see a "person[email]" text field containing "andy@example.com"

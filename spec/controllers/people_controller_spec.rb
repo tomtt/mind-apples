@@ -212,6 +212,7 @@ describe PeopleController do
         controller.stubs(:current_user).returns @mock_person
         Person.stubs(:find_by_param).returns @mock_person
         PeopleController.any_instance.stubs(:password_invalid?).returns(mock)
+        PeopleController.any_instance.stubs(:populate_resource).once
         @mock_person.stubs(:update_attributes).returns false
         @mock_person.stubs(:login).returns 'applesmind'
       end

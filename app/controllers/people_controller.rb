@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
   before_filter :redirect_unless_profile_page_is_public, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
+
+  include PeopleHelper
   
   def create
     self.resource = new_resource
@@ -20,9 +22,10 @@ class PeopleController < ApplicationController
   def update
     self.resource = find_resource
     self.resource.protected_login= (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
-    
+
     if password_invalid?
       @resource_saved = false
+      populate_resource(self.resource)
     else
       @resource_saved = resource.update_attributes(params[resource_name])
     end
