@@ -27,6 +27,8 @@ config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
 
+config.log_level = :error
+
 # Needs to be in an after_initialize or the settings get blatted for some reason.
 config.after_initialize do
   ExceptionNotifier.exception_recipients = %w(andy@sociability.org.uk mindapples-error@tomtenthij.nl)
