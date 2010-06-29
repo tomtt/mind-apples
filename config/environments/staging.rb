@@ -10,7 +10,7 @@ config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
 # See everything in the log (default is :info)
-# config.log_level = :debug
+config.log_level = :debug
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
@@ -26,8 +26,6 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
-
-config.log_level = :error
 
 # Needs to be in an after_initialize or the settings get blatted for some reason.
 config.after_initialize do
