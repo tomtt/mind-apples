@@ -157,6 +157,7 @@ class Person < ActiveRecord::Base
   end
 
   def login_can_not_start_with_autogen_string_unless_page_code_matches
+    # debugger
     if login.index(AUTOGEN_LOGIN_PREFIX) == 0 && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
       if login_changed?
         self.login = login_was

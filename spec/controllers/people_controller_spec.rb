@@ -461,7 +461,15 @@ describe PeopleController do
         post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
       end
     end
-    
+
+    it "delete genarated login from resource when validation fails" do
+      person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode',:save => false})
+      person.expects(:login=).once
+      Person.stubs(:new_with_mindapples).returns(person)
+
+      post(:create, "person" => {"login" => ''})
+    end
+
     describe "when saved" do
       before do
         @mock_person = build_mock_person
@@ -487,6 +495,7 @@ describe PeopleController do
         @mock_person = build_mock_person
         @mock_person.stubs(:save).returns false
         @mock_person.stubs(:avatar=)
+        @mock_person.stubs(:login=)
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
 

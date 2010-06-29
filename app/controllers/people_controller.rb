@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   before_filter :convert_policy_checked_value, :only => [:create, :update]
 
   include PeopleHelper
-  
+
   def create
     self.resource = new_resource
     self.resource.protected_login = params["person"]["login"]
@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
     elsif @generated_login
       @resource_saved = resource.save
     end
+    resource.login = '' if !@resource_saved && @generated_login
   end
 
   def update
