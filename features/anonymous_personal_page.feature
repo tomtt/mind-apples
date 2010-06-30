@@ -1,5 +1,5 @@
 @pivotal_1292369
-@pivotal_4030096
+@pivotal_4029941
 
 Feature: Anonymous personal page
 
