@@ -66,6 +66,8 @@ body {
   }
 }
 
+.clear { clear: both; }
+
 @mixin main_section {
   width: 960px;
   padding: 0 22px;
@@ -343,13 +345,14 @@ body {
   }
     
   .the_test{
-    padding-top: 20px;
+    padding-top: 40px;
     background: url(/images/layout/bg-top-the-test.png) no-repeat center top;
     color: #fff;
     font-size: 1.1em;
     
     .inner {
       background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;  
+      overflow: hidden;
       
       h1 {
         font-size: 2.3em;
@@ -371,14 +374,78 @@ body {
       }
       
       label {
-        font-size: 1.2em;
+        font-size: 1.3em;
         font-weight: bold;
-        margin-bottom: 7px;
+        display: block;
+        margin-bottom: 10px;
         .description {
-          font-size: 0.85em;
+          font-size: 0.7em;
           font-weight: normal;
           color: #CDE5AE;
         }
+        .description_highlight {
+          font-size: 0.75em;
+        }
+      }
+      
+      .form_input {
+         display: block;
+         
+         label {
+           font-size: 0.95em;
+           display: inline;
+           margin-bottom: 0;
+         }
+         
+         .label-radio {
+           margin-right: 0.6em;
+         }
+         
+         select {
+           padding: 2px;
+           background-color: white;
+           border: 0 none;
+           font-size: 0.85em;
+           width: 280px;
+         }
+      }
+
+      .col_full { 
+        clear: both;
+        display: block;
+        margin-bottom: 40px;
+      }
+      
+      .col_odd { 
+        margin-bottom: 40px;
+        margin-right: 20px;
+        width: 280px;
+        clear: left;
+        float: left;
+      }
+      
+      .col_even { 
+        margin-bottom: 30px;
+        float: left;
+        width: 280px;
+      }
+      
+      .row_odd {
+        clear: both;
+        padding: 20px 60px;
+        
+        label {
+          .description {
+            color: #515152;
+          }
+        }
+      }
+      
+      .row_even {
+        clear: both;
+        margin-top: 10px;
+        padding: 40px 60px;
+        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
       }
       
       .arrow_lead_in {
@@ -388,20 +455,6 @@ body {
         width: 22px;
         position: relative;
       }
-      
-      .row_odd {
-        padding: 20px 60px;
-      }
-      
-      .row_even {
-        margin-top: 10px;
-        padding: 40px 60px;
-        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
-      }
-      
-      .col_full { margin-bottom: 10px;}
-      .col_odd { margin-bottom: 10px;}
-      .col_even { margin-bottom: 10px;}
   
       .five_things {      
         .description {
@@ -436,6 +489,11 @@ body {
           margin: -76px 0 20px -30px;
         }
         .brain_dump {
+          background: url('/images/arrows/white_down.png') no-repeat right bottom; 
+          padding-bottom: 50px;
+          padding-right: 30px;
+          margin-bottom: 0px;
+          width: 580px;
           textarea {
             border: 0 none;
             width: 580px;
