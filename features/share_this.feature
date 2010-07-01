@@ -13,10 +13,8 @@ Feature: As a Social Butterfly I would like to invite others to MA by posting to
 
   Scenario: I can share something through facebook
     When I go to "/person/visible_ninja"
-    And I should see a ShareThis facebook link
-    Then I follow "addthis_button_twitter"
-    And I should see "Mindapples is group of volunteers"
+    And I should see "addthis_button_twitter" image link with "http://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" url
 
   Scenario: I can share something through twitter
     When I go to "/person/visible_ninja"
-    And I should see a ShareThis twitter link
+    And I should see "addthis_button_facebook" image link with "http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" url
