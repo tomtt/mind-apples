@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def render_404
     render :template => "errors/error_404", :status => "404 Not Found"
   end
-  
+
   def render_500
     render :template => "errors/error_500", :status => "500"
   end
@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user_session
+    #this solve the error: You must activate the Authlogic::Session::Base.controller
+    Authlogic::Session::Base.controller = Authlogic::ControllerAdapters::RailsAdapter.new(self)
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
   end

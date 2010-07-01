@@ -4,8 +4,10 @@ ActionController::Routing::Routes.draw do |map|
   # Resources
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]
+  map.connect '/person/:id/favourites', :controller => 'people', :action => 'favourites'
+
   map.resources :password_resets
-  
+
   # Named routes
   map.root :controller => "pages", :action => "home"
   map.login '/login', :controller => "user_sessions", :action => "new"
@@ -23,14 +25,12 @@ ActionController::Routing::Routes.draw do |map|
   map.terms '/terms', :controller => "pages", :action => "terms"
   map.services '/services', :controller => "pages", :action => "services"
   map.privacy '/privacy', :controller => "pages", :action => "privacy"
-  
+
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
-  map.favourites '/person/:login/favourites', :controller => 'people', :action => 'favourites'
-  
+
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
   map.connect '/this-is-a-page-that-blows-up-to-test-the-500-error', :controller => 'errors', :action => 'error500'
-  # map.connect '*path', :controller => 'errors', :action => 'error500'
 end

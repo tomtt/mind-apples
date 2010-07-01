@@ -18,9 +18,9 @@ Factory.define :person do |u|
   u.password_confirmation "letmein"
   u.public_profile true
   u.policy_checked nil
-  u.email 'mind@apple.com'
+  u.email {|n| "#{n}mind@apple.com" }
 end
 
-
 Factory.define :mindapple do |m|
+  m.association :person, :factory => :person
 end

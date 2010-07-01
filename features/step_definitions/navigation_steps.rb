@@ -29,3 +29,7 @@ Then /^I should see "([^\"]*)" link with "([^\"]*)" url$/ do |link_text, link_ur
   response.should have_xpath("//a[@href='#{link_url}']")
   response.should have_xpath("//a[@href='#{link_url}'][text()='#{link_text}']")
 end
+
+Then /^I should see homepage "([^\"]*)" section$/ do |section_name|
+  response.should have_xpath("//h2[contains(.,'#{section_name}')]")
+end

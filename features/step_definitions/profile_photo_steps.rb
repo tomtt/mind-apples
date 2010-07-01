@@ -14,16 +14,17 @@ Then /^I should not see a profile picture "([^\"]*)"$/ do |image_name|
   response.should_not have_xpath("//img[contains(@src, '#{image_name}')]")
 end
 
-Then /^I should see the default profile picture$/ do
-  response.should have_xpath("//img[contains(@src, 'missing_original.png') or contains(@src, 'missing_thumb.png')]")
-end
-
-Then /^I should not see the default profile picture$/ do
-  response.should_not have_xpath("//img[contains(@src, 'missing_original.png') or contains(@src, 'missing_thumb.png')]")
+Then /^I (should(?: not)?) see the default profile picture$/ do |expectation|
+  case expectation
+   when "should"
+     response.should have_xpath("//img[contains(@src, 'missing_medium.png') or contains(@src, 'missing_thumb.png')]")
+   else
+     response.should_not have_xpath("//img[contains(@src, 'missing_medium.png') or contains(@src, 'missing_thumb.png')]")
+   end
 end
 
 Given /^profile for "([^\"]*)" with picture "([^\"]*)"$/ do |login, image_name|
-   img_path = File.join(RAILS_ROOT, 'features', 'upload-files', image_name)
-   Person.find_by_login(login).update_attribute(:avatar, File.new(img_path, "r"))
+  img_path = File.join(RAILS_ROOT, 'features', 'upload-files', image_name)
+  Person.find_by_login(login).update_attribute(:avatar, File.new(img_path, "r"))
 end
 

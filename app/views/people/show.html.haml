@@ -4,8 +4,8 @@
 %p
   - if current_user && current_user == resource
     = link_to 'Edit', edit_person_path(resource)
-- if resource.avatar.exists?
-  %img{:src => resource.avatar.url(:medium)}
+
+%img{:src => resource.avatar.url(:medium)}
 
 %h3
   %ol
