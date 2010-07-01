@@ -41,22 +41,11 @@ module ApplicationHelper
   end
     
   def share_this_icons
-    # genereted at http://www.addthis.com/
-
-    '<!-- AddThis Button BEGIN -->
-    
-      <div id="share_this_links" class="addthis_toolbox addthis_default_style">
-        <a class="addthis_button_facebook" addthis:url="http://mindapples.staging.tomtenthij.co.uk/"></a>
-        <a class="addthis_button_twitter" addthis:url="http://mindapples.staging.tomtenthij.co.uk/"></a>
-      </div>
-      
-      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c1213380f6109b1">
-        show_share_this_icons();
-      </script>
-      
-    <!-- AddThis Button END -->'
+    # http://www.addthis.com/
+    '<a href="http://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" id="addthis_button_twitter"><img src="/images/icons/twitter.png" alt="twitter" /></a>
+     <a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" id="addthis_button_facebook"><img src="/images/icons/facebook.png" alt="facebook" /></a>'
   end
-  
+
   def header_error_message(errors_count)
     return "Oh dear, there were #{errors_count} problems:" if errors_count > 1
     "Oh dear, there was a problem:"
