@@ -54,11 +54,11 @@ Then /^I should not see an? "([^\"]*)" submit button$/ do |name|
 end
 
 When /^I should see a ShareThis facebook link$/ do
-  response.should have_selector("a", :class=> 'addthis_button_facebook')
+  response.should have_selector("a", :id=> 'addthis_button_facebook')
 end
 
 When /^I should see a ShareThis twitter link$/ do
-  response.should have_selector("a", :class=> 'addthis_button_twitter')
+  response.should have_selector("a", :id=> 'addthis_button_twitter')
 end
 
 Then /^I should see the "([^\"]*)" image with alt "([^\"]*)"$/ do |image_path, alt_text|

@@ -29,19 +29,11 @@ describe ApplicationHelper do
     
   describe "share_this_icons" do
     it "returns pregenerated html code for addThis widget" do
-      share_this_icons.should include('text/javascript')
-    end
-  
-    it "contains the keywork facebook" do
-      share_this_icons.should include('addthis_button_facebook')
+      share_this_icons.should include('http://api.addthis.com/oexchange/0.8/forward/twitter/offer')
     end
 
-    it "contains the keywork twitter" do
-      share_this_icons.should include('addthis_button_twitter')
-    end    
-    
-    it "shows the shareThis icons if javascript is enabled" do
-      share_this_icons.should include('show_share_this_icons')
+    it "contains the keywork facebook" do
+      share_this_icons.should include('http://api.addthis.com/oexchange/0.8/forward/facebook/offer')
     end
   end
   
