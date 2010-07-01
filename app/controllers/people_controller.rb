@@ -75,7 +75,17 @@ class PeopleController < ApplicationController
   def show
     rc_show
   end
-  
+
+  def favourites
+    begin
+      person = Person.find_by_param(params[:id])
+      raise ActiveRecord::RecordNotFound if person.nil? 
+      @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
+    rescue ActiveRecord::RecordNotFound
+      flash_error_message(:notice, "Unknown person, cound't find its favourites", root_path)
+    end
+  end
+
   def likes
     if current_user
       begin
@@ -83,10 +93,10 @@ class PeopleController < ApplicationController
         like_mindapple
       rescue ActiveRecord::RecordNotFound
         flash_error_message(:notice, "Unknown mindapple, cound't finish like operation", root_path)
-      end      
+      end
     else
       flash_error_message(:notice, "You must be logged in to like a mindapple", root_path)
-    end      
+    end
   end
   
   def unlikes
@@ -96,21 +106,11 @@ class PeopleController < ApplicationController
         unlike_mindapple
       rescue ActiveRecord::RecordNotFound
         flash_error_message(:notice, "Unknown mindapple, cound't finish unlike operation", root_path)
-      end      
+      end
     else
       flash_error_message(:notice, "You must be logged in to unlike a mindapple", root_path)
-    end      
-    
-  end
-
-  def favourites
-    begin
-      person = Person.find(:first, :conditions => ["login = ?", params[:login]]) # this find doesn't raise an exception when the record is not found
-      raise ActiveRecord::RecordNotFound if person.nil? 
-      @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
-    rescue ActiveRecord::RecordNotFound
-      flash_error_message(:notice, "Unknown person, cound't find its favourites", root_path)
     end
+
   end
 
   protected
