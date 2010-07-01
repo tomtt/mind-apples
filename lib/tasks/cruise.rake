@@ -3,7 +3,7 @@
 # Separate tasks for running rspec and cucumber tests exist to minimise cruise control execution time
 
 desc 'Custom CruiseControl task for running all test suites'
-task :cruise => ['cruise:spec', 'cruise:cucumber', 'cruise:jslint']
+task :cruise => ['cruise:spec', 'cruise:features']
 
 namespace :cruise do
 
@@ -14,17 +14,11 @@ namespace :cruise do
   end
 
   desc 'Custom CruiseControl task for running Cucumber'
-  task :cucumber => :initial_setup do
+  task :features => :initial_setup do
     # Invoke task to run non-WIP Cucumber features
-    CruiseControl::invoke_rake_task 'cucumber'
+    CruiseControl::invoke_rake_task 'features'
   end
 
-  desc 'Custom CruiseControl task for running JSlint'
-  task :jslint => :initial_setup do
-    # Invoke task to run jslint tests
-    CruiseControl::invoke_rake_task 'jslint'
-  end
-  
   task :initial_setup do
     ENV['RAILS_ENV'] = 'test'  
     
