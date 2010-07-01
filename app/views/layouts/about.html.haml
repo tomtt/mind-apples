@@ -4,11 +4,24 @@
       - t.named 'About'
       - t.links_to :controller => :pages, :action => :about
     - add_tab do |t|
-      - t.named 'Team'
+      - t.named 'Who we are'
       - t.links_to :controller => :pages, :action => :about_team
     - add_tab do |t|
       - t.named 'How we got here'
       - t.links_to :controller => :pages, :action => :how_we_got_here
+    - add_tab do |t|
+      - t.named 'Organisation'
+      - t.links_to :controller => :pages, :action => :organisation
+    - add_tab do |t|
+      - t.named 'Research'
+      - t.links_to :controller => :pages, :action => :research
+    - add_tab do |t|
+      - t.named 'Contact'
+      - t.links_to :controller => :pages, :action => :contact
+    - add_tab do |t|
+      - t.named 'Media'
+      - t.links_to :controller => :pages, :action => :media
+
   .sub_central
     .inner
       = yield

@@ -1,0 +1,29 @@
+- content_for :content do
+  - render_tabnav :sub do
+    - add_tab do |t|
+      - t.named 'Services'
+      - t.links_to :controller => :pages, :action => :services
+    - add_tab do |t|
+      - t.named 'Individuals'
+      - t.links_to :controller => :pages, :action => :individuals
+    - add_tab do |t|
+      - t.named 'Workplaces'
+      - t.links_to :controller => :pages, :action => :workplaces
+    - add_tab do |t|
+      - t.named 'Schools'
+      - t.links_to :controller => :pages, :action => :schools
+    - add_tab do |t|
+      - t.named 'Universities'
+      - t.links_to :controller => :pages, :action => :universities
+    - add_tab do |t|
+      - t.named 'Communities'
+      - t.links_to :controller => :pages, :action => :communities
+    - add_tab do |t|
+      - t.named 'Healthcare'
+      - t.links_to :controller => :pages, :action => :healthcare
+
+  .sub_central
+    .inner
+      = yield
+
+= render :file => 'layouts/application'
