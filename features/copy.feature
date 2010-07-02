@@ -136,6 +136,7 @@ Feature: Proper layouts structure
   Scenario: Who we are menu link
     When I go to the "about" page
     Then I should see "Who we are"
+    And I should see "The idea"
     When I follow "Who we are"
     Then I should see "Andy Gibson"
     And I should see "Tessy Britton"
