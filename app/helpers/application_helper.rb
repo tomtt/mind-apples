@@ -39,11 +39,11 @@ module ApplicationHelper
   def git_info
     '<div class="git-version">version: ' + Git.master_head_sha1 + '</div>'
   end
-    
+
   def share_this_icons
     # http://www.addthis.com/
-    '<a href="http://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" id="addthis_button_twitter"><img src="/images/icons/twitter.png" alt="twitter" /></a>
-     <a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://mindapples.staging.tomtenthij.co.uk&title=cooolstuf is minapple" id="addthis_button_facebook"><img src="/images/icons/facebook.png" alt="facebook" /></a>'
+    '<a href="http://twitter.com/home?status=I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F%3A+http%3A%2F%2Fbit.ly%2Fc5Ylta" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter.png" alt="twitter" /></a>
+     <a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://mindapples.staging.tomtenthij.co.uk" id="addthis_button_facebook"  target="_blank"><img src="/images/icons/facebook.png" alt="facebook" /></a>'
   end
 
   def header_error_message(errors_count)

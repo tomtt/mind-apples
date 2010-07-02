@@ -28,11 +28,11 @@ describe ApplicationHelper do
   end
     
   describe "share_this_icons" do
-    it "returns pregenerated html code for addThis widget" do
-      share_this_icons.should include('http://api.addthis.com/oexchange/0.8/forward/twitter/offer')
+    it "returns code for twitter sharing" do
+      share_this_icons.should include('http://twitter.com/home?status=')
     end
 
-    it "contains the keywork facebook" do
+    it "returns code for facebook sharing" do
       share_this_icons.should include('http://api.addthis.com/oexchange/0.8/forward/facebook/offer')
     end
   end
