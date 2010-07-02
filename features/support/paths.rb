@@ -6,7 +6,7 @@ module NavigationHelpers
   # step definition in webrat_steps.rb
   #
   def path_to(page_name)
-          # debugger
+
     case page_name
     when /^the homepage$/
       '/'

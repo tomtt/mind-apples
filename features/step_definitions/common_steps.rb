@@ -19,3 +19,9 @@ Given /^I fill all mandatory fields$/ do
   And "I fill in \"person[password_confirmation]\" with \"sosocial\""
   And "I fill in \"Don't go! Leave your e-mail\" with \"andy@example.com\""
 end
+
+Then /^I should see (\d+) mindapples$/ do |number|
+  document = Webrat::XML.xml_document(response.body)
+  nodes = document.xpath("//*[@class='mindapple']")
+  nodes.size.should == number.to_i
+end

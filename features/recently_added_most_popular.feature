@@ -1,4 +1,5 @@
 @pivotal_3774115
+@pivotal_4035092
 
 Feature: As a social butterfly I would like to see the most popular and recently added sections of the home page
   In order to keep home page actual
@@ -34,3 +35,16 @@ Feature: As a social butterfly I would like to see the most popular and recently
     And I should not see the link with name "anonymous" for "annonym@annonym.com" at mindapple section
 
     And I should not see mindapples id for "annony3m@annonym.com" at mindapple section
+
+  Scenario: As a curious can't see empty mindapples
+    Given person "andy" exists with login: "andyman", name: "Andy Gibson", email: "andy@overlord.com"
+
+    And a mindapple "mindapple1" exists with suggestion: "wrestling with bears", person: person "andy"
+    And a mindapple "mindapple2" exists with suggestion: "", person: person "andy"
+    And a mindapple "mindapple2" exists with suggestion: "eating ice cream", person: person "andy"
+
+    When I go to "/person/andyman"
+
+    Then I should see 2 mindapples
+    And I should see "wrestling with bears"
+    And I should see "eating ice cream"
