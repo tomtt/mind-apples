@@ -136,6 +136,16 @@ body {
       font-size: 1.2em;
       line-height: 1.65em;
       
+      .page_flip_top {
+        width: 109px;
+        height: 87px;
+        background: url('/images/layout/page_flip.png');
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      
       .five-a-day {
         float: right;
         width: 425px;
