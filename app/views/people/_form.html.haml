@@ -1,6 +1,9 @@
 - form_for resource, :html => { :class => "survey", :multipart => true} do |person_form|
   = error_messages_for(:person, :header_message => header_error_message(resource.errors.count), :message => "")
-  = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
-  = render(:partial => 'entry', :locals => { :form => person_form })
-  = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
-  %br.clear
+  
+  .the_test
+    .inner
+      = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
+      = render(:partial => 'entry', :locals => { :form => person_form })
+      = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
+      %br.clear

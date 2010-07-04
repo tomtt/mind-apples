@@ -347,6 +347,25 @@ body {
     font-weight: bold;
     line-height: 1.35em;
   }
+  
+  .errorExplanation {
+    padding: 10px 55px 20px;
+    color: red;
+    h2 {
+      background: none;
+      font-size: 1.2em;
+      line-height: 1.1em;
+      font-weight: bold;
+      padding: 0;
+      color: red;
+      margin-bottom: 10px;
+    }
+    
+    ul {
+      font-size: 1.1em;
+      list-style-type: disc;
+    }
+  }
     
   .the_test{
     padding-top: 40px;
@@ -513,8 +532,11 @@ body {
           width: 580px;
           textarea {
             border: 0 none;
-            width: 580px;
+            width: 570px;
             height: 63px;
+            padding: 5px;
+            font-family: helvetica neue,arial,sans;
+            font-size: 1em;
           }
         }
       }

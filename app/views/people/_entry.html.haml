@@ -81,6 +81,9 @@
       = form.check_box(:policy_checked, :class => 'policy_checkbox')
       = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\">Terms & Conditions</a>",:class => 'label-checkbox'
 
-  //  - unless resource.policy_checked
-  //    %span{:class=>"policy_checkbox red"} Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry.
+    - unless resource.policy_checked
+      %span{:class=>"policy_checkbox red"} 
+        %br.clear
+        %br
+        Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry.
   %br.clear
