@@ -68,18 +68,19 @@
       = form.password_field :password_confirmation
     -else
       = form.password_field :password_confirmation, :value=>''
-  .col_odd.radio-input
+  .col_odd
     = form.label :public_profile, "Show yourself. <span class='description'>Are you happy for others to see your profile?</span>"
     .form_input
       = form.radio_button(:public_profile, true)
-      = form.label "public_profile_true", "Yes, I'm happy to make my profile public.", :class => 'label-radio'
+      = form.label "public_profile_true", "Yes, I'm happy to make my profile public.", :class => 'label-radio label-radio-person_public_profile'
       %br
       = form.radio_button(:public_profile, false)
-      = form.label "public_profile_false", "No, I want to stay anonymous please", :class => 'label-radio'
-  .col_even
+      = form.label "public_profile_false", "No, I want to stay anonymous please", :class => 'label-radio label-radio-person_public_profile'
+  .col_even.policy_check
     .form_input
       = form.check_box(:policy_checked, :class => 'policy_checkbox')
-      = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\">Terms & Conditions</a>",:class => 'label-radio'
+      = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\">Terms & Conditions</a>",:class => 'label-checkbox'
 
-    - unless resource.policy_checked
-      %span{:class=>"policy_checkbox red"} Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry.
+  //  - unless resource.policy_checked
+  //    %span{:class=>"policy_checkbox red"} Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry.
+  %br.clear

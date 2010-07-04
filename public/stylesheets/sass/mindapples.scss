@@ -247,6 +247,10 @@ body {
       a, span { width: 58px; }
       a.active, span.active { background-image: url(/images/nav_bar/blog_active.png); }
     }
+    .person {
+      a, span { width: 116px; margin-right: 10px;}
+      a.active, span.active { background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
+    }
     
   }
 }
@@ -328,7 +332,7 @@ body {
 
 .take_the_test {
   width: 700px;
-  margin: 0 auto;
+  margin: 40px auto 140px auto;
     
   h2 {
     background: url(/images/headings/light_green_bg.png) no-repeat left center;
@@ -358,7 +362,7 @@ body {
         font-size: 2.3em;
       }
       
-      input[type=text] {
+      input[type=text], input[type=password] {
         border: none;
         font-size: 1.5em;
         margin-left: 13px;
@@ -368,9 +372,16 @@ body {
       }
 
       input[type=image] {
-        bottom: -70px;
-        position: absolute;
-        right: 20px;
+        float: right;
+        margin-right: 30px;
+        margin-top: -33px;
+        padding-left: 74px;
+        background: url('/images/arrows/white_left_curve_south_east.png') no-repeat left 5px;
+      }
+      
+      input[type=file] {
+        font-size: 0.8em;
+        padding: 10px;
       }
       
       label {
@@ -439,6 +450,12 @@ body {
             color: #515152;
           }
         }
+        
+        .form_input {
+          .label-radio {
+            color: #515152;
+          }
+        }
       }
       
       .row_even {
@@ -503,9 +520,44 @@ body {
       }
       
       .account_details {
+        padding: 20px 30px 0 60px;
+        
         .arrow_lead_in {
           margin: -46px 0 20px -30px;
         }
+        
+        .form_input {
+          .label-radio-person_public_profile {
+            font-weight: normal;
+            font-size: 1.04em;
+          }
+        }
+        
+        .policy_check {
+          background: url('/images/layout/bg-policy.png') no-repeat left top;
+          padding: 23px 16px;
+          width: 275px;
+          margin-bottom: 0px;
+          
+          a { color: #E0EDCC; text-decoration: none;}
+          
+          .form_input {
+            input[type=checkbox] {
+              float: left;
+            }
+            .label-checkbox {
+              margin-top: -5px;
+              font-size: 1.45em;
+              line-height: 1.5em;
+              display: block;
+              float: left;
+              width: 93%;
+              padding-left: 6px;
+            }
+          }
+          
+        }
+        
       }
   
     }
