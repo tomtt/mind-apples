@@ -355,6 +355,13 @@ describe Person do
                                :password => 'bla1234',
                                :password_confirmation => 'foo1234')
     end
+
+    it "should not be sent if the person was imported from survey monkey" do
+      person = Factory.build(:person, :email => 'andy@example.com', :respondent_id => 123)
+      PersonMailer.expects(:deliver_welcome_email).never
+      person.save!
+    end
+
   end
 
   describe "delivering password reset instructions" do
