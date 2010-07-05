@@ -10,4 +10,12 @@ module PeopleHelper
     return "anonymous" unless mindapple.person.login_set_by_user?
     link_to (mindapple.person.name || mindapple.person.login), person_path(mindapple.person)
   end
+  
+  def suggestion(position)
+    return '' unless session[:suggestions][position.to_s]
+    person_suggestion = session[:suggestions][position.to_s]["suggestion"]
+    session[:suggestions] = nil if position == 4
+    person_suggestion
+  end
+
 end

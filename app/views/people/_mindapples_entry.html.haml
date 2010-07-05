@@ -1,4 +1,6 @@
 .row_odd.five_things
   %ol
+    - suggestion_number = 0
     - form.fields_for :mindapples do |mindapple_form|
-      = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form })
+      = render(:partial => '/mindapples/entry', :locals => { :form => mindapple_form, :suggestion_number => suggestion_number })
+      - suggestion_number += 1

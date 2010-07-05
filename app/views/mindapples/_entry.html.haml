@@ -1,2 +1,5 @@
 %li.mindapple
-  = form.text_field(:suggestion)
+  -if session[:suggestions]
+    = form.text_field(:suggestion, :value => suggestion(suggestion_number))
+  -else
+    = form.text_field(:suggestion)

@@ -1,5 +1,4 @@
 @pivotal_1292289
-@wip
 
 Feature: Setting a password
   In order to be able to edit my page
@@ -15,7 +14,7 @@ Feature: Setting a password
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "Your page on Mindapples"
-    And I should see "Thank you for updating your Mindapples page."
+    And I should see "Thanks for sharing your mindapples."
 
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"
@@ -30,7 +29,7 @@ Feature: Setting a password
     Then I should receive 1 emails
     When I open the email with subject "Setting your Mindapples password"
     And I click the first link in the email
-    
+
     And I fill in "Password" with "mynewpassword"
     And I fill in "Password confirmation" with "mynewpassword"
     And I press "Update my password and log me in"
@@ -54,5 +53,5 @@ Feature: Setting a password
     And I fill in "Password" with "mynewpassword"
     And I fill in "Password confirmation" with "mynewpassword"
     And I press "Update my password and log me in"
-    
+
     Then I should see "Password successfully updated"
