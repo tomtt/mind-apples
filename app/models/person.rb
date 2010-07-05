@@ -48,6 +48,8 @@ class Person < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :if => Proc.new { |person| person.login_set_by_user? && !person.email.blank? }, :message => :"email.format"
   validate :login_can_not_start_with_autogen_string_unless_page_code_matches
 
+  # validates_length_of :login, :minimum => 1, :if => Proc.new { |person| debugger;person.login_set_by_user?}, :on => :update, :message => :"email.format"
+
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
 
