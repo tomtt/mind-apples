@@ -36,5 +36,26 @@ describe PeopleHelper do
       person_link(mindapple).should == "anonymous"
     end
   end
+  
+  describe "suggestion" do
+    before(:each) do
+      session[:suggestions] = {'0' => {"suggestion" => 'riding on the wolf'},
+                               '1' => {"suggestion" =>'swiming with sharks'},
+                               '2' => {"suggestion" =>'wrestling with the bears'},
+                               '3' => {"suggestion" =>''},
+                               '4' => {"suggestion" =>'feading lions'}
+                               }
+    end
+
+    it "return suggestion from session" do
+      suggestion(1).should == 'swiming with sharks'
+    end
+
+    it "clear session with suggestions" do
+      suggestion(4).should == 'feading lions'
+      session[:suggestions].should == nil
+    end
+
+  end
 
 end

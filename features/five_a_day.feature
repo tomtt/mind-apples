@@ -5,6 +5,7 @@
 @pivotal_1292172
 @pivotal_3771421
 @pivotal_3773666
+@pivotal_4135609
 
 Feature: Asking for five a day
   In order to gather suggestions
@@ -19,7 +20,11 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
     Then I should see "Yes yes, of course I accept the Terms & Conditions"
+    And the "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" field should not contain "autogen"
     And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
+    And I should see a "person[mindapples_attributes][1][suggestion]" text field containing "Being in nature"
+    And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
+    And I should see a "person[mindapples_attributes][4][suggestion]" text field containing "Tidying and filing"
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"

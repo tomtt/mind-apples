@@ -15,6 +15,11 @@ class PagesController < ApplicationController
     raise 'Intentional error'
   end
 
+  def homepage
+    session[:suggestions] = params[:person][:mindapples_attributes] if params[:person] && params[:person][:mindapples_attributes]
+    redirect_to new_person_path
+  end
+
   private
 
   def choose_layout
