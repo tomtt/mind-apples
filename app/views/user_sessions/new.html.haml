@@ -1,18 +1,24 @@
-%h2
-  login
-- form_for @user_session, :url => user_session_path do |f|
-  = error_messages(f.error_messages)
-  = f.label :login
-  = f.text_field :login
-  = f.label :password
-  = f.password_field :password
-  %br
-  = f.label :remember_me, "Remember me", :class => 'inline'
-  = f.check_box :remember_me
-  %br
-  = f.submit "Log in"
-= form_tag password_resets_path
-= label_tag 'email', 'Enter your email to receive instructions on how to set your password'
-= text_field_tag 'email'
-= submit_tag 'Send email'
-</form>
+.simple_form_box
+  %h2
+    Login
+  .inner
+    - form_for @user_session, :url => user_session_path do |f|
+      = error_messages(f.error_messages)
+      = f.label :login
+      = f.text_field :login
+      = f.label :password
+      = f.password_field :password
+      %br
+      .form_input
+        = f.check_box :remember_me
+        = f.label :remember_me, "Remember me"
+      = image_submit_tag '/images/buttons/go.png', :class => "submit-form", :alt => "Submit"
+    %br.clear
+    </form>
+
+.col_10of16
+  .inner
+    = form_tag password_resets_path
+    = label_tag 'email', 'Enter your email to receive instructions on how to set your password'
+    = text_field_tag 'email'
+    = submit_tag 'Send email'

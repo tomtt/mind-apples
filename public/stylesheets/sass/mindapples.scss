@@ -215,6 +215,7 @@ body {
   } 
 }
 
+.col_10of16 { width: 580px; margin: 20px auto; .inner {padding: 10px 40px;} }
 
 .nav_bar {
   background: url(/images/nav_bar/menu_bar.gif) no-repeat;
@@ -345,7 +346,6 @@ body {
   margin: 40px auto 140px auto;
     
   h2 {
-    background: url(/images/headings/light_green_bg.png) no-repeat left center;
     padding: 0 55px;
   }
     
@@ -392,7 +392,7 @@ body {
       }
       
       input[type=text], input[type=password] {
-        border: none;
+        border: 0 none;
         font-size: 1.5em;
         margin-left: 13px;
         padding: 2px;
@@ -598,6 +598,99 @@ body {
 
 /* Page Elements */
 
+input[type=text], input[type=password] {
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 2px;
+  width: 280px;
+  margin: 0 0 10px 0;
+}
+
+input[type=submit] {
+  border: 1px solid $darkgreen;
+  background-color: $darkgreen;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 1px;
+  margin: 0 0 10px 0;
+}
+
+label {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.7em;
+  margin-bottom: 3px;
+  display: block;
+  .description {
+    font-size: 0.7em;
+    line-height: 1em;
+  }
+}
+      
+.form_input {
+  display: block;
+         
+  label {
+    font-size: 1em;
+    display: inline;
+    margin-bottom: 0;
+  }
+         
+  .label-radio {
+    margin-right: 0.6em;
+  }
+         
+  select {
+    padding: 2px;
+    background-color: white;
+    border: 1px solid $lightgreen;
+    font-size: 0.85em;
+    width: 280px;
+  }
+}
+
+.simple_form_box {
+  margin: 20px auto 0;
+  font-size: 1.2em;
+  line-height: 1.65em;
+  width: 540px;
+  color: white;
+  margin-bottom: 20px;
+  background: {
+    image: url(/images/layout/bg-form-box-top.png);
+    repeat: no-repeat;
+    position: top;
+  }
+  
+  h2 { margin-bottom: 0px; }
+  
+  .inner {
+    margin-top: 0;
+    padding:10px 30px 30px;
+    position: relative;
+    background: {
+      image: url(/images/layout/bg-form-box-main.png);
+      repeat: no-repeat;
+      position: bottom;
+    }
+    
+    input[type=text], input[type=password] {
+      width: 90%;
+      margin: 2px 0 8px;
+    }
+    
+    input[type=image] {
+      bottom: -15px;
+      position: absolute;
+      right: 20px;
+    }
+
+  }
+}
+
 .five-a-day {
   font-size: 1.2em;
   line-height: 1.65em;
@@ -751,6 +844,10 @@ h2 {
   line-height: 37px;
   margin-bottom: 15px;
   padding: 0 15px;
+}
+
+h2.light_bg {
+  background: url(/images/headings/light_green_bg.png) no-repeat left center;
 }
 
 h2 span {
