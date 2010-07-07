@@ -222,6 +222,30 @@ body {
   width: 943px;
   margin: 10px;
   
+  .share_buttons {
+    float: right;
+    margin-top: 3px;
+    margin-right: 60px;
+    color: white;
+    
+    li {
+      float:left;     
+      a {
+        display: block;
+        width: 31px;
+        height: 40px;
+        text-indent: -900em;
+        margin: 0 3px;
+        outline: 0 none;
+      }
+      
+      a.facebook { background: url(/images/nav_bar/social-facebook.png) no-repeat center center;}
+      a.twitter { background: url(/images/nav_bar/social-twitter.png) no-repeat center center;}
+      a.flickr { width: 34px; background: url(/images/nav_bar/social-flickr.png) no-repeat center center;}
+      a.delicious { background: url(/images/nav_bar/social-delicious.png) no-repeat center center;}
+    }
+  }
+  
   #main_tabnav ul {
     margin-left: 15px;
     overflow: auto;
@@ -233,7 +257,7 @@ body {
       a, span {
         height: 50px;
         line-height: 50px;
-        margin-top: -3px;
+        margin: -3px 7px 0;
         display: block;
         text-align: center;
         font: {
@@ -246,21 +270,17 @@ body {
       }
     }
     
-    .home {
-      a, span { width: 71px; }
-      a.active, span.active { background-image: url(/images/nav_bar/home_active.png); }
+    .home, .five {
+      a.active, span.active { width: 71px; background-image: url(/images/nav_bar/home_active.png);}
     }
-    .about_us {
-      a, span { width: 83px; }
-      a.active, span.active { background-image: url(/images/nav_bar/about_us_active.png); }
+    .about_us, .services {
+      a.active, span.active { width: 83px; background-image: url(/images/nav_bar/about_us_active.png);}
     }
     .blog {
-      a, span { width: 58px; }
-      a.active, span.active { background-image: url(/images/nav_bar/blog_active.png); }
+      a.active, span.active { width: 58px; background-image: url(/images/nav_bar/blog_active.png);}
     }
-    .person {
-      a, span { width: 116px; margin-right: 10px;}
-      a.active, span.active { background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
+    .person, .grow {
+      a.active, span.active { width: 116px; background: url(/images/nav_bar/person_active.png) no-repeat center bottom;}
     }
     
   }
