@@ -191,11 +191,14 @@ body {
     }
     
     #footer {
-      @include main_section;
-      height: 126px;
+      
+      .inner {
+        @include main_section;
+        height: 65px;
+      }
 
       ul {
-        padding-top: 40px;
+        padding-top: 20px;
         text-align: center;
       }
 
@@ -211,6 +214,39 @@ body {
         color: #fff;
         text-decoration: none;
       }
+      
+      .site-credits {
+        text-align: right;
+        font-size: 1.1em;
+        margin-top: 3px;
+        color: white;
+        overflow: hidden;
+        padding: 10px 50px 30px;
+        
+        ul {
+          float:right;
+          padding-top: 0;
+          margin-bottom: 15px;
+          li {
+            float: left;
+            background-color: #fff;
+            padding: 10px;     
+            margin: 0;
+            a {
+              display: block;
+              height: 40px;
+              text-indent: -900em;
+              outline: 0 none;
+            }
+      
+            a.unboxed { width: 64px; background: url(/images/footer/unboxed_consulting.png) no-repeat center bottom;}
+            a.unltd { width: 56px; background: url(/images/footer/unltd.png) no-repeat center bottom;}
+            a.nominet_trust { width: 102px; background: url(/images/footer/nominet_trust.png) no-repeat center bottom;}
+          }
+        }
+      }
+      
+      
     }
   } 
 }
