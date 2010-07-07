@@ -66,6 +66,11 @@ body {
   }
 }
 
+.content {
+  a {color: $darkgreen; text-decoration: none;}
+  a:hover {text-decoration: underline;}
+}
+
 .clear { clear: both; }
 
 @mixin main_section {
@@ -705,6 +710,28 @@ label {
     border: 1px solid $lightgreen;
     font-size: 0.85em;
     width: 280px;
+  }
+}
+
+.errorExplanation {
+  padding: 10px 55px;
+  border: 2px solid #FE0308;
+  margin: 10px 0;
+  background: #fff;
+  color: #FE0308;
+  h2 {
+    background: none;
+    font-size: 1em;
+    line-height: 1.1em;
+    font-weight: bold;
+    padding: 0;
+    color: #FE0308;
+    margin-bottom: 10px;
+  }
+    
+  ul {
+    font-size: 1.1em;
+    list-style-type: disc;
   }
 }
 
