@@ -1,17 +1,22 @@
-%h1
-  = page_possessor(resource) + " page on Mindapples"
+.user
+  - render_tabnav :sub do
+    - add_tab do |t|
+      - t.named 'My five a day'
+      - t.links_to :controller => :people, :action => :show, :id => resource
 
-%p
-  - if current_user && current_user == resource
-    = link_to 'Edit', edit_person_path(resource)
+  .left_column
+    %img{ :src => resource.avatar.url(:medium) }
+    %p
+      = resource
+      - if current_user && current_user == resource
+        = link_to 'Edit', edit_person_path(resource)
 
-%img{:src => resource.avatar.url(:medium)}
+  .sub_central
+    .inner
+      %ol
+        = render(resource.mindapples)
 
-%h3
-  %ol
-    = render(resource.mindapples)
-
-%h4
+-#%h4
   = h resource.name
   made this page by taking the Mindapples Test. 
   %br

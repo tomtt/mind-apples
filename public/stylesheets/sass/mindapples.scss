@@ -384,22 +384,30 @@ body {
     // 1px avoids bg image gaps due to collapsing margins
     padding: 1px 39px;
     width: 538px;
-
-    h1 {
-      margin-bottom: 1em;
-    }
-
-    p {
-      line-height: 1.5;
-      margin-bottom: 1.5em;
-    }
-
-    ul {
-      list-style: disc;
-      margin-bottom: 1.5em;
-      margin-left: 15px;
-    }
   }
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  p {
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+  }
+
+  ul {
+    list-style: disc;
+    margin-bottom: 1.5em;
+    margin-left: 15px;
+  }
+}
+
+.left_column {
+  float: left;
+}
+
+.right_column {
+  float: right;
 }
 
 .take_the_test {
@@ -845,6 +853,7 @@ label {
 
 .mindapple {
   margin-bottom: 15px;
+  list-style: none;
 
   img {
     display: block;
@@ -866,6 +875,7 @@ label {
   .number {
     color: #009523;
     font-size: 1.4em;
+    margin: 0;
   }
 
   .apple {
@@ -874,6 +884,7 @@ label {
 
   .when, .social {
     color: #6d6f72;
+    margin: 0;
   }
 
   a {
@@ -950,4 +961,21 @@ h2 span {
 .main_content {
   float: left;
   width: 519px;
+}
+
+.user {
+  .left_column {
+    img {
+      border: 1px solid #d0d0d0;
+      display: block;
+      padding: 4px;
+    }
+
+    p {
+      color: $darkgreen;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  }
 }
