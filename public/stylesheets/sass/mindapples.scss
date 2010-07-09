@@ -887,6 +887,26 @@ label {
     margin: 0;
   }
 
+  .social {
+    overflow: auto;
+
+    p {
+      float: left;
+    }
+
+    a {
+      display: block;
+      float: right;
+    }
+
+    .like {
+      background: url(/images/icons/red_heart.png) no-repeat;
+      height: 17px;
+      text-indent: -9999px;
+      width: 19px;
+    }
+  }
+
   a {
     color: #009523;
     text-decoration: none;
