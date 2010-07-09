@@ -979,3 +979,21 @@ h2 span {
     }
   }
 }
+
+#news {
+  .news_item {
+    margin-bottom: 1.5em;
+  }
+
+  h3 {
+    color: #555;
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 1;
+    padding: 0.5em 0;
+  }
+
+  p.meta {
+    color: #999;
+  }
+}

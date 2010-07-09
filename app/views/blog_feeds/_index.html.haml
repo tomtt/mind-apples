@@ -1,9 +1,9 @@
 #news
   %h2 News
   - @blogfeeds.each do |feed|
-    .news
+    .news_item
       %h3= feed.title
-      %h4= "Posted on #{feed.published.strftime("%d %b %Y")}"
-      %p= feed.teaser      
-      %a{:href => feed.url, :title => 'Read more'} Read more ...
-      %span= "Posted by #{feed.author}"
+      %p
+        = feed.teaser
+        %a{:href => feed.url} (Read more)
+      %p.meta= "Posted by #{feed.author} on #{feed.published.strftime("%d %b %Y")}"
