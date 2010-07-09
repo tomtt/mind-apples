@@ -149,6 +149,7 @@ body {
         position: absolute;
         top: 0;
         right: 0;
+        z-index: 1;
       }
       
       .five-a-day {
@@ -268,6 +269,8 @@ body {
     margin-top: 3px;
     margin-right: 60px;
     color: white;
+    z-index: 2;
+    position: relative;
     
     li {
       float:left;     
@@ -404,10 +407,12 @@ body {
 
 .left_column {
   float: left;
+  width: 165px;
 }
 
 .right_column {
   float: right;
+  width: 165px;
 }
 
 .take_the_test {

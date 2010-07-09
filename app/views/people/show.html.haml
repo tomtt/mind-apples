@@ -11,21 +11,23 @@
       - if current_user && current_user == resource
         = link_to 'Edit', edit_person_path(resource)
 
+  .right_column
+    %h4= page_possessor(resource) + " page on Mindapples"
+    %p
+      = h resource.name
+      made this page by taking the Mindapples Test. 
+      %br
+      What are you doing to look after your mind?
+      %br
+
+      - if(!current_user)
+        = link_to('go', new_person_path)
+        What do you do to look after your mind?
+      %br
+      
+      = share_this_icons
+
   .sub_central
     .inner
       %ol
         = render(resource.mindapples)
-
--#%h4
-  = h resource.name
-  made this page by taking the Mindapples Test. 
-  %br
-  What are you doing to look after your mind?
-  %br
-
-  - if(!current_user)
-    = link_to('go', new_person_path)
-    What do you do to look after your mind?
-  %br
-  
-  = share_this_icons
