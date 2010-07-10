@@ -66,6 +66,11 @@ body {
   }
 }
 
+.content {
+  a {color: $darkgreen; text-decoration: none;}
+  a:hover {text-decoration: underline;}
+}
+
 .clear { clear: both; }
 
 @mixin main_section {
@@ -144,6 +149,7 @@ body {
         position: absolute;
         top: 0;
         right: 0;
+        z-index: 1;
       }
       
       .five-a-day {
@@ -191,11 +197,14 @@ body {
     }
     
     #footer {
-      @include main_section;
-      height: 126px;
+      
+      .inner {
+        @include main_section;
+        height: 65px;
+      }
 
       ul {
-        padding-top: 40px;
+        padding-top: 20px;
         text-align: center;
       }
 
@@ -211,15 +220,75 @@ body {
         color: #fff;
         text-decoration: none;
       }
+      
+      .site-credits {
+        text-align: right;
+        font-size: 1.1em;
+        margin-top: 3px;
+        color: white;
+        overflow: hidden;
+        padding: 10px 50px 30px;
+        
+        ul {
+          float:right;
+          padding-top: 0;
+          margin-bottom: 15px;
+          li {
+            float: left;
+            background-color: #fff;
+            padding: 10px;     
+            margin: 0;
+            a {
+              display: block;
+              height: 40px;
+              text-indent: -900em;
+              outline: 0 none;
+            }
+      
+            a.unboxed { width: 64px; background: url(/images/footer/unboxed_consulting.png) no-repeat center bottom;}
+            a.unltd { width: 56px; background: url(/images/footer/unltd.png) no-repeat center bottom;}
+            a.nominet_trust { width: 102px; background: url(/images/footer/nominet_trust.png) no-repeat center bottom;}
+          }
+        }
+      }
+      
+      
     }
   } 
 }
 
+.col_10of16 { width: 580px; margin: 20px auto; .inner {padding: 10px 40px;} }
 
 .nav_bar {
   background: url(/images/nav_bar/menu_bar.gif) no-repeat;
   width: 943px;
   margin: 10px;
+  
+  .share_buttons {
+    float: right;
+    margin-top: 3px;
+    margin-right: 60px;
+    color: white;
+    z-index: 2;
+    position: relative;
+    
+    li {
+      float:left;     
+      a {
+        display: block;
+        width: 31px;
+        height: 40px;
+        text-indent: -900em;
+        margin: 0 3px;
+        outline: 0 none;
+      }
+      
+      a.facebook { background: url(/images/nav_bar/social-facebook.png) no-repeat center center;}
+      a.twitter { background: url(/images/nav_bar/social-twitter.png) no-repeat center center;}
+      a.flickr { width: 34px; background: url(/images/nav_bar/social-flickr.png) no-repeat center center;}
+      a.delicious { background: url(/images/nav_bar/social-delicious.png) no-repeat center center;}
+    }
+  }
   
   #main_tabnav ul {
     margin-left: 15px;
@@ -232,7 +301,7 @@ body {
       a, span {
         height: 50px;
         line-height: 50px;
-        margin-top: -3px;
+        margin: -3px 7px 0;
         display: block;
         text-align: center;
         font: {
@@ -245,21 +314,17 @@ body {
       }
     }
     
-    .home {
-      a, span { width: 71px; }
-      a.active, span.active { background-image: url(/images/nav_bar/home_active.png); }
+    .home, .five {
+      a.active, span.active { width: 71px; background-image: url(/images/nav_bar/home_active.png);}
     }
-    .about_us {
-      a, span { width: 83px; }
-      a.active, span.active { background-image: url(/images/nav_bar/about_us_active.png); }
+    .about_us, .services {
+      a.active, span.active { width: 83px; background-image: url(/images/nav_bar/about_us_active.png);}
     }
     .blog {
-      a, span { width: 58px; }
-      a.active, span.active { background-image: url(/images/nav_bar/blog_active.png); }
+      a.active, span.active { width: 58px; background-image: url(/images/nav_bar/blog_active.png);}
     }
-    .person {
-      a, span { width: 116px; margin-right: 10px;}
-      a.active, span.active { background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
+    .person, .grow {
+      a.active, span.active { width: 116px; background: url(/images/nav_bar/person_active.png) no-repeat center bottom;}
     }
     
   }
@@ -322,22 +387,32 @@ body {
     // 1px avoids bg image gaps due to collapsing margins
     padding: 1px 39px;
     width: 538px;
-
-    h1 {
-      margin-bottom: 1em;
-    }
-
-    p {
-      line-height: 1.5;
-      margin-bottom: 1.5em;
-    }
-
-    ul {
-      list-style: disc;
-      margin-bottom: 1.5em;
-      margin-left: 15px;
-    }
   }
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  p {
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+  }
+
+  ul {
+    list-style: disc;
+    margin-bottom: 1.5em;
+    margin-left: 15px;
+  }
+}
+
+.left_column {
+  float: left;
+  width: 165px;
+}
+
+.right_column {
+  float: right;
+  width: 165px;
 }
 
 .take_the_test {
@@ -345,7 +420,6 @@ body {
   margin: 40px auto 140px auto;
     
   h2 {
-    background: url(/images/headings/light_green_bg.png) no-repeat left center;
     padding: 0 55px;
   }
     
@@ -392,7 +466,7 @@ body {
       }
       
       input[type=text], input[type=password] {
-        border: none;
+        border: 0 none;
         font-size: 1.5em;
         margin-left: 13px;
         padding: 2px;
@@ -598,6 +672,121 @@ body {
 
 /* Page Elements */
 
+input[type=text], input[type=password] {
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 2px;
+  width: 280px;
+  margin: 0 0 10px 0;
+}
+
+input[type=submit] {
+  border: 1px solid $darkgreen;
+  background-color: $darkgreen;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 1px;
+  margin: 0 0 10px 0;
+}
+
+label {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.7em;
+  margin-bottom: 3px;
+  display: block;
+  .description {
+    font-size: 0.7em;
+    line-height: 1em;
+  }
+}
+      
+.form_input {
+  display: block;
+         
+  label {
+    font-size: 1em;
+    display: inline;
+    margin-bottom: 0;
+  }
+         
+  .label-radio {
+    margin-right: 0.6em;
+  }
+         
+  select {
+    padding: 2px;
+    background-color: white;
+    border: 1px solid $lightgreen;
+    font-size: 0.85em;
+    width: 280px;
+  }
+}
+
+.errorExplanation {
+  padding: 10px 55px;
+  border: 2px solid #FE0308;
+  margin: 10px 0;
+  background: #fff;
+  color: #FE0308;
+  h2 {
+    background: none;
+    font-size: 1em;
+    line-height: 1.1em;
+    font-weight: bold;
+    padding: 0;
+    color: #FE0308;
+    margin-bottom: 10px;
+  }
+    
+  ul {
+    font-size: 1.1em;
+    list-style-type: disc;
+  }
+}
+
+.simple_form_box {
+  margin: 20px auto 0;
+  font-size: 1.2em;
+  line-height: 1.65em;
+  width: 540px;
+  color: white;
+  margin-bottom: 20px;
+  background: {
+    image: url(/images/layout/bg-form-box-top.png);
+    repeat: no-repeat;
+    position: top;
+  }
+  
+  h2 { margin-bottom: 0px; }
+  
+  .inner {
+    margin-top: 0;
+    padding:10px 30px 30px;
+    position: relative;
+    background: {
+      image: url(/images/layout/bg-form-box-main.png);
+      repeat: no-repeat;
+      position: bottom;
+    }
+    
+    input[type=text], input[type=password] {
+      width: 90%;
+      margin: 2px 0 8px;
+    }
+    
+    input[type=image] {
+      bottom: -15px;
+      position: absolute;
+      right: 20px;
+    }
+
+  }
+}
+
 .five-a-day {
   font-size: 1.2em;
   line-height: 1.65em;
@@ -669,6 +858,7 @@ body {
 
 .mindapple {
   margin-bottom: 15px;
+  list-style: none;
 
   img {
     display: block;
@@ -690,6 +880,7 @@ body {
   .number {
     color: #009523;
     font-size: 1.4em;
+    margin: 0;
   }
 
   .apple {
@@ -698,6 +889,27 @@ body {
 
   .when, .social {
     color: #6d6f72;
+    margin: 0;
+  }
+
+  .social {
+    overflow: auto;
+
+    p {
+      float: left;
+    }
+
+    a {
+      display: block;
+      float: right;
+    }
+
+    .like {
+      background: url(/images/icons/red_heart.png) no-repeat;
+      height: 17px;
+      text-indent: -9999px;
+      width: 19px;
+    }
   }
 
   a {
@@ -753,6 +965,10 @@ h2 {
   padding: 0 15px;
 }
 
+h2.light_bg {
+  background: url(/images/headings/light_green_bg.png) no-repeat left center;
+}
+
 h2 span {
   background: url(/images/headings/small_apple.png) no-repeat 5px 50%;
   display: block;
@@ -770,4 +986,39 @@ h2 span {
 .main_content {
   float: left;
   width: 519px;
+}
+
+.user {
+  .left_column {
+    img {
+      border: 1px solid #d0d0d0;
+      display: block;
+      padding: 4px;
+    }
+
+    p {
+      color: $darkgreen;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  }
+}
+
+#news {
+  .news_item {
+    margin-bottom: 1.5em;
+  }
+
+  h3 {
+    color: #555;
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 1;
+    padding: 0.5em 0;
+  }
+
+  p.meta {
+    color: #999;
+  }
 }

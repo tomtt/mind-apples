@@ -14,7 +14,7 @@ end
 
 Then /^I should see (\d+) news items$/ do |number|
   document = Webrat::XML.xml_document(response.body)
-  nodes = document.xpath("//*[@class='news']")
+  nodes = document.xpath("//*[@class='news_item']")
   nodes.size.should == number.to_i
 end
 
