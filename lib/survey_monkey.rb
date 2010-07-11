@@ -1,3 +1,7 @@
+# None of this code is tested. My excuse is that it's throwaway code:
+# it is to be used only before public launch to perform the import of
+# current survey monkey respondents
+
 class SurveyMonkey
   def self.import_from_csv(csv_filename)
     SurveyMonkey.new.parse_csv(csv_filename)
@@ -10,8 +14,8 @@ class SurveyMonkey
     extract_data_rows(csv_filename)
 
     check_labels!
-    @data.map { |data_row| map_to_attributes(data_row) }.each do |attributes|
-      add_response(attributes)
+    @data.each do |data_row|
+      add_response(data_row)
     end
   end
 
@@ -74,13 +78,12 @@ class SurveyMonkey
     attributes[key] = data_row[label_index] unless data_row[label_index].blank?
   end
 
-
-  def map_to_attributes(data_row)
+  def add_response(data_row)
     require "ruby-debug"
     attributes = {}
 
     set_attribute(data_row, attributes, :respondent_id, 0)
-    person = find_by_respondent_id(attributes[:respondent_id])
+    person = Person.find_by_respondent_id(attributes[:respondent_id])
     unless person
       attribute_fields = [[:name, 20],
                           [:braindump, 14],
@@ -95,34 +98,25 @@ class SurveyMonkey
       attribute_fields.each do |key_index|
         set_attribute(data_row, attributes, key_index[0], key_index[1])
       end
-      person.transaction do
-        person.update_attributes!(attributes)
+
+      attributes[:email] = nil unless EmailValidation::valid?(attributes[:email])
+
+      password = ActiveSupport::SecureRandom.hex(16)
+      default_attributes = { :policy_checked => true, :public_profile => false }
+
+      # puts "Importing %s, %s" % [attributes[:name], attributes[:email]]
+
+      if attributes[:email] && Person.find_by_email(attributes[:email])
+        puts "Email already exists: #{attributes.inspect}"
+        return
+      end
+
+      Person.transaction do
+        person = Person.create_with_random_password_and_login_and_page_code!(default_attributes.merge(attributes))
         5.times do |count|
           person.mindapples.create!(:suggestion => data_row[9 + count])
         end
       end
     end
-  end
-
-  def add_response(data_row)
-    # respondent_id = data_row[0]
-    # return if Survey.find_by_respondent_id(respondent_id)
-    # survey = Survey.create!(:respondent_id => respondent_id,
-    #                         :apple_1 => data_row[9],
-    #                         :apple_2 => data_row[10],
-    #                         :apple_3 => data_row[11],
-    #                         :apple_4 => data_row[12],
-    #                         :apple_5 => data_row[13],
-    #                         :brain_dump => data_row[14],
-    #                         :health_check => data_row[15],
-    #                         :famous_fives => data_row[16],
-    #                         :gender => data_row[17],
-    #                         :age_range => data_row[18],
-    #                         :country => data_row[19],
-    #                         :name => data_row[20],
-    #                         :email => data_row[21],
-    #                         :start_date => DateTime.parse(data_row[2]),
-    #                         :end_date => DateTime.parse(data_row[3]))
-    puts "Created survey for #{survey.name} (#{respondent_id})"
   end
 end
