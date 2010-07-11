@@ -12,7 +12,9 @@ describe EmailValidation do
     it "is false for invalid email addresses" do
       invalid_addresses = ["bob.builder", # no hostname
                            "bob.builder@example.c-m", # weird char in hostname
-                           "bob:builder" # colon
+                           "bob:builder", # colon
+                           nil,
+                           ""
                           ]
       invalid_addresses.each do |address|
         EmailValidation.valid?(address).should be_false
