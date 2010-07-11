@@ -79,7 +79,6 @@ class SurveyMonkey
   end
 
   def add_response(data_row)
-    require "ruby-debug"
     attributes = {}
 
     set_attribute(data_row, attributes, :respondent_id, 0)
