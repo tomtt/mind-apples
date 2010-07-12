@@ -79,7 +79,7 @@
   .col_even.policy_check
     .form_input
       = form.check_box(:policy_checked, :class => 'policy_checkbox')
-      = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\">Terms & Conditions</a>",:class => 'label-checkbox'
+      = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
 
     - unless resource.policy_checked
       %span{:class=>"policy_checkbox red"} 
