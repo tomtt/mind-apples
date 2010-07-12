@@ -20,7 +20,7 @@ config.action_mailer.delivery_method = :test
 # config.gem 'ruby-debug'
 
 # To allow debugger to be used when using passenger
-require 'ruby-debug'
+# require 'ruby-debug'
 if File.exists?(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
   Debugger.wait_connection = true
   Debugger.start_remote
