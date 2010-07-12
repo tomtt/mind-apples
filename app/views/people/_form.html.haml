@@ -3,6 +3,10 @@
   
   .the_test
     .inner
+      .five_things
+        %h1 Important bit.
+        .description 
+          What five things do you do every day, or regularly, to look after your mind?
       = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
       = render(:partial => 'entry', :locals => { :form => person_form })
       = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
