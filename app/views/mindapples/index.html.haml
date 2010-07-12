@@ -2,8 +2,15 @@
   %h2
     Search
   .inner
-    - form_tag mindapples_path do
+    - form_tag mindapples_path, :method => :get do
       = label_tag 'mindapple'
       = text_field_tag 'mindapple'
-      = image_submit_tag '/images/buttons/go.png', :class => "submit-form", :alt => "Log in"
+      = image_submit_tag '/images/buttons/go.png', :class => "submit-form", :alt => "Find"
     %br.clear
+
+  %br.clear
+    
+  %ul
+    = render :partial => 'mindapples/mindapple', :collection => @mindapples
+-if @mindapples
+  = will_paginate @mindapples

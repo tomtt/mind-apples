@@ -22,7 +22,7 @@ describe Mindapple do
   it "should create a new instance given valid attributes" do
     Mindapple.create!(@valid_attributes)
   end
-  
+
   describe "associations" do
     describe "people that like a mindapple" do
       it "responds to fans method" do
@@ -62,16 +62,16 @@ describe Mindapple do
 
       @max = 5
     end
-        
+
     it "returns N mindapples if there are N or more than N in the top-N" do
       most_liked = Mindapple.most_liked(@max)
-      
+
       most_liked.size.should == @max
     end
 
     it "returns the N most liked mindapples if there are N or more than N in the top-N" do
       most_liked = Mindapple.most_liked(@max)
-      
+
       most_liked.should include(@mindapple_1)
       most_liked.should include(@mindapple_2)
       most_liked.should include(@mindapple_3)
@@ -81,14 +81,14 @@ describe Mindapple do
 
     it "doesn't return a mindapple if it's not one of the most liked top-N" do
       most_liked = Mindapple.most_liked(@max)
-      
+
       most_liked.should_not include(@mindapple_6)
     end
-    
-  end 
-  
+
+  end
+
   describe "most_recent" do
-    
+
     before(:each) do
       @person1 = Factory.create(:person, :email=> "#{rand}_test@email.com")
 
@@ -145,6 +145,16 @@ describe Mindapple do
       person = Factory.create(:person, :email=> "#{rand}_test_#{i}@email.com")
       person.liked_mindapples << mindapple
     end
+  end
+  
+  it "return all mindappples containing searchable param" do
+    mindapple = Factory.create(:mindapple, :suggestion => 'Runing in the park')
+    mindapple2 = Factory.create(:mindapple, :suggestion => 'Eating ice cream')
+    mindapple3 = Factory.create(:mindapple, :suggestion => 'Sleeping in the park')
+    mindapples = Mindapple.search_by_suggestion('park')
+
+    mindapples.size.should == 2
+    mindapples.should include(mindapple, mindapple3)
   end
 end
 

@@ -7,11 +7,14 @@ describe MindapplesController do
   end
 
   describe "GET index" do
-    it "assigns all mindapples as @mindapples" do
-      Mindapple.stubs(:find).with(:all).returns([mock_mindapple])
-      get :index
+    it "assigns all mindapples that contain searched param as @mindapples" do
+
+      Mindapple.expects(:search_by_suggestion).with("park").returns([mock_mindapple])
+
+      get :index, :mindapple => "park"
       assigns[:mindapples].should == [mock_mindapple]
     end
+
   end
 
 end
