@@ -1,17 +1,17 @@
 - content_for :content do
   - render_tabnav :sub do
     - add_tab do |t|
-      - t.named 'Help us Grow'
-      - t.links_to :controller => :pages, :action => :grow
-    - add_tab do |t|
       - t.named 'Donate'
       - t.links_to :controller => :pages, :action => :donate
+      - t.html= {:class => 'grow grow_donate'}
     - add_tab do |t|
       - t.named 'Volunteer'
       - t.links_to :controller => :pages, :action => :volunteer
+      - t.html= {:class => 'grow grow_volunteer'}
     - add_tab do |t|
       - t.named 'Grown your own'
       - t.links_to :controller => :pages, :action => :grow_your_own
+      - t.html= {:class => 'grow grow_your_own'}
 
   .sub_central
     .inner

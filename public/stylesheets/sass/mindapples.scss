@@ -333,62 +333,110 @@ body {
 }
 
 .sub_tabnav {
-  background: url(/images/layout/bg-center-content-top.png) no-repeat center bottom;
-  padding-bottom: 20px;
 
   ul {
-    border-bottom: 10px solid $lightgreen;
     font: {
       family: helvetica neue, arial, sans;
-      weight: bold;
-      size: 19px;
+      size: 15px;
     }
     margin: 30px auto 0;
     overflow: auto;
-    padding-left: 10px;
-    width: 570px;
+    padding: 0;
+    width: 590px;
 
     li {
       float: left;
-      margin-left: -35px;
-    }
-
-    li:first-child {
-      margin-left: 0;
+      line-height: 0;
     }
 
     a {
       background: no-repeat center bottom;
       color: #fff;
       display: block;
-      line-height: 48px;
-      padding-right: 30px;
-      padding-top: 8px;
+      line-height: 0px;
+      padding: 22px 31px 16px 20px;
       position: relative;
       text-decoration: none;
       text-align: center;
+      margin-left: -20px;
     }
-
-    li:first-child a { background-image: url(/images/subnav/left_off.png); width: 173px; z-index: 3; }
-    li:first-child + li a { background-image: url(/images/subnav/middle_off.png); width: 183px; z-index: 2; }
-    li:first-child + li + li a { background-image: url(/images/subnav/right_off.png); width: 191px; z-index: 1; }
-
-    li.active:first-child a { background-image: url(/images/subnav/left_on.png); }
-    li:first-child + li.active a { background-image: url(/images/subnav/middle_on.png); }
-    li:first-child + li + li.active a { background-image: url(/images/subnav/right_on.png); }
+    
+    a:hover { text-decoration: none; }
+    
+    .about {
+      a { padding: 22px 31px 16px 20px; }
+      a.active { z-index: 7; }
+    }
+    
+    .grow {
+      font-size: 20px; font-weight: bold;
+      a { padding: 26px 67px 20px 54px; margin-left: -25px;}
+      a.active { z-index: 4; }
+    }
+    
+    .services {
+      font-size: 14px;
+      a {  padding: 22px 32px 16px 20px; margin-left: -29px;}
+      a.active { z-index: 7; }
+    }
+    
+    //About - tab - off
+    .about_idea a { background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat; z-index: 6; margin-left: 0;}
+    .about_team a { background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat; z-index: 5;}
+    .about_organisation a { background: url(/images/subnav/about/Organise-inactive.png) left bottom no-repeat; z-index: 4; margin-left: -26px; padding-right: 33px; padding-left: 23px;}
+    .about_research a { background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat; z-index: 3; padding-right: 37px;}
+    .about_contact a { background: url(/images/subnav/about/Contact-inactive.png) left bottom no-repeat; z-index: 2; margin-left: -24px;}
+    .about_media a { background: url(/images/subnav/about/Media-inactive.png) left bottom no-repeat; z-index: 1; padding-right:35px;}
+    
+    //About - tab - on
+    .about_idea a.active { background: url(/images/subnav/about/The-idea-active.png) left bottom no-repeat; }
+    .about_team a.active { background: url(/images/subnav/about/Who-we-are-active.png) left bottom no-repeat; }
+    .about_organisation a.active { background: url(/images/subnav/about/Organise-active.png) left bottom no-repeat; }
+    .about_research a.active { background: url(/images/subnav/about/Research-active.png) left bottom no-repeat; }
+    .about_contact a.active { background: url(/images/subnav/about/Contact-active.png) left bottom no-repeat; }
+    .about_media a.active { background: url(/images/subnav/about/Media-active.png) left bottom no-repeat; }
+    
+    //Grow - tab - off
+    .grow_donate a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}
+    .grow_volunteer a { background: url(/images/subnav/grow/Volunteer-inactive.png) left bottom no-repeat; z-index: 2; padding: 26px 75px 20px 46px; }
+    .grow_your_own a { background: url(/images/subnav/grow/Grow-your-own-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -38px; padding: 26px 43px 20px 40px;}
+        
+    //Grow - tab - on
+    .grow_donate a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
+    .grow_volunteer a.active { background: url(/images/subnav/grow/Volunteer-active.png) left bottom no-repeat; }
+    .grow_your_own a.active { background: url(/images/subnav/grow/Grow-your-own-active.png) left bottom no-repeat; }
+    
+    //Services - tab - off
+    .services_workplaces a { background: url(/images/subnav/services/Workplaces-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -4px;}
+    .services_schools a { background: url(/images/subnav/services/Schools-inactive.png) left bottom no-repeat; z-index: 5;}
+    .services_uni a { background: url(/images/subnav/services/Universities-inactive.png) left bottom no-repeat; z-index: 4;}
+    .services_communities a { background: url(/images/subnav/services/Communities-inactive.png) left bottom no-repeat; z-index: 3; margin-left: -25px;}
+    .services_healthcare a { background: url(/images/subnav/services/Healthcare-inactive.png) left bottom no-repeat; z-index: 2; margin-left: -27px;}
+    .services_individuals a { background: url(/images/subnav/services/Individuals-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -27px;}
+    
+    //Services - tab - on
+    .services_workplaces a.active { background: url(/images/subnav/services/Workplaces-active.png) left bottom no-repeat; }
+    .services_schools a.active { background: url(/images/subnav/services/Schools-active.png) left bottom no-repeat; }
+    .services_uni a.active { background: url(/images/subnav/services/Universities-active.png) left bottom no-repeat; }
+    .services_communities a.active { background: url(/images/subnav/services/Communities-active.png) left bottom no-repeat; }
+    .services_healthcare a.active { background: url(/images/subnav/services/Healthcare-active.png) left bottom no-repeat; }
+    .services_individuals a.active { background: url(/images/subnav/services/Individuals-active.png) left bottom no-repeat; }
+    
   }
 }
 
 .sub_central {
-  background: url(/images/layout/bg-center-content-bottom.png) no-repeat center bottom;
-  padding-bottom: 38px;
+  padding-top: 38px;
+  margin: -2px auto 0;
+  width: 595px;
+  background: transparent url('/images/subnav/bg-subnav-bottom.png') no-repeat top;
+  z-index: 20;
 
   .inner {
-    background: url(/images/layout/bg-center-content.png) repeat-y center top;
-    margin: 0 auto;
     // 1px avoids bg image gaps due to collapsing margins
-    padding: 1px 39px;
-    width: 538px;
+    padding-top: 1px;
+    margin: 40px 40px 20px;
+    color: #666;
   }
 
   h1 {
@@ -415,6 +463,11 @@ body {
 .right_column {
   float: right;
   width: 165px;
+}
+
+.right_column_wide {
+  float: right;
+  width: 425px;
 }
 
 .take_the_test {
@@ -789,6 +842,15 @@ label {
   }
 }
 
+.promotion {
+  padding-left: 5px;
+  margin-bottom: 10px;
+  img {
+    padding: 4px;
+    border: 1px solid #d0d0d0;
+  }
+}
+
 .five-a-day {
   font-size: 1.2em;
   line-height: 1.65em;
@@ -871,6 +933,7 @@ label {
     background: url(/images/green_apple.png) no-repeat left bottom;
     border: 2px solid #009523;
     border-radius: 10px;
+    -moz-border-radius: 10px;
     margin-left: 55px;
     padding: 10px 15px 10px 80px;
   }

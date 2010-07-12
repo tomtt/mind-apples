@@ -1,12 +1,20 @@
 - if current_user.nil?
   = render(:partial => '/pages/what_section')
 
-  .five-a-day
-    .inner-top
-      %h1 What are your mindapples?
-      %p What 5 things do you do every day, or regularly to look after your mind...
+  .right_column_wide
+    .five-a-day
+      .inner-top
+        %h1 What are your mindapples?
+        %p What 5 things do you do every day, or regularly to look after your mind...
 
-      = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
+        = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
+        %br.clear
+    
+    .promotion
+      = link_to image_tag('/images/content/bigtreat.gif', :title => "The Big Treat"), "http://mindapples.org/thebigtreat"
+      
+    .promotion
+      = link_to image_tag('/images/content/sgp.jpg', :title => "The Secret Garden Party"), "http://uk.secretgardenparty.com/2010/"
 
 .main_content
   = render :partial => 'blog_feeds/index'

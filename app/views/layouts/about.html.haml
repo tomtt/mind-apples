@@ -3,24 +3,27 @@
     - add_tab do |t|
       - t.named 'The idea'
       - t.links_to :controller => :pages, :action => :about
+      - t.html= {:class => 'about about_idea'}
     - add_tab do |t|
       - t.named 'Who we are'
       - t.links_to :controller => :pages, :action => :about_team
-    - add_tab do |t|
-      - t.named 'How we got here'
-      - t.links_to :controller => :pages, :action => :how_we_got_here
+      - t.html= {:class => 'about about_team'}
     - add_tab do |t|
       - t.named 'Organisation'
       - t.links_to :controller => :pages, :action => :organisation
+      - t.html= {:class => 'about about_organisation'}
     - add_tab do |t|
       - t.named 'Research'
       - t.links_to :controller => :pages, :action => :research
+      - t.html= {:class => 'about about_research'}
     - add_tab do |t|
       - t.named 'Contact'
       - t.links_to :controller => :pages, :action => :contact
+      - t.html= {:class => 'about about_contact'}
     - add_tab do |t|
       - t.named 'Media'
       - t.links_to :controller => :pages, :action => :media
+      - t.html= {:class => 'about about_media'}
 
   .sub_central
     .inner
