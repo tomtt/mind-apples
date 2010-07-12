@@ -294,7 +294,7 @@ body {
   
   #main_tabnav ul {
     margin-left: 15px;
-    overflow: auto;
+    overflow: hidden;
     
     li {
       display: block;
@@ -381,7 +381,7 @@ body {
     }
     
     //About - tab - off
-    .about_idea a { background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat; z-index: 6; margin-left: 0;}
+    .about_idea a { background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -3px;}
     .about_team a { background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat; z-index: 5;}
     .about_organisation a { background: url(/images/subnav/about/Organise-inactive.png) left bottom no-repeat; z-index: 4; margin-left: -26px; padding-right: 33px; padding-left: 23px;}
     .about_research a { background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat; z-index: 3; padding-right: 37px;}
