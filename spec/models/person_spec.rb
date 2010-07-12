@@ -461,4 +461,9 @@ describe Person do
       subject.valid_password?("password_stub").should be_true
     end
   end
+
+  it "can be updated without resetting the password" do
+    person = Factory.create(:person, :password => "blurb", :password_confirmation => "blurb")
+    lambda { person.update_attributes!(:braindump => "Boo") }.should_not raise_error
+  end
 end

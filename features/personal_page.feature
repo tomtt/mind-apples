@@ -115,8 +115,6 @@ Feature: Personal page
   Scenario: Person sets his name
     When I follow "Edit"
     And I fill in "Be proud. What's your name" with "Bob the Builder"
-    And I fill in "person[password]" with "secretsuper"
-    And I fill in "person[password_confirmation]" with "secretsuper"
     And I press "Submit"
     Then I should see "Bob the Builder's page on Mindapples"
 
@@ -132,8 +130,6 @@ Feature: Personal page
   Scenario: Person edit his policy
     When I follow "Edit"
     And I uncheck "person_policy_checked"
-    And I fill in "person[password]" with "secretsuper"
-    And I fill in "person[password_confirmation]" with "secretsuper"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
     And I should see "Please accept the Terms & Conditions"
