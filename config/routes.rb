@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :mindapples, :as => "fives"
+
   map.resources :blog_feeds
 
   # Resources
@@ -22,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.contact '/about/contact', :controller => "pages", :action => "contact"
   map.media '/about/media', :controller => "pages", :action => "media"
 
-  map.fives '/fives', :controller => "pages", :action => "fives"
+  # map.fives '/fives', :controller => "pages", :action => "five"
   map.pledge '/pledge', :controller => "pages", :action => "pledge"
 
   map.grow '/grow', :controller => "pages", :action => "grow"
@@ -38,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.individuals '/services/individuals', :controller => "pages", :action => "individuals"
   map.workplaces '/services/workplaces', :controller => "pages", :action => "workplaces"
   map.schools '/services/schools', :controller => "pages", :action => "schools"
-  map.niversities '/services/universities', :controller => "pages", :action => "universities"
+  map.universities '/services/universities', :controller => "pages", :action => "universities"
   map.communities '/services/communities', :controller => "pages", :action => "communities"
   map.healthcare '/services/healthcare', :controller => "pages", :action => "healthcare"
 

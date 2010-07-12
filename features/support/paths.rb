@@ -21,7 +21,9 @@ module NavigationHelpers
     when /^the "about" page$/
       about_path
     when /^the "fives" page$/
-      fives_path
+      mindapples_path
+    when /^the "Explore" page$/
+      mindapples_path
     when /^the "help us grow" page$/
       grow_path
     when /^the "links" page$/

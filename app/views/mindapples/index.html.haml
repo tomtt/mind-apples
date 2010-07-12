@@ -1,0 +1,9 @@
+.simple_form_box
+  %h2
+    Search
+  .inner
+    - form_tag mindapples_path do
+      = label_tag 'mindapple'
+      = text_field_tag 'mindapple'
+      = image_submit_tag '/images/buttons/go.png', :class => "submit-form", :alt => "Log in"
+    %br.clear
