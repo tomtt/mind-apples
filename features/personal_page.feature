@@ -107,8 +107,6 @@ Feature: Personal page
 
   Scenario: Person edits his page
     When I follow "Edit"
-    And I fill in "person[password]" with "secretsuper"
-    And I fill in "person[password_confirmation]" with "secretsuper"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
     # When I fill in "Brain dump" with "Mindapples really rocks"
     And I press "Submit"

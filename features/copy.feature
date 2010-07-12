@@ -86,9 +86,9 @@ Feature: Proper layouts structure
 # #Footer
 # # NB. Some of the footer links are duplicated above, so not sure how to test them...
 # 
-  # Scenario: Company information
-  #   When I go to the homepage
-  #   Then I should see "Mindapples is a non-profit organisation registered in England and Wales number 07264252."
+  Scenario: Company information
+    When I go to the homepage
+    Then I should see "Mindapples is a non-profit organisation registered in England and Wales number 07264252."
 
   Scenario: Terms menu link
     Given I am on the homepage
@@ -97,6 +97,10 @@ Feature: Proper layouts structure
     Then I should see "Terms & conditions"
     And I should be on "/terms"
 
+  Scenario: copyright
+    Given I am on the homepage
+    And I should see "This site was built by Unboxed Consulting and the Mindapples volunteers, funded and supported by UnLtd and the Nominet Trust"
+
   Scenario: Privacy menu link
     When I go to the homepage
     Then I should see "Privacy policy"
@@ -104,31 +108,14 @@ Feature: Proper layouts structure
     Then I should see "Privacy policy"
     And I should be on "/privacy"
     # New path for /privacy
-  
-  # Scenario: Unboxed logo
-  #   When I go to the homepage
-  #   Then I should see the Unboxed logo
-  #   When I click on the Unboxed logo
-  #   Then I should be at URL "http://www.unboxedconsulting.com"
-  # 
-  # Scenario: UnLtd logo
-  #   When I go to the homepage
-  #   Then I should see the UnLtd logo
-  #   When I click on the UnLtd logo
-  #   Then I should be at URL "http://www.unltd.org.uk"
-  # 
-  # Scenario: Nominet Trust logo
-  #   When I go to the homepage
-  #   Then I should see the Nominet Trust logo
-  #   When I click on the Nominet Trust logo
-  #   Then I should be at URL "http://www.nominettrust.org.uk"
-  # 
-  # Scenario: Volunteers menu link
-  #   When I go to the homepage
-  #   Then I should see "Mindapples volunteers"
-  #   When I follow "Mindapples volunteers"
-  #   Then I should see "Who we are"
-  #   And I should be on "/about/team"
+
+  Scenario: Unboxed logo
+    When I go to the homepage
+    And I should see "Unboxed Consulting" link with "http://www.unboxedconsulting.com" url
+    And I should see "UnLtd*" link with "http://www.unltd.org.uk" url
+    And I should see "Nominet Trust" link with "http://www.nominettrust.org.uk" url
+    Then I follow "Mindapples volunteers"
+    And I should be on "/about/team"
 # 
 # #About us section menu
 # # NB. We haven't got a plan for section menus at the moment, so I've put them in the pages themselves for now...
@@ -215,7 +202,7 @@ Feature: Proper layouts structure
 # 
 # #Grow section menu
 # #NB. Changed the path for this section to /grow
-@grow
+
   Scenario: Donate link
     When I go to the "help us grow" page
     Then I should see "Donate"
@@ -223,7 +210,7 @@ Feature: Proper layouts structure
     Then I should see "please donate"
     And I should be on "/grow/donate"
   #New page for this has been added in the pages directory
-@grow
+
   Scenario: Volunteer link
     When I go to the "help us grow" page
     Then I should see "Volunteer"
@@ -231,7 +218,7 @@ Feature: Proper layouts structure
     Then I should see "Volunteer with us"
     And I should be on "/grow/volunteer"
   #New page for this has been added in the pages directory
-@grow
+
   Scenario: Grow your own link
     When I go to the "help us grow" page
     Then I should see "Grow your own"
@@ -239,5 +226,3 @@ Feature: Proper layouts structure
     Then I should see "Grow your own mindapples"
     And I should be on "/grow/grow_your_own"
   #New page for this has been added in the pages directory
-
-
