@@ -17,4 +17,4 @@ Feature: As a Social Butterfly I would like to invite others to MA by posting to
 
   Scenario: I can share something through twitter
     When I go to "/person/visible_ninja"
-    And I should see "addthis_button_facebook" image link with "http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://mindapples.staging.tomtenthij.co.uk" url
+    And I should see "addthis_button_facebook" image link

@@ -34,6 +34,9 @@ When /^I should see "([^\"]*)" image link with "([^\"]*)" url$/ do |link_id, lin
   response.should have_xpath("//a[@href='#{link_url}']")
 end
 
+When /^I should see "([^\"]*)" image link$/ do |link_id|
+  response.should have_xpath("//a[@id='#{link_id}']")
+end
 
 Then /^I should see homepage "([^\"]*)" section$/ do |section_name|
   response.should have_xpath("//h2[contains(.,'#{section_name}')]")
