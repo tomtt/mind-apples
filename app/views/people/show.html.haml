@@ -12,15 +12,10 @@
         = link_to 'Edit', edit_person_path(resource)
 
   .right_column
-    %h4= page_possessor(resource) + " page on Mindapples"
     %p
-      = h resource.name
-      made this page by taking the Mindapples Test. 
-      %br
-      What are you doing to look after your mind?
-      %br
-
       - if(!current_user)
+        What's your 5 a day?
+        %br
         = link_to('go', new_person_path)
         What do you do to look after your mind?
       %br

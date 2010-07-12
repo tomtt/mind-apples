@@ -44,8 +44,8 @@ Feature: Asking for five a day
     And I choose "person_public_profile_true"
     And I check "person_policy_checked"
     And I press "Submit"
-    # Then I should see "Here are their suggestions for good things to do to keep your mind healthy"
-    And I should see "Thanks for sharing your mindapples."
+    Then I should see "My five a day"
+    And I should see "Thanks for sharing your mindapples"
     And I should see "Being in nature"
     When I follow "Edit"
     Then I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Playing the piano"
@@ -77,7 +77,8 @@ Feature: Asking for five a day
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I press "Submit"
-    Then I should see "Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry."
+#    Then I should see "Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry." (can we change the warning text copy to this please
+    Then I should see "Please accept the Terms & Conditions"
 
   Scenario: Everybody can follow link to terms page from test page
     When I go to the "take the test" page

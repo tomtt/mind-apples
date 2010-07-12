@@ -27,10 +27,10 @@ Feature: Proper layouts structure
     And I should see "Leave your e-mail and we'll send you your mindapples. "
 
     And I should not see "Once more with the password please, in case of typos..."
-    And I should see "Again with the password please, in case of typos."
+    And I should see "And again with the password please"
 
     And I should not see "Yes, I'm happy to make my profile public on Mindapples.org"
-    And I should see "Yes, I'm happy to make my profile public"
+    And I should see "I'm happy to make my profile public"
 
     And I should not see "Where do you live?"
     And I should see "Which country are you from?"
