@@ -340,7 +340,7 @@ body {
       size: 15px;
     }
     margin: 30px auto 0;
-    overflow: auto;
+    overflow: hidden;
     padding: 0;
     width: 590px;
 
@@ -353,7 +353,7 @@ body {
       background: no-repeat center bottom;
       color: #fff;
       display: block;
-      line-height: 0px;
+      line-height: 18px;
       padding: 22px 31px 16px 20px;
       position: relative;
       text-decoration: none;
