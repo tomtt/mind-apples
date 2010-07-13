@@ -17,9 +17,9 @@ end
 Then /^I (should(?: not)?) see the default profile picture$/ do |expectation|
   case expectation
    when "should"
-     response.should have_xpath("//img[contains(@src, 'missing_medium.png') or contains(@src, 'missing_thumb.png')]")
+     response.should have_xpath("//img[contains(@src, 'missing_medium.jpg') or contains(@src, 'missing_thumb.jpg')]")
    else
-     response.should_not have_xpath("//img[contains(@src, 'missing_medium.png') or contains(@src, 'missing_thumb.png')]")
+     response.should_not have_xpath("//img[contains(@src, 'missing_medium.jpg') or contains(@src, 'missing_thumb.jpg')]")
    end
 end
 
