@@ -20,7 +20,7 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
     Then I should see "Yes yes, of course I accept the Terms & Conditions"
-    And the "Join us. Choose a username to claim your Mindapples account.(careful, you can only choose once)" field should not contain "autogen"
+    And the "Join us. Choose a username to claim your Mindapples account." field should not contain "autogen"
     And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
     And I should see a "person[mindapples_attributes][1][suggestion]" text field containing "Being in nature"
     And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
@@ -77,8 +77,7 @@ Feature: Asking for five a day
     When I go to the "take the test" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I press "Submit"
-#    Then I should see "Please keep our laywers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry." (can we change the warning text copy to this please
-    Then I should see "Please accept the Terms & Conditions"
+    Then I should see "Please keep our lawyers happy by ticking the box to say you agree to our terms and conditions."
 
   Scenario: Everybody can follow link to terms page from test page
     When I go to the "take the test" page

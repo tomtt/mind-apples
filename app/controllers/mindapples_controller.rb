@@ -1,7 +1,10 @@
 class MindapplesController < ApplicationController
 
   def index
-    @mindapples = Mindapple.search_by_suggestion(params['mindapple']).paginate(:page => params[:page], :per_page => 10) unless params['mindapple'].blank?
+    unless params['mindapple'].blank?
+      @mindapples = Mindapple.search_by_suggestion(params['mindapple']).paginate(:page => params[:page], :per_page => 10)
+      @search_message = "Sorry, it seems that we can't find what you are looking for." if @mindapples.size == 0
+    end
 
     respond_to do |format|
       format.html # index.html.erb

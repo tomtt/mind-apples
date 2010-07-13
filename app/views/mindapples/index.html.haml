@@ -9,7 +9,11 @@
     %br.clear
 
   %br.clear
-    
+
+  - if @search_message
+    %h3
+      =@search_message.to_s
+
   %ul
     = render :partial => 'mindapples/mindapple', :collection => @mindapples
 -if @mindapples

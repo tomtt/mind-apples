@@ -24,7 +24,7 @@ Feature: As a social butterfly I would like to see the most popular and recently
     And I should see mindapples id for "andy@overlord.com" at mindapple section
     And I should see name "Andy Gibson" for "andy@overlord.com" at mindapple section
     And I should see the link with name "Andy Gibson" for "annonym@annonym.com" at mindapple section
-    
+
     And I should see suggestion "eating ice cream" for "miss@bashful.com" at mindapple section
     And I should see mindapples id for "miss@bashful.com" at mindapple section
     And I should see name "miss_bashful" for "miss@bashful.com" at mindapple section
@@ -48,3 +48,27 @@ Feature: As a social butterfly I would like to see the most popular and recently
     Then I should see 2 mindapples
     And I should see "wrestling with bears"
     And I should see "eating ice cream"
+
+  Scenario: As a curious can't see name of user at mindapples if his profile is private
+    Given person "andy" exists with login: "andyman", name: "Andy Gibson", email: "andy@overlord.com", public_profile: false
+    And a mindapple "mindapple1" exists with suggestion: "wrestling with bears", person: person "andy"
+    Then I am on the homepage
+
+    And I should see 1 mindapples
+    And I should see "wrestling with bears"
+    And I should see name "anonymous" for "andy@overlord.com" at mindapple section
+
+  Scenario: As a miss bathful I can see my name at mindapples if my profile is private
+    Given I have a personal page
+    And my login is "andyman"
+    And my email is "andy@overlord.com"
+    And my password is "secret"
+    And my profile is private
+    And my mindapple is "wrestling with bears"
+    And I am logged in
+
+    When I am on the homepage
+
+    Then I should see 1 mindapples
+    And I should see "wrestling with bears"
+    And I should see name "andyman" for "andy@overlord.com" at mindapple section
