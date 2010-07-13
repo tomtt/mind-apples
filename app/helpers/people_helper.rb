@@ -7,8 +7,12 @@ module PeopleHelper
   end
 
   def person_link(mindapple)
-    return (link_to (mindapple.person.name || mindapple.person.login), person_path(mindapple.person)) if mindapple.person.login_set_by_user?
-    (mindapple.person.name.blank?) ? "anonymous" : mindapple.person.name
+    return (link_to (mindapple.person.name || mindapple.person.login), person_path(mindapple.person)) if mindapple.person.login_set_by_user? && ( mindapple.person.public_profile == true || match_logger_user?( mindapple.person))
+    (mindapple.person.name.blank? || mindapple.person.public_profile == false) ? "anonymous" : mindapple.person.name
+  end
+
+  def match_logger_user?(person)
+    current_user.id == person.id if current_user
   end
 
   def suggestion(position)

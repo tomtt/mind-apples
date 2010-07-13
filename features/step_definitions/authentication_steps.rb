@@ -26,6 +26,15 @@ Given /^my braindump is "([^\"]*)"$/ do |braindump|
   @me_person.update_attributes(:braindump => braindump)
 end
 
+Given /^my profile is private$/ do
+  @me_person.update_attributes(:public_profile => false)
+end
+
+Given /^my mindapple is "([^\"]*)"$/ do |mindapple|
+  @me_person.mindapples.delete_all
+  Factory(:mindapple, :suggestion => mindapple,  :person => @me_person)
+end
+
 Given /^I am logged in$/ do
   @me_person ||= Factory.create(:person)
   Given 'my password is "drowssap"'

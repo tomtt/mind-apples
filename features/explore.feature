@@ -1,5 +1,5 @@
 @pivotal_4192987
-@wp
+
 Feature: Explore page
   In order to search for mindapples
   As the curios cat
