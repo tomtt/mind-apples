@@ -28,6 +28,8 @@ module NavigationHelpers
       grow_path
     when /^the "links" page$/
       links_path
+    when /^the "big treat" page$/
+      thebigtreat_path
     when /^the "services" page$/
      services_path
     when /^the url "this-is-a-page-that-blows-up-to-test-the-500-error"$/
