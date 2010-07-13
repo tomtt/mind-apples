@@ -60,7 +60,7 @@ class Person < ActiveRecord::Base
     config.validate_email_field false
   end
 
-  has_many :mindapples, :dependent => :nullify
+  has_many :mindapples, :dependent => :destroy
   has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
 
   # paperclip

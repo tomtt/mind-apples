@@ -45,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   map.healthcare '/services/healthcare', :controller => "pages", :action => "healthcare"
 
   map.privacy '/privacy', :controller => "pages", :action => "privacy"
+  map.thebigtreat '/thebigtreat', :controller => "pages", :action => "bigtreat"
 
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'

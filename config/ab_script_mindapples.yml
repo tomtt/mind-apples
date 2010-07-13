@@ -1,0 +1,7 @@
+host: survey.mindapples.org
+number_of_multiple_requests: 3
+number_of_requests: 300
+urls:
+- /services
+- /person/new
+- /
