@@ -374,6 +374,12 @@ body {
       a.active { z-index: 4; }
     }
     
+    .show_mindapples {
+      font-size: 18px; font-weight: bold;
+      a { padding: 26px 53px 20px 30px; margin-left: -25px;}
+      a.active { z-index: 4; }
+    }
+    
     .services {
       font-size: 14px;
       a {  padding: 22px 32px 16px 20px; margin-left: -29px;}
@@ -421,6 +427,11 @@ body {
     .services_communities a.active { background: url(/images/subnav/services/Communities-active.png) left bottom no-repeat; }
     .services_healthcare a.active { background: url(/images/subnav/services/Healthcare-active.png) left bottom no-repeat; }
     .services_individuals a.active { background: url(/images/subnav/services/Individuals-active.png) left bottom no-repeat; }
+    
+     //Five-a-day - tab - off
+    .show_my_fives a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}        
+    //Five-a-day - tab - on
+    .show_my_fives a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
     
   }
 }
@@ -849,6 +860,49 @@ label {
   img {
     padding: 4px;
     border: 1px solid #d0d0d0;
+  }
+}
+
+.your_fives_take {
+  padding-top: 15px;
+  margin-bottom: 10px;
+  width: 160px;
+  background: url(/images/layout/your_fives_bg-top.png) no-repeat top left;
+  
+  .inner {
+    position: relative;
+    padding: 10px 3px 100px;
+    background: url(/images/layout/your_fives_bg-bottom.png) no-repeat left bottom;
+    color: #E3F4CB;
+    font-size: 1.3em;
+    font-weight: bold;
+    
+    .heading {
+      display: block;
+      color: white;
+      font-size: 4.85em;
+      text-align: center;
+      padding-bottom: 24px;
+      
+      .prefix{
+        display: block;
+        font-size: 0.28em;
+        padding: 24px 43px 9px 0;
+        margin: 0 7px;
+        background: url(/images/headings/green_apple.png) no-repeat right top;
+      }
+    }
+    
+    p { margin-top: 15px; padding: 0 12px; }
+    
+    .go { 
+      position: absolute; 
+      bottom: 0; 
+      right: -30px;
+      padding-left: 44px;
+      background: url(/images/arrows/white_left_curve_south_east.png) no-repeat left 5px;
+    }
+    
   }
 }
 
