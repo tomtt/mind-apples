@@ -333,15 +333,18 @@ body {
 }
 
 .sub_tabnav {
+  background: url(/images/layout/bg-center-content-top.png) no-repeat center bottom;
+  padding-bottom: 20px;
 
   ul {
     font: {
       family: helvetica neue, arial, sans;
       size: 15px;
     }
+    background: transparent url('/images/subnav/bg-subnav-bottom.png') no-repeat bottom;
     margin: 30px auto 0;
     overflow: hidden;
-    padding: 0;
+    padding: 0 0 11px 3px;
     width: 590px;
 
     li {
@@ -387,10 +390,10 @@ body {
     }
     
     //About - tab - off
-    .about_idea a { background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -3px;}
-    .about_team a { background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat; z-index: 5;}
+    .about_idea a { background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -1px;}
+    .about_team a { background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat; z-index: 5; margin-left: -22px; padding-right: 29px;}
     .about_organisation a { background: url(/images/subnav/about/Organise-inactive.png) left bottom no-repeat; z-index: 4; margin-left: -26px; padding-right: 33px; padding-left: 23px;}
-    .about_research a { background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat; z-index: 3; padding-right: 37px;}
+    .about_research a { background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat; z-index: 3; margin-left: -22px; padding-right: 37px;}
     .about_contact a { background: url(/images/subnav/about/Contact-inactive.png) left bottom no-repeat; z-index: 2; margin-left: -24px;}
     .about_media a { background: url(/images/subnav/about/Media-inactive.png) left bottom no-repeat; z-index: 1; padding-right:35px;}
     
@@ -413,12 +416,12 @@ body {
     .grow_your_own a.active { background: url(/images/subnav/grow/Grow-your-own-active.png) left bottom no-repeat; }
     
     //Services - tab - off
-    .services_workplaces a { background: url(/images/subnav/services/Workplaces-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -4px;}
-    .services_schools a { background: url(/images/subnav/services/Schools-inactive.png) left bottom no-repeat; z-index: 5;}
-    .services_uni a { background: url(/images/subnav/services/Universities-inactive.png) left bottom no-repeat; z-index: 4;}
+    .services_workplaces a { background: url(/images/subnav/services/Workplaces-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -2px;}
+    .services_schools a { background: url(/images/subnav/services/Schools-inactive.png) left bottom no-repeat; z-index: 5; padding-right: 28px; margin-left: -27px;}
+    .services_uni a { background: url(/images/subnav/services/Universities-inactive.png) left bottom no-repeat; z-index: 4; padding-right: 30px; }
     .services_communities a { background: url(/images/subnav/services/Communities-inactive.png) left bottom no-repeat; z-index: 3; margin-left: -25px;}
     .services_healthcare a { background: url(/images/subnav/services/Healthcare-inactive.png) left bottom no-repeat; z-index: 2; margin-left: -27px;}
-    .services_individuals a { background: url(/images/subnav/services/Individuals-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -27px;}
+    .services_individuals a { background: url(/images/subnav/services/Individuals-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -27px; padding-right: 35px; }
     
     //Services - tab - on
     .services_workplaces a.active { background: url(/images/subnav/services/Workplaces-active.png) left bottom no-repeat; }
@@ -437,16 +440,15 @@ body {
 }
 
 .sub_central {
-  padding-top: 38px;
-  margin: -2px auto 0;
-  width: 595px;
-  background: transparent url('/images/subnav/bg-subnav-bottom.png') no-repeat top;
-  z-index: 20;
+  background: url(/images/layout/bg-center-content-bottom.png) no-repeat center bottom;
+  padding-bottom: 38px;
+  margin: 0 auto;
+  width: 610px;
 
   .inner {
+    background: url(/images/layout/bg-center-content.png) repeat-y center top;
     // 1px avoids bg image gaps due to collapsing margins
-    padding-top: 1px;
-    margin: 40px 40px 20px;
+    padding: 1px 39px;
     color: #666;
   }
 
@@ -815,12 +817,19 @@ label {
   }
 }
 
+#flashes {
+  color: $darkgreen;
+  padding: 5px 10px;
+  background-color: #E3F4CB;
+  margin: 0 7px 0 9px;
+}
+
 .simple_form_box {
   margin: 20px auto 0;
   font-size: 1.2em;
   line-height: 1.65em;
   width: 540px;
-  color: white;
+
   margin-bottom: 20px;
   background: {
     image: url(/images/layout/bg-form-box-top.png);
@@ -828,12 +837,13 @@ label {
     position: top;
   }
   
-  h2 { margin-bottom: 0px; }
+  h2 { margin-bottom: 0px; color: white;}
   
   .inner {
     margin-top: 0;
     padding:10px 30px 30px;
     position: relative;
+    color: white;
     background: {
       image: url(/images/layout/bg-form-box-main.png);
       repeat: no-repeat;
@@ -1013,7 +1023,7 @@ label {
   }
 
   .social {
-    overflow: auto;
+    overflow: hidden;
 
     p {
       float: left;
