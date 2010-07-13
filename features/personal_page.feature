@@ -21,9 +21,7 @@ Feature: Personal page
     And I fill in "Login" with "butterfly"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
-    # Then I should see "Mindapples rocks"
-    # And I should see "Welcome back 'butterfly'"
-    And I should see "butterfly's page on Mindapples"
+    And I should see "My five a day"
     Then I should not see a link to "go"
     And I should not see "and pick your 5-a-day. "
 
@@ -34,9 +32,7 @@ Feature: Personal page
     And I fill in "Login" with "butterfly"
     And I fill in "Password" with "sosocial"
     And I press "Log in"
-    # Then I should see "Mindapples rocks"
-    # And I should see "Welcome back 'butterfly'"
-    And I should see "butterfly's page on Mindapples"
+    And I should see "My five a day"
     Then I should not see a link to "go"
     And I should not see "and pick your 5-a-day. "
 
@@ -58,16 +54,13 @@ Feature: Personal page
     And I should see "You don't have permission to see this page"
 
   Scenario: Person logs in and sees his page
-    # Then I should see "Mindapples rocks"
-    # And I should see "Welcome back 'gandy'"
-    And I should see "gandy's page on Mindapples"
+    And I should see "My five a day"
     Then I should not see a link to "go"
     Then I should not see "and pick your 5-a-day. "
   
   Scenario: Person views its own page when not logged in
     When I follow "Log out"
     And I go to "/person/gandy"
-    # Then I should see "Mindapples rocks"
     And I should see a link to "go"
     And I should not see "and pick your 5-a-day. "
 	And I should see "What do you do to look after your mind?"
@@ -75,16 +68,13 @@ Feature: Personal page
   Scenario: Person follows the link to his page
     When I follow "About us"
     And I follow "Me"
-    # Then I should see "Mindapples rocks"
 
   Scenario: Another person logs in while somebody is already logged in
     Given I have a personal page
     And my login is "anna"
     And my password is "apples"
-    # And my braindump is "I love Mindapples"
     When I log in
     And I follow "Me"
-    # Then I should see "I love Mindapples"
 
   @permission_bug
   Scenario: Trying to edit another's page while logged in will take me to the homepage
@@ -108,15 +98,13 @@ Feature: Personal page
   Scenario: Person edits his page
     When I follow "Edit"
     Then I should see a "person[braindump]" text area containing "Mindapples rocks"
-    # When I fill in "Brain dump" with "Mindapples really rocks"
     And I press "Submit"
-    # Then I should see "Mindapples really rocks"
 
   Scenario: Person sets his name
     When I follow "Edit"
     And I fill in "Be proud. What's your name" with "Bob the Builder"
     And I press "Submit"
-    Then I should see "Bob the Builder's page on Mindapples"
+    Then I should see "My five a day"
 
   Scenario: Person sets his new password
     When I follow "Edit"
@@ -132,7 +120,7 @@ Feature: Personal page
     And I uncheck "person_policy_checked"
     And I press "Submit"
     Then I should not see "Thank you for updating your Mindapples page."
-    And I should see "Please accept the Terms & Conditions"
+    And I should see "Please keep our lawyers happy by ticking the box to say you agree to our terms and conditions."
 
   Scenario: A hacker tries to edit another person's page
     Given I have a personal page

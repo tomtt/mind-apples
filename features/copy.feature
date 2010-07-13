@@ -21,7 +21,7 @@ Feature: Proper layouts structure
     When I log in
     And I go to "anna" edit page
     And I should not see "What else do you need to stay mentally healthy?"
-    And I should see "What else do you need to stay mentally well?"
+    And I should see "What else do you need to look after your mind?"
 
     And I should not see "Leave your e-mail and we'll send you occasional messages. "
     And I should see "Leave your e-mail and we'll send you your mindapples. "
@@ -222,7 +222,7 @@ Feature: Proper layouts structure
   Scenario: Grow your own link
     When I go to the "help us grow" page
     Then I should see "Grow your own"
-    When I follow "Grown your own"
+    When I follow "Grow your own"
     Then I should see "Grow your own mindapples"
     And I should be on "/grow/grow_your_own"
   #New page for this has been added in the pages directory

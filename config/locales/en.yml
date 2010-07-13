@@ -6,7 +6,7 @@ en:
     errors:
       full_messages:
         policy_checked:
-          blank: "Please accept the Terms & Conditions"
+          blank: "Please keep our lawyers happy by ticking the box to say you agree to our terms and conditions. Otherwise they'll worry."
         email:
           blank: "We need your email address to create your account."
           unique: "That e-mail address is already taken. Please choose again."
