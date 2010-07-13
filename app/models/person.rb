@@ -36,7 +36,7 @@
 
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
-  DEFAULT_IMAGE_URL = "/images/icons/missing_:style.png"
+  DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
   validates_presence_of :page_code
   validates_length_of :password_confirmation, :minimum => 1000, :if => Proc.new { |person| person.password.to_s != person.password_confirmation }, :message => :"password_confirmation.dont_match"
