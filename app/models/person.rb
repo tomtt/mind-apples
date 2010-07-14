@@ -104,6 +104,11 @@ class Person < ActiveRecord::Base
     PersonMailer.deliver_set_password(self)
   end
 
+  def deliver_claim_your_page_instructions!
+    reset_single_access_token!
+    PersonMailer.deliver_claim_your_page(self)
+  end
+
   def to_s
     to_param
   end
