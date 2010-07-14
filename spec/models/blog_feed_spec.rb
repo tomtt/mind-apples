@@ -32,7 +32,7 @@ describe BlogFeed do
   end
 
   it "has got url feed constant" do
-    BlogFeed::FEED_URL.should == "http://mindapples.org/feed/"
+    BlogFeed::FEED_URL.should == "http://blog.mindapples.org/feed/"
   end
 
   describe "import_feeds" do
