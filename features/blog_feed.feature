@@ -7,7 +7,7 @@ Feature: Feed parsing
   I want the blog feed to come through the wordpress
 
 Scenario: Feed contain proper values
-  Given mind apple feed from the url "http://mindapples.org/feed/" is consumed
+  Given mind apple feed from the url "http://blog.mindapples.org/feed/" is consumed
   When I am on the homepage
   Then I should see "News"
   And I should see 3 news items
