@@ -1,7 +1,8 @@
-host: survey.mindapples.org
+host: mindapples.org
 number_of_multiple_requests: 3
 number_of_requests: 300
 urls:
+- /
 - /services
 - /person/new
-- /
+- /fives?mindapple=dog&x=0&y=0
