@@ -14,7 +14,7 @@
 #
 
 class BlogFeed < ActiveRecord::Base
-  FEED_URL = "http://mindapples.org/feed/"
+  FEED_URL = "http://blog.mindapples.org/feed/"
 
   validates_uniqueness_of :title
   validates_presence_of :teaser, :title, :url, :published
