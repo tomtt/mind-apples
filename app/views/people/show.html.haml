@@ -3,6 +3,7 @@
     - add_tab do |t|
       - t.named 'My five a day'
       - t.links_to :controller => :people, :action => :show, :id => resource
+      - t.html= {:class => 'show_mindapples show_my_fives'}
 
   .left_column
     %img{ :src => resource.avatar.url(:medium) }
@@ -12,15 +13,20 @@
         = link_to 'Edit', edit_person_path(resource)
 
   .right_column
-    %p
-      - if(!current_user)
-        What's your 5 a day?
-        %br
-        = link_to('go', new_person_path)
-        What do you do to look after your mind?
-      %br
+    - if(!current_user)
+      .your_fives_take
+        .inner
+          .heading
+            %span.prefix
+              Take the 
+            %br
+            Test
+          %p
+            What do you do to look after your mind?
+          .go
+            = link_to image_tag('/images/buttons/go.png', :title => "Take the test"), new_person_path
       
-      = share_this_icons
+    = share_this_icons
 
   .sub_central
     .inner

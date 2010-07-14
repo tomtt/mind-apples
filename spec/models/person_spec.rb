@@ -446,6 +446,15 @@ describe Person do
     end
   end
 
+  describe "destroying one" do
+    it "destroys its mindapples" do
+      person = Factory.create(:person)
+      3.times { Factory.create(:mindapple, :person => person) }
+      person.reload
+      lambda { person.destroy }.should change(Mindapple, :count).by(-3)
+    end
+  end
+
   describe "create_with_random_password_and_login_and_page_code" do
     before do
       PageCode.stubs(:code).returns("page_code_stub")

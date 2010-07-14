@@ -225,4 +225,10 @@ Feature: Proper layouts structure
     When I follow "Grow your own"
     Then I should see "Grow your own mindapples"
     And I should be on "/grow/grow_your_own"
+
+  Scenario: The big trat page
+    When I go to the "big treat" page
+    Then I should see "The Big Treat, 16-17 July 2010"
+    And I should be on "/thebigtreat"
+
   #New page for this has been added in the pages directory
