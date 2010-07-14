@@ -1,9 +1,9 @@
 development:
   host: mindapples.local
 production: &PRO
-  host: survey.mindapples.org
+  host: mindapples.org
 staging: &PRO
-  host: survey.mindapples.org
+  host: mindapples.staging.unboxedconsulting.com
 test:
   <<: *PRO
 cucumber:
