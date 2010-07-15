@@ -143,10 +143,10 @@ describe ApplicationController do
     end
   end
 
-  describe "catch standard errors" do
-    it "when is raised error 500" do
-      get :show, :id => 'something'
-      response.should render_template('errors/error_500')
-    end
-  end
+  # describe "catch standard errors" do
+  #   it "when is raised error 500" do
+  #     get :show, :id => 'something'
+  #     response.should render_template('errors/error_500')
+  #   end
+  # end
 end

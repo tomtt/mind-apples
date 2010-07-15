@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
     render :template => "errors/error_404", :status => "404 Not Found"
   end
 
-  def render_500
-    render :template => "errors/error_500", :status => "500"
-  end
+  # def render_500
+  #   render :template => "errors/error_500", :status => "500"
+  # end
 
   private
 

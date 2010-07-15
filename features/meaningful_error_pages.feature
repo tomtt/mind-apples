@@ -10,9 +10,9 @@ Feature: Meaningful error pages
     Then the response status should be 404
     And I should see "Sorry, the page you were looking for does not exist"
 
-  @allow-rescue
-  Scenario: visiting a page that blows up
-    When I try to go to the url "this-is-a-page-that-blows-up-to-test-the-500-error"
-    Then the response status should be 500
-    And I should see "Sorry, something went wrong"
+  # @allow-rescue
+  # Scenario: visiting a page that blows up
+  #   When I try to go to the url "this-is-a-page-that-blows-up-to-test-the-500-error"
+  #   Then the response status should be 500
+  #   And I should see "Sorry, something went wrong"
     
