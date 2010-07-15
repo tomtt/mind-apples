@@ -26,9 +26,3 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
-
-# Needs to be in an after_initialize or the settings get blatted for some reason.
-config.after_initialize do
-  ExceptionNotifier.exception_recipients = %w(andy@sociability.org.uk mindapples-error@tomtenthij.nl)
-  ExceptionNotifier.email_prefix = "[MINDAPPLES-PRODUCTION] "
-end
