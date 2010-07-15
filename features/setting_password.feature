@@ -32,7 +32,7 @@ Feature: Setting a password
 
     And I fill in "Password" with "mynewpassword"
     And I fill in "Password confirmation" with "mynewpassword"
-    And I press "Update my password and log me in"
+    And I press "Give me that password and log me in"
 
     Then I should see a "person[braindump]" text area containing "I heart mindapples"
 
@@ -52,6 +52,6 @@ Feature: Setting a password
 
     And I fill in "Password" with "mynewpassword"
     And I fill in "Password confirmation" with "mynewpassword"
-    And I press "Update my password and log me in"
+    And I press "Give me that password and log me in"
 
     Then I should see "Password successfully updated"
