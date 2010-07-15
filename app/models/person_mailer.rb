@@ -14,7 +14,7 @@ class PersonMailer < ActionMailer::Base
     subject 'Claim your page on the new Mindapples website!'
     recipients person.email
     from       SENDER_EMAIL
-    body       :claim_your_page_url => edit_person_url(person.single_access_token, :host => Mindapples::Config['host'])
+    body       :claim_your_page_url => edit_person_url(person, :user_credentials => person.single_access_token, :host => Mindapples::Config['host'])
   end
 
   def set_password(person)
