@@ -1,5 +1,5 @@
 %h1
-  Change My Password
+  Pick a Password
 - form_for @person, :url => password_reset_path, :method => :put do |f|
   = f.error_messages
   = f.label :password
@@ -12,4 +12,4 @@
   = f.password_field :password_confirmation
   %br
   %br
-  = f.submit "Update my password and log me in"
+  = f.submit "Give me that password and log me in"
