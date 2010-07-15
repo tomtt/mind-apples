@@ -105,7 +105,7 @@ class Person < ActiveRecord::Base
   end
 
   def deliver_claim_your_page_instructions!
-    reset_single_access_token!
+    reset_perishable_token!
     PersonMailer.deliver_claim_your_page(self)
   end
 
