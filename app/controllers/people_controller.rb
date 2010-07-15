@@ -238,7 +238,15 @@ class PeopleController < ApplicationController
   end
 
   def validate_image
-    avatar = Person.find_by_id(params[:pid]).avatar
+    person = Person.find_by_id(params[:pid])
+
+    unless person
+      resource.avatar = Person.new.avatar
+      return
+    end
+
+    avatar = person.avatar
+
     if avatar.url == Person.new.avatar.url
       resource.avatar = Person.new.avatar
     else

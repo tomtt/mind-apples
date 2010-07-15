@@ -136,12 +136,18 @@ describe PeopleController do
         Person.stubs(:find_by_id).returns  @mock_person
         Person.stubs(:find_resource).returns( @mock_person)
       end
-      
+
       it "fail if user is autogen with empty password and new login" do
-        @mock_person.stubs(:login_set_by_user?).returns false
-        @mock_person.stubs(:errors).returns(mock('error', :add))
-        @mock_person.stubs(:login).returns 'apple'
-        
+        mock_person = @mock_person
+        mock_person.stubs(:login_set_by_user?).returns false
+        mock_person.stubs(:errors).returns(mock('error', :add))
+        mock_person.stubs(:login).returns 'apple'
+        mock_person.stubs(:[]=)
+
+        mock_avatar = mock('avatar', :url => 'avatar_url')
+        mock_person.stubs(:avatar).returns(mock_avatar)
+        mock_person.stubs(:avatar=)
+
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
 
@@ -150,6 +156,7 @@ describe PeopleController do
         mock_error = mock('error')
         mock_error.expects(:add).never.with('Please', " choose a valid password (minimum is 4 characters)")
         @mock_person.stubs(:errors).returns(mock_error)
+        @mock_person.stubs(:login).returns 'gandy'
 
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
       end
@@ -159,10 +166,12 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
       end
 
-      it "doesn't fail if autogen user with filled password" do
-        @mock_person.stubs(:login_set_by_user?).returns false
-        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => 'supersecret'})
-      end
+      # it "doesn't fail if autogen user with filled password" do
+      #   @mock_person.stubs(:login_set_by_user?).returns false
+      #   @mock_person.stubs(:login).returns 'gandy'
+      #   @mock_person.stubs(:password).returns 'supersecret'
+      #   put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => 'supersecret'})
+      # end
 
     end
 
@@ -174,11 +183,15 @@ describe PeopleController do
       end
 
       it "should set the login in a protected way on the updated resource" do
-        Person.stubs(:find_by_param).returns @mock_person
         PeopleController.any_instance.stubs(:password_invalid?).returns false
-        @mock_person.expects(:update_attributes)
-        @mock_person.expects(:protected_login=).with('gandy')
+        mock_person = @mock_person
 
+        mock_person.stubs(:avatar).returns('avatar')
+        mock_person.stubs(:avatar=)
+        mock_person.expects(:update_attributes)
+        mock_person.expects(:protected_login=).with('gandy')
+
+        Person.stubs(:find_by_param).returns mock_person
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
 
@@ -219,9 +232,10 @@ describe PeopleController do
 
       it "and load previous picture for avatar" do
         mock_person = @mock_person
-        mock_person.expects(:avatar).returns(mock('avatar', :url => 'different_path'))
+        mock_avatar = mock('avatar', :url => 'avatar_url')
+        mock_person.stubs(:avatar).returns(mock_avatar)
         Person.stubs(:find_by_id).returns mock_person
-        mock_person.expects(:avatar=).never
+        mock_person.expects(:avatar=).with(mock_avatar)
 
         put(:update, "person" => {'login'=>'gandy'})
       end
@@ -356,6 +370,7 @@ describe PeopleController do
       @mock_person.stubs(:last_request_at)
       @mock_person.stubs(:last_request_at=)
       @mock_person.stubs(:persistence_token)
+      @mock_person.stubs(:avatar=)
       @mock_person.expects(:protected_login=).with('gandy')
       post(:create, "person" => {"login" => 'gandy'})
     end
@@ -448,14 +463,14 @@ describe PeopleController do
 
     describe "if user name is filled" do
       it "only with filled email" do
-        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
+        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode', :avatar= => true})
         Person.stubs(:new_with_mindapples).returns(person)
         person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
       end
       
       it "only with filled password" do
-        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode'})
+        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode', :avatar= => true})
         Person.stubs(:new_with_mindapples).returns(person)
         person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
@@ -463,7 +478,7 @@ describe PeopleController do
     end
 
     it "delete genarated login from resource when validation fails" do
-      person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode',:save => false})
+      person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode',:save => false, :avatar= => true})
       person.expects(:login=).once
       Person.stubs(:new_with_mindapples).returns(person)
 
