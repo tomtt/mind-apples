@@ -165,14 +165,11 @@ describe PeopleController do
         @mock_person.stubs(:login_set_by_user?).returns true
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
       end
+    end
 
-      # it "doesn't fail if autogen user with filled password" do
-      #   @mock_person.stubs(:login_set_by_user?).returns false
-      #   @mock_person.stubs(:login).returns 'gandy'
-      #   @mock_person.stubs(:password).returns 'supersecret'
-      #   put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => 'supersecret'})
-      # end
-
+    it "doesn't fail if autogen user with filled password" do
+      person = Factory(:person, :email => 'gandy@post.com', :login => 'autogen_abcdefgh', :page_code => 'abcdefgh')
+      put(:update, "person" => {"login" => 'autogen_abcdefgh', 'email' => 'gandy@post.com', 'passsword' => 'supersecret',  'password_confirmation' => 'supersecret'})
     end
 
     describe "when logged in as the updated user" do
