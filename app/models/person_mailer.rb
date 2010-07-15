@@ -1,5 +1,5 @@
 class PersonMailer < ActionMailer::Base
-  SENDER_EMAIL = ''
+  SENDER_EMAIL = 'hello@mindapples.org'
 
   def welcome_email(person)
     subject    'Your Mindapples'
