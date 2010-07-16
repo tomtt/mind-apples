@@ -99,9 +99,9 @@ describe PasswordResetsController do
         flash[:notice].should =~ /no user was found/i
       end
 
-      it "should show the form again" do
+      it "should show the login page" do
         do_create
-        response.should render_template('new')
+        response.should redirect_to(login_path)
       end
     end
   end
