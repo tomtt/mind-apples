@@ -1,5 +1,7 @@
 config/database.yml
 *~
+*#*#
+.#*
 *.cache
 *.log
 .DS_Store
