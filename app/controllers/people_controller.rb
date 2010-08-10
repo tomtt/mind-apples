@@ -32,6 +32,12 @@ class PeopleController < ApplicationController
     end
   end
 
+  response_for :show, :new, :edit do |format|
+    format.html
+    format.js
+    format.xml  { render :xml => nil }
+  end
+
   response_for :update do |format|
     if @resource_saved
       update_logged_user
