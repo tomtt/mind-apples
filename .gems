@@ -1,0 +1,9 @@
+rails
+haml
+authlogic
+feedtools
+uuidtools
+will_paginate
+paperclip
+hassle
+hoptoad_notifier

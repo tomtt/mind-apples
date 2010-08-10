@@ -1,0 +1,148 @@
+--- !ruby/object:Gem::Specification 
+name: hassle
+version: !ruby/object:Gem::Version 
+  hash: 29
+  prerelease: false
+  segments: 
+  - 0
+  - 0
+  - 1
+  version: 0.0.1
+platform: ruby
+authors: 
+- Pedro Belo
+- Nick Quaranto
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-10-16 00:00:00 +01:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rack
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :runtime
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: haml
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :runtime
+  version_requirements: *id002
+- !ruby/object:Gem::Dependency 
+  name: rspec
+  prerelease: false
+  requirement: &id003 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id003
+- !ruby/object:Gem::Dependency 
+  name: cucumber
+  prerelease: false
+  requirement: &id004 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id004
+- !ruby/object:Gem::Dependency 
+  name: rack-test
+  prerelease: false
+  requirement: &id005 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id005
+description: Makes SASS less of a hassle on read-only filesystems by compiling and serving it up for you
+email: 
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE
+- README.textile
+files: 
+- LICENSE
+- README.textile
+- init.rb
+- lib/hassle.rb
+- spec/base.rb
+- spec/hassle_compiler_spec.rb
+- spec/hassle_spec.rb
+has_rdoc: true
+homepage: http://github.com/pedro/hassle
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 17
+      segments: 
+      - 1
+      - 3
+      - 5
+      version: 1.3.5
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Make SASS less of a hassle
+test_files: 
+- spec/base.rb
+- spec/hassle_compiler_spec.rb
+- spec/hassle_spec.rb
