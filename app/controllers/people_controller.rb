@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
   response_for :show, :new, :edit do |format|
     format.html
     format.js
-    format.xml  { render :xml => nil }
+    format.xml
   end
 
   response_for :update do |format|
