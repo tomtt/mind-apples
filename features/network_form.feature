@@ -6,13 +6,14 @@ Feature: Networks: custom form
   I want a custom form with some copy and tagging users as belonging to my network
 
   Background:
-    Given a network with name: "Bill Hicks' Marketeers"
+    Given a network exists with name: "Bill Hicks' Marketeers"
     And that network's url is "bill-hicks-marketeers"
     And that network's form_header is "Hey Goat Boys, please fill in the form below!"
 
   Scenario: Person visits his networks form page and fills it in
     Given I have access to the inbox of "marla@example.com"
     When I go to "/in/bill-hicks-marketeers" 
+    Then I should see "Hey Goat Boys, please fill in the form below!"
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Telling people not to smoke"
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Putting dollar signs on things"
     And I fill in "person[mindapples_attributes][3][suggestion]" with "Sleeping like a baby"

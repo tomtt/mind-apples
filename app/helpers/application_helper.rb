@@ -49,4 +49,10 @@ module ApplicationHelper
     return "Oh dear, there were #{errors_count} problems:" if errors_count > 1
     "Oh dear, there was a problem:"
   end
+
+  def network_form_header
+    if @network && ! (@network.form_header.empty?)
+      "<p class='network_header'>#{@network.form_header}</p>\n"
+    end
+  end
 end
