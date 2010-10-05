@@ -43,6 +43,11 @@ namespace :deploy do
     run "ln -fs #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
 
+  after "deploy:migrate", "deploy:db_seed"
+  task :db_seed do
+    run "cd #{latest_release} && rake RAILS_ENV=#{rails_env} db:seed"
+  end
+
   # Clean up old releases (by default keeps last 5)
   after "deploy:update_code", "deploy:cleanup"
 
