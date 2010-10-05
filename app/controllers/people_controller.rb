@@ -4,6 +4,7 @@ class PeopleController < ApplicationController
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
   before_filter :redirect_unless_profile_page_is_public, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
+  before_filter :assign_network, :only => [:new]
 
   include PeopleHelper
 
@@ -260,4 +261,9 @@ class PeopleController < ApplicationController
     end
   end
 
+  def assign_network
+    if params[:network]
+      @network = Network.find_by_url(params[:network]) or render_404
+    end
+  end
 end

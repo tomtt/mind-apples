@@ -50,6 +50,9 @@ ActionController::Routing::Routes.draw do |map|
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
 
+  # networks
+  map.network "/in/:network", :controller => "people", :action => "new"
+
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

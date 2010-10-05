@@ -334,6 +334,22 @@ describe PeopleController do
       get :new
       controller.resource.should == @mock_person
     end
+
+    it "sets @network to nil if no network is passed" do
+      get :new
+      assigns[:network].should be_nil
+    end
+
+    it "sets @network to the network if a known one is passed" do
+      network = Factory.create(:network)
+      get :new, :network => network.url
+      assigns[:network].should == network
+    end
+
+    it "renders a 404 if an unknown network is passed" do
+      get :new, :network => "froob"
+      response.should render_template('errors/error_404')
+    end
   end
 
   describe "create" do
