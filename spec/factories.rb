@@ -11,6 +11,11 @@ Factory.define :blog_feed do |u|
   u.url "link to original source"
 end
 
+Factory.define :network do |n|
+  n.sequence(:url) { |n| "network_#{n}" }
+  n.sequence(:name) { |n| "network_#{n}" }
+end
+
 Factory.define :person do |u|
   u.sequence(:login) {|n| "user_#{n}" }
   u.sequence(:page_code) {|n| "%08d" % n }
