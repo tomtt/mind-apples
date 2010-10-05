@@ -16,6 +16,7 @@ require 'cucumber/rails/active_record'
 require 'webrat'
 require 'webrat/core/matchers'
 require 'email_spec/cucumber'
+require 'cucumber/formatter/unicode'
 
 Webrat.configure do |config|
   config.mode = :rails
