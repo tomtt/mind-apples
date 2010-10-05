@@ -10,9 +10,9 @@ Feature: Mindapples Home Page
     Then I should see the "green_question_mark.png" image with alt "question mark"
     And I should see "What are your mindapples?"
     And I should see the "green_comment_bubble.png" image with alt "comment bubble"
-    And I should see "Share what works for you"
+    And I should see "Tell us what you do"
     And I should see the "two_green_arrows.png" image with alt "two arrows"
-    And I should see "Discover new things to do" 
+    And I should see "Find new things to do" 
     And I should see the "green_heart.png" image with alt "heart"
     And I should see "Love your mind"
 
