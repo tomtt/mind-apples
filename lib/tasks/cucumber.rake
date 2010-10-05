@@ -2,19 +2,20 @@ $LOAD_PATH.unshift(RAILS_ROOT + '/vendor/plugins/cucumber/lib') if File.director
 
 unless ARGV.any? {|a| a =~ /^gems/}
 
-begin
-  require 'cucumber/rake/task'
+  begin
+    require 'cucumber/rake/task'
 
-  Cucumber::Rake::Task.new(:features) do |t|
-    t.fork = true
-    t.cucumber_opts = ['--format', (ENV['CUCUMBER_FORMAT'] || 'progress')]
+    Cucumber::Rake::Task.new(:features) do |t|
+      t.fork = true
+      t.cucumber_opts = ['--format', (ENV['CUCUMBER_FORMAT'] || 'progress')]
+    end
+    task :default => :features
+    task :features => 'db:test:prepare'
+  rescue LoadError
+    desc 'Cucumber rake task not available'
+    task :features do
+      abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
+    end
   end
-  task :features => 'db:test:prepare'
-rescue LoadError
-  desc 'Cucumber rake task not available'
-  task :features do
-    abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
-  end
-end
 
 end
