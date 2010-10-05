@@ -27,78 +27,78 @@ describe PeopleController do
     it_should_behave_like "all actions finding a person"
 
     describe "when logged in as the user" do
-      
-      shared_examples_for "The user is the owner of a profile page" do 
+
+      shared_examples_for "The user is the owner of a profile page" do
         it "doesn't redirect to the home page" do
           get 'show', :id => @person.login
           response.should_not redirect_to(root_path)
         end
-          
+
         it "doesn't display a flash error message" do
           get 'show', :id => @person.login
           flash[:notice].should == nil
-        end                  
+        end
       end
-      
-      shared_examples_for "The user is not the owner of a profile page" do 
+
+      shared_examples_for "The user is not the owner of a profile page" do
         it "redirects to the home page" do
           get 'show', :id => @person.login
           response.should redirect_to(root_path)
         end
-    
+
         it "displays a flash error message" do
           get 'show', :id => @person.login
           flash[:notice].should == "You don't have permission to see this page"
-        end                  
+        end
       end
-      
-      
+
+
       describe "when visiting my own page and the page is not public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
-          controller.stubs(:current_user).returns @person 
-          Person.stubs(:find_by_param).returns(@person)       
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
+          controller.stubs(:current_user).returns @person
+          Person.stubs(:find_by_param).returns(@person)
         end
-                
-        it_should_behave_like "The user is the owner of a profile page"          
+
+        it_should_behave_like "The user is the owner of a profile page"
 
       end
-          
+
       describe "when visiting my own page and the page is public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => true) 
-          controller.stubs(:current_user).returns @person 
-          Person.stubs(:find_by_param).returns(@person)       
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => true)
+          controller.stubs(:current_user).returns @person
+          Person.stubs(:find_by_param).returns(@person)
         end
-        
+
         it_should_behave_like "The user is the owner of a profile page"
       end
     end
-    
+
     describe "when not logged in as the user" do
-      
+
       describe "when visiting a profile's page and the page is not public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
           @person.stubs(:to_param).returns('testThis')
           controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)             
+          Person.stubs(:find_by_param).with('testThis').returns(@person)
         end
 
         it_should_behave_like "The user is not the owner of a profile page"
       end
-    
+
       describe "when visiting a profile's page and the page is public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => true) 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => true)
           @person.stubs(:to_param).returns('testThis')
           controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)             
+          Person.stubs(:find_by_param).with('testThis').returns(@person)
         end
-        
+
         it_should_behave_like "The user is the owner of a profile page"
       end
-    end    
+    end
   end
 
   describe "edit" do
@@ -198,7 +198,7 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'asdasds'})
         response.should redirect_to(person_path(@mock_person))
       end
-  
+
       it "should flash a thank you message" do
         PeopleController.any_instance.stubs(:password_invalid?)
         put(:update, "person" => {"login" => 'gandy'})
@@ -211,7 +211,7 @@ describe PeopleController do
         Person.stubs(:find_by_param).returns(nil_person)
         mock_person = mock('person')
         ApplicationController.any_instance.stubs(:current_user).returns(mock_person)
-        
+
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
@@ -269,7 +269,7 @@ describe PeopleController do
         put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
       end
     end
-    
+
     describe "profile picture" do
       before(:each) do
         @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
@@ -277,12 +277,12 @@ describe PeopleController do
         Person.stubs(:find_by_param).returns @person
         PeopleController.any_instance.stubs(:password_invalid?).returns false
       end
-      
+
       it "delete if delete_checkbox is in params" do
          PeopleController.any_instance.expects(:delete_profile_picture).once
          put(:update, "person" => {"login" => 'gandy'}, 'delete_avatar' => 1)
       end
-      
+
       it "don't delete if delete_checkbox is not int params" do
          PeopleController.any_instance.expects(:delete_profile_picture).never
          put(:update, "person" => {"login" => 'gandy'})
@@ -306,29 +306,29 @@ describe PeopleController do
         @mock_person.expects(:protected_login=).never
         put(:update, "person" => {"login" => 'gandy'})
       end
-  
+
       it "should set the notice flash" do
         put(:update, "person" => {"login" => 'gandy'})
         flash[:notice].should == 'You do not have permission to edit this page'
       end
-  
+
       it "should redirect to the login page" do
         put(:update, "person" => {"login" => 'gandy'})
         response.should redirect_to(root_path)
       end
     end
   end
-  
+
   describe "new" do
     before do
       @mock_person = build_mock_person
     end
-  
+
     it "should create a new person with mindapples" do
       Person.expects(:new_with_mindapples)
       get :new
     end
-  
+
     it "should have the new person as the resource" do
       Person.stubs(:new_with_mindapples).returns @mock_person
       get :new
@@ -400,7 +400,7 @@ describe PeopleController do
       post(:create, "person" => {})
       controller.resource.login.should == '%sabzABz09' % Person::AUTOGEN_LOGIN_PREFIX
     end
-  
+
     it "should use a 20 character long code for the password and confirmation" do
       PageCode.stubs(:code).returns 'abcdef'
       PageCode.expects(:code).with(20).returns '20charlongpass'
@@ -408,40 +408,40 @@ describe PeopleController do
       controller.resource.password.should == '20charlongpass'
       controller.resource.password_confirmation.should == '20charlongpass'
     end
-  
+
     it "should not set a default password if the password field was filled in" do
       post(:create, "person" => { :password => 'mypass' })
       controller.resource.password.should == 'mypass'
     end
-  
+
     it "should not set a default password if the password confirmation field was filled in" do
       post(:create, "person" => { :password_confirmation => 'mypass' })
       controller.resource.password_confirmation.should == 'mypass'
     end
-  
+
     it "should not set a default password if the login field was filled in" do
       post(:create, "person" => { :login => 'mypass' })
       controller.resource.password.should == nil
     end
-  
+
     it "should set a default password if the password field was passed blank" do
       PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password => '' })
       controller.resource.password.should == 'default_password'
     end
-  
+
     it "should set a default password if the password confirmation field was passed blank" do
       PageCode.stubs(:code).returns 'default_password'
       post(:create, "person" => { :password_confirmation => '' })
       controller.resource.password_confirmation.should == 'default_password'
     end
-  
+
     # it "don't validate email presence and uniquenes together" do
     #   person = Factory(:person)
     #   post(:create, "person" => { :email => '' })
     #   flash.now[:message].should == 'noo'
     # end
-    
+
     it "should not allow a constructed form to create more than five mindapples" do
       post(:create, "person" =>
            {
@@ -465,7 +465,7 @@ describe PeopleController do
         person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
       end
-      
+
       it "only with filled password" do
         person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode', :avatar= => true})
         Person.stubs(:new_with_mindapples).returns(person)
@@ -488,20 +488,20 @@ describe PeopleController do
         @mock_person.stubs(:save).returns true
         Person.stubs(:new_with_mindapples).returns(@mock_person)
       end
-  
+
       it "should redirect to show page" do
         UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
         response.should redirect_to(person_path(controller.resource))
       end
-      
+
       it "renders flash message" do
         UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
         flash.now[:message].should == 'Thanks for sharing your mindapples.'
       end
     end
-  
+
     describe "when there are errors" do
       before do
         @mock_person = build_mock_person
@@ -564,9 +564,9 @@ describe PeopleController do
       end
     end
   end
-  
+
   describe "like mindapples actions" do
-    
+
     before(:each) do
       @person = Factory.create(:person, :email => "abcdef@ghijk.com")
       @owned_mindapple = Factory.create(:mindapple)
@@ -579,7 +579,7 @@ describe PeopleController do
       describe "when logged in" do
 
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
           controller.stubs(:current_user).returns @person
           Person.stubs(:find_by_param).returns(@person)
         end
@@ -610,237 +610,237 @@ describe PeopleController do
         it "redirects to the homepage if trying to add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-          
+
           put :likes, :id => mindapple
           response.should redirect_to(root_path)
         end
-        
+
         it "shows an error message if trying to add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-          
+
           put :likes, :id => mindapple
-                  
+
           flash[:notice].should == "You can't like a mindapple more than once"
         end
-              
+
         it "doesn't add a mindapple to a user's liked ones if the user is the owner of the mindapple" do
           mindapple = Factory.create(:mindapple)
           @person.mindapples << mindapple
           put :likes, :id => mindapple
-          
-          @person.liked_mindapples.should_not include(mindapple)          
+
+          @person.liked_mindapples.should_not include(mindapple)
         end
-      
+
         it "redirects to the homepage if the user tries to like one of its mindapples" do
           mindapple = Factory.create(:mindapple)
           @person.mindapples << mindapple
           put :likes, :id => mindapple
-          
+
           response.should redirect_to(root_path)
         end
-      
+
         it "shows an error message if the user tries to like one of its mindapples" do
           mindapple = Factory.create(:mindapple)
           @person.mindapples << mindapple
           put :likes, :id => mindapple
-          
+
           flash[:notice].should == "You can't like one of your mindapples"
         end
-        
+
         it "doesn't add a mindapple if it doesn't exist" do
           put :likes, :id => -1
-          
+
           @person.liked_mindapples.should be_empty
         end
-      
+
         it "redirects to the homepage if trying to add a mindapple that doesn't exist" do
           put :likes, :id => -1
-          
+
           response.should redirect_to(root_path)
         end
-      
+
         it "shows an error message if trying to add a mindapple that doesn't exist" do
           put :likes, :id => -1
-          
+
           flash[:notice].should == "Unknown mindapple, cound't finish like operation"
         end
-        
+
       end
-      
+
       describe "when not logged in" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
           @person.stubs(:to_param).returns('testThis')
           controller.stubs(:current_user).returns nil
           Person.stubs(:find_by_param).with('testThis').returns(@person)
         end
-        
+
         it "redirects to the homepage" do
           mindapple = Factory.create(:mindapple)
           put :likes, :mindapple => mindapple
-          
+
           response.should redirect_to(root_path)
         end
-        
+
         it "shows an error message" do
           mindapple = Factory.create(:mindapple)
           put :likes, :mindapple => mindapple
-          
+
           flash[:notice].should == "You must be logged in to like a mindapple"
         end
-        
+
         it "doesn't add a mindapple as liked by a user that doesn't own the mindapple" do
           mindapple = Factory.create(:mindapple)
           put :likes, :mindapple => mindapple
-          
+
           @person.liked_mindapples.should be_empty
         end
-      
+
         it "doesn't add a mindapple to a user's liked ones when the user owns the mindapple" do
           mindapple = Factory.create(:mindapple)
           @person.mindapples << mindapple
           put :likes, :mindapple => mindapple
-          
+
           @person.liked_mindapples.should_not include(mindapple)
         end
-        
+
         it "doesn't add a mindapple if it doesn't exist" do
           put :likes, :mindapple => -1
-          
+
           @person.liked_mindapples.should be_empty
         end
-        
+
       end
-      
+
     end
-    
+
     describe "unlike" do
       describe "when logged in" do
-    
+
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
-          controller.stubs(:current_user).returns @person 
-          Person.stubs(:find_by_param).returns(@person)                 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
+          controller.stubs(:current_user).returns @person
+          Person.stubs(:find_by_param).returns(@person)
         end
-        
-        # it "should be successful" do        
+
+        # it "should be successful" do
         #   mindapple = Factory.create(:mindapple)
         #   put :unlikes, :id => mindapple
-        #   
+        #
         #   response.should be_success
         # end
-      
+
         it "removes a mindapple from a user's liked_mindapples only if the user previously liked it" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-          
+
           put :unlikes, :id => mindapple
-          
+
           @person.liked_mindapples.should_not include(mindapple)
         end
-    
+
         it "doesn't do anything  if the user didn't previously like it" do
           mindapple = Factory.create(:mindapple)
-          
+
           put :unlikes, :id => mindapple
-          
-          @person.liked_mindapples.should be_empty          
+
+          @person.liked_mindapples.should be_empty
         end
-    
+
         it "redirects to the homepage if the user didn't previously like it" do
           mindapple = Factory.create(:mindapple)
-          
+
           put :unlikes, :id => mindapple
-          
+
           response.should redirect_to(root_path)
         end
-    
+
         it "shows an error message if the user didn't previously like it" do
           mindapple = Factory.create(:mindapple)
-          
+
           put :unlikes, :id => mindapple
-          
+
           flash[:notice].should == "You can't unlike a mindapple if you didn't previously like it"
         end
-    
+
         it "doesn't remove a mindapple from another user's liked_mindapples" do
           mindapple = Factory.create(:mindapple)
           another_person = Factory.create(:person, :email => "emailTestEmail@email.com")
-          
+
           another_person.liked_mindapples << mindapple
-          
+
           put :unlikes, :id => mindapple
-          
-          another_person.liked_mindapples.size.should == 1          
+
+          another_person.liked_mindapples.size.should == 1
         end
-    
+
         it "redirects to the homepage if trying to unlike another's liked_mindapples" do
           mindapple = Factory.create(:mindapple)
           another_person = Factory.create(:person, :email => "newEmailTestEmail@email.com")
-          
+
           another_person.liked_mindapples << mindapple
-          
+
           put :unlikes, :id => mindapple
-          
+
           response.should redirect_to(root_path)
         end
       end
-      
+
       describe "when not logged in" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false) 
+          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
           @person.stubs(:to_param).returns('testThis')
           controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)                             
+          Person.stubs(:find_by_param).with('testThis').returns(@person)
         end
-        
+
         it "redirects to the homepage" do
           mindapple = Factory.create(:mindapple)
           put :unlikes, :id => mindapple
-          
-          response.should redirect_to(root_path)          
+
+          response.should redirect_to(root_path)
         end
-        
+
         it "doesn't remove a mindapple from a user's liked_mindapples if the user previously liked it" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-          
+
           put :unlikes, :id => mindapple
-          
+
           @person.liked_mindapples.should include(mindapple)
         end
-    
+
         it "doesn't do anything  if the user didn't previously like it" do
           mindapple = Factory.create(:mindapple)
-          
+
           put :unlikes, :id => mindapple
-          
+
           @person.liked_mindapples.should be_empty
         end
-    
+
         it "doesn't remove a mindapple from another user's liked_mindapples" do
           mindapple = Factory.create(:mindapple)
           another_person = Factory.create(:person, :email => "stset@email.com")
-          
+
           another_person.liked_mindapples << mindapple
-          
+
           put :unlikes, :id => mindapple
-          
+
           another_person.liked_mindapples.size.should == 1
         end
-        
+
         it "shows a error message" do
           mindapple = Factory.create(:mindapple)
           put :unlikes, :id => mindapple
-          
+
           flash[:notice].should == "You must be logged in to unlike a mindapple"
         end
       end
-      
+
     end
   end
-  
+
   describe "favourites" do
     it "should return the favourites in @favourites" do
       person = Factory.create(:person, :email => "e@mail.com", :login => 'login_test')
