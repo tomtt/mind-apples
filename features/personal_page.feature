@@ -58,7 +58,7 @@ Feature: Personal page
     Then I should not see a link to "go"
     Then I should not see "and pick your 5-a-day. "
   
-  Scenario: Person views its own page when not logged in
+  Scenario: Person views his own page when not logged in
     When I follow "Log out"
     And I go to "/person/gandy"
     And I should see a link to "go"
