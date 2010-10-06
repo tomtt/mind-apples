@@ -52,6 +52,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # networks
   map.network "/in/:network", :controller => "people", :action => "new"
+  map.network_admin "/in/:network/admin", :controller => "networks", :action => "admin"
 
   # Generic routes
   map.connect ':controller/:action/:id'
