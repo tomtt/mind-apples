@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101005134659) do
+ActiveRecord::Schema.define(:version => 20101006115210) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20101005134659) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "respondent_id"
+    t.integer  "network_id"
   end
 
 end

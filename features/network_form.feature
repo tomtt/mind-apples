@@ -6,7 +6,7 @@ Feature: Networks: custom form
   I want a custom form with some copy and tagging users as belonging to my network
 
   Background:
-    Given a network exists with name: "Bill Hicks' Marketeers"
+    Given a network "bhm" exists with name: "Bill Hicks' Marketeers"
     And that network's url is "bill-hicks-marketeers"
     And that network's form_header is "Hey Goat Boys, please fill in the form below!"
 
@@ -31,6 +31,9 @@ Feature: Networks: custom form
     Then I should see "My five a day"
     And I should see "Thanks for sharing your mindapples"
     And I should see "Sleeping like a baby"
+
+    Then a person "marla" should exist with email: "marla@example.com"
+    And the network "bhm" should be that person's network
 
     And I should receive an email
     When I open the email

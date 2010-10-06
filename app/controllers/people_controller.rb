@@ -5,6 +5,7 @@ class PeopleController < ApplicationController
   before_filter :redirect_unless_profile_page_is_public, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
   before_filter :assign_network, :only => [:new]
+  before_filter :add_network_to_person_attributes, :only => [:create]
 
   include PeopleHelper
 
@@ -264,6 +265,14 @@ class PeopleController < ApplicationController
   def assign_network
     if params[:network]
       @network = Network.find_by_url(params[:network]) or render_404
+    end
+  end
+
+  def add_network_to_person_attributes
+    if params[:person].has_key?("network_url")
+      network_url = params["person"].delete("network_url")
+      @network = Network.find_by_url(network_url)
+      params["person"]["network_id"] = @network.to_param
     end
   end
 end

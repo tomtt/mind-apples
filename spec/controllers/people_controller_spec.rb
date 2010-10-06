@@ -537,6 +537,18 @@ describe PeopleController do
         response.should render_template('errors/error_404')
       end
     end
+
+    describe "setting the network from the network_url hidden field" do
+      it "associates the person with the network if a network url is passed" do
+        pending "can't seem to make this spec pass using mocha"
+        # Factory.create(:network, :url => "bhm", :id => 28)
+        # Person.expects(:new).returns mock('person') # .with(has_key(:network_id => 29))
+        # # Person.should_receive(:new).with(hash_including(:network_id => 28))
+        # post(:create, "person" => {}, "network_url" => "bhm")
+      end
+
+      it "needs more specs"
+    end
   end
 
   describe "convert_policy_checked_value" do

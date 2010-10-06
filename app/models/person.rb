@@ -53,6 +53,8 @@ class Person < ActiveRecord::Base
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
 
+  belongs_to :network
+
   acts_as_authentic do |config|
     config.merge_validates_length_of_password_field_options :message => :"password.length"
     config.merge_validates_uniqueness_of_login_field_options :message => :"login.taken"
