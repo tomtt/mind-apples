@@ -1,6 +1,17 @@
 .take_the_test
   .inner
     = network_form_header
+    - if current_user
+      - name_for_view = current_user.name_for_view
+      - if name_for_view
+        - name = "'%s'." % name_for_view
+      - else
+        - name = "an anonymous user."
+      %p
+        Hello, you are still logged in as
+        = name
+        You can fill in the form below to let somebody else share their Mindapples, or you can
+        = link_to("edit your own", edit_person_path(current_user)) + "."
     %h2.light_bg
       Take the Mindapples test
     %p.intro
