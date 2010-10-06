@@ -89,7 +89,7 @@ Feature: Personal page
     
   Scenario: A new survey is filled in while somebody is already logged in
     When I go to the "take the test" page
-    Then I should see "Hello, you are still logged in as 'gandy'."
+    Then I should see "You're already logged in as 'gandy'."
     When I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I check "person_policy_checked"
     And I press "Submit"

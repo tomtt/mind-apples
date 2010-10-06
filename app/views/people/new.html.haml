@@ -8,12 +8,12 @@
       - else
         - name = "an anonymous user."
       %p
-        Hello, you are still logged in as
+        You're already logged in as
         = name
-        You can fill in the form below to let somebody else share their Mindapples, or you can
-        = link_to("edit your own", edit_person_path(current_user)) + "."
+        You can still take the Mindapples Test again below, we'll just make you a new account. Alternatively,
+        = link_to("edit your Mindapples Page here", edit_person_path(current_user)) + "."
     %h2.light_bg
       Take the Mindapples test
     %p.intro
-      If eating five fruit and veg a day is good for our bodies, what about our minds? Take the Mindapples 5-a-day Test now and help us find the most popular activities to keep ourselves mentally well.
+      If eating five fruit and veg a day is good for our bodies, what about our minds? Share the 5-a-day for your mind and tell us what you do to take care of yourself.
     = render(:partial => 'form')
