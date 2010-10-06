@@ -1,0 +1,9 @@
+%div
+  This is the admin page for 
+  = @network.name
+%div
+  People belonging to this network:
+  %ul.bulleted
+    - @network.people.each do |person|
+      %li
+        = link_to(person.name_for_view || person.login, person_path(person))
