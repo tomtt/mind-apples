@@ -38,3 +38,13 @@ Feature: Networks: custom form
     And I should receive an email
     When I open the email
     Then I should see "Your Mindapples" in the email subject
+
+  Scenario: Person first forgets to agree to t&c
+    When I go to "/in/bill-hicks-marketeers" 
+    And I fill in "Don't go! Leave your e-mail" with "marla@example.com"
+    And I press "Submit"
+    And I check "person_policy_checked"
+    And I press "Submit"
+
+    Then a person "marla" should exist with email: "marla@example.com"
+    And the network "bhm" should be that person's network

@@ -9,7 +9,9 @@
           What five things do you do every day, or regularly, to look after your mind?
       = render(:partial => 'mindapples_entry', :locals => { :form => person_form })
       = render(:partial => 'entry', :locals => { :form => person_form })
-      - if params[:network]
+      - if @network
+        = person_form.hidden_field(:network_url, :value => @network.url)
+      - elsif params[:network]
         = person_form.hidden_field(:network_url, :value => params[:network])
       = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
       %br.clear

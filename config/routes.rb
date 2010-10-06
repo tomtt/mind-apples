@@ -54,6 +54,9 @@ ActionController::Routing::Routes.draw do |map|
   map.network "/in/:network", :controller => "people", :action => "new"
   map.network_admin "/in/:network/admin", :controller => "networks", :action => "admin"
 
+  # widgets
+  # map.widget "/widgets/form"
+
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
