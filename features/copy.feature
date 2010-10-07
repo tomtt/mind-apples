@@ -24,13 +24,13 @@ Feature: Proper layouts structure
     And I should see "What else do you need to look after your mind?"
 
     And I should not see "Leave your e-mail and we'll send you occasional messages. "
-    And I should see "Leave your e-mail and we'll send you your mindapples. "
+    And I should see "E-mail us! Leave your e-mail and we'll post you your mindapples. (never made public)"
 
     And I should not see "Once more with the password please, in case of typos..."
     And I should see "And again with the password please"
 
     And I should not see "Yes, I'm happy to make my profile public on Mindapples.org"
-    And I should see "I'm happy to make my profile public"
+    And I should see "Show yourself. Can other people see your profile?"
 
     And I should not see "Where do you live?"
     And I should see "Which country are you from?"
@@ -52,7 +52,7 @@ Feature: Proper layouts structure
     Then I should see "Take the Mindapples test"
     And I should be on "/person/new"
     And I should not see "Choose a username for your Mindapples account.(careful, you can only choose once)"
-    And I should see "Choose a username to claim your Mindapples account."
+    And I should see "Choose a username."
 
   Scenario: Explore menu link
     When I go to the homepage

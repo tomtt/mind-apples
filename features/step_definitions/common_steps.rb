@@ -17,7 +17,7 @@ Given /^I fill all mandatory fields$/ do
   And "I check \"person_policy_checked\""
   And "I fill in \"person[password]\" with \"sosocial\""
   And "I fill in \"person[password_confirmation]\" with \"sosocial\""
-  And "I fill in \"Don't go! Leave your e-mail\" with \"andy@example.com\""
+  And "I fill in \"E-mail us\" with \"andy@example.com\""
 end
 
 Then /^I should see (\d+) mindapples$/ do |number|

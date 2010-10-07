@@ -24,7 +24,7 @@ Feature: Networks: custom form
     And I fill in "Passport control" with "UK"
     And I fill in "Your thing" with "Marketeer extraordinaire"
     And I fill in "Be proud" with "Marla Arson"
-    And I fill in "Don't go! Leave your e-mail" with "marla@example.com"
+    And I fill in "E-mail us" with "marla@example.com"
     And I choose "person_public_profile_true"
     And I check "person_policy_checked"
     And I press "Submit"
@@ -41,7 +41,7 @@ Feature: Networks: custom form
 
   Scenario: Person first forgets to agree to t&c
     When I go to "/in/bill-hicks-marketeers" 
-    And I fill in "Don't go! Leave your e-mail" with "marla@example.com"
+    And I fill in "E-mail us" with "marla@example.com"
     And I press "Submit"
     And I check "person_policy_checked"
     And I press "Submit"

@@ -8,7 +8,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
   Scenario: As a social butterfly I don't have to fill in email if I don't fill in username
     When I go to the "take the test" page
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should not see "My five a day"
@@ -16,7 +16,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
   Scenario: As a social butterfl I must fill in email/password confirmation if I fill in username
     When I go to the "take the test" page
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"
@@ -26,8 +26,8 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
   Scenario: As a social butterfly/little miss bashful I must fill in email/password confirmation if I fill in username
     When I go to the "take the test" page
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
-    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I fill in "Join us. Choose a username." with "banana_man"
+    And I fill in "E-mail us" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should not see "My five a day"
@@ -41,7 +41,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I press "Go"
     And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should not see "My five a day"
@@ -54,7 +54,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I check "person_policy_checked"
@@ -70,10 +70,10 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I fill in "person[password]" with "s"
     And I fill in "person[password_confirmation]" with "s"
-    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I fill in "E-mail us" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "Please choose a valid password (minimum is 4 characters)"
@@ -85,10 +85,10 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I press "Go"
 
-    And I fill in "Join us. Choose a username to claim your Mindapples account." with "banana_man"
+    And I fill in "Join us. Choose a username." with "banana_man"
     And I fill in "person[password]" with "supersecret"
     And I fill in "person[password_confirmation]" with "supersecret"
-    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I fill in "E-mail us" with "andy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "That username has already been taken. Please choose again."
@@ -110,7 +110,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I am on my edit page
     And I am logged in
     And I fill in "Join us. Choose a username" with "andyyy"
-    And I fill in "Don't go! Leave your e-mail" with "andy@example.com"
+    And I fill in "E-mail us" with "andy@example.com"
     And I press "Submit"
     Then I should see "Oh dear, there was a problem:"
     And I should see a "person[email]" text field containing "andy@example.com"
