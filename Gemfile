@@ -9,7 +9,6 @@ gem "feedtools"
 gem "uuidtools"
 gem "will_paginate"
 gem "paperclip"
-gem "hassle"
 gem "hoptoad_notifier"
 
 group :development, :test do
