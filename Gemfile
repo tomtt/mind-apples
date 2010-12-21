@@ -10,6 +10,7 @@ gem "uuidtools"
 gem "will_paginate"
 gem "paperclip"
 gem "hoptoad_notifier"
+gem "taps", "0.3.14"
 
 group :development, :test do
   gem "capybara"
