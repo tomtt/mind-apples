@@ -1,3 +1,4 @@
+rack --version 1.0.0
 rails
 haml
 authlogic
