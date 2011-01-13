@@ -44,6 +44,8 @@ GEM
       term-ansicolor (~> 1.0.5)
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
+    cuke-inspector (0.0.8)
+      cucumber (>= 0.3.104)
     culerity (0.2.13)
     daemons (1.1.0)
     database_cleaner (0.6.0)
@@ -153,6 +155,7 @@ DEPENDENCIES
   capybara
   cucumber
   cucumber-rails
+  cuke-inspector
   database_cleaner
   email_spec
   factory_girl (= 1.3.2)!

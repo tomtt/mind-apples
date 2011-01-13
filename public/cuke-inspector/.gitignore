@@ -1,0 +1,4 @@
+images
+*.html
+javascripts/[^.]*
+stylesheets

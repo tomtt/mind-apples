@@ -17,6 +17,7 @@ group :development, :test do
   gem "database_cleaner"
   gem "cucumber-rails"
   gem "cucumber"
+  gem 'cuke-inspector'
   gem "rspec-rails", "1.3.2"
   gem "spork"
   gem "launchy"
