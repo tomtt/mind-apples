@@ -1,0 +1,18 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: utf8
+  username:
+  password:
+  template: template0 # Required for UTF8 encoding
+
+development:
+  <<: *defaults
+  database: mindapples_development
+test: &TEST
+  <<: *defaults
+  database: mindapples_test
+cucumber:
+  <<: *TEST
+production:
+  <<: *defaults
+  database: mindapples_production

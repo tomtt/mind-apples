@@ -32,7 +32,7 @@ describe Mindapple do
 
       it "returns an array of people that like the mindapple" do
         mindapple = Factory.create(:mindapple)
-        person1 = Factory.create(:person, :email => "person1@email.com") 
+        person1 = Factory.create(:person, :email => "person1@email.com")
         person2 = Factory.create(:person, :email => "person2@email.com")
 
         person1.liked_mindapples << mindapple
@@ -88,56 +88,62 @@ describe Mindapple do
   end
 
   describe "most_recent" do
+    context "with example mindapples" do
+      before(:each) do
+        @person1 = Factory.create(:person, :email=> "#{rand}_test@email.com")
 
-    before(:each) do
-      @person1 = Factory.create(:person, :email=> "#{rand}_test@email.com")
+        @mindapple_1_1 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago, :suggestion => "boo")
+        @mindapple_1_2 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago, :suggestion => "boo")
+        @mindapple_1_3 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago, :suggestion => "boo")
+        @mindapple_1_4 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago, :suggestion => "boo")
+        @mindapple_1_5 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago, :suggestion => "boo")
 
-      @mindapple_1_1 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago)
-      @mindapple_1_2 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago)
-      @mindapple_1_3 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago)
-      @mindapple_1_4 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago)
-      @mindapple_1_5 = Factory.create(:mindapple, :person => @person1, :created_at => 3.minute.ago)
+        @person2 = Factory.create(:person, :email=> "#{rand}_test@email.com")
 
-      @person2 = Factory.create(:person, :email=> "#{rand}_test@email.com")
+        @mindapple_2_1 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago, :suggestion => "boo")
+        @mindapple_2_2 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago, :suggestion => "boo")
+        @mindapple_2_3 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago, :suggestion => "boo")
+        @mindapple_2_4 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago, :suggestion => "boo")
+        @mindapple_2_5 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago, :suggestion => "boo")
 
-      @mindapple_2_1 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago)
-      @mindapple_2_2 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago)
-      @mindapple_2_3 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago)
-      @mindapple_2_4 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago)
-      @mindapple_2_5 = Factory.create(:mindapple, :person => @person2, :created_at => 2.minute.ago)
+        @person3 = Factory.create(:person, :email=> "#{rand}_test@email.com")
+        @mindapple_3_1 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago, :suggestion => "boo")
+        @mindapple_3_2 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago, :suggestion => "boo")
+        @mindapple_3_3 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago, :suggestion => "boo")
+        @mindapple_3_4 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago, :suggestion => "boo")
+        @mindapple_3_5 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago, :suggestion => "boo")
 
-      @person3 = Factory.create(:person, :email=> "#{rand}_test@email.com")
-      @mindapple_3_1 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago)
-      @mindapple_3_2 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago)
-      @mindapple_3_3 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago)
-      @mindapple_3_4 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago)
-      @mindapple_3_5 = Factory.create(:mindapple, :person => @person3, :created_at => 1.minute.ago)
+        @max = 5
+      end
 
-      @max = 5
+      it "returns N mindapples if there are N or more than N in the most recent top-N" do
+        most_recent = Mindapple.most_recent(@max)
+
+        most_recent.size.should == 3
+      end
+
+      it "returns the N most recent mindapples if there are N or more than N in the top-N" do
+        most_recent = Mindapple.most_recent(@max)
+        people_ids = most_recent.map {|e| e.person_id}
+
+        people_ids.should include(@person1.id)
+        people_ids.should include(@person2.id)
+        people_ids.should include(@person3.id)
+      end
+
+      it "returns the N most recent ordered by created_at DESC" do
+        most_recent = Mindapple.most_recent(@max)
+
+        most_recent[0].created_at.should >= most_recent[1].created_at
+        most_recent[1].created_at.should >= most_recent[2].created_at
+      end
     end
 
-    it "returns N mindapples if there are N or more than N in the most recent top-N" do
-      most_recent = Mindapple.most_recent(@max)
-
-      most_recent.size.should == 3
+    it "does not return any mindapples that have no suggestion" do
+      @person = Factory.create(:person, :email=> "#{rand}_test@email.com")
+      @mindapple = Factory.create(:mindapple, :person => @person, :created_at => 1.minute.ago, :suggestion => "")
+      Mindapple.most_recent(3).should be_empty
     end
-
-    it "returns the N most recent mindapples if there are N or more than N in the top-N" do
-      most_recent = Mindapple.most_recent(@max)
-      people_ids = most_recent.map {|e| e.person_id}
-
-      people_ids.should include(@person1.id)
-      people_ids.should include(@person2.id)
-      people_ids.should include(@person3.id)
-    end
-
-    it "returns the N most recent ordered by created_at DESC" do
-      most_recent = Mindapple.most_recent(@max)
-
-      most_recent[0].created_at.should >= most_recent[1].created_at
-      most_recent[1].created_at.should >= most_recent[2].created_at
-    end
-
   end
 
   def make_people_like_mindapple(number_of_fans, mindapple)
@@ -146,7 +152,7 @@ describe Mindapple do
       person.liked_mindapples << mindapple
     end
   end
-  
+
   it "return all mindappples containing searchable param" do
     mindapple = Factory.create(:mindapple, :suggestion => 'Runing in the park')
     mindapple2 = Factory.create(:mindapple, :suggestion => 'Eating ice cream')

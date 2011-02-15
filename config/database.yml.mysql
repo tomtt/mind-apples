@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+development:
+  <<: *defaults
+  database: mindapples_development
+test: &TEST
+  <<: *defaults
+  database: mindapples_test
+cucumber:
+  <<: *TEST
+production:
+  <<: *defaults
+  database: mindapples_production
