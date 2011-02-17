@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
   layout :choose_layout
-  
+
   TOP_APPLES_MAX = 5
   MOST_RECENT_APPLES_MAX = 5
-  
+
   def home
     @person = Person.new_with_mindapples
     @blogfeeds = BlogFeed.latest(3)
@@ -13,6 +13,20 @@ class PagesController < ApplicationController
 
   def error
     raise 'Intentional error'
+  end
+
+  def debug
+    @env = {}
+    ENV.keys.each do |key|
+      @env[key] =
+        if %w{CONSOLE_AUTH DATABASE_URL SHARED_DATABASE_URL S3_SECRET S3_KEY}.include?(key)
+          ENV[key][0..4] + "[secret]"
+        else
+          ENV[key]
+        end
+    end
+
+    @bucket = Paperclip::Attachment.default_options[:bucket]
   end
 
   def homepage
