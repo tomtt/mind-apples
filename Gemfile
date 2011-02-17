@@ -11,6 +11,7 @@ gem "will_paginate"
 gem "paperclip"
 gem "hoptoad_notifier"
 gem "taps", "0.3.14"
+gem "aws-s3"
 
 group :development, :test do
   gem "capybara"
