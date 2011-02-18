@@ -72,7 +72,6 @@ class PeopleController < ApplicationController
         end
       end
     else
-      resource.avatar = Person.new.avatar
       format.html { render :action => "edit" }
       format.js   { render :action => "edit" }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }

@@ -476,14 +476,14 @@ describe PeopleController do
 
     describe "if user name is filled" do
       it "only with filled email" do
-        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode', :avatar= => true})
+        person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode' })
         Person.stubs(:new_with_mindapples).returns(person)
         person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
       end
 
       it "only with filled password" do
-        person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode', :avatar= => true})
+        person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode' })
         Person.stubs(:new_with_mindapples).returns(person)
         person.expects(:save).never
         post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
@@ -491,7 +491,7 @@ describe PeopleController do
     end
 
     it "delete genarated login from resource when validation fails" do
-      person = mock('person', {:protected_login= => 'login', :page_code= => 'pagecode',:save => false, :avatar= => true})
+      person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode',:save => false })
       person.expects(:login=).once
       Person.stubs(:new_with_mindapples).returns(person)
 
