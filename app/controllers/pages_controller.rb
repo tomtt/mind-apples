@@ -16,17 +16,21 @@ class PagesController < ApplicationController
   end
 
   def debug
-    @env = {}
-    ENV.keys.each do |key|
-      @env[key] =
-        if %w{CONSOLE_AUTH DATABASE_URL SHARED_DATABASE_URL S3_SECRET S3_KEY}.include?(key)
-          ENV[key][0..4] + "[secret]"
-        else
-          ENV[key]
-        end
-    end
+    if ENV["DEBUG_ENABLED"] && ENV["DEBUG_ENABLED"].downcase == "true"
+      @env = {}
+      ENV.keys.each do |key|
+        @env[key] =
+          if %w{CONSOLE_AUTH DATABASE_URL SHARED_DATABASE_URL S3_SECRET S3_KEY}.include?(key)
+            ENV[key][0..4] + "[secret]"
+          else
+            ENV[key]
+          end
+      end
 
-    @bucket = Paperclip::Attachment.default_options[:bucket]
+      @bucket = Paperclip::Attachment.default_options[:bucket]
+    else
+      redirect_to root_path
+    end
   end
 
   def homepage

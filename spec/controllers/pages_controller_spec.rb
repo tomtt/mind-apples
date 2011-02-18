@@ -33,4 +33,31 @@ describe PagesController do
     end
 
   end
+
+  describe "debug" do
+    # No need to spec what values to set, but enabling of debug needs to be tested
+    it "renders debug if DEBUG_ENABLED is TRUE" do
+      ENV["DEBUG_ENABLED"] = "TRUE"
+      get :debug
+      response.should render_template(:debug)
+    end
+
+    it "renders debug if DEBUG_ENABLED is tRue (disregarding case)" do
+      ENV["DEBUG_ENABLED"] = "tRue"
+      get :debug
+      response.should render_template(:debug)
+    end
+
+    it "redirects to the root if DEBUG_ENABLED is not TRUE" do
+      ENV["DEBUG_ENABLED"] = "FALSE"
+      get :debug
+      response.should redirect_to(root_path)
+    end
+
+    it "redirects to the root if DEBUG_ENABLED is not set" do
+      ENV.delete("DEBUG_ENABLED")
+      get :debug
+      response.should redirect_to(root_path)
+    end
+  end
 end
