@@ -24,5 +24,15 @@ config.action_view.cache_template_loading            = true
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 # config.action_mailer.delivery_method = :sendmail
+ActionMailer::Base.smtp_settings = {
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :authentication => :plain,
+  :domain => ENV['GMAIL_SMTP_USER'],
+  :user_name => ENV['GMAIL_SMTP_USER'],
+  :password => ENV['GMAIL_SMTP_PASSWORD'],
+  :tls => true
+}
+
 # Enable threaded mode
 # config.threadsafe!
