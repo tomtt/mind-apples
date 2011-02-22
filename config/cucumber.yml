@@ -1,0 +1,15 @@
+<%
+no_rerun_opts = "--format progress"
+rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
+conditional_rerun_opts = rerun.to_s.strip.empty? ? no_rerun_opts : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
+cuke_inspector_opts = "--format Cucumber::Formatter::StepdefsJson --out public/cuke-inspector/javascripts/cucumber_steps.json "
+common_opts = "--format rerun --out rerun.txt --strict --tags ~@wip --tags ~@development -r features"
+rerun_opts = "#{conditional_rerun_opts} #{common_opts}"
+default_opts = "#{no_rerun_opts} #{common_opts}"
+%>
+default: <%= default_opts %>
+whole_suite: <%= cuke_inspector_opts + default_opts %>
+rerun: <%= rerun_opts %>
+wip: --tags @wip:3 --wip features
+textmate: "--tags @wip:3 --wip -r features --format html"
+simple: --strict --tags ~@wip -r features
