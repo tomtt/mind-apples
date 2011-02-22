@@ -14,6 +14,8 @@ module NavigationHelpers
       login_path
     when /^the logout page$/
       logout_path
+    when /^the CMS page$/
+      admin_root_path
     when /^the "take the test" page$/
       new_person_path
     when /^the full form page$/

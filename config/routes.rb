@@ -58,6 +58,11 @@ ActionController::Routing::Routes.draw do |map|
   # widgets
   # map.widget "/widgets/form"
 
+  map.namespace :admin do |admin|
+    admin.root  :controller => 'admin'
+    admin.resources :people
+  end
+
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

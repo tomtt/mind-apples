@@ -48,6 +48,10 @@ Given /^I am not logged in$/ do
   visit logout_path
 end
 
+Given /^I am an admin$/ do
+  @me_person = Factory.create(:person, {:role => 'admin'})
+end
+
 When /^I log in$/ do
   visit login_path
   fill_in("Login", :with => @me_person.login)
@@ -58,3 +62,4 @@ end
 When /^I log out$/ do
   visit logout_path
 end
+
