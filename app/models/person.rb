@@ -111,6 +111,10 @@ class Person < ActiveRecord::Base
     PersonMailer.deliver_claim_your_page(self)
   end
 
+  def is_admin?
+    false
+  end
+
   def to_s
     to_param
   end

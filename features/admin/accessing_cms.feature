@@ -1,9 +1,8 @@
-@wip
-
 Feature: Only an admin can access the cms
   In order to manage the mindapples website
   Only an admin must be able to access the cms
 
+  @wip
   Scenario: Accessing as an admin
     Given I am an admin
     And I am logged in
@@ -14,7 +13,7 @@ Feature: Only an admin can access the cms
     Given I have a personal page
     And I am logged in
     When I go to the CMS page
-    Then I should see "Access denied"
+    Then I should see "You must be logged in as an admin"
     And I should be on the homepage
     
   Scenario: Accessing when not logged in
