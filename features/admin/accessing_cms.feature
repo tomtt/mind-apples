@@ -2,7 +2,6 @@ Feature: Only an admin can access the cms
   In order to manage the mindapples website
   Only an admin must be able to access the cms
 
-  @wip
   Scenario: Accessing as an admin
     Given I am an admin
     And I am logged in

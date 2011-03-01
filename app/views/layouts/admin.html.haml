@@ -1,0 +1,37 @@
+!!!
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title CMS
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %link{:href => image_path('/favicon.ico'), :rel => "shortcut icon"}/
+    = stylesheet_link_tag "defaults",        |
+      "admin",                               |
+      :media => 'all'
+    = javascript_include_tag "jquery/jquery-1.5.1.min.js", |
+      "dom_ready_handler",                                 |
+      :cache => 'admin_all'
+    = yield :head
+    = yield :javascripts
+  %body.admin
+    .page_wrapper
+      .inner_page_wrapper
+        #page
+          #page_top
+            - form_tag logout_url, :method => :delete, :class => "logout" do
+              = submit_tag "Log out"
+          = render :partial => '/admin/shared/admin_nav'
+          = yield :secondary_nav
+          .page_content.clearfix
+            #inner_container
+              = yield :left_col
+              .center_col_full
+                = show_flashes
+                = yield :layout
+            / /#inner_container
+            .footer
+              = yield :footer
+          / /.page_content
+          .page_bottom
+        / /#page
+      / /.inner_page_wrapper
+    / /.page_wrapper

@@ -112,7 +112,7 @@ class Person < ActiveRecord::Base
   end
 
   def is_admin?
-    false
+    role == "admin"
   end
 
   def to_s

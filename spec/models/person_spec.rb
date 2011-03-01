@@ -475,4 +475,20 @@ describe Person do
     person = Factory.create(:person, :password => "blurb", :password_confirmation => "blurb")
     lambda { person.update_attributes!(:braindump => "Boo") }.should_not raise_error
   end
+
+  describe "is_admin?" do
+    it "is false if the person does not have a role specified" do
+      Factory.build(:person, :role => nil).is_admin?.should == false
+    end
+
+    it "is true if the person has 'admin' as its role" do
+      Factory.build(:person, :role => "admin").is_admin?.should == true
+    end
+
+    it "is false if the person has something else than 'admin' as its role" do
+      Factory.build(:person, :role => "").is_admin?.should == false
+      Factory.build(:person, :role => "user").is_admin?.should == false
+      Factory.build(:person, :role => "Admin").is_admin?.should == false
+    end
+  end
 end
