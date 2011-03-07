@@ -1,1 +1,11 @@
-[Here will be the main admin nav]
+- render_tabnav :admin do
+  - add_tab do |t|
+    - t.named 'Home'
+    - t.links_to admin_root_path
+    - t.highlights_on :controller => 'admin/admin'
+    - t.html = { :id => "home" }
+  - add_tab do |t|
+    - t.named 'People'
+    - t.links_to admin_people_path
+    - t.highlights_on :controller => 'admin/people'
+    - t.html = { :id => "people" }

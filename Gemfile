@@ -10,6 +10,7 @@ gem "uuidtools"
 gem "will_paginate"
 gem "paperclip"
 gem "hoptoad_notifier"
+gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
 gem "taps", "0.3.14"
 gem "aws-s3"
 

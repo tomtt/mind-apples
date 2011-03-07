@@ -5,6 +5,13 @@ GIT
   specs:
     factory_girl (1.3.2)
 
+GIT
+  remote: https://github.com/unboxed/tabnav.git
+  revision: 135b2587d5366b585b561d97d2fab98df5dadb6c
+  specs:
+    tabnav (1.0.3)
+      actionpack (>= 2.3.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -181,6 +188,7 @@ DEPENDENCIES
   ruby-debug
   spork
   string_to_editor
+  tabnav!
   taps (= 0.3.14)
   term-ansicolor
   uuidtools
