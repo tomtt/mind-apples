@@ -39,7 +39,7 @@ class Person < ActiveRecord::Base
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
   validates_presence_of :page_code
-  validates_length_of :password_confirmation, :minimum => 1000, :if => Proc.new { |person| person.password.to_s != person.password_confirmation }, :message => :"password_confirmation.dont_match"
+  validates_confirmation_of :password, :message => :"password_confirmation.dont_match"
 
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user?}, :message => :"email.blank"
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique"
@@ -52,6 +52,7 @@ class Person < ActiveRecord::Base
 
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
+  before_validation :unset_password_confirmation_if_password_is_not_set
 
   belongs_to :network
 
@@ -201,4 +202,9 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def unset_password_confirmation_if_password_is_not_set
+    if self.password.nil? && self.password_confirmation.blank?
+      self.password_confirmation = nil
+    end
+  end
 end
