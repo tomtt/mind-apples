@@ -498,6 +498,11 @@ describe PeopleController do
       post(:create, "person" => {"login" => ''})
     end
 
+    it "does not use the role field if passed as a param" do
+      post(:create, "person" => {'login' => 'bigapple', "role" => "admin"})
+      assigns[:person].role.should be_nil
+    end
+
     describe "when saved" do
       before do
         @mock_person = build_mock_person
