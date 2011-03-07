@@ -4,9 +4,11 @@ Feature: Only an admin can access the cms
 
   Scenario: Accessing as an admin
     Given I am an admin
+    And my login is "andy"
     And I am logged in
     When I go to the CMS page
     Then I should be on the CMS page
+    And I should see "Logged in as andy"
 
   Scenario: Accessing as a person
     Given I have a personal page

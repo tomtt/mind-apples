@@ -13,12 +13,12 @@
       .inner_page_wrapper
         #page
           #page_top
-            .user_info
-              -# Logged in as
-              -# = current_user.login
-
             - form_tag logout_url, :method => :delete, :class => "logout" do
               = submit_tag "Log out"
+            .user_info
+              Logged in as
+              = current_user.login
+              &nbsp;
           = render :partial => '/admin/shared/admin_nav'
           = yield :secondary_nav
           .page_content.clearfix
