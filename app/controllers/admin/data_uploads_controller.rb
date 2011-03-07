@@ -1,2 +1,2 @@
-class Admin::DataUploadsController < ApplicationController
+class Admin::DataUploadsController < Admin::AdminController
 end
