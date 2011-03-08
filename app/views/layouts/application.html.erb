@@ -46,6 +46,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     })();
 
   </script>
+  <%- if current_user && current_user.is_admin? -%><a id="admin_link" href="/admin">*</a><%- end -%>
 </body>
 </html>
 
