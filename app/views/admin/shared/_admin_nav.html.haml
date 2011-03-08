@@ -5,10 +5,10 @@
     - t.highlights_on :controller => 'admin/admin'
     - t.html = { :id => "home" }
   - add_tab do |t|
-    - t.named 'Upload Data'
-    - t.links_to new_admin_data_upload_path
-    - t.highlights_on :controller => 'admin/data_uploads'
-    - t.html = { :id => "upload_data" }
+    - t.named 'Import People'
+    - t.links_to new_admin_people_import_path
+    - t.highlights_on :controller => 'admin/people_imports'
+    - t.html = { :id => "people_imports" }
   - add_tab do |t|
     - t.named 'People'
     - t.links_to admin_people_path

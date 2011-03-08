@@ -1,9 +1,0 @@
-- form_for :data_upload, :html => { :class => "data_upload", :multipart => true} do |data_upload_form|
-  = error_messages_for(:data_upload)
-  = data_upload_form.label :user_type_description, "Enter a description of who the users are, e.g. \"Secret Garden Party Attendee 2011\""
-  = data_upload_form.text_field :user_type_description
-  %br
-  = data_upload_form.label :network_id, "Network that users in CSV belong to:"
-  = data_upload_form.select :network_id, options_for_select(@network_options)
-  %br
-  = data_upload_form.submit "Process the CSV file"

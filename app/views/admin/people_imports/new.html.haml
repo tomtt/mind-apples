@@ -1,0 +1,9 @@
+- form_for :people_import, :html => { :class => "people_import", :multipart => true} do |people_import_form|
+  = error_messages_for(:people_import)
+  = people_import_form.label :user_type_description, "Enter a description of who the users are, e.g. \"Secret Garden Party Attendee 2011\""
+  = people_import_form.text_field :user_type_description
+  %br
+  = people_import_form.label :network_id, "Network that users in CSV belong to:"
+  = people_import_form.select :network_id, options_for_select(@network_options)
+  %br
+  = people_import_form.submit "Process the CSV file"

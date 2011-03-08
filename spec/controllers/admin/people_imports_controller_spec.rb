@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::DataUploadsController do
+describe Admin::PeopleImportsController do
   context "when logged in as admin" do
     before :each do
       @admin_person = Factory.create(:person, :role => "admin")

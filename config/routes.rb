@@ -60,7 +60,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
     admin.root  :controller => 'admin'
-    admin.resources :data_uploads
+    admin.resources :people_imports
     admin.resources :people
   end
 
