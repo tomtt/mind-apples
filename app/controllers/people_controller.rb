@@ -63,7 +63,7 @@ class PeopleController < ApplicationController
       format.html do
         if @resource_saved
           login_as_new_user
-          flash[:message] = 'Thanks for sharing your mindapples.'
+          flash[:message] = 'Thanks for sharing your mindapples!'
           if @generated_login && params[:pid].nil?
             redirect_to edit_resource_path(resource)
           else
@@ -90,7 +90,7 @@ class PeopleController < ApplicationController
       raise ActiveRecord::RecordNotFound if person.nil? 
       @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
-      flash_error_message(:notice, "Unknown person, cound't find its favourites", root_path)
+      flash_error_message(:notice, "Unknown person, couldn't find its favourites", root_path)
     end
   end
 
@@ -100,7 +100,7 @@ class PeopleController < ApplicationController
         @mindapple = Mindapple.find(params[:id])
         like_mindapple
       rescue ActiveRecord::RecordNotFound
-        flash_error_message(:notice, "Unknown mindapple, cound't finish like operation", root_path)
+        flash_error_message(:notice, "Unknown mindapple, couldn't finish the operation", root_path)
       end
     else
       flash_error_message(:notice, "You must be logged in to like a mindapple", root_path)
@@ -113,7 +113,7 @@ class PeopleController < ApplicationController
         @mindapple = Mindapple.find(params[:id])
         unlike_mindapple
       rescue ActiveRecord::RecordNotFound
-        flash_error_message(:notice, "Unknown mindapple, cound't finish unlike operation", root_path)
+        flash_error_message(:notice, "Unknown mindapple, couldn't finish the operation", root_path)
       end
     else
       flash_error_message(:notice, "You must be logged in to unlike a mindapple", root_path)
@@ -217,7 +217,7 @@ class PeopleController < ApplicationController
         flash_error_message(:notice, "You can't like a mindapple more than once", root_path)
       end
     else
-      flash_error_message(:notice, "You can't like one of your mindapples", root_path)
+      flash_error_message(:notice, "Sorry, you can't like one of your own mindapples", root_path)
     end
   end
 
@@ -236,7 +236,7 @@ class PeopleController < ApplicationController
       end
 
     else
-      flash_error_message(:notice, "You can't unlike a mindapple if you didn't previously like it", root_path)
+      flash_error_message(:notice, "You need to like a mindapple first before you can unlike it!", root_path)
     end
   end
 
