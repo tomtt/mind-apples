@@ -21,13 +21,22 @@ describe Admin::PeopleImportsController do
 
         get :new
 
-        expected_options = [["--- Select a network ---", "none"]]
+        expected_options = [["--- Select a network ---", nil]]
         expected_options << ["Aardvark", 8]
         expected_options << ["Badger", 12]
         expected_options << ["Cockatoo", 10]
 
         assigns[:network_options].should == expected_options
       end
+
+      it "assigns a new PeopleImport to @people_import" do
+        PeopleImport.stubs(:new).returns(:a_new_model)
+        get :new
+        assigns[:people_import].should == :a_new_model
+      end
+    end
+
+    describe "POST create" do
     end
   end
 end
