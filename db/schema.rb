@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222140301) do
+ActiveRecord::Schema.define(:version => 20110317122733) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(:version => 20110222140301) do
     t.integer  "respondent_id"
     t.integer  "network_id"
     t.string   "role"
+  end
+
+  create_table "people_imports", :force => true do |t|
+    t.text     "s3_etag"
+    t.text     "s3_key"
+    t.text     "user_type_description"
+    t.integer  "network_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

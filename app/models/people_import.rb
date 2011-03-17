@@ -1,6 +1,6 @@
 require "aws/s3"
 
-class PeopleImport
+class PeopleImport < ActiveRecord::Base
   BUCKET = "mindapples-people_imports"
   TOP_LEVEL_DIRECTORY = Rails.env
 
