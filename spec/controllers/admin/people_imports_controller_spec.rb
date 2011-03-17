@@ -37,6 +37,40 @@ describe Admin::PeopleImportsController do
     end
 
     describe "POST create" do
+      it "initializes a PeopleImport with passed params" do
+        PeopleImport.expects(:new).with("foo" => "bar").returns(mock("PeopleImport", :save => true))
+        post :create, "people_import" => { "foo" => "bar" }
+      end
+
+      it "initializes a blank PeopleImport when no params were passed" do
+        PeopleImport.expects(:new).with({}).returns(mock("PeopleImport", :save => true))
+        post :create
+      end
+
+      it "assigns the initialized PeopleImport to @people_import" do
+        mock_people_import = mock("PeopleImport", :save => true)
+        PeopleImport.stubs(:new).returns(mock_people_import)
+        post :create, "people_import" => { "foo" => "bar" }
+        assigns[:people_import].should == mock_people_import
+      end
+
+      it "sets the flash notice if the people_import was saved" do
+        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => true))
+        post :create, "people_import" => { "foo" => "bar" }
+        flash[:notice].should =~ /completed/
+      end
+
+      it "renders :create if the people_import was saved" do
+        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => true))
+        post :create, "people_import" => { "foo" => "bar" }
+        response.should render_template(:create)
+      end
+
+      it "renders :new if the people_import was not saved" do
+        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => false))
+        post :create, "people_import" => { "foo" => "bar" }
+        response.should render_template(:new)
+      end
     end
   end
 end
