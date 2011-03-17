@@ -32,4 +32,6 @@ group :development, :test do
   gem 'term-ansicolor'
   gem "email_spec"
   gem "mocha"
+  gem "autotest-rails"
+  gem "ZenTest"
 end

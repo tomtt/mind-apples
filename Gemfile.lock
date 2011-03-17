@@ -15,6 +15,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.5.0)
     actionmailer (2.3.4)
       actionpack (= 2.3.4)
     actionpack (2.3.4)
@@ -27,6 +28,8 @@ GEM
     activesupport (2.3.4)
     authlogic (2.1.6)
       activesupport
+    autotest-rails (4.1.0)
+      ZenTest
     aws-s3 (0.6.2)
       builder
       mime-types
@@ -163,7 +166,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
   authlogic
+  autotest-rails
   aws-s3
   capybara
   cucumber
