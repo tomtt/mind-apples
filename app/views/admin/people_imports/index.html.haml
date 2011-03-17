@@ -1,0 +1,16 @@
+CSV files on S3 (#{@csv_directory.path}):
+%table
+  - @csv_s3_objects.each do |csv|
+    %tr
+      %th Filename
+      %th
+      %th Last modified
+    %tr
+      %td
+        = h csv.displayed_filename
+      %td
+        = link_to(image_tag("icons/drive-download.png"), csv.url)
+      %td
+        = DateTime.parse(csv.about["last-modified"]).to_s(:db)
+      %td
+        = button_to("Import", new_admin_people_import_path(:key => csv.key))

@@ -8,6 +8,12 @@ describe Admin::PeopleImportsController do
     end
 
     describe "GET new" do
+      before do
+        AWS::S3::Base.stubs(:establish_connection!)
+        AWS::S3::Bucket.stubs(:objects).returns([])
+        AWS::S3::S3Object.stubs(:find).returns(mock('s3 object'))
+      end
+
       it "assigns the network options to @network_options" do
         Factory.create(:network, :name => "Badger", :id => 12)
         Factory.create(:network, :name => "Aardvark", :id => 8)
