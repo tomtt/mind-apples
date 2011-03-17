@@ -1,7 +1,8 @@
-- form_for :people_import, :html => { :class => "people_import", :multipart => true} do |people_import_form|
+- form_for [:admin, @people_import], :html => { :class => "people_import", :multipart => true} do |people_import_form|
   = error_messages_for(:people_import)
-  = people_import_form.label :csv_key, "CSV file on S3:"
-  = people_import_form.text_field :csv_key, :value => @csv_object.key, :size => 100, :disabled => true
+  = people_import_form.label :s3_key, "CSV file on S3:"
+  = people_import_form.text_field :s3_key_display, :value => @csv_object.key, :size => 100, :disabled => true
+  = people_import_form.hidden_field :s3_key, :value => @csv_object.key
   = people_import_form.text_field :csv_last_modified, :value => @csv_object.last_modified.to_s(:db), :size => 30, :disabled => true
   %br
   = people_import_form.label :user_type_description, "Enter a description of who the users are, e.g. \"Secret Garden Party Attendee 2011\":"
