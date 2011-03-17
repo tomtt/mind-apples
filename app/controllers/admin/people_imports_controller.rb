@@ -6,6 +6,6 @@ class Admin::PeopleImportsController < Admin::AdminController
 
   def new
     @csv_object = PeopleImport.find_csv_by_s3_key(params[:key])
-    @network_options = [["--- Select a network ---", "none"]] + Network.all(:order => :name).map { |n| [n.name, n.id] }
+    @network_options = [["--- Select a network ---", nil]] + Network.all(:order => :name).map { |n| [n.name, n.id] }
   end
 end
