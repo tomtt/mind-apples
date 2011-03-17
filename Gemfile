@@ -15,11 +15,12 @@ gem "taps", "0.3.14"
 gem "aws-s3"
 
 group :development, :test do
+  gem "heroku"
   gem "capybara"
   gem "database_cleaner"
   gem "cucumber-rails"
   gem "cucumber"
-  gem 'cuke-inspector'
+  gem "cuke-inspector"
   gem "rspec-rails", "1.3.2"
   gem "spork"
   gem "launchy"
@@ -28,10 +29,13 @@ group :development, :test do
   gem "string_to_editor"
   gem "method_info"
   gem "mongrel"
-  gem 'ruby-debug'
-  gem 'term-ansicolor'
+  gem "term-ansicolor"
   gem "email_spec"
   gem "mocha"
+end
+
+group :dev_extra do
+  gem 'ruby-debug'
   gem "autotest-rails"
   gem "ZenTest"
 end

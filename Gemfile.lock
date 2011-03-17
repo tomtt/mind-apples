@@ -78,6 +78,9 @@ GEM
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
     haml (3.0.25)
+    heroku (1.18.3)
+      launchy (~> 0.3.2)
+      rest-client (>= 1.4.0, < 1.7.0)
     hoptoad_notifier (2.3.12)
       activesupport
       builder
@@ -180,6 +183,7 @@ DEPENDENCIES
   fastercsv
   feedtools
   haml
+  heroku
   hoptoad_notifier
   launchy
   method_info
