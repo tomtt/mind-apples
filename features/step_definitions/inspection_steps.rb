@@ -1,3 +1,13 @@
+Then /^I should (not |)see "([^\"]*)" in the (.*)$/ do |see_or_not, text, section_name|
+  within_section(section_name) do
+    if see_or_not.blank?
+      page.should have_content(text.to_s)
+    else
+      page.should have_no_content(text.to_s)
+    end
+  end
+end
+
 Then /^I should see an? "([^\"]*)" (text|password) field containing "([^\"]*)"$/ do |name, type, value|
   response.body.should have_selector("input[type='#{type}'][name='#{name}'][value='#{value}']")
 end

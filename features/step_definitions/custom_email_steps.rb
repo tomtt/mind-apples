@@ -14,3 +14,7 @@ When /^(?:I|they|"([^\"]*?)") opens? the most recent email$/ do |address|
   end
   set_current_email(email)
 end
+
+Then /^in the email subject (?:I|they) should see "([^"]*?)"$/ do |text|
+  current_email.should have_subject(text)
+end

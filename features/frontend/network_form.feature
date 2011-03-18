@@ -37,7 +37,7 @@ Feature: Networks: custom form
 
     And I should receive an email
     When I open the email
-    Then I should see "Your Mindapples" in the email subject
+    Then in the email subject I should see "Your Mindapples"
 
   Scenario: Person first forgets to agree to t&c
     When I go to "/in/bill-hicks-marketeers" 
