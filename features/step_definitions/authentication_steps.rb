@@ -63,3 +63,7 @@ When /^I log out$/ do
   visit logout_path
 end
 
+Given /^I belong to the "([^\"]*)" network$/ do |name|
+  @me_person.network = Network.find_by_name(name)
+  @me_person.save!
+end
