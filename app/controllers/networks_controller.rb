@@ -1,5 +1,13 @@
 class NetworksController < ApplicationController
-  before_filter :redirect_unless_user_is_admin
+  before_filter :redirect_unless_user_is_admin, :except => [:show]
+
+  def show
+    if params[:network]
+      @network = Network.find_by_url(params[:network]) or render_404
+    end
+    @most_liked = Mindapple.most_liked(PagesController::TOP_APPLES_MAX) # TODO: Needs to be limited to network
+    @most_recent = Mindapple.most_recent(PagesController::TOP_APPLES_MAX) # TODO: Needs to be limited to network
+  end
 
   def admin
     @network = Network.find_by_url(params[:network])

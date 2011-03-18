@@ -52,7 +52,11 @@ ActionController::Routing::Routes.draw do |map|
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
 
   # networks
+  # currently networks are done hackily due to lack of time. the desired structure is to have
+  # the page for a person signing up at /in/:network/people/new and the network page at /in/:network
+  # which might redirect to the login page if no user is logged in
   map.network "/in/:network", :controller => "people", :action => "new"
+  map.network "/in/:network/welcome", :controller => "networks", :action => "show"
   map.network_admin "/in/:network/admin", :controller => "networks", :action => "admin"
 
   # widgets
