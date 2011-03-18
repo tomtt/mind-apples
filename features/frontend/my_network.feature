@@ -16,7 +16,7 @@ Feature: My network
     Then I should not see "Take the test"
     When I follow "My community"
     Then I should see "The 4Beauty form"
-    And I should be on "/in/4beauty"
+    And I should be on "/in/4beauty/welcome"
 
   Scenario: Person not in a network does not see a link to a network
     Given I have a personal page
