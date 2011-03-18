@@ -26,8 +26,8 @@ module NavigationHelpers
       mindapples_path
     when /^the "Explore" page$/
       mindapples_path
-    when /^the "help us grow" page$/
-      grow_path
+    when /^the "join us" page$/
+      join_us_path
     when /^the "links" page$/
       links_path
     when /^the "big treat" page$/

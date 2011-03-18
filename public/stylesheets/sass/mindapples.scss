@@ -406,12 +406,12 @@ body {
     .about_media a.active { background: url(/images/subnav/about/Media-active.png) left bottom no-repeat; }
     
     //Grow - tab - off
-    .grow_donate a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}
+    .grow_join_us a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}
     .grow_volunteer a { background: url(/images/subnav/grow/Volunteer-inactive.png) left bottom no-repeat; z-index: 2; padding: 26px 75px 20px 46px; }
     .grow_your_own a { background: url(/images/subnav/grow/Grow-your-own-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -38px; padding: 26px 43px 20px 40px;}
         
     //Grow - tab - on
-    .grow_donate a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
+    .grow_join_us a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
     .grow_volunteer a.active { background: url(/images/subnav/grow/Volunteer-active.png) left bottom no-repeat; }
     .grow_your_own a.active { background: url(/images/subnav/grow/Grow-your-own-active.png) left bottom no-repeat; }
     

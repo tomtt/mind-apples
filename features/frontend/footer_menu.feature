@@ -12,7 +12,7 @@ Feature: Footer menu
     And I go to the <page>
     And I follow "Explore"
     And I go to the <page>
-    And I follow "Help us grow"
+    And I follow "Join us"
     And I go to the <page>
     And I follow "About us"
     And I go to the <page>
@@ -24,4 +24,4 @@ Feature: Footer menu
     | "about" page         |
     | "take the test" page |
     | "fives" page         |
-    | "help us grow" page  |
+    | "join us" page  |

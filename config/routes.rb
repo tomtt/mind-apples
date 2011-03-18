@@ -29,7 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.pledge '/pledge', :controller => "pages", :action => "pledge"
 
   map.grow '/grow', :controller => "pages", :action => "grow"
-  map.donate '/grow/donate', :controller => "pages", :action => "donate"
+  map.join_us '/grow/join_us', :controller => "pages", :action => "join_us"
+  map.partnerships '/grow/partnerships', :controller => "pages", :action => "partnerships"
   map.volunteer '/grow/volunteer', :controller => "pages", :action => "volunteer"
   map.grow_your_own '/grow/grow_your_own', :controller => "pages", :action => "grow_your_own"
 

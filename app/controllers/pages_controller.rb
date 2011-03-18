@@ -44,7 +44,7 @@ class PagesController < ApplicationController
     case action_name
     when "about", "about_team", "how_we_got_here", "organisation", "evidence", "contact", "media"
       "about"
-    when "grow", "donate", "volunteer", "grow_your_own"
+    when "grow", "join_us", "partnerships", "volunteer", "grow_your_own"
       "grow"
     when "services", "individuals", "workplaces", "schools", "universities", "communities", "healthcare"
       "services"
