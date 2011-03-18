@@ -1,0 +1,18 @@
+.right_column_wide
+  = render(:partial => "/shared/search")
+.main_content
+  = network_form_header
+  .most_recent
+    %h2
+      %span Most recent
+
+    %ul
+      = render :partial => 'mindapples/mindapple', :collection => @most_recent
+
+  .top_apples
+    %h2
+      %span Top &lsquo;apples
+
+    %ul
+      = render :partial => 'mindapples/mindapple', :collection => @most_liked
+
