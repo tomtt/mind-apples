@@ -128,67 +128,67 @@ Feature: Proper layouts structure
 
   Scenario: The organisation menu link
     When I go to the "about" page
-    Then I should see "Organisation"
+    Then I should see "Organisation" in the sub nav
     When I follow "Organisation"
-    Then I should see "Our organisation"
+    Then I should see "Our organisation" in the h1
     And I should be on "/about/organisation"
 
   Scenario: Evidence menu link
     When I go to the "about" page
-    Then I should see "Evidence"
+    Then I should see "Evidence" in the sub nav
     When I follow "Evidence"
-    Then I should see "Mindapples evidence and approach"
+    Then I should see "Mindapples evidence and approach" in the h1
     And I should be on "/about/evidence"
 
   Scenario: Contact menu link
     When I go to the "about" page
-    Then I should see "Contact"
+    Then I should see "Contact" in the sub nav
     When I follow "Contact"
-    Then I should see "Contact us"
+    Then I should see "Contact us" in the h1
     And I should be on "/about/contact"
 
   Scenario: Media menu link
     When I go to the "about" page
-    Then I should see "Media"
+    Then I should see "Media" in the sub nav
     When I follow "Media"
-    Then I should see "Mindapples in the media"
+    Then I should see "Mindapples in the media" in the h1
     And I should be on "/about/media"
 
 #
 #Hire us section menu
  Scenario: Engagement hire us link
    When I go to the "Hire us" page
-   Then I should see "Engagement"
+   Then I should see "Engagement" in the sub nav
    When I follow "Engagement"
-   Then I should see "Engagement services"
+   Then I should see "Engagement services" in the h1
    And I should be on "/services/engagement"
 
  Scenario: Research hire us link
    When I go to the "Hire us" page
-   Then I should see "Research"
+   Then I should see "Research" in the sub nav
    When I follow "Research"
-   Then I should see "Research services"
+   Then I should see "Research services" in the h1
    And I should be on "/services/research"
 
  Scenario: Training hire us link
    When I go to the "Hire us" page
-   Then I should see "Training"
+   Then I should see "Training" in the sub nav
    When I follow "Training"
-   Then I should see "Training and workshops"
+   Then I should see "Training and workshops" in the h1
    And I should be on "/services/training"
 
  Scenario: Wellbeing programmes hire us link
    When I go to the "Hire us" page
-   Then I should see "Wellbeing programmes"
+   Then I should see "Wellbeing programmes" in the sub nav
    When I follow "Wellbeing programmes"
-   Then I should see "Wellbeing programmes"
+   Then I should see "Wellbeing programmes" in the h1
    And I should be on "/services/wellbeing_programmes"
 
  Scenario: Testimonials hire us link
    When I go to the "Hire us" page
-   Then I should see "Testimonials"
+   Then I should see "Testimonials" in the sub nav
    When I follow "Testimonials"
-   Then I should see "What people say"
+   Then I should see "What people say" in the h1
    And I should be on "/services/testimonials"
 #
 
@@ -197,29 +197,29 @@ Feature: Proper layouts structure
 
  Scenario: Partnerships link
    When I go to the "Join us" page
-   Then I should see "Partnerships"
+   Then I should see "Partnerships" in the sub nav
    When I follow "Partnerships"
-   Then I should see "Partnerships"
+   Then I should see "Partnerships" in the h1
    And I should be on "/grow/partnerships"
 
   
  Scenario: Grow your own link
    When I go to the "Join us" page
 
-   Then I should see "Grow your own"
+   Then I should see "Grow your own" in the sub nav
    When I follow "Grow your own"
-   Then I should see "Grow your own mindapples"
+   Then I should see "Grow your own mindapples" in the h1
    And I should be on "/grow/grow_your_own"
 
   Scenario: Volunteer link
    When I go to the "Join us" page
-   Then I should see "Volunteer"
+   Then I should see "Volunteer" in the sub nav
    When I follow "Volunteer"
-   Then I should see "Volunteer with us"
+   Then I should see "Volunteer with us" in the h1
    And I should be on "/grow/volunteer"
 
   Scenario: The big treat page
 
    When I go to the "big treat" page
-   Then I should see "The Big Treat"
+   Then I should see "The Big Treat" in the h1
    And I should be on "/thebigtreat"
