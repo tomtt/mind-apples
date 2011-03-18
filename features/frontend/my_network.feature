@@ -11,7 +11,8 @@ Feature: My network
     And I belong to the "4Beauty" network
     When I log in
 
-    And I follow "My community"
+    Then I should not see "Take the test"
+    When I follow "My community"
     Then I should see "The 4Beauty form"
     And I should be on "/in/4beauty"
 
@@ -19,4 +20,5 @@ Feature: My network
     Given I have a personal page
     And my password is "eagleeyed"
     When I log in
-    Then I should not see "My community"
+    Then I should not see "Take the test"
+    And I should not see "My community"
