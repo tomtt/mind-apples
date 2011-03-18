@@ -77,7 +77,7 @@ Then /^I should not see an? "([^\"]*)" image button$/ do |image_path|
   response.body.should_not have_tag("input[type=image][src*='#{image_path}']")
 end
 
-Then /^"([^\"]*)" should be highlighted in the main menu$/ do |tab_name|
+Then /^only "([^\"]*)" should be highlighted in the main menu$/ do |tab_name|
   highlighted_tabs = xpath_search("//div[@id='main_tabnav']//a[#{with_class('active')}]")
   highlighted_tabs.size.should == 1
   highlighted_tabs.first.text.should == tab_name

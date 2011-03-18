@@ -47,3 +47,4 @@
         - t.named 'My community'
         - t.links_to network_path(current_user.network)
         - t.html= {:class => 'my_network'}
+        - t.highlights_on proc { ! params[:network].blank? }
