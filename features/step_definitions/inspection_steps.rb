@@ -1,11 +1,11 @@
-Then /^I should (not |)see "([^\"]*)" in the (.*)$/ do |see_or_not, text, section_name|
-  within_section(section_name) do
-    if see_or_not.blank?
-      page.should have_content(text.to_s)
-    else
-      page.should have_no_content(text.to_s)
-    end
+Then /^I should see "([^\"]*)" in the (.*)$/ do |text, section_name|
+  response.should have_xpath(xpath_of_section(section_name)) do |section|
+    section.should contain(text)
   end
+end
+
+Then /^I should not see "([^\"]*)" in the (.*)$/ do |text, section_name|
+  response.should_not have_xpath("#{xpath_of_section(section_name)}//*[contains(., '#{text}')]")
 end
 
 Then /^I should see an? "([^\"]*)" (text|password) field containing "([^\"]*)"$/ do |name, type, value|
