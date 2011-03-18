@@ -271,7 +271,7 @@ class PeopleController < ApplicationController
     if params[:person].has_key?("network_url")
       network_url = params["person"].delete("network_url")
       @network = Network.find_by_url(network_url)
-      params["person"]["network_id"] = @network.to_param
+      params["person"]["network_id"] = @network.id
     end
   end
 end
