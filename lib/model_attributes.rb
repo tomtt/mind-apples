@@ -12,6 +12,7 @@ class ModelAttributes
         value = { $2 => value }
       end
       raise ArgumentError.new("Key can not be blank (\"#{key}\")") if key.blank?
+      raise ArgumentError.new("Unmatched ']' in key (\"#{key}\")") if key_copy =~ /\]/
       hash.deep_merge!(key_copy => value)
     end
     hash

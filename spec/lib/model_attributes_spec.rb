@@ -47,12 +47,33 @@ describe ModelAttributes do
       lambda { ModelAttributes.construct(["a[b"], [:foo]) }.should raise_error(ArgumentError)
     end
 
+    it "raises an ArgumentError if the toplevel key has a closing bracket" do
+      lambda { ModelAttributes.construct(["a][b]"], [:foo]) }.should raise_error(ArgumentError)
+    end
+
     it "raises an ArgumentError if the key is blank" do
       lambda { ModelAttributes.construct([""], [:foo]) }.should raise_error(ArgumentError)
     end
 
     it "raises an ArgumentError if one of the keys in a hierarchy is blank" do
       lambda { ModelAttributes.construct(["blobs[][foo]"], [:foo]) }.should raise_error(ArgumentError)
+    end
+
+    it "works for an example csv import" do
+      keys = ["name",
+              "email",
+              "braindump",
+              "location",
+              "gender",
+              "age",
+              "occupation",
+              "health_check",
+              "ethnicity",
+              "mindapples_attributes[0][suggestion]",
+              "mindapples_attributes][1][suggestion]",
+              "mindapples_attributes[2][suggestion]",
+              "mindapples_attributes[3][suggestion]",
+              "mindapples_attributes][4][suggestion]"]
     end
   end
 end
