@@ -43,6 +43,6 @@
       - t.html= {:class => 'blog'}
     - if current_user && current_user.network
       - add_tab do |t|
-        - t.named 'My network'
+        - t.named 'My community'
         - t.links_to network_path(current_user.network)
         - t.html= {:class => 'my_network'}
