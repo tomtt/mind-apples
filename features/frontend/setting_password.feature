@@ -14,7 +14,7 @@ Feature: Setting a password
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "My five a day"
-    And I should see "Thanks for sharing your mindapples."
+    And I should see "Thanks for sharing your mindapples!"
 
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"

@@ -519,7 +519,7 @@ describe PeopleController do
       it "renders flash message" do
         UserSession.stubs(:create!)
         post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
-        flash.now[:message].should == 'Thanks for sharing your mindapples.'
+        flash.now[:message].should == 'Thanks for sharing your mindapples!'
       end
     end
 
@@ -678,7 +678,7 @@ describe PeopleController do
           @person.mindapples << mindapple
           put :likes, :id => mindapple
 
-          flash[:notice].should == "You can't like one of your mindapples"
+          flash[:notice].should == "Sorry, you can't like one of your own mindapples"
         end
 
         it "doesn't add a mindapple if it doesn't exist" do
@@ -696,7 +696,7 @@ describe PeopleController do
         it "shows an error message if trying to add a mindapple that doesn't exist" do
           put :likes, :id => -1
 
-          flash[:notice].should == "Unknown mindapple, cound't finish like operation"
+          flash[:notice].should == "Unknown mindapple, couldn't finish the operation"
         end
 
       end
@@ -794,7 +794,7 @@ describe PeopleController do
 
           put :unlikes, :id => mindapple
 
-          flash[:notice].should == "You can't unlike a mindapple if you didn't previously like it"
+          flash[:notice].should == "You need to like a mindapple first before you can unlike it!"
         end
 
         it "doesn't remove a mindapple from another user's liked_mindapples" do

@@ -8,7 +8,7 @@ Feature: Meaningful error pages
   Scenario: visiting a non-existant page
     When I go to "/person/visible_ninja"
     Then the response status should be 404
-    And I should see "Sorry, the page you were looking for does not exist"
+    And I should see "We couldn't find a page here I'm afraid"
 
   # @allow-rescue
   # Scenario: visiting a page that blows up
