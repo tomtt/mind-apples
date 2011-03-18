@@ -153,3 +153,73 @@ Feature: Proper layouts structure
     When I follow "Media"
     Then I should see "Mindapples in the media"
     And I should be on "/about/media"
+
+#
+#Hire us section menu
+ Scenario: Engagement hire us link
+   When I go to the "Hire us" page
+   Then I should see "Engagement"
+   When I follow "Engagement"
+   Then I should see "Engagement services"
+   And I should be on "/services/engagement"
+
+ Scenario: Research hire us link
+   When I go to the "Hire us" page
+   Then I should see "Research"
+   When I follow "Research"
+   Then I should see "Research services"
+   And I should be on "/services/research"
+
+ Scenario: Training hire us link
+   When I go to the "Hire us" page
+   Then I should see "Training"
+   When I follow "Training"
+   Then I should see "Training and workshops"
+   And I should be on "/services/training"
+
+ Scenario: Wellbeing programmes hire us link
+   When I go to the "Hire us" page
+   Then I should see "Wellbeing programmes"
+   When I follow "Wellbeing programmes"
+   Then I should see "Wellbeing programmes"
+   And I should be on "/services/wellbeing_programmes"
+
+ Scenario: Testimonials hire us link
+   When I go to the "Hire us" page
+   Then I should see "Testimonials"
+   When I follow "Testimonials"
+   Then I should see "What people say"
+   And I should be on "/services/testimonials"
+#
+
+# 
+#Join us section menu
+
+ Scenario: Partnerships link
+   When I go to the "Join us" page
+   Then I should see "Partnerships"
+   When I follow "Partnerships"
+   Then I should see "Partnerships"
+   And I should be on "/grow/partnerships"
+
+  
+ Scenario: Grow your own link
+   When I go to the "Join us" page
+
+   Then I should see "Grow your own"
+   When I follow "Grow your own"
+   Then I should see "Grow your own mindapples"
+   And I should be on "/grow/grow_your_own"
+
+  Scenario: Volunteer link
+   When I go to the "Join us" page
+   Then I should see "Volunteer"
+   When I follow "Volunteer"
+   Then I should see "Volunteer with us"
+   And I should be on "/grow/volunteer"
+
+  Scenario: The big treat page
+
+   When I go to the "big treat" page
+   Then I should see "The Big Treat"
+   And I should be on "/thebigtreat"

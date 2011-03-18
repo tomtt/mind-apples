@@ -45,6 +45,11 @@ ActionController::Routing::Routes.draw do |map|
   map.universities '/services/universities', :controller => "pages", :action => "universities"
   map.communities '/services/communities', :controller => "pages", :action => "communities"
   map.healthcare '/services/healthcare', :controller => "pages", :action => "healthcare"
+  map.healthcare '/services/engagement', :controller => "pages", :action => "engagement"
+  map.healthcare '/services/testimonials', :controller => "pages", :action => "testimonials"
+  map.healthcare '/services/research', :controller => "pages", :action => "research"
+  map.healthcare '/services/training', :controller => "pages", :action => "training"
+  map.wellbeing_programmes '/services/wellbeing_programmes', :controller => "pages", :action => "wellbeing_programmes"
 
   map.privacy '/privacy', :controller => "pages", :action => "privacy"
   map.thebigtreat '/thebigtreat', :controller => "pages", :action => "bigtreat"

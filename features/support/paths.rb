@@ -26,14 +26,14 @@ module NavigationHelpers
       mindapples_path
     when /^the "Explore" page$/
       mindapples_path
-    when /^the "join us" page$/
+    when /^the "[Jj]oin us" page$/
       join_us_path
     when /^the "links" page$/
       links_path
     when /^the "big treat" page$/
       thebigtreat_path
-    when /^the "services" page$/
-     services_path
+    when /^the "Hire us" page$/
+      services_path
     when /^the url "this-is-a-page-that-blows-up-to-test-the-500-error"$/
       'this-is-a-page-that-blows-up-to-test-the-500-error'
     when /^my mindapples page$/
