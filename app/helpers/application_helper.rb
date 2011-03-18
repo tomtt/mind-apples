@@ -51,7 +51,7 @@ module ApplicationHelper
   end
 
   def network_form_header
-    if @network && ! (@network.form_header.empty?)
+    if @network && @network.form_header && ! (@network.form_header.empty?)
       "<p class='network_header'>#{@network.form_header}</p>\n"
     end
   end

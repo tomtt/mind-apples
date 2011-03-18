@@ -3,7 +3,7 @@
     Search
   .inner
     - form_tag mindapples_path, :method => :get do
-      = label_tag 'mindapple'
+      = label_tag 'mindapple', "Find new things to do"
       = text_field_tag 'mindapple'
       = image_submit_tag '/images/buttons/go.png', :class => "submit-form", :alt => "Find"
     %br.clear
