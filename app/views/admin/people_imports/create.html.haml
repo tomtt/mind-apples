@@ -1,5 +1,9 @@
 Creating
-%ul
+%ul.people_import_results
   - @people_import.results.each do |result|
     %li
-      = result
+      - if result.is_a?(Person)
+        Added:
+        = link_to("#{result.email} (#{result.name})", person_path(result))
+      - else
+        = result

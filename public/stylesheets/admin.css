@@ -205,3 +205,8 @@ input.text_submit:hover {
 .user_info {
   float: right;
 }
+
+ul.people_import_results {
+  list-style: disc;
+  margin-left: 20px;
+}
