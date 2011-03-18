@@ -1,3 +1,5 @@
+@committed
+
 Feature: My network
   In order to find out more about people similar to me
   As a person that is part of a network

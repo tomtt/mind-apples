@@ -47,7 +47,6 @@ Feature: Proper layouts structure
 
   Scenario: Take the test menu link
     When I go to the homepage
-    And I should see "Take the test"
     And I follow "Take the test"
     Then I should see "Take the Mindapples test"
     And I should be on "/person/new"
@@ -56,23 +55,21 @@ Feature: Proper layouts structure
 
   Scenario: Explore menu link
     When I go to the homepage
-    Then I should see "Explore"
-    When I follow "Explore"
+    And I follow "Explore"
     Then I should see "Search"
     And I should be on "/fives"
 
-  Scenario: Services menu link
+  Scenario: Hire Us menu link
     When I go to the homepage
-    Then I should see "Services"
-    When I follow "Services"
+    And I follow "Hire Us"
     Then I should see "Mindapples services"
     And I should be on "/services"
     
-  Scenario: Help us grow menu link
+  Scenario: Join us menu link
     When I go to the homepage
-    Then I should see "Help us grow"
-    When I follow "Help us grow"
-    Then I should see "Help us grow"
+    Then I should see "Join us"
+    When I follow "Join us"
+    Then I should see "Join us"
     And I should be on "/grow"
   #Moved /help-us-grow page to /grow
   
