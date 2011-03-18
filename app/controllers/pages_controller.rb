@@ -42,7 +42,7 @@ class PagesController < ApplicationController
 
   def choose_layout
     case action_name
-    when "about", "about_team", "how_we_got_here", "organisation", "research", "contact", "media"
+    when "about", "about_team", "how_we_got_here", "organisation", "evidence", "contact", "media"
       "about"
     when "grow", "donate", "volunteer", "grow_your_own"
       "grow"

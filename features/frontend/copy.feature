@@ -85,7 +85,7 @@ Feature: Proper layouts structure
 # 
   Scenario: Company information
     When I go to the homepage
-    Then I should see "Mindapples is a non-profit organisation registered in England and Wales number 07264252."
+    Then I should see "Mindapples is an independent non-profit organisation"
 
   Scenario: Terms menu link
     Given I am on the homepage
@@ -133,12 +133,12 @@ Feature: Proper layouts structure
     Then I should see "Our organisation"
     And I should be on "/about/organisation"
 
-  Scenario: Research menu link
+  Scenario: Evidence menu link
     When I go to the "about" page
-    Then I should see "Research"
-    When I follow "Research"
-    Then I should see "Mindapples research and methodology"
-    And I should be on "/about/research"
+    Then I should see "Evidence"
+    When I follow "Evidence"
+    Then I should see "Mindapples evidence and approach"
+    And I should be on "/about/evidence"
 
   Scenario: Contact menu link
     When I go to the "about" page
@@ -153,79 +153,3 @@ Feature: Proper layouts structure
     When I follow "Media"
     Then I should see "Mindapples in the media"
     And I should be on "/about/media"
-
-# #Services section menu
-  Scenario: Individuals services link
-    When I go to the "services" page
-    Then I should see "Individuals"
-    When I follow "Individuals"
-    Then I should see "Mindapples for individuals"
-    And I should be on "/services/individuals"
-
-  Scenario: Workplaces services link
-    When I go to the "services" page
-    Then I should see "Workplaces"
-    When I follow "Workplaces"
-    Then I should see "Mindapples at work"
-    And I should be on "/services/workplaces"
-
-  Scenario: Schools services link
-    When I go to the "services" page
-    Then I should see "Schools"
-    When I follow "Schools"
-    Then I should see "Mindapples in schools"
-    And I should be on "/services/schools"
-
-  Scenario: Universities services link
-    When I go to the "services" page
-    Then I should see "Universities"
-    When I follow "Universities"
-    Then I should see "Mindapples in universities"
-    And I should be on "/services/universities"
-
-  Scenario: Communities services link
-    When I go to the "services" page
-    Then I should see "Communities"
-    When I follow "Communities"
-    Then I should see "Mindapples in communities"
-    And I should be on "/services/communities"
-
-  Scenario: Healthcare services link
-    When I go to the "services" page
-    Then I should see "Healthcare"
-    When I follow "Healthcare"
-    Then I should see "Mindapples in healthcare"
-    And I should be on "/services/healthcare"
-# 
-# #Grow section menu
-# #NB. Changed the path for this section to /grow
-
-  Scenario: Donate link
-    When I go to the "help us grow" page
-    Then I should see "Donate"
-    When I follow "Donate"
-    Then I should see "please donate"
-    And I should be on "/grow/donate"
-  #New page for this has been added in the pages directory
-
-  Scenario: Volunteer link
-    When I go to the "help us grow" page
-    Then I should see "Volunteer"
-    When I follow "Volunteer"
-    Then I should see "Volunteer with us"
-    And I should be on "/grow/volunteer"
-  #New page for this has been added in the pages directory
-
-  Scenario: Grow your own link
-    When I go to the "help us grow" page
-    Then I should see "Grow your own"
-    When I follow "Grow your own"
-    Then I should see "Grow your own mindapples"
-    And I should be on "/grow/grow_your_own"
-
-  Scenario: The big trat page
-    When I go to the "big treat" page
-    Then I should see "The Big Treat, 16-17 July 2010"
-    And I should be on "/thebigtreat"
-
-  #New page for this has been added in the pages directory

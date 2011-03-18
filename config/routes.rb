@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.team '/about/team', :controller => "pages", :action => "about_team"
   map.how_we_got_here '/about/how-we-got-here', :controller => "pages", :action => "how_we_got_here"
   map.organisation '/about/organisation', :controller => "pages", :action => "organisation"
-  map.research '/about/research', :controller => "pages", :action => "research"
+  map.research '/about/evidence', :controller => "pages", :action => "evidence"
   map.contact '/about/contact', :controller => "pages", :action => "contact"
   map.media '/about/media', :controller => "pages", :action => "media"
   map.debug '/debug', :controller => "pages", :action => "debug"

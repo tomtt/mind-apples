@@ -1,29 +1,25 @@
 - content_for :content do
   - render_tabnav :sub do
     - add_tab do |t|
-      - t.named 'Workplaces'
-      - t.links_to :controller => :pages, :action => :workplaces
-      - t.html= {:class => 'services services_workplaces'}
+      - t.named 'Engagement'
+      - t.links_to :controller => :pages, :action => :engagement
+      - t.html= {:class => 'services services_engagement'}
     - add_tab do |t|
-      - t.named 'Schools'
-      - t.links_to :controller => :pages, :action => :schools
-      - t.html= {:class => 'services services_schools'}
+      - t.named 'Research'
+      - t.links_to :controller => :pages, :action => :research
+      - t.html= {:class => 'services services_research'}
     - add_tab do |t|
-      - t.named 'Universities'
-      - t.links_to :controller => :pages, :action => :universities
-      - t.html= {:class => 'services services_uni'}
+      - t.named 'training'
+      - t.links_to :controller => :pages, :action => :training
+      - t.html= {:class => 'services services_training'}
     - add_tab do |t|
-      - t.named 'Communities'
-      - t.links_to :controller => :pages, :action => :communities
-      - t.html= {:class => 'services services_communities'}
+      - t.named 'Wellbeing programmes'
+      - t.links_to :controller => :pages, :action => :wellbeing_programmes
+      - t.html= {:class => 'services services_wellbeing_programmes'}
     - add_tab do |t|
-      - t.named 'Healthcare'
-      - t.links_to :controller => :pages, :action => :healthcare
-      - t.html= {:class => 'services services_healthcare'}
-    - add_tab do |t|
-      - t.named 'Individuals'
-      - t.links_to :controller => :pages, :action => :individuals
-      - t.html= {:class => 'services services_individuals'}
+      - t.named 'Testimonials'
+      - t.links_to :controller => :pages, :action => :testimonials
+      - t.html= {:class => 'services services_testimonials'}
 
   .sub_central
     .inner
