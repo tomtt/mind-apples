@@ -1,5 +1,5 @@
 
-- if @network && @network.form_header && ! (@network.form_header.empty?)
+- if @network && @network.description && ! (@network.description.empty?)
   .network_details
     .logo
       - if @network.logo?
@@ -8,4 +8,4 @@
       %h1 
         = @network.name
 
-      = @network.form_header
+      = @network.description

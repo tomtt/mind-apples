@@ -5,7 +5,7 @@
 #  id                :integer         not null, primary key
 #  name              :string(255)
 #  url               :string(255)
-#  form_header       :text
+#  description       :text
 #  created_at        :datetime
 #  updated_at        :datetime
 #  logo_file_name    :string(255)

@@ -6,7 +6,7 @@ Feature: My network
   I want to browse the mindapples of other people in my network
 
   Scenario: Networked person goes to her network
-    Given a network exists with name: "4Beauty", form_header: "The 4Beauty form", url: "4beauty", logo_file_name: "beaudiful_logo.jpg"
+    Given a network exists with name: "4Beauty", description: "The 4Beauty form", url: "4beauty", logo_file_name: "beaudiful_logo.jpg"
     And a network exists with name: "Lambeth"
     And I have a personal page
     And my password is "eagleeyed"

@@ -8,7 +8,7 @@ Feature: Networks: custom form
   Background:
     Given a network "bhm" exists with name: "Bill Hicks' Marketeers"
     And that network's url is "bill-hicks-marketeers"
-    And that network's form_header is "Hey Goat Boys, please fill in the form below!"
+    And that network's description is "Hey Goat Boys, please fill in the form below!"
 
   Scenario: Person visits his networks form page and fills it in
     Given I have access to the inbox of "marla@example.com"

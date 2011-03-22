@@ -34,7 +34,7 @@ Feature: Main menu
     Then only "Explore" should be highlighted in the main menu
 
   Scenario: A logged in user belonging to a network goes to different pages and checks the highlighting in the menu bar
-    Given a network exists with name: "4Beauty", form_header: "The 4Beauty form", url: "4beauty"
+    Given a network exists with name: "4Beauty", description: "The 4Beauty form", url: "4beauty"
     And a network exists with name: "Lambeth"
     And I have a personal page
     And my password is "eagleeyed"
