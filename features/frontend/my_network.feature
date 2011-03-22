@@ -6,7 +6,7 @@ Feature: My network
   I want to browse the mindapples of other people in my network
 
   Scenario: Networked person goes to her network
-    Given a network exists with name: "4Beauty", form_header: "The 4Beauty form", url: "4beauty"
+    Given a network exists with name: "4Beauty", form_header: "The 4Beauty form", url: "4beauty", logo_file_name: "beaudiful_logo.jpg"
     And a network exists with name: "Lambeth"
     And I have a personal page
     And my password is "eagleeyed"
@@ -16,6 +16,7 @@ Feature: My network
     Then I should not see "Take the test"
     When I follow "My community"
     Then I should see "The 4Beauty form"
+    And I should see the "medium" sized "logo" image attachment for the network with name: "4Beauty"
     And I should be on "/in/4beauty/welcome"
 
   Scenario: Person not in a network does not see a link to a network

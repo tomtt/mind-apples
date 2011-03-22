@@ -1,0 +1,11 @@
+
+- if @network && @network.form_header && ! (@network.form_header.empty?)
+  .network_details
+    .logo
+      - if @network.logo?
+        = image_tag @network.logo.url(:medium), :alt => @network.name
+    .text
+      %h1 
+        = @network.name
+
+      = @network.form_header

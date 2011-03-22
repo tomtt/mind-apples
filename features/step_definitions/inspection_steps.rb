@@ -92,3 +92,10 @@ Then /^only "([^\"]*)" should be highlighted in the main menu$/ do |tab_name|
   highlighted_tabs.size.should == 1
   highlighted_tabs.first.text.should == tab_name
 end
+
+Then /^I should see the "([^\"]*)" sized "([^\"]*)" image attachment for the ([^\s]*) with ([^\:]*): "([^\"]*)"$/ do |size, attachment_name, model_name, field_name, field_value|
+  model = model_name.camelize.constantize
+  record = model.send("find_by_#{field_name}", field_value)
+  expected_image_path = record.send(attachment_name).url(size.to_sym)
+  response.should have_xpath("//img[@src='#{expected_image_path}']")
+end

@@ -1,7 +1,9 @@
 .right_column_wide
   = render(:partial => "/shared/search")
-.main_content
-  = network_form_header
+.main_content.network_main_content
+
+  = render(:partial => "network_details")
+      
   .most_recent
     %h2
       %span Most recent

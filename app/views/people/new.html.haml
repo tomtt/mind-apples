@@ -1,6 +1,6 @@
 .take_the_test
   .inner
-    = network_form_header
+    = render :partial => 'networks/network_details'
     - if current_user
       - name_for_view = current_user.name_for_view
       - if name_for_view

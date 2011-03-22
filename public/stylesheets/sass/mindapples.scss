@@ -1171,6 +1171,37 @@ h2 span {
   }
 }
 
+/* ========= network stuff ========= */
+.network_details {
+
+  
+  .text {
+    width: 315px;
+    
+    h1 {
+      color: #067D29;
+    }
+    p {
+      
+    }
+  }
+  
+  .logo {
+    width: 162px;
+    height: 162px;
+    overflow: hidden;
+    float: right;
+  }
+  
+}
+
+.network_main_content {
+  .network_details {
+    margin: 38px 0 30px 33px;
+  }
+}
+
+
 #news {
   .news_item {
     margin-bottom: 1.5em;
