@@ -37,29 +37,13 @@ class PeopleImport < ActiveRecord::Base
     @results = []
 
     data.each do |values|
-      begin
-        attributes = ModelAttributes.construct(keys, values)
-        password = PageCode.code(20)
-        attributes["password"] = password
-        attributes["password_confirmation"] = password
-
-        begin
-          person = Person.new(attributes)
-          page_code = PageCode.code
-          person.page_code = page_code
-          person.login = '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
-          person.network = network
-          person.type_description = user_type_description
-          person.import_s3_etag = s3_object.etag
-          person.save!
-          @results << person
-        rescue => e
-          @results << "#{attributes['email']} (#{attributes['name']}): Error: #{e.to_s}"
-        end
-      rescue => e
-        @results << "Parse error: #{e.to_s}"
-      end
+      @results << Person.create_from_keys_and_values(keys,
+                                                     values,
+                                                     :network => network,
+                                                     :type_description => user_type_description,
+                                                     :import_s3_etag => s3_object.etag)
     end
+    @results
   end
 
   module S3ObjectHelpers
