@@ -13,6 +13,7 @@ gem "hoptoad_notifier"
 gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
 gem "taps", "0.3.14"
 gem "aws-s3"
+gem "pg"
 
 group :development, :test do
   gem "heroku"
