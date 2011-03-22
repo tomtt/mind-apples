@@ -294,7 +294,7 @@ body {
   
   #main_tabnav ul {
     margin-left: 15px;
-    overflow: hidden;
+    height: 47px;
     
     li {
       display: block;
@@ -328,7 +328,23 @@ body {
     .person, .grow {
       a.active, span.active { width: 116px; background: url(/images/nav_bar/person_active.png) no-repeat center bottom;}
     }
-    
+    .my_network {
+      position: relative;
+      
+      a.active, span.active {
+        position: absolute;
+        overflow: hidden;
+        top: -5px;
+        left: 0px;
+        width: 159px;
+        padding-right: 27px;
+        padding-top: 81px;
+        height: 0px;
+        font-size: 1.3em;
+        text-transform: uppercase;
+        background-image: url(/images/nav_bar/my_community_active.png);
+      }
+    } 
   }
 }
 
