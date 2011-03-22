@@ -23,27 +23,12 @@ class PeopleImport < ActiveRecord::Base
 
   belongs_to :network
 
-  def perform_csv_import
-    s3_object = PeopleImport.find_csv_by_s3_key(s3_key)
-    csv_content = s3_object.value
-    data = []
+  validates_presence_of :s3_key
+  validates_presence_of :user_type_description
+  validates_presence_of :network, :if => :has_network?
 
-    FasterCSV.parse(csv_content) do |row|
-      data << row
-    end
-
-    keys = data.shift
-
-    @results = []
-
-    data.each do |values|
-      @results << Person.create_from_keys_and_values(keys,
-                                                     values,
-                                                     :network => network,
-                                                     :type_description => user_type_description,
-                                                     :import_s3_etag => s3_object.etag)
-    end
-    @results
+  def has_network?
+    !network_id.nil?
   end
 
   module S3ObjectHelpers
@@ -73,6 +58,29 @@ class PeopleImport < ActiveRecord::Base
   end
 
   private
+
+  def perform_csv_import
+    s3_object = PeopleImport.find_csv_by_s3_key(s3_key)
+    csv_content = s3_object.value
+    data = []
+
+    FasterCSV.parse(csv_content) do |row|
+      data << row
+    end
+
+    keys = data.shift
+
+    @results = []
+
+    data.each do |values|
+      @results << Person.create_from_keys_and_values(keys,
+                                                     values,
+                                                     :network => network,
+                                                     :type_description => user_type_description,
+                                                     :import_s3_etag => s3_object.etag)
+    end
+    @results
+  end
 
   def self.establish_s3_connection!
     AWS::S3::Base.establish_connection!(:access_key_id => ENV["S3_KEY"], :secret_access_key => ENV["S3_SECRET"])
