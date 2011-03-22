@@ -64,12 +64,14 @@ describe Mindapple do
     end
 
     it "returns N mindapples if there are N or more than N in the top-N" do
+      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.size.should == @max
     end
 
     it "returns the N most liked mindapples if there are N or more than N in the top-N" do
+      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.should include(@mindapple_1)
@@ -80,6 +82,7 @@ describe Mindapple do
     end
 
     it "doesn't return a mindapple if it's not one of the most liked top-N" do
+      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.should_not include(@mindapple_6)
@@ -117,12 +120,14 @@ describe Mindapple do
       end
 
       it "returns N mindapples if there are N or more than N in the most recent top-N" do
+        pend_when_not_using_postgres
         most_recent = Mindapple.most_recent(@max)
 
         most_recent.size.should == 3
       end
 
       it "returns the N most recent mindapples if there are N or more than N in the top-N" do
+        pend_when_not_using_postgres
         most_recent = Mindapple.most_recent(@max)
         people_ids = most_recent.map {|e| e.person_id}
 
@@ -132,6 +137,7 @@ describe Mindapple do
       end
 
       it "returns the N most recent ordered by created_at DESC" do
+        pend_when_not_using_postgres
         most_recent = Mindapple.most_recent(@max)
 
         most_recent[0].created_at.should >= most_recent[1].created_at
@@ -140,6 +146,7 @@ describe Mindapple do
     end
 
     it "does not return any mindapples that have no suggestion" do
+      pend_when_not_using_postgres
       @person = Factory.create(:person, :email=> "#{rand}_test@email.com")
       @mindapple = Factory.create(:mindapple, :person => @person, :created_at => 1.minute.ago, :suggestion => "")
       Mindapple.most_recent(3).should be_empty

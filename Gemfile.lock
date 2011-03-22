@@ -104,6 +104,7 @@ GEM
     paperclip (2.3.8)
       activerecord
       activesupport
+    pg (0.10.1)
     pickle (0.4.4)
       cucumber (>= 0.8)
       rake
@@ -191,6 +192,7 @@ DEPENDENCIES
   mongrel
   mysql
   paperclip
+  pg
   pickle
   rails (= 2.3.4)
   rspec-rails (= 1.3.2)

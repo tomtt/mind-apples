@@ -178,6 +178,25 @@ class Person < ActiveRecord::Base
     new_person
   end
 
+  # This method is used when importing a person from a csv file. The keys are attribute names like
+  # 'mindapples_attributes[3][suggestion]', the values are the corresponding values for those
+  # attributes. The csv import code expects to get the new user returned if there were no errors, or
+  # a string containing an error message if there was an error.
+  def self.create_from_keys_and_values(keys, values, attributes = {})
+    begin
+      attributes.merge!(ModelAttributes.construct(keys, values))
+    rescue ArgumentError
+      @results << "Parse error: #{e.to_s}"
+    end
+
+    begin
+      return create_with_random_password_and_login_and_page_code!(attributes)
+    rescue => e
+      return "#{attributes['email']} (#{attributes['name']}): Error: #{e.to_s}"
+    end
+
+  end
+
   private
 
   def chop_superfluous_mindapples
