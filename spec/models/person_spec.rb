@@ -1,3 +1,49 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  email                     :text
+#  page_code                 :string(255)
+#  braindump                 :text
+#  location                  :string(255)
+#  gender                    :string(255)
+#  age                       :string(255)
+#  occupation                :string(255)
+#  health_check              :string(255)
+#  tags                      :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  login                     :string(255)     default(""), not null
+#  crypted_password          :string(255)     default(""), not null
+#  password_salt             :string(255)     default(""), not null
+#  persistence_token         :string(255)     default(""), not null
+#  single_access_token       :string(255)     default(""), not null
+#  perishable_token          :string(255)     default(""), not null
+#  login_count               :integer         default(0), not null
+#  failed_login_count        :integer         default(0), not null
+#  last_request_at           :datetime
+#  current_login_at          :datetime
+#  last_login_at             :datetime
+#  current_login_ip          :string(255)
+#  last_login_ip             :string(255)
+#  has_received_welcome_mail :boolean
+#  public_profile            :boolean         default(TRUE)
+#  policy_checked            :boolean
+#  password_saved            :boolean         default(FALSE)
+#  avatar_file_name          :string(255)
+#  avatar_content_type       :string(255)
+#  avatar_file_size          :integer
+#  avatar_updated_at         :datetime
+#  respondent_id             :integer
+#  network_id                :integer
+#  role                      :string(255)
+#  ethnicity                 :string(255)
+#  import_s3_etag            :string(255)
+#  type_description          :string(255)
+#
+
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Person do

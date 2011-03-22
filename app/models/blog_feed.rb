@@ -2,7 +2,7 @@
 #
 # Table name: blog_feeds
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer         not null, primary key
 #  author     :string(255)
 #  title      :string(255)
 #  content    :text

@@ -2,9 +2,9 @@
 #
 # Table name: mindapples
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer         not null, primary key
 #  suggestion :text
-#  person_id  :integer(4)
+#  person_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
 #

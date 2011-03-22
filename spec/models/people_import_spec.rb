@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: people_imports
+#
+#  id                    :integer         not null, primary key
+#  s3_etag               :text
+#  s3_key                :text
+#  user_type_description :text
+#  network_id            :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PeopleImport do
