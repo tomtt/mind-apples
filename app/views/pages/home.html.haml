@@ -14,14 +14,11 @@
       = link_to image_tag('/images/content/bigtreat.gif', :title => "The Big Treat"), "/thebigtreat"
 
 .main_content
+
+  .promotional_video
+    %iframe{:title => "YouTube video player", :width => "519", :height => "322", :src => "http://www.youtube.com/embed/7x8gXSCA4Ww", :frameborder => "0", :allowfullscreen => ""}
+
   = render :partial => 'blog_feeds/index'
-
-  .top_apples
-    %h2
-      %span Top &lsquo;apples
-
-    %ul
-      = render :partial => 'mindapples/mindapple', :collection => @most_liked
 
   .most_recent
     %h2
@@ -29,3 +26,10 @@
 
     %ul
       = render :partial => 'mindapples/mindapple', :collection => @most_recent
+
+  .top_apples
+    %h2
+      %span Top &lsquo;apples
+
+    %ul
+      = render :partial => 'mindapples/mindapple', :collection => @most_liked
