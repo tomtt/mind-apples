@@ -1,10 +1,9 @@
 .nav_bar
   .share_buttons
     %ul
-      %li.facebook=  link_to 'Facebook', 'http://www.facebook.com/group.php?gid=67664831909', :class => "facebook"
+      %li.facebook=  link_to 'Facebook', 'http://www.facebook.com/mindapples', :class => "facebook"
       %li.twitter=  link_to 'Twitter', 'http://twitter.com/mindapples', :class => "twitter"
       %li.flickr=  link_to 'Flickr', 'http://www.flickr.com/photos/tags/mindapples/', :class => "flickr"
-      %li.delicious=  link_to 'Delicious', 'http://delicious.com/tag/mindapples', :class => "delicious"
       
   - render_tabnav :main do
     - add_tab do |t|
