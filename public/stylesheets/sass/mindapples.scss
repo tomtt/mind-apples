@@ -421,15 +421,25 @@ body {
     .about_contact a.active { background: url(/images/subnav/about/Contact-active.png) left bottom no-repeat; }
     .about_media a.active { background: url(/images/subnav/about/Media-active.png) left bottom no-repeat; }
     
+    
+    //Grow - generic
+    .grow a {
+      padding: 12px 15px 12px 0px;
+      margin-left: -20px;
+    }
+    
     //Grow - tab - off
-    .grow_join_us a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}
-    .grow_volunteer a { background: url(/images/subnav/grow/Volunteer-inactive.png) left bottom no-repeat; z-index: 2; padding: 26px 75px 20px 46px; }
-    .grow_your_own a { background: url(/images/subnav/grow/Grow-your-own-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -38px; padding: 26px 43px 20px 40px;}
-        
+    .grow_join_us a { background: url(/images/subnav/join_us/join_us_inactive.png) left bottom no-repeat; z-index: 4; margin-left: 10px; width: 112px; }
+    .grow_partnerships a { background: url(/images/subnav/join_us/partnerships_inactive.png) left bottom no-repeat; z-index: 3; width: 157px; }
+    .grow_your_own a { background: url(/images/subnav/join_us/grow_inactive.png) left bottom no-repeat; z-index: 2; width: 173px; }
+    .grow_volunteer a { background: url(/images/subnav/join_us/volunteer_inactive.png) left bottom no-repeat; z-index: 1; width: 138px; }
+
     //Grow - tab - on
-    .grow_join_us a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
-    .grow_volunteer a.active { background: url(/images/subnav/grow/Volunteer-active.png) left bottom no-repeat; }
-    .grow_your_own a.active { background: url(/images/subnav/grow/Grow-your-own-active.png) left bottom no-repeat; }
+    .grow_join_us a.active { background: url(/images/subnav/join_us/join_us_active.png) left bottom no-repeat; z-index: 5; }
+    .grow_partnerships a.active { background: url(/images/subnav/join_us/partnerships_active.png) left bottom no-repeat; z-index: 5; }
+    .grow_your_own a.active { background: url(/images/subnav/join_us/grow_active.png) left bottom no-repeat; z-index: 5; }
+    .grow_volunteer a.active { background: url(/images/subnav/join_us/volunteer_active.png) left bottom no-repeat; z-index: 5; }
+
 
     
     //Hire us - generic
