@@ -1180,9 +1180,15 @@ h2 span {
     
     h1 {
       color: #067D29;
+      font-size: 2em;
+      margin-bottom: 25px;
     }
     p {
-      
+      color: #067D29;
+      font-size: 1.3em;
+      line-height: 1.35em;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
   }
   
@@ -1197,7 +1203,7 @@ h2 span {
 
 .network_main_content {
   .network_details {
-    margin: 38px 0 30px 33px;
+    margin: 38px 0 80px 33px;
   }
 }
 

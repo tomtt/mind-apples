@@ -18,7 +18,7 @@ class Network < ActiveRecord::Base
   has_many :people
   
   has_attached_file :logo,
-                    :styles => { :medium => '#162x162' }
+                    :styles => { :medium => '162x162#' }
   
 
   def to_param
