@@ -401,7 +401,7 @@ body {
     
     .services {
       font-size: 14px;
-      a {  padding: 22px 32px 16px 20px; margin-left: -29px;}
+      a {  }
       a.active { z-index: 7; }
     }
     
@@ -430,28 +430,35 @@ body {
     .grow_join_us a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
     .grow_volunteer a.active { background: url(/images/subnav/grow/Volunteer-active.png) left bottom no-repeat; }
     .grow_your_own a.active { background: url(/images/subnav/grow/Grow-your-own-active.png) left bottom no-repeat; }
+
     
-    //Services - tab - off
-    .services_workplaces a { background: url(/images/subnav/services/Workplaces-inactive.png) left bottom no-repeat; z-index: 6; margin-left: -2px;}
-    .services_schools a { background: url(/images/subnav/services/Schools-inactive.png) left bottom no-repeat; z-index: 5; padding-right: 28px; margin-left: -27px;}
-    .services_uni a { background: url(/images/subnav/services/Universities-inactive.png) left bottom no-repeat; z-index: 4; padding-right: 30px; }
-    .services_communities a { background: url(/images/subnav/services/Communities-inactive.png) left bottom no-repeat; z-index: 3; margin-left: -25px;}
-    .services_healthcare a { background: url(/images/subnav/services/Healthcare-inactive.png) left bottom no-repeat; z-index: 2; margin-left: -27px;}
-    .services_individuals a { background: url(/images/subnav/services/Individuals-inactive.png) left bottom no-repeat; z-index: 1; margin-left: -27px; padding-right: 35px; }
+    //Hire us - generic
+    .services a {
+      padding: 12px 15px 12px 0px;
+      margin-left: -21px;
+    }
+
+    //Hire us - tab - off
+    .services_engagement a           { background: url(/images/subnav/hire_us/engagement_inactive.png) left bottom no-repeat; width: 110px; margin-left: 4px; z-index: 5; }
+    .services_research a             { background: url(/images/subnav/hire_us/research_inactive.png) left bottom no-repeat; width: 95px; z-index: 4; }
+    .services_training a             { background: url(/images/subnav/hire_us/training_inactive.png) left bottom no-repeat; width: 94px; z-index: 3; }
+    .services_wellbeing_programmes a { background: url(/images/subnav/hire_us/wellbeing_inactive.png) left bottom no-repeat; width: 177px; z-index: 2; }
+    .services_testimonials a         { background: url(/images/subnav/hire_us/testimonials_inactive.png) left bottom no-repeat; width: 114px; z-index: 1; }
     
-    //Services - tab - on
-    .services_workplaces a.active { background: url(/images/subnav/services/Workplaces-active.png) left bottom no-repeat; }
-    .services_schools a.active { background: url(/images/subnav/services/Schools-active.png) left bottom no-repeat; }
-    .services_uni a.active { background: url(/images/subnav/services/Universities-active.png) left bottom no-repeat; }
-    .services_communities a.active { background: url(/images/subnav/services/Communities-active.png) left bottom no-repeat; }
-    .services_healthcare a.active { background: url(/images/subnav/services/Healthcare-active.png) left bottom no-repeat; }
-    .services_individuals a.active { background: url(/images/subnav/services/Individuals-active.png) left bottom no-repeat; }
-    
+    //Hire us - tab - on
+    .services_engagement a.active           { background: url(/images/subnav/hire_us/engagement_active.png) left bottom no-repeat; z-index: 6; }
+    .services_research a.active             { background: url(/images/subnav/hire_us/research_active.png) left bottom no-repeat; z-index: 6; }
+    .services_training a.active             { background: url(/images/subnav/hire_us/training_active.png) left bottom no-repeat; z-index: 6; }
+    .services_wellbeing_programmes a.active { background: url(/images/subnav/hire_us/wellbeing_active.png) left bottom no-repeat; z-index: 6; }
+    .services_testimonials a.active         { background: url(/images/subnav/hire_us/testimonials_active.png) left bottom no-repeat; z-index: 6; }
+      
+
      //Five-a-day - tab - off
     .show_my_fives a { background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat; z-index: 3; margin-left: 2px;}        
     //Five-a-day - tab - on
     .show_my_fives a.active { background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
     
+        
   }
 }
 
