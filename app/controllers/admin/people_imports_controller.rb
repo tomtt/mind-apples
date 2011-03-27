@@ -1,5 +1,4 @@
 class Admin::PeopleImportsController < Admin::AdminController
-  
   def index
     @csv_directory = PeopleImport.s3_csv_directory
     @csv_s3_objects = PeopleImport.s3_csv_objects
