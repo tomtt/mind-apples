@@ -5,7 +5,7 @@ class NetworksController < ApplicationController
     if params[:network]
       @network = Network.find_by_url(params[:network]) or render_404
     end
-    @most_liked = Mindapple.most_liked(PagesController::TOP_APPLES_MAX) # TODO: Needs to be limited to network
+    @most_liked = Mindapple.most_liked_within_network(@network, PagesController::TOP_APPLES_MAX)
     @most_recent = Mindapple.most_recent(PagesController::TOP_APPLES_MAX) # TODO: Needs to be limited to network
   end
 

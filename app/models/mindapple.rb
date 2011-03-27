@@ -13,10 +13,13 @@ class Mindapple < ActiveRecord::Base
   belongs_to :person
   has_many :mindapple_likings
   has_many :fans, :through => :mindapple_likings
-  # has_and_belongs_to_many :fans, :class_name => "Person"
 
   def self.most_liked(max)
-    Mindapple.all(:order => "mindapple_likings_count DESC", :limit => max, :conditions => "mindapple_likings_count > 0")
+    most_liked_within_context(Mindapple, max)
+  end
+
+  def self.most_liked_within_network(network, max)
+    most_liked_within_context(network.mindapples, max)
   end
 
   def self.most_recent(max)
@@ -34,5 +37,10 @@ class Mindapple < ActiveRecord::Base
   named_scope :search_by_suggestion, lambda {|searched_string| {
     :conditions => [ 'suggestion LIKE ?', "%#{searched_string}%"]
   }}
+  
+  private
 
+  def self.most_liked_within_context(context, max)
+    context.find(:all, :order => "mindapple_likings_count DESC", :limit => max, :conditions => "mindapple_likings_count > 0")
+  end
 end

@@ -16,7 +16,8 @@
 
 class Network < ActiveRecord::Base
   has_many :people
-  
+  has_many :mindapples, :through => :people
+
   has_attached_file :logo,
                     :styles => { :medium => '162x162#' }
   

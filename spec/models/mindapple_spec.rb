@@ -64,14 +64,12 @@ describe Mindapple do
     end
 
     it "returns N mindapples if there are N or more than N in the top-N" do
-      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.size.should == @max
     end
 
     it "returns the N most liked mindapples if there are N or more than N in the top-N" do
-      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.should include(@mindapple_1)
@@ -82,10 +80,68 @@ describe Mindapple do
     end
 
     it "doesn't return a mindapple if it's not one of the most liked top-N" do
-      pend_when_not_using_postgres
       most_liked = Mindapple.most_liked(@max)
 
       most_liked.should_not include(@mindapple_6)
+    end
+
+  end
+
+  describe "most_liked_within_network" do
+
+    before(:each) do
+      @network_a = Factory.create(:network)
+      @network_b = Factory.create(:network)
+      @person_a = Factory.create(:person, :network => @network_a)
+      @person_b = Factory.create(:person, :network => @network_b)
+      @mindapple_1_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_2_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_3_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_4_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_5_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_6_a = Factory.create(:mindapple, :person => @person_a)
+      @mindapple_1_b = Factory.create(:mindapple, :person => @person_b)
+      @mindapple_2_b = Factory.create(:mindapple, :person => @person_b)
+      @mindapple_3_b = Factory.create(:mindapple, :person => @person_b)
+      @mindapple_4_b = Factory.create(:mindapple, :person => @person_b)
+      @mindapple_5_b = Factory.create(:mindapple, :person => @person_b)
+      @mindapple_6_b = Factory.create(:mindapple, :person => @person_b)
+
+      make_people_like_mindapple(5, @mindapple_1_a)
+      make_people_like_mindapple(5, @mindapple_2_a)
+      make_people_like_mindapple(4, @mindapple_3_a)
+      make_people_like_mindapple(3, @mindapple_4_a)
+      make_people_like_mindapple(1, @mindapple_5_a)
+
+      make_people_like_mindapple(7, @mindapple_1_b)
+      make_people_like_mindapple(7, @mindapple_2_b)
+      make_people_like_mindapple(2, @mindapple_3_b)
+      make_people_like_mindapple(1, @mindapple_4_b)
+      make_people_like_mindapple(9, @mindapple_5_b)
+
+      @max = 5
+    end
+
+    it "returns N mindapples if there are N or more than N in the top-N" do
+      most_liked = Mindapple.most_liked_within_network(@network_a, @max)
+
+      most_liked.size.should == @max
+    end
+
+    it "returns the N most liked mindapples if there are N or more than N in the top-N" do
+      most_liked = Mindapple.most_liked_within_network(@network_a, @max)
+
+      most_liked.should include(@mindapple_1_a)
+      most_liked.should include(@mindapple_2_a)
+      most_liked.should include(@mindapple_3_a)
+      most_liked.should include(@mindapple_4_a)
+      most_liked.should include(@mindapple_5_a)
+    end
+
+    it "doesn't return a mindapple if it's not one of the most liked top-N" do
+      most_liked = Mindapple.most_liked_within_network(@network_a, @max)
+
+      most_liked.should_not include(@mindapple_6_a)
     end
 
   end
