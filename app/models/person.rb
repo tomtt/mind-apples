@@ -76,7 +76,9 @@ class Person < ActiveRecord::Base
   end
 
   has_many :mindapples, :dependent => :destroy
-  has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
+  has_many :mindapple_likings
+  has_many :liked_mindapples, :through => :mindapple_likings
+  # has_and_belongs_to_many :liked_mindapples, :class_name => "Mindapple"
 
   # paperclip
   has_attached_file :avatar, :styles => { :medium => "150x150>", :thumb => "40x40>" }, :default_url => DEFAULT_IMAGE_URL
