@@ -19,7 +19,11 @@ class Mindapple < ActiveRecord::Base
   end
 
   def self.most_liked_within_network(network, max)
-    most_liked_within_context(network.mindapples, max)
+    if network
+      most_liked_within_context(network.mindapples, max)
+    else
+      []
+    end
   end
 
   def self.most_recent(max)
@@ -37,7 +41,7 @@ class Mindapple < ActiveRecord::Base
   named_scope :search_by_suggestion, lambda {|searched_string| {
     :conditions => [ 'suggestion LIKE ?', "%#{searched_string}%"]
   }}
-  
+
   private
 
   def self.most_liked_within_context(context, max)

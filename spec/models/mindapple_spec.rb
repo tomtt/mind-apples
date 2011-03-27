@@ -144,6 +144,10 @@ describe Mindapple do
       most_liked.should_not include(@mindapple_6_a)
     end
 
+    it "returns an empty list if ni is passed as the network" do
+      most_liked = Mindapple.most_liked_within_network(nil, 3)
+      most_liked.should == []
+    end
   end
 
   describe "most_recent" do

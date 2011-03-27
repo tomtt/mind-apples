@@ -37,7 +37,16 @@ describe NetworksController do
     end
 
     it "assigns most recent mindapples within the network to @most_recent" do
-      pending
+      controller.stubs(:current_user).returns(false)
+      UserSession.stubs(:new).returns(:new_user_session)
+      get :show, :network => "4beauty"
+      assigns[:user_session].should == :new_user_session
+    end
+
+    it "does not assign @user_session if the user is already logged in" do
+      controller.stubs(:current_user).returns(true)
+      get :show, :network => "4beauty"
+      assigns[:user_session].should == nil
     end
   end
 end

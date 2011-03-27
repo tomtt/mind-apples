@@ -7,6 +7,9 @@ class NetworksController < ApplicationController
     end
     @most_liked = Mindapple.most_liked_within_network(@network, PagesController::TOP_APPLES_MAX)
     @most_recent = Mindapple.most_recent(PagesController::TOP_APPLES_MAX) # TODO: Needs to be limited to network
+    unless current_user
+      @user_session = UserSession.new
+    end
   end
 
   def admin
