@@ -12,6 +12,10 @@
 
   %br.clear
 
+  - if @network
+    Here are the mindapples for the #{@network.name} network. There may be more if you
+    = link_to("search in all the mindapples", mindapples_path(:mindapple => params[:mindapple]))
+
   - if @search_message
     %h3
       =@search_message.to_s

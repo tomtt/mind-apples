@@ -28,7 +28,8 @@ Feature: Explore network within a network
     And I fill in "Find new things to do" with "park"
     And I press "Find"
     
-    Then I should see "feeding deer in the park"
+    Then I should see "Here are the mindapples for the 4Beauty network"
+    And I should see "feeding deer in the park"
     And I should not see "running on the beach"
     And I should not see "gathering leaves in the park"
     And I should not see "dancing around the campfire"
@@ -50,6 +51,14 @@ Feature: Explore network within a network
 
     Then I should see "running on the beach"
     And I should not see "running around trees"
+
+    # Now check that the link to search all mindapples works
+    When I follow "all the mindapples"
+    And I fill in "Find new things to do" with "running"
+    And I press "Find"
+
+    Then I should see "running on the beach"
+    And I should see "running around trees"
 
   Scenario: Searching for mindapples without any result
     Given a network "4beauty" exists with name: "4Beauty"
