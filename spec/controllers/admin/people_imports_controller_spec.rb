@@ -47,29 +47,51 @@ describe Admin::PeopleImportsController do
         post :create
       end
 
-      it "assigns the initialized PeopleImport to @people_import" do
-        mock_people_import = mock("PeopleImport", :save => true)
-        PeopleImport.stubs(:new).returns(mock_people_import)
-        post :create, "people_import" => { "foo" => "bar" }
-        assigns[:people_import].should == mock_people_import
+      context "when the people_import was saved" do
+        before :each do
+          @mock_people_import = mock("PeopleImport", :save => true)
+          PeopleImport.stubs(:new).returns(@mock_people_import)
+        end
+
+        it "assigns the initialized PeopleImport to @people_import" do
+          post :create, "people_import" => { "foo" => "bar" }
+          assigns[:people_import].should == @mock_people_import
+        end
+
+        it "sets the flash notice if the people_import was saved" do
+          post :create, "people_import" => { "foo" => "bar" }
+          flash[:notice].should =~ /completed/
+        end
+
+        it "renders :create if the people_import was saved" do
+          post :create, "people_import" => { "foo" => "bar" }
+          response.should render_template(:create)
+        end
       end
 
-      it "sets the flash notice if the people_import was saved" do
-        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => true))
-        post :create, "people_import" => { "foo" => "bar" }
-        flash[:notice].should =~ /completed/
-      end
+      context "when the people_import could not be saved" do
+        before :each do
+          AWS::S3::Base.stubs(:establish_connection!)
+          AWS::S3::S3Object.stubs(:find).returns(mock('s3 object'))
+          @mock_people_import = mock("PeopleImport", :save => false, :s3_key => "abcd")
+          PeopleImport.stubs(:new).returns(@mock_people_import)
+        end
 
-      it "renders :create if the people_import was saved" do
-        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => true))
-        post :create, "people_import" => { "foo" => "bar" }
-        response.should render_template(:create)
-      end
+        it "renders :new if the people_import was not saved" do
+          post :create, "people_import" => { "foo" => "bar" }
+          response.should render_template(:new)
+        end
 
-      it "renders :new if the people_import was not saved" do
-        PeopleImport.stubs(:new).returns(mock("PeopleImport", :save => false))
-        post :create, "people_import" => { "foo" => "bar" }
-        response.should render_template(:new)
+        it "sets the network options" do
+          post :create, "people_import" => { "foo" => "bar" }
+          assigns[:network_options].should_not be_empty
+        end
+
+        it "assigns the csv object found from the s3_key to @csv_object" do
+          PeopleImport.stubs(:find_csv_by_s3_key).with("abcd").returns(:mock_csv_object)
+          post :create, "people_import" => { "foo" => "bar" }
+          assigns[:csv_object].should == :mock_csv_object
+        end
       end
     end
   end

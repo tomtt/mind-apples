@@ -14,6 +14,26 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PeopleImport do
+  it "has a factory that creates a valid object" do
+    Factory.build(:people_import).should be_valid
+  end
+
+  it "is not valid without an s3_key" do
+    Factory.build(:people_import, :s3_key => "").should_not be_valid
+  end
+
+  it "is not valid without a user_type_description" do
+    Factory.build(:people_import, :user_type_description => "").should_not be_valid
+  end
+
+  it "can not be associated with a non-existing network" do
+    Factory.build(:people_import, :network_id => -1).should_not be_valid
+  end
+
+  it "can be not associated with any network" do
+    Factory.build(:people_import, :network_id => nil).should be_valid
+  end
+
   def mock_bucket_object(options = {})
     object = mock("bucket object")
     options.each do |k, v|

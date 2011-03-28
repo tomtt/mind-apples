@@ -1,7 +1,6 @@
 @pivotal_9161315
-@wip
 
-Feature: Explore network
+Feature: Explore network within a network
   In order to search for mindapples within my community
   As the curious cat
   I want search box producing only results from people in my community
@@ -19,7 +18,7 @@ Feature: Explore network
     And a mindapple "la-mindapple-one" exists with person: person "bob", suggestion: "gathering leaves in the park"
     And a mindapple "la-mindapple-two" exists with person: person "bob", suggestion: "dancing around the campfire"
     And a mindapple "no-mindapple-one" exists with person: person "cas", suggestion: "kissing in the park"
-    And a mindapple "no-mindapple-two" exists with person: person "cas", suggestion: "climbing trees"
+    And a mindapple "no-mindapple-two" exists with person: person "cas", suggestion: "running around trees"
 
     And I have a personal page
     And my password is "eagleeyed"
@@ -35,6 +34,13 @@ Feature: Explore network
     And I should not see "dancing around the campfire"
     And I should not see "kissing in the park"
     And I should not see "climbing trees"
+
+    # Now check that the search box 'remembers' the context of the network
+    When I fill in "Find new things to do" with "running"
+    And I press "Find"
+
+    Then I should see "running on the beach"
+    And I should not see "running around trees"
 
   Scenario: Searching for mindapples without any result
     Given a network "4beauty" exists with name: "4Beauty"

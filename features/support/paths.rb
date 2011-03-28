@@ -44,6 +44,8 @@ module NavigationHelpers
       '/person'
     when /^my favourite mindapples page$/
       "/person/#{@me_person.login}/favourites"
+    when /^the network page for "(.*)"$/
+      network_path(Network.find_by_url($1))
     when /^"(.*)\" edit page$/
       person = Person.find_by_login($1)
       edit_person_path(person)

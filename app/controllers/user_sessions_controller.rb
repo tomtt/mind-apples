@@ -9,8 +9,15 @@ class UserSessionsController < ApplicationController
     format.html do
       if @resource_saved
         flash[:notice] = "Login successful!"
-        redirect_back_or_default person_path(resource.person)
+        if network = Network.find_by_id(params["network_id"])
+          redirect_back_or_default network_path(network)
+        else
+          redirect_back_or_default person_path(resource.person)
+        end
       else
+        if params[:network_id]
+          @network = Network.find_by_id(params[:network_id])
+        end
         render :action => :new
       end
     end

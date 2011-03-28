@@ -16,6 +16,11 @@ Factory.define :network do |n|
   n.sequence(:name) { |n| "network_#{n}" }
 end
 
+Factory.define :people_import do |i|
+  i.s3_key "/path/from/factory"
+  i.user_type_description "Factory description"
+end
+
 Factory.define :person do |u|
   u.sequence(:login) {|n| "user_#{n}" }
   u.sequence(:page_code) {|n| "%08d" % n }

@@ -1,5 +1,12 @@
 .right_column_wide
   = render(:partial => "/shared/search")
+  - unless current_user
+    .simple_form_box
+      %h2
+        Already got an account?
+      .inner
+        = render(:partial => "/shared/login_form")
+
 .main_content.network_main_content
 
   = render(:partial => "network_details")

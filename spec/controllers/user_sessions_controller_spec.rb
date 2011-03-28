@@ -38,9 +38,15 @@ describe UserSessionsController do
         flash[:notice].should == "Login successful!"
       end
 
-      it "should redirect back to account path redirect back is not set" do
+      it "should redirect back to account path if redirect back is not set and no network was passed" do
         post(:create, "session" => {})
         response.should redirect_to(person_path(@person))
+      end
+
+      it "should redirect back to network path if redirect back is not set and no network was passed" do
+        network = Factory.create(:network, :id => 999)
+        post(:create, "session" => {}, "network_id" => "999")
+        response.should redirect_to(network_path(network))
       end
     end
   end
@@ -53,8 +59,14 @@ describe UserSessionsController do
     end
 
     it "should render new" do
-      post(:create, "session" => {})
+      post(:create, "session" => {}, "network_id" => 777)
       response.should render_template("new")
+    end
+
+    it "assigns to @network, the network that was passed as a param" do
+      Network.stubs(:find_by_id).with("777").returns(:mock_network)
+      post(:create, "session" => {}, "network_id" => 777)
+      assigns[:network].should == :mock_network
     end
   end
 
