@@ -36,3 +36,5 @@ ActionMailer::Base.smtp_settings = {
 
 # Enable threaded mode
 # config.threadsafe!
+
+config.action_controller.asset_host = "http://mindapples.org"
