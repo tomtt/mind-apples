@@ -1,3 +1,5 @@
+set :branch, "vps_production"
+
 set :rails_env, "production"
 
 set :rails_server, "209.41.75.7"
