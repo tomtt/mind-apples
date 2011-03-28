@@ -26,3 +26,5 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
+
+config.action_controller.asset_host = "http://mindapples.org"
