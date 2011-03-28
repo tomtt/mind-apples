@@ -2,11 +2,15 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  MIGRATING_TO_HEROKU = true
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
+
+  before_filter :redirect_if_migrating_to_heroku
 
   # rescue_from Exception, :with => :render_500
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
@@ -21,6 +25,17 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def redirect_if_migrating_to_heroku
+    if MIGRATING_TO_HEROKU &&
+        ! %w{show index}.include?(params[:action]) &&
+        ! %w{pages}.include?(params[:controller]) &&
+        ! (request.path == "/logout")
+      location = %w{home pasture field location residence accomodation property address hearth nest habitation}.rand
+      flash[:notice] = "Mindapples is moving to a better #{location}. Some bits of the site have been disabled, please try again later."
+      redirect_to root_path
+    end
+  end
 
   def current_user_session
     #this solve the error: You must activate the Authlogic::Session::Base.controller
