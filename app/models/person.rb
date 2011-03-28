@@ -198,11 +198,58 @@ class Person < ActiveRecord::Base
 
   end
 
-  def self.import_avatars_from_vps
-    puts "Nothing is being done here yet"
+  def self.import_avatars_from_live_site
+    avatars_to_update = determine_avatars_to_update
+    avatars_to_update.each do |person_id, avatar_url|
+      Person.find(person_id).update_avatar_from_url(avatar_url)
+    end
+  end
+
+  def get_attributes_from_live_site
+    require "open-uri"
+
+    @@app ||= ActionController::Integration::Session.new
+    url = @@app.person_url(self, :format => "xml",  :host => "mindapples.org", :public_override => ENV["public_override"])
+
+    attributes = Hash.from_xml(open(url).read)["person"]
+    attributes || {}
+  end
+
+  def update_avatar_from_url(avatar_url)
+    require "open-uri"
+    avatar_url.gsub!(' ', '%20')
+    avatar_url.gsub!('[', '%5B')
+    avatar_url.gsub!(']', '%5D')
+    update_attributes!(:avatar => open(avatar_url))
+
+  rescue OpenURI::HTTPError => e
+    person_url = if public_profile
+                   ActionController::Integration::Session.new.person_url(self, :host => "mindapples.org")
+                 else
+                   ActionController::Integration::Session.new.person_url(self, :host => "mindapples.org", :public_override => ENV["public_override"])
+                 end
+    puts "HTTPError updating the avatar \"#{avatar_url}\" for person with id #{id}: #{person_url}"
   end
 
   private
+
+  def self.determine_avatars_to_update
+    avatars_to_update = {}
+    json_file_name = Rails.root.join("tmp", "avatars_to_update.json")
+    if File.exist?(json_file_name)
+      avatars_to_update = JSON.parse(File.read(json_file_name))
+    else
+      File.open(json_file_name, "w") do |json_file|
+        Person.all.each do |person|
+          if avatar_url = person.get_attributes_from_live_site["avatar_url"]
+            avatars_to_update[person] = avatar_url
+          end
+        end
+        json_file.puts(avatars_to_update.to_json)
+      end
+    end
+    avatars_to_update
+  end
 
   def chop_superfluous_mindapples
     return unless mindapples.size > 5
