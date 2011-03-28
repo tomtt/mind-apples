@@ -1,7 +1,8 @@
-- if current_user.nil?
-  = render(:partial => '/pages/what_section')
 
-  .right_column_wide
+
+.right_column_wide
+  - if current_user.nil?
+    = render(:partial => '/pages/what_section')
     .five-a-day
       .inner-top
         %h1 What are your mindapples?
@@ -9,11 +10,23 @@
 
         = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
         %br.clear
-    
-    .promotion
-      = link_to image_tag('/images/content/bigtreat.gif', :title => "The Big Treat"), "/thebigtreat"
+  -else
+    = render(:partial => 'shared/small_search')
+  
+  .promotion
+    = link_to image_tag('/images/content/bigtreat.gif', :title => "The Big Treat"), "/thebigtreat"
 
 .main_content
+  %dl.mindapples_definition
+    %dt 
+      mindapple
+      %span.phonetics (mind-ap-el) 
+      &bull;
+      %span.type n.
+    %dd
+      a simple day-to-day activity that is good for the mind
+      
+   
 
   .promotional_video
     %iframe{:title => "YouTube video player", :width => "519", :height => "322", :src => "http://www.youtube.com/embed/7x8gXSCA4Ww", :frameborder => "0", :allowfullscreen => ""}

@@ -1189,10 +1189,43 @@ h2 span {
 }
 
 .promotional_video {
-  margin: 20px 0 40px;
+  margin: 16px 0 30px;
+}
+
+dl.mindapples_definition {
+  font-family: 'times new roman', sans-serif;
+  width: 426px;
+  height: 142px;
+  margin: 26px 0 15px 13px;
+  background-image: url(/images/content/definition_bg.jpg);
+  font-size: 27px;
+  line-height: 1.2em;
+  padding:24px 60px 0 34px;
+  
+  dt {
+    font-weight: bold;
+    
+    .phonetics {
+      font-weight: normal;
+    }
+    .type {
+      font-weight: normal;
+      font-style: italic;
+    }
+  }
 }
 
 
+.small_search_box {
+  width: 398px;
+  
+  h2 {
+    background: #008C36 url(/images/layout/small_search_top.gif) top left no-repeat;
+  }
+  .inner {
+    background: transparent url(/images/layout/your_fives_bg-bottom.png) bottom left repeat-x;
+  }
+}
 
 /* ========= network stuff ========= */
 .network_details {
