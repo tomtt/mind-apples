@@ -23,4 +23,7 @@
   %ul
     = render :partial => 'mindapples/mindapple', :collection => @mindapples
 -if @mindapples
-  = will_paginate @mindapples
+  - if @network
+    = will_paginate @mindapples, :network_id => @network.id
+  - else
+    = will_paginate @mindapples
