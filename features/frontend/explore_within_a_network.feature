@@ -42,6 +42,15 @@ Feature: Explore network within a network
     Then I should see "running on the beach"
     And I should not see "running around trees"
 
+    # Now check that the search box still 'remembers' the context of the network after an error
+    When I fill in "Find new things to do" with "xx"
+    And I press "Find"
+    And I fill in "Find new things to do" with "running"
+    And I press "Find"
+
+    Then I should see "running on the beach"
+    And I should not see "running around trees"
+
   Scenario: Searching for mindapples without any result
     Given a network "4beauty" exists with name: "4Beauty"
     And a network "lambeth" exists with name: "Lambeth"

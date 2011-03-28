@@ -2,9 +2,9 @@ class MindapplesController < ApplicationController
 
   def index
     unless params['mindapple'].blank?
+      @network = Network.find_by_id(params[:network_id])
       if params['mindapple'].size > 2
-        if params[:network_id]
-          @network = Network.find_by_id(params[:network_id])
+        if @network
           context = Mindapple.belonging_to_network(@network)
         else
           context = Mindapple
