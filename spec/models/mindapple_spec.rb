@@ -220,14 +220,46 @@ describe Mindapple do
     end
   end
 
-  it "return all mindappples containing searchable param" do
-    mindapple = Factory.create(:mindapple, :suggestion => 'Runing in the park')
-    mindapple2 = Factory.create(:mindapple, :suggestion => 'Eating ice cream')
-    mindapple3 = Factory.create(:mindapple, :suggestion => 'Sleeping in the park')
-    mindapples = Mindapple.search_by_suggestion('park')
+  describe "search_by_suggestion" do
+    it "returns all mindappples containing searchable param" do
+      mindapple = Factory.create(:mindapple, :suggestion => 'Runing in the park')
+      mindapple2 = Factory.create(:mindapple, :suggestion => 'Eating ice cream')
+      mindapple3 = Factory.create(:mindapple, :suggestion => 'Sleeping in the park')
+      mindapples = Mindapple.search_by_suggestion('park')
 
-    mindapples.size.should == 2
-    mindapples.should include(mindapple, mindapple3)
+      mindapples.size.should == 2
+      mindapples.should include(mindapple, mindapple3)
+    end
+  end
+
+  describe "belonging_to_network" do
+    it "returns only all mindappples posted by people in the network" do
+      network1 = Factory.create(:network, :name => "one")
+      network2 = Factory.create(:network, :name => "two")
+
+      person1a = Factory.create(:person, :network => network1)
+      person1b = Factory.create(:person, :network => network1)
+      person2a = Factory.create(:person, :network => network2)
+      person2b = Factory.create(:person, :network => network2)
+      person3a = Factory.create(:person, :network => nil)
+      person3b = Factory.create(:person, :network => nil)
+
+      mindapple1a = Factory.create(:mindapple, :person => person1a)
+      mindapple1b = Factory.create(:mindapple, :person => person1b)
+      mindapple2a = Factory.create(:mindapple, :person => person2a)
+      mindapple2b = Factory.create(:mindapple, :person => person2b)
+      mindapple3a = Factory.create(:mindapple, :person => person3a)
+      mindapple3b = Factory.create(:mindapple, :person => person3b)
+
+      mindapples = Mindapple.belonging_to_network(network2)
+
+      mindapples.size.should == 2
+      mindapples.should include(mindapple2a, mindapple2b)
+    end
+
+    it "does not blow up if the passed network is nil" do
+      Mindapple.belonging_to_network(nil).should == []
+    end
   end
 end
 

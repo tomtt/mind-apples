@@ -42,6 +42,17 @@ class Mindapple < ActiveRecord::Base
     :conditions => [ 'suggestion LIKE ?', "%#{searched_string}%"]
   }}
 
+  named_scope :belonging_to_network, lambda { |network|
+    {
+      :select => "mindapples.*",
+      :joins => "
+          LEFT JOIN people AS people_for_belonging_to_network
+          ON people_for_belonging_to_network.id = mindapples.person_id
+        ",
+      :conditions => ["people_for_belonging_to_network.network_id = %d", network ? network.id : -1]
+    }
+  }
+
   private
 
   def self.most_liked_within_context(context, max)
