@@ -1,7 +1,6 @@
 @pivotal_9161315
-@wip
 
-Feature: Explore network
+Feature: Explore network within a network
   In order to search for mindapples within my community
   As the curious cat
   I want search box producing only results from people in my community
