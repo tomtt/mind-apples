@@ -198,6 +198,10 @@ class Person < ActiveRecord::Base
 
   end
 
+  def self.import_avatars_from_vps
+    puts "Nothing is being done here yet"
+  end
+
   private
 
   def chop_superfluous_mindapples
