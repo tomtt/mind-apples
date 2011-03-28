@@ -63,7 +63,6 @@ Feature: Mindapples Home Page
     And I should not see a "person[mindapples_attributes][1][suggestion]" text field
     And I should not see a "person[mindapples_attributes][2][suggestion]" text field
     And I should not see a "person[mindapples_attributes][4][suggestion]" text field
-    And I should not see a "go.png" image button
 
   @top_apples
   Scenario: As a not logged in user i can see the Top Apples section
