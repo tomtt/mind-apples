@@ -11,12 +11,13 @@
 
   = render(:partial => "network_details")
       
-  .most_recent
-    %h2
-      %span Most recent
-
-    %ul
-      = render :partial => 'mindapples/mindapple', :collection => @most_recent
+  - if false # this section is disabled until backend can be implemented
+    .most_recent
+      %h2
+        %span Most recent
+  
+      %ul
+        = render :partial => 'mindapples/mindapple', :collection => @most_recent
 
   .top_apples
     %h2
