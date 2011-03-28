@@ -2,3 +2,5 @@
   %a.logo{:href => root_path}
     %img{:src => "/images/header/main_logo.png", :alt => "Mindapples - love your mind?"}
   = render :partial => 'shared/login_controls'
+  - if current_user && current_user.is_admin?
+    = link_to("*", admin_root_path, :id => "admin_link")
