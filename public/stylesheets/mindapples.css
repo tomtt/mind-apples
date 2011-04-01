@@ -1,0 +1,1065 @@
+/* Generic */
+* {
+  margin: 0px;
+  padding: 0px; }
+
+a img {
+  border: none; }
+
+ul {
+  list-style-type: none; }
+
+.git-version {
+  display: none; }
+
+.simple_button_1 {
+  height: 24px;
+  line-height: 24px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 22px 0 9px;
+  background-image: url(/images/icons/small_white_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: #89C33E; }
+
+.simple_button_2 {
+  height: 24px;
+  line-height: 24px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 22px 0 9px;
+  background-image: url(/images/icons/small_white_arrow.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: #067D29; }
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.foreground {
+  position: absolute; }
+
+/* Layout */
+body {
+  font-family: helvetica neue, arial, sans;
+  font-size: 62.5%;
+  background-image: url(/images/layout/bg-mid.gif);
+  background-position: center center;
+  background-repeat: repeat-y;
+  background-color: #035118; }
+
+.content a {
+  color: #40863e;
+  text-decoration: none; }
+.content a:hover {
+  text-decoration: underline; }
+
+.clear {
+  clear: both; }
+
+.outer_page_wrapper {
+  width: 100%;
+  background-image: url(/images/layout/bg-top.jpg);
+  background-position: top center;
+  background-repeat: no-repeat; }
+  .outer_page_wrapper .inner_page_wrapper {
+    width: 100%;
+    text-align: center;
+    background-image: url(/images/layout/bg-bottom.jpg);
+    background-position: bottom center;
+    background-repeat: no-repeat; }
+    .outer_page_wrapper .inner_page_wrapper #header {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      height: 177px; }
+      .outer_page_wrapper .inner_page_wrapper #header .logo {
+        position: absolute;
+        top: 0px;
+        left: 37px; }
+      .outer_page_wrapper .inner_page_wrapper #header .login_controls {
+        position: absolute;
+        width: 294px;
+        height: 130px;
+        top: 23px;
+        right: -30px; }
+        .outer_page_wrapper .inner_page_wrapper #header .login_controls .background {
+          background-image: url(/images/header/login_box_bg.png); }
+        .outer_page_wrapper .inner_page_wrapper #header .login_controls .foreground {
+          padding: 43px 0 0 98px; }
+          .outer_page_wrapper .inner_page_wrapper #header .login_controls .foreground a {
+            display: block;
+            width: 45px;
+            margin-bottom: 4px; }
+    .outer_page_wrapper .inner_page_wrapper .page_main {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      background-color: white;
+      min-height: 1446px;
+      margin-bottom: 211px;
+      overflow: auto;
+      padding-top: 10px;
+      font-size: 1.2em;
+      line-height: 1.65em; }
+      .outer_page_wrapper .inner_page_wrapper .page_main .page_flip_top {
+        width: 109px;
+        height: 87px;
+        background: url("/images/layout/page_flip.png");
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1; }
+      .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day {
+        float: right;
+        width: 425px;
+        color: white;
+        background-image: url(/images/layout/bg-bottom-five-a-day.png);
+        background-repeat: no-repeat;
+        background-position: bottom; }
+        .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day .inner-top {
+          padding: 40px 30px 0;
+          margin-bottom: 61px;
+          background-image: url(/images/layout/bg-top-five-a-day.png);
+          background-repeat: no-repeat;
+          background-position: top; }
+        .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a {
+          color: #83ac44;
+          background-color: #CDE5AE;
+          text-decoration: none;
+          padding: 0 2px; }
+        .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a:hover {
+          background-color: white; }
+        .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day h1 {
+          margin-bottom: 0.8em; }
+        .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day h4 {
+          font-size: 1.4em;
+          color: #CDE5AE; }
+    .outer_page_wrapper .inner_page_wrapper #footer .inner {
+      width: 960px;
+      padding: 0 22px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      position: relative;
+      height: 65px; }
+    .outer_page_wrapper .inner_page_wrapper #footer ul {
+      padding-top: 20px;
+      text-align: center; }
+    .outer_page_wrapper .inner_page_wrapper #footer li {
+      display: inline;
+      font-weight: bold;
+      font-size: 1.4em;
+      list-style: none;
+      margin: 0 10px; }
+    .outer_page_wrapper .inner_page_wrapper #footer a {
+      color: #fff;
+      text-decoration: none; }
+    .outer_page_wrapper .inner_page_wrapper #footer p.footer_sentences {
+      padding-top: 4px; }
+    .outer_page_wrapper .inner_page_wrapper #footer .site-credits {
+      text-align: right;
+      font-size: 1.1em;
+      margin-top: 3px;
+      color: white;
+      overflow: hidden;
+      padding: 10px 50px 30px; }
+      .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul {
+        float: right;
+        padding-top: 0;
+        margin-bottom: 15px; }
+        .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul li {
+          float: left;
+          background-color: #fff;
+          padding: 5px 10px;
+          margin: 0; }
+          .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul li a {
+            display: block;
+            height: 40px;
+            text-indent: -900em;
+            outline: 0 none; }
+          .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul li a.unboxed {
+            width: 64px;
+            background: url(/images/footer/unboxed_consulting.png) no-repeat center bottom; }
+          .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul li a.unltd {
+            width: 56px;
+            background: url(/images/footer/unltd.png) no-repeat center bottom; }
+          .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul li a.nominet_trust {
+            width: 102px;
+            background: url(/images/footer/nominet_trust.png) no-repeat center bottom; }
+
+.col_10of16 {
+  width: 580px;
+  margin: 20px auto; }
+  .col_10of16 .inner {
+    padding: 10px 40px; }
+
+.nav_bar {
+  background: url(/images/nav_bar/menu_bar.gif) no-repeat;
+  width: 943px;
+  margin: 10px; }
+  .nav_bar .share_buttons {
+    float: right;
+    margin-top: 3px;
+    margin-right: 60px;
+    color: white;
+    z-index: 2;
+    position: relative; }
+    .nav_bar .share_buttons li {
+      float: left; }
+      .nav_bar .share_buttons li a {
+        display: block;
+        width: 31px;
+        height: 40px;
+        text-indent: -900em;
+        margin: 0 3px;
+        outline: 0 none; }
+      .nav_bar .share_buttons li a.facebook {
+        background: url(/images/nav_bar/social-facebook.png) no-repeat center center; }
+      .nav_bar .share_buttons li a.twitter {
+        background: url(/images/nav_bar/social-twitter.png) no-repeat center center; }
+      .nav_bar .share_buttons li a.flickr {
+        width: 34px;
+        background: url(/images/nav_bar/social-flickr.png) no-repeat center center; }
+      .nav_bar .share_buttons li a.delicious {
+        background: url(/images/nav_bar/social-delicious.png) no-repeat center center; }
+  .nav_bar #main_tabnav ul {
+    margin-left: 15px;
+    height: 47px; }
+    .nav_bar #main_tabnav ul li {
+      display: block;
+      float: left; }
+      .nav_bar #main_tabnav ul li a, .nav_bar #main_tabnav ul li span {
+        height: 50px;
+        line-height: 50px;
+        margin: -3px 7px 0;
+        display: block;
+        text-align: center;
+        font-family: helvetica neue, arial, sans;
+        font-weight: bold;
+        font-size: 1.2em;
+        color: white;
+        text-decoration: none; }
+    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
+      width: 71px;
+      background-image: url(/images/nav_bar/home_active.png); }
+    .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active, .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
+      width: 83px;
+      background-image: url(/images/nav_bar/about_us_active.png); }
+    .nav_bar #main_tabnav ul .blog a.active, .nav_bar #main_tabnav ul .blog span.active {
+      width: 58px;
+      background-image: url(/images/nav_bar/blog_active.png); }
+    .nav_bar #main_tabnav ul .person a.active, .nav_bar #main_tabnav ul .person span.active, .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .grow span.active {
+      width: 116px;
+      background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
+    .nav_bar #main_tabnav ul .my_network {
+      position: relative; }
+      .nav_bar #main_tabnav ul .my_network a.active, .nav_bar #main_tabnav ul .my_network span.active {
+        position: absolute;
+        overflow: hidden;
+        top: -5px;
+        left: 0px;
+        width: 159px;
+        padding-right: 27px;
+        padding-top: 81px;
+        height: 0px;
+        font-size: 1.3em;
+        text-transform: uppercase;
+        background-image: url(/images/nav_bar/my_community_active.png); }
+
+.sub_tabnav {
+  background: url(/images/layout/bg-center-content-top.png) no-repeat center bottom;
+  padding-bottom: 20px; }
+  .sub_tabnav ul {
+    font-family: helvetica neue, arial, sans;
+    font-size: 15px;
+    background: transparent url("/images/subnav/bg-subnav-bottom.png") no-repeat bottom;
+    margin: 30px auto 0;
+    overflow: hidden;
+    padding: 0 0 11px 3px;
+    width: 590px; }
+    .sub_tabnav ul li {
+      float: left;
+      line-height: 0; }
+    .sub_tabnav ul a {
+      background: no-repeat center bottom;
+      color: #fff;
+      display: block;
+      line-height: 18px;
+      padding: 22px 31px 16px 20px;
+      position: relative;
+      text-decoration: none;
+      text-align: center;
+      margin-left: -20px; }
+    .sub_tabnav ul a:hover {
+      text-decoration: none; }
+    .sub_tabnav ul .about a {
+      padding: 22px 31px 16px 20px; }
+    .sub_tabnav ul .about a.active {
+      z-index: 7; }
+    .sub_tabnav ul .grow {
+      font-size: 20px;
+      font-weight: bold; }
+      .sub_tabnav ul .grow a {
+        padding: 26px 67px 20px 54px;
+        margin-left: -25px; }
+      .sub_tabnav ul .grow a.active {
+        z-index: 4; }
+    .sub_tabnav ul .show_mindapples {
+      font-size: 18px;
+      font-weight: bold; }
+      .sub_tabnav ul .show_mindapples a {
+        padding: 26px 53px 20px 30px;
+        margin-left: -25px; }
+      .sub_tabnav ul .show_mindapples a.active {
+        z-index: 4; }
+    .sub_tabnav ul .services {
+      font-size: 14px; }
+      .sub_tabnav ul .services a.active {
+        z-index: 7; }
+    .sub_tabnav ul .about_idea a {
+      background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat;
+      z-index: 6;
+      margin-left: -1px; }
+    .sub_tabnav ul .about_team a {
+      background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat;
+      z-index: 5;
+      margin-left: -22px;
+      padding-right: 29px; }
+    .sub_tabnav ul .about_organisation a {
+      background: url(/images/subnav/about/Organise-inactive.png) left bottom no-repeat;
+      z-index: 4;
+      margin-left: -26px;
+      padding-right: 33px;
+      padding-left: 23px; }
+    .sub_tabnav ul .about_evidence a {
+      background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat;
+      z-index: 3;
+      margin-left: -22px;
+      padding-right: 37px; }
+    .sub_tabnav ul .about_contact a {
+      background: url(/images/subnav/about/Contact-inactive.png) left bottom no-repeat;
+      z-index: 2;
+      margin-left: -24px; }
+    .sub_tabnav ul .about_media a {
+      background: url(/images/subnav/about/Media-inactive.png) left bottom no-repeat;
+      z-index: 1;
+      padding-right: 35px; }
+    .sub_tabnav ul .about_idea a.active {
+      background: url(/images/subnav/about/The-idea-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .about_team a.active {
+      background: url(/images/subnav/about/Who-we-are-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .about_organisation a.active {
+      background: url(/images/subnav/about/Organise-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .about_evidence a.active {
+      background: url(/images/subnav/about/Research-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .about_contact a.active {
+      background: url(/images/subnav/about/Contact-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .about_media a.active {
+      background: url(/images/subnav/about/Media-active.png) left bottom no-repeat; }
+    .sub_tabnav ul .grow a {
+      padding: 12px 15px 12px 0px;
+      margin-left: -20px; }
+    .sub_tabnav ul .grow_join_us a {
+      background: url(/images/subnav/join_us/join_us_inactive.png) left bottom no-repeat;
+      z-index: 4;
+      margin-left: 10px;
+      width: 112px; }
+    .sub_tabnav ul .grow_partnerships a {
+      background: url(/images/subnav/join_us/partnerships_inactive.png) left bottom no-repeat;
+      z-index: 3;
+      width: 157px; }
+    .sub_tabnav ul .grow_your_own a {
+      background: url(/images/subnav/join_us/grow_inactive.png) left bottom no-repeat;
+      z-index: 2;
+      width: 173px; }
+    .sub_tabnav ul .grow_volunteer a {
+      background: url(/images/subnav/join_us/volunteer_inactive.png) left bottom no-repeat;
+      z-index: 1;
+      width: 138px; }
+    .sub_tabnav ul .grow_join_us a.active {
+      background: url(/images/subnav/join_us/join_us_active.png) left bottom no-repeat;
+      z-index: 5; }
+    .sub_tabnav ul .grow_partnerships a.active {
+      background: url(/images/subnav/join_us/partnerships_active.png) left bottom no-repeat;
+      z-index: 5; }
+    .sub_tabnav ul .grow_your_own a.active {
+      background: url(/images/subnav/join_us/grow_active.png) left bottom no-repeat;
+      z-index: 5; }
+    .sub_tabnav ul .grow_volunteer a.active {
+      background: url(/images/subnav/join_us/volunteer_active.png) left bottom no-repeat;
+      z-index: 5; }
+    .sub_tabnav ul .services a {
+      padding: 12px 15px 12px 0px;
+      margin-left: -21px; }
+    .sub_tabnav ul .services_engagement a {
+      background: url(/images/subnav/hire_us/engagement_inactive.png) left bottom no-repeat;
+      width: 110px;
+      margin-left: 4px;
+      z-index: 5; }
+    .sub_tabnav ul .services_research a {
+      background: url(/images/subnav/hire_us/research_inactive.png) left bottom no-repeat;
+      width: 95px;
+      z-index: 4; }
+    .sub_tabnav ul .services_training a {
+      background: url(/images/subnav/hire_us/training_inactive.png) left bottom no-repeat;
+      width: 94px;
+      z-index: 3; }
+    .sub_tabnav ul .services_wellbeing_programmes a {
+      background: url(/images/subnav/hire_us/wellbeing_inactive.png) left bottom no-repeat;
+      width: 177px;
+      z-index: 2; }
+    .sub_tabnav ul .services_testimonials a {
+      background: url(/images/subnav/hire_us/testimonials_inactive.png) left bottom no-repeat;
+      width: 114px;
+      z-index: 1; }
+    .sub_tabnav ul .services_engagement a.active {
+      background: url(/images/subnav/hire_us/engagement_active.png) left bottom no-repeat;
+      z-index: 6; }
+    .sub_tabnav ul .services_research a.active {
+      background: url(/images/subnav/hire_us/research_active.png) left bottom no-repeat;
+      z-index: 6; }
+    .sub_tabnav ul .services_training a.active {
+      background: url(/images/subnav/hire_us/training_active.png) left bottom no-repeat;
+      z-index: 6; }
+    .sub_tabnav ul .services_wellbeing_programmes a.active {
+      background: url(/images/subnav/hire_us/wellbeing_active.png) left bottom no-repeat;
+      z-index: 6; }
+    .sub_tabnav ul .services_testimonials a.active {
+      background: url(/images/subnav/hire_us/testimonials_active.png) left bottom no-repeat;
+      z-index: 6; }
+    .sub_tabnav ul .show_my_fives a {
+      background: url(/images/subnav/grow/Donate-inactive.png) left bottom no-repeat;
+      z-index: 3;
+      margin-left: 2px; }
+    .sub_tabnav ul .show_my_fives a.active {
+      background: url(/images/subnav/grow/Donate-active.png) left bottom no-repeat; }
+
+.sub_central {
+  background: url(/images/layout/bg-center-content-bottom.png) no-repeat center bottom;
+  padding-bottom: 38px;
+  margin: 0 auto;
+  width: 610px; }
+  .sub_central .inner {
+    background: url(/images/layout/bg-center-content.png) repeat-y center top;
+    padding: 1px 39px;
+    color: #666; }
+  .sub_central h1 {
+    margin-bottom: 1em; }
+  .sub_central p {
+    line-height: 1.5;
+    margin-bottom: 1.5em; }
+  .sub_central ul {
+    list-style: disc;
+    margin-bottom: 1.5em;
+    margin-left: 15px; }
+
+.left_column {
+  float: left;
+  width: 165px; }
+
+.right_column {
+  float: right;
+  width: 165px; }
+
+.right_column_wide {
+  float: right;
+  width: 425px; }
+
+.take_the_test {
+  width: 700px;
+  margin: 40px auto 140px auto; }
+  .take_the_test h2 {
+    padding: 0 55px; }
+  .take_the_test .intro {
+    padding: 0px 60px;
+    margin-bottom: 27px;
+    color: #067D29;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.35em; }
+  .take_the_test .network_header {
+    padding: 0px 60px;
+    margin-bottom: 27px;
+    color: #067D29;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.35em; }
+  .take_the_test .errorExplanation {
+    padding: 10px 55px 20px;
+    color: red; }
+    .take_the_test .errorExplanation h2 {
+      background: none;
+      font-size: 1.2em;
+      line-height: 1.1em;
+      font-weight: bold;
+      padding: 0;
+      color: red;
+      margin-bottom: 10px; }
+    .take_the_test .errorExplanation ul {
+      font-size: 1.1em;
+      list-style-type: disc; }
+  .take_the_test .the_test {
+    padding-top: 40px;
+    background: url(/images/layout/bg-top-the-test.png) no-repeat center top;
+    color: #fff;
+    font-size: 1.1em; }
+    .take_the_test .the_test .inner {
+      background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;
+      overflow: hidden; }
+      .take_the_test .the_test .inner h1 {
+        font-size: 2.3em; }
+      .take_the_test .the_test .inner input[type=text], .take_the_test .the_test .inner input[type=password] {
+        border: 0 none;
+        font-size: 1.5em;
+        margin-left: 13px;
+        padding: 2px;
+        width: 280px;
+        margin: 0; }
+      .take_the_test .the_test .inner input[type=image] {
+        float: right;
+        margin-right: 30px;
+        margin-top: -33px;
+        padding-left: 74px;
+        background: url("/images/arrows/white_left_curve_south_east.png") no-repeat left 5px; }
+      .take_the_test .the_test .inner input[type=file] {
+        font-size: 0.8em;
+        padding: 10px; }
+      .take_the_test .the_test .inner label {
+        font-size: 1.3em;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px; }
+        .take_the_test .the_test .inner label .description {
+          font-size: 0.7em;
+          font-weight: normal;
+          color: #CDE5AE; }
+        .take_the_test .the_test .inner label .description_highlight {
+          font-size: 0.75em; }
+      .take_the_test .the_test .inner .form_input {
+        display: block; }
+        .take_the_test .the_test .inner .form_input label {
+          font-size: 0.95em;
+          display: inline;
+          margin-bottom: 0; }
+        .take_the_test .the_test .inner .form_input .label-radio {
+          margin-right: 0.6em; }
+        .take_the_test .the_test .inner .form_input select {
+          padding: 2px;
+          background-color: white;
+          border: 0 none;
+          font-size: 0.85em;
+          width: 280px; }
+      .take_the_test .the_test .inner .col_full {
+        clear: both;
+        display: block;
+        margin-bottom: 40px; }
+      .take_the_test .the_test .inner .col_odd {
+        margin-bottom: 40px;
+        margin-right: 20px;
+        width: 280px;
+        clear: left;
+        float: left; }
+      .take_the_test .the_test .inner .col_even {
+        margin-bottom: 30px;
+        float: left;
+        width: 280px; }
+      .take_the_test .the_test .inner .row_odd {
+        clear: both;
+        padding: 20px 60px; }
+        .take_the_test .the_test .inner .row_odd label .description {
+          color: #515152; }
+        .take_the_test .the_test .inner .row_odd .form_input .label-radio {
+          color: #515152; }
+      .take_the_test .the_test .inner .row_even {
+        clear: both;
+        margin-top: 10px;
+        padding: 40px 60px;
+        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top; }
+      .take_the_test .the_test .inner .arrow_lead_in {
+        display: block;
+        background: url("/images/arrows/white_left_curve_down.png") no-repeat left top;
+        height: 57px;
+        width: 22px;
+        position: relative; }
+      .take_the_test .the_test .inner .five_things {
+        padding: 0 60px; }
+        .take_the_test .the_test .inner .five_things .description {
+          background: url("/images/arrows/white_right_curve_south_east.png") no-repeat right top;
+          padding-right: 45px;
+          padding-top: 25px;
+          width: 325px;
+          font-size: 1.35em;
+          font-weight: bold;
+          line-height: 1.4em;
+          color: #D9EDBC;
+          margin-top: -10px;
+          margin-bottom: 15px; }
+        .take_the_test .the_test .inner .five_things li {
+          background: url(/images/green_whole_apple.png) no-repeat 0 5px;
+          color: white;
+          font-weight: bold;
+          list-style-position: inside;
+          padding: 3px 0 5px 8px;
+          margin-bottom: 7px; }
+        .take_the_test .the_test .inner .five_things input[type=text] {
+          padding: 6px;
+          width: 500px;
+          margin-left: 20px; }
+      .take_the_test .the_test .inner .extra_details .arrow_lead_in {
+        margin: -76px 0 20px -30px; }
+      .take_the_test .the_test .inner .extra_details .brain_dump {
+        background: url("/images/arrows/white_down.png") no-repeat right bottom;
+        padding-bottom: 50px;
+        padding-right: 30px;
+        margin-bottom: 0px;
+        width: 580px; }
+        .take_the_test .the_test .inner .extra_details .brain_dump textarea {
+          border: 0 none;
+          width: 570px;
+          height: 63px;
+          padding: 5px;
+          font-family: helvetica neue,arial,sans;
+          font-size: 1em; }
+      .take_the_test .the_test .inner .account_details {
+        padding: 20px 30px 0 60px; }
+        .take_the_test .the_test .inner .account_details .arrow_lead_in {
+          margin: -46px 0 20px -30px; }
+        .take_the_test .the_test .inner .account_details .form_input .label-radio-person_public_profile {
+          font-weight: normal;
+          font-size: 1.04em; }
+        .take_the_test .the_test .inner .account_details .policy_check {
+          background: url("/images/layout/bg-policy.png") no-repeat left top;
+          padding: 23px 16px;
+          width: 275px;
+          margin-bottom: 0px; }
+          .take_the_test .the_test .inner .account_details .policy_check a {
+            color: #E0EDCC;
+            text-decoration: none; }
+          .take_the_test .the_test .inner .account_details .policy_check .form_input input[type=checkbox] {
+            float: left; }
+          .take_the_test .the_test .inner .account_details .policy_check .form_input .label-checkbox {
+            margin-top: -5px;
+            font-size: 1.45em;
+            line-height: 1.5em;
+            display: block;
+            float: left;
+            width: 93%;
+            padding-left: 6px; }
+
+/* Page Elements */
+input[type=text], input[type=password] {
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 2px;
+  width: 280px;
+  margin: 0 0 10px 0; }
+
+input[type=submit] {
+  border: 1px solid #40863e;
+  background-color: #40863e;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 13px;
+  padding: 1px;
+  margin: 0 0 10px 0; }
+
+label {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.7em;
+  margin-bottom: 3px;
+  display: block; }
+  label .description {
+    font-size: 0.7em;
+    line-height: 1em; }
+
+.form_input {
+  display: block; }
+  .form_input label {
+    font-size: 1em;
+    display: inline;
+    margin-bottom: 0; }
+  .form_input .label-radio {
+    margin-right: 0.6em; }
+  .form_input select {
+    padding: 2px;
+    background-color: white;
+    border: 1px solid #a3c65d;
+    font-size: 0.85em;
+    width: 280px; }
+
+.errorExplanation {
+  padding: 10px 55px;
+  border: 2px solid #FE0308;
+  margin: 10px 0;
+  background: #fff;
+  color: #FE0308; }
+  .errorExplanation h2 {
+    background: none;
+    font-size: 1em;
+    line-height: 1.1em;
+    font-weight: bold;
+    padding: 0;
+    color: #FE0308;
+    margin-bottom: 10px; }
+  .errorExplanation ul {
+    font-size: 1.1em;
+    list-style-type: disc; }
+
+#flashes {
+  color: #40863e;
+  padding: 5px 10px;
+  background-color: #E3F4CB;
+  margin: 0 7px 0 9px; }
+
+.simple_form_box {
+  margin: 20px auto 0;
+  font-size: 1.2em;
+  line-height: 1.65em;
+  width: 540px;
+  margin-bottom: 20px;
+  background-image: url(/images/layout/bg-form-box-top.png);
+  background-repeat: no-repeat;
+  background-position: top; }
+  .simple_form_box h2 {
+    margin-bottom: 0px;
+    color: white; }
+  .simple_form_box .inner {
+    margin-top: 0;
+    padding: 10px 30px 30px;
+    position: relative;
+    color: white;
+    background-image: url(/images/layout/bg-form-box-main.png);
+    background-repeat: no-repeat;
+    background-position: bottom; }
+    .simple_form_box .inner input[type=text], .simple_form_box .inner input[type=password] {
+      width: 90%;
+      margin: 2px 0 8px; }
+    .simple_form_box .inner input[type=image] {
+      bottom: -15px;
+      position: absolute;
+      right: 20px; }
+
+.promotion {
+  padding-left: 5px;
+  margin-bottom: 10px; }
+  .promotion img {
+    padding: 4px;
+    border: 1px solid #d0d0d0; }
+
+.your_fives_take {
+  padding-top: 15px;
+  margin-bottom: 10px;
+  width: 160px;
+  background: url(/images/layout/your_fives_bg-top.png) no-repeat top left; }
+  .your_fives_take .inner {
+    position: relative;
+    padding: 10px 3px 100px;
+    background: url(/images/layout/your_fives_bg-bottom.png) no-repeat left bottom;
+    color: #E3F4CB;
+    font-size: 1.3em;
+    font-weight: bold; }
+    .your_fives_take .inner .heading {
+      display: block;
+      color: white;
+      font-size: 4.85em;
+      text-align: center;
+      padding-bottom: 24px; }
+      .your_fives_take .inner .heading .prefix {
+        display: block;
+        font-size: 0.28em;
+        padding: 24px 43px 9px 0;
+        margin: 0 7px;
+        background: url(/images/headings/green_apple.png) no-repeat right top; }
+    .your_fives_take .inner p {
+      margin-top: 15px;
+      padding: 0 12px; }
+    .your_fives_take .inner .go {
+      position: absolute;
+      bottom: 0;
+      right: -30px;
+      padding-left: 44px;
+      background: url(/images/arrows/white_left_curve_south_east.png) no-repeat left 5px; }
+
+.five-a-day {
+  font-size: 1.2em;
+  line-height: 1.65em;
+  float: right;
+  width: 425px;
+  color: white;
+  background-image: url(/images/layout/bg-bottom-five-a-day.png);
+  background-repeat: no-repeat;
+  background-position: bottom; }
+  .five-a-day .inner-top {
+    padding: 40px 30px 0;
+    margin-bottom: 61px;
+    position: relative;
+    background-image: url(/images/layout/bg-top-five-a-day.png);
+    background-repeat: no-repeat;
+    background-position: top; }
+  .five-a-day a {
+    color: #83ac44;
+    background-color: #CDE5AE;
+    text-decoration: none;
+    padding: 0 2px; }
+  .five-a-day a:hover {
+    background-color: white; }
+  .five-a-day h1 {
+    font-size: 1.8em;
+    margin-bottom: 0 !important; }
+  .five-a-day p {
+    background: url(/images/arrows/white_down.png) no-repeat right center;
+    color: #CDE5AE;
+    font-size: 1.3em;
+    padding: 10px 50px 20px 0; }
+  .five-a-day li {
+    background: url(/images/white_apple.png) no-repeat 0 4px;
+    color: #009523;
+    font-weight: bold;
+    list-style-position: inside;
+    padding: 5px 0 5px 8px; }
+  .five-a-day input[type=text] {
+    border: none;
+    font-size: 1.5em;
+    margin-left: 13px;
+    padding: 2px;
+    width: 290px; }
+  .five-a-day input[type=image] {
+    bottom: -70px;
+    position: absolute;
+    right: 20px; }
+
+.mindapple {
+  margin-bottom: 15px;
+  list-style: none; }
+  .mindapple img {
+    display: block;
+    float: left; }
+  .mindapple > div {
+    background: url(/images/green_apple.png) no-repeat left bottom;
+    border: 2px solid #009523;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin-left: 55px;
+    padding: 10px 15px 10px 80px; }
+  .mindapple span {
+    display: block; }
+  .mindapple .number {
+    color: #009523;
+    font-size: 1.4em;
+    margin: 0; }
+  .mindapple .apple {
+    margin-bottom: 1em; }
+  .mindapple .when, .mindapple .social {
+    color: #6d6f72;
+    margin: 0; }
+  .mindapple .social {
+    overflow: hidden; }
+    .mindapple .social p {
+      float: left; }
+    .mindapple .social a {
+      display: block;
+      float: right; }
+    .mindapple .social .like {
+      background: url(/images/icons/red_heart.png) no-repeat;
+      height: 19px;
+      text-indent: -9999px;
+      width: 19px; }
+    .mindapple .social .unlike {
+      background: url(/images/icons/red_heart_full.png) no-repeat;
+      height: 19px;
+      text-indent: -9999px;
+      width: 19px; }
+  .mindapple a {
+    color: #009523;
+    text-decoration: none; }
+
+/* Home page */
+.what_section {
+  margin: 20px 0 40px;
+  overflow: auto;
+  text-align: center; }
+
+.what_section li {
+  color: #009523;
+  display: inline-block;
+  font: bold 16px/1.25 "Helvetica Neue", Arial, sans-serif;
+  list-style: none;
+  padding-left: 80px;
+  vertical-align: top;
+  width: 140px; }
+
+.what_section .what {
+  padding-left: 0; }
+
+.what_section img {
+  display: block;
+  margin: 0 auto 10px; }
+
+.what_section .what img {
+  padding: 6px 0 0; }
+
+.what_section .share img {
+  padding: 3px 0 0; }
+
+.what_section .love img {
+  padding: 9px 0 0; }
+
+.what_section .share,
+.what_section .love {
+  background: url(/images/arrows/green_over.png) no-repeat 0 20%; }
+
+.what_section .discover {
+  background: url(/images/arrows/green_under.png) no-repeat 0 60%; }
+
+h2 {
+  background: url(/images/headings/green_bg.png) no-repeat left center;
+  color: #fff;
+  font-weight: normal;
+  line-height: 37px;
+  margin-bottom: 15px;
+  padding: 0 15px; }
+
+#errorExplanation h2 {
+  color: #FE0308; }
+
+h2.light_bg {
+  background: url(/images/headings/light_green_bg.png) no-repeat left center; }
+
+h2 span {
+  background: url(/images/headings/small_apple.png) no-repeat 5px 50%;
+  display: block;
+  padding-left: 35px; }
+
+.top_apples, .most_recent {
+  margin-top: 45px; }
+
+.top_apples h2 {
+  background-image: url(/images/headings/red_bg.png); }
+
+.main_content {
+  float: left;
+  width: 519px; }
+
+.user .left_column img {
+  border: 1px solid #d0d0d0;
+  display: block;
+  padding: 4px; }
+.user .left_column p {
+  color: #40863e;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 10px; }
+
+.promotional_video {
+  margin: 16px 0 30px; }
+
+dl.mindapples_definition {
+  font-family: 'times new roman', sans-serif;
+  width: 426px;
+  height: 142px;
+  margin: 26px 0 15px 13px;
+  background-image: url(/images/content/definition_bg.jpg);
+  font-size: 27px;
+  line-height: 1.2em;
+  padding: 24px 60px 0 34px; }
+  dl.mindapples_definition dt {
+    font-weight: bold; }
+    dl.mindapples_definition dt .phonetics {
+      font-weight: normal; }
+    dl.mindapples_definition dt .type {
+      font-weight: normal;
+      font-style: italic; }
+
+.small_search_box {
+  width: 398px; }
+  .small_search_box h2 {
+    background: #008c36 url(/images/layout/small_search_top.gif) top left no-repeat;
+    padding: 14px 15px 1px; }
+  .small_search_box .inner {
+    background: transparent url(/images/layout/your_fives_bg-bottom.png) bottom left repeat-x; }
+    .small_search_box .inner input#mindapple {
+      width: 329px; }
+    .small_search_box .inner input.submit-form {
+      right: -20px; }
+
+.small_login_box {
+  width: 398px; }
+  .small_login_box .inner input {
+    width: 329px; }
+  .small_login_box .inner input.submit-form {
+    width: auto;
+    right: -20px; }
+
+/* ========= network stuff ========= */
+.network_details .text {
+  width: 315px; }
+  .network_details .text h1 {
+    color: #067D29;
+    font-size: 2em;
+    margin-bottom: 25px; }
+  .network_details .text p {
+    color: #067D29;
+    font-size: 1.3em;
+    line-height: 1.35em;
+    font-weight: bold;
+    margin-bottom: 20px; }
+.network_details .logo {
+  width: 162px;
+  height: 162px;
+  overflow: hidden;
+  float: right; }
+
+.network_main_content .network_details {
+  margin: 38px 0 80px 33px; }
+
+#news .news_item {
+  margin-bottom: 1.5em; }
+#news h3 {
+  color: #555;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1;
+  padding: 0.5em 0; }
+#news p.meta {
+  color: #999; }
+
+ul.bulleted {
+  margin-left: 2em;
+  list-style-type: disc;
+  indent: 1em; }
+
+pre {
+  font-size: 110%; }
+
+#admin_link {
+  width: 50px;
+  height: 60px;
+  position: relative;
+  top: 344px;
+  left: -147px;
+  text-decoration: none;
+  padding-left: 55px;
+  padding-top: 24px;
+  padding-right: 7px;
+  padding-bottom: 37px;
+  color: red; }

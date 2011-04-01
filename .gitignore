@@ -16,9 +16,7 @@ db/*.sqlite3
 public/features/*
 config/initializers/personal.rb
 public/tmp.html
-.sass-cache
 public/system/*
-public/stylesheets/mindapples.css
 public/javascripts/midapple.js
 public/javascripts/all.js
 .rvmrc
