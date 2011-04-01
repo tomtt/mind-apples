@@ -302,7 +302,8 @@ body {
       color: #fff;
       display: block;
       line-height: 18px;
-      padding: 22px 31px 16px 20px;
+      margin-left:-21px;
+      padding:12px 15px 12px 0;
       position: relative;
       text-decoration: none;
       text-align: center;
@@ -310,7 +311,9 @@ body {
     .sub_tabnav ul a:hover {
       text-decoration: none; }
     .sub_tabnav ul .about a {
-      padding: 22px 31px 16px 20px; }
+      padding-top: 13px;
+      padding-bottom: 12px;  
+    }
     .sub_tabnav ul .about a.active {
       z-index: 7; }
     .sub_tabnav ul .grow {
@@ -336,31 +339,33 @@ body {
     .sub_tabnav ul .about_idea a {
       background: url(/images/subnav/about/The-idea-inactive.png) left bottom no-repeat;
       z-index: 6;
-      margin-left: -1px; }
+      margin-left: -1px;
+      width: 94px; }
     .sub_tabnav ul .about_team a {
       background: url(/images/subnav/about/Who-we-are-inactive.png) left bottom no-repeat;
       z-index: 5;
       margin-left: -22px;
-      padding-right: 29px; }
+      width: 114px; }
     .sub_tabnav ul .about_organisation a {
       background: url(/images/subnav/about/Organise-inactive.png) left bottom no-repeat;
       z-index: 4;
       margin-left: -26px;
-      padding-right: 33px;
-      padding-left: 23px; }
+      width: 126px; }
     .sub_tabnav ul .about_evidence a {
       background: url(/images/subnav/about/Research-inactive.png) left bottom no-repeat;
       z-index: 3;
-      margin-left: -22px;
-      padding-right: 37px; }
+      margin-left: -21px;
+      width: 105px; }
     .sub_tabnav ul .about_contact a {
       background: url(/images/subnav/about/Contact-inactive.png) left bottom no-repeat;
       z-index: 2;
-      margin-left: -24px; }
+      margin-left: -25px;
+      width: 87px; }
     .sub_tabnav ul .about_media a {
       background: url(/images/subnav/about/Media-inactive.png) left bottom no-repeat;
       z-index: 1;
-      padding-right: 35px; }
+      width: 80px;
+      margin-left: -17px; }
     .sub_tabnav ul .about_idea a.active {
       background: url(/images/subnav/about/The-idea-active.png) left bottom no-repeat; }
     .sub_tabnav ul .about_team a.active {
