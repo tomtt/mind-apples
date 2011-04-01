@@ -113,7 +113,7 @@ body {
       background-color: white;
       min-height: 1446px;
       margin-bottom: 211px;
-      overflow: auto;
+      padding-bottom: 60px;
       padding-top: 10px;
       font-size: 1.2em;
       line-height: 1.65em; }
@@ -522,12 +522,16 @@ body {
       list-style-type: disc; }
   .take_the_test .the_test {
     padding-top: 40px;
-    background: url(/images/layout/bg-top-the-test.png) no-repeat center top;
+    background: url(/images/layout/bg-top-the-test.png) no-repeat top center;
     color: #fff;
-    font-size: 1.1em; }
+    font-size: 1.1em; 
+    position: relative;
+    min-width: 0; }
     .take_the_test .the_test .inner {
       background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;
-      overflow: hidden; }
+      position: relative;
+      display: block;
+       }
       .take_the_test .the_test .inner h1 {
         font-size: 2.3em; }
       .take_the_test .the_test .inner input[type=text], .take_the_test .the_test .inner input[type=password] {
@@ -587,7 +591,9 @@ body {
         width: 280px; }
       .take_the_test .the_test .inner .row_odd {
         clear: both;
-        padding: 20px 60px; }
+        padding: 20px 60px;
+        position: relative;
+        width: 580px; }
         .take_the_test .the_test .inner .row_odd label .description {
           color: #515152; }
         .take_the_test .the_test .inner .row_odd .form_input .label-radio {
@@ -596,20 +602,21 @@ body {
         clear: both;
         margin-top: 10px;
         padding: 40px 60px;
-        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top; }
+        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
+        position: relative; }
       .take_the_test .the_test .inner .arrow_lead_in {
         display: block;
         background: url("/images/arrows/white_left_curve_down.png") no-repeat left top;
         height: 57px;
         width: 22px;
-        position: relative; }
+        position: absolute; }
       .take_the_test .the_test .inner .five_things {
         padding: 0 60px; }
         .take_the_test .the_test .inner .five_things .description {
           background: url("/images/arrows/white_right_curve_south_east.png") no-repeat right top;
           padding-right: 45px;
           padding-top: 25px;
-          width: 325px;
+          width: 340px;
           font-size: 1.35em;
           font-weight: bold;
           line-height: 1.4em;
@@ -628,7 +635,8 @@ body {
           width: 500px;
           margin-left: 20px; }
       .take_the_test .the_test .inner .extra_details .arrow_lead_in {
-        margin: -76px 0 20px -30px; }
+        top: -20px;
+        left: 24px; }
       .take_the_test .the_test .inner .extra_details .brain_dump {
         background: url("/images/arrows/white_down.png") no-repeat right bottom;
         padding-bottom: 50px;
@@ -643,9 +651,12 @@ body {
           font-family: helvetica neue,arial,sans;
           font-size: 1em; }
       .take_the_test .the_test .inner .account_details {
-        padding: 20px 30px 0 60px; }
+          padding: 20px 30px 0 60px;
+          width:610px;
+        }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
-          margin: -46px 0 20px -30px; }
+          top: -20px;
+          left: 24px; }
         .take_the_test .the_test .inner .account_details .form_input .label-radio-person_public_profile {
           font-weight: normal;
           font-size: 1.04em; }

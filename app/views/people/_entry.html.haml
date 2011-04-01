@@ -38,7 +38,7 @@
   .col_even
     = form.label :name, "Be proud. <span class='description'>What's your name? </span><br/><span class='description_highlight'>(very optional)</span>"
     = form.text_field :name
-  %br.clear
+  %div.clear
 
 .row_odd.account_details
   .arrow_lead_in
@@ -80,4 +80,4 @@
     .form_input
       = form.check_box(:policy_checked, :class => 'policy_checkbox')
       = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
-  %br.clear
+  %div.clear
