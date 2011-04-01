@@ -117,6 +117,10 @@ body {
       padding-top: 10px;
       font-size: 1.2em;
       line-height: 1.65em; }
+      .outer_page_wrapper .inner_page_wrapper .page_main h1 {
+        font-size: 2em;
+        line-height: 1.4em;
+      }
       .outer_page_wrapper .inner_page_wrapper .page_main .page_flip_top {
         width: 109px;
         height: 87px;
