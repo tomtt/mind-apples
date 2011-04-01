@@ -1004,10 +1004,11 @@ dl.mindapples_definition {
 
 .small_login_box {
   width: 398px; }
-  .small_login_box .inner input {
+  .small_login_box .inner input[type=text],
+  .small_login_box .inner input[type=password]
+   {
     width: 329px; }
   .small_login_box .inner input.submit-form {
-    width: auto;
     right: -20px; }
 
 /* ========= network stuff ========= */
