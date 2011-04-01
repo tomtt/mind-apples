@@ -46,7 +46,7 @@ class PagesController < ApplicationController
       "about"
     when "grow", "join_us", "partnerships", "volunteer", "grow_your_own"
       "grow"
-    when "services", "individuals", "workplaces", "schools", "universities", "communities", "healthcare"
+    when "services", "engagement", "research", "training", "wellbeing_programmes", "testimonials"
       "services"
     else
       "application"

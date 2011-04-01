@@ -15,6 +15,11 @@
       - t.named 'About us'
       - t.links_to about_path
       - t.highlights_on :controller => :pages, :action => :about
+      - t.highlights_on :controller => :pages, :action => :about_team
+      - t.highlights_on :controller => :pages, :action => :organisation
+      - t.highlights_on :controller => :pages, :action => :evidence
+      - t.highlights_on :controller => :pages, :action => :contact
+      - t.highlights_on :controller => :pages, :action => :media
       - t.html= {:class => 'about_us'}
     - unless current_user
       - add_tab do |t|
@@ -25,12 +30,17 @@
     - add_tab do |t|
       - t.named 'Explore'
       - t.links_to mindapples_path
-      - t.highlights_on :controller => :mindapples, :action => :index
+      - t.highlights_on :controller => :mindapples, :action => :index, :network_id => ""
       - t.html= {:class => 'five'}
     - add_tab do |t|
       - t.named 'Hire us'
       - t.links_to services_path
       - t.highlights_on :controller => :pages, :action => :services
+      - t.highlights_on :controller => :pages, :action => :engagement
+      - t.highlights_on :controller => :pages, :action => :research
+      - t.highlights_on :controller => :pages, :action => :training
+      - t.highlights_on :controller => :pages, :action => :wellbeing_programmes
+      - t.highlights_on :controller => :pages, :action => :testimonials
       - t.html= {:class => 'services'}
     - add_tab do |t|
       - t.named 'Join us'
@@ -46,4 +56,5 @@
         - t.named 'My community'
         - t.links_to network_path(current_user.network)
         - t.html= {:class => 'my_network'}
-        - t.highlights_on proc { ! params[:network].blank? }
+        - t.highlights_on proc { ! params[:network].blank? || ! params[:network_id].blank? }
+        
