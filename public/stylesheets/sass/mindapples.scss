@@ -1221,9 +1221,17 @@ dl.mindapples_definition {
   
   h2 {
     background: #008C36 url(/images/layout/small_search_top.gif) top left no-repeat;
+    padding: 14px 15px 1px;
   }
   .inner {
     background: transparent url(/images/layout/your_fives_bg-bottom.png) bottom left repeat-x;
+    
+    input#mindapple {
+      width: 329px;
+    }
+    input.submit-form {
+      right: -20px;
+    }
   }
 }
 
