@@ -1,7 +1,7 @@
 .right_column_wide
-  = render(:partial => "/shared/search")
+  = render(:partial => "/shared/small_search")
   - unless current_user
-    .simple_form_box
+    .simple_form_box.small_login_box
       %h2
         Already got an account?
       .inner

@@ -1235,6 +1235,20 @@ dl.mindapples_definition {
   }
 }
 
+.small_login_box {
+  width: 398px;
+  
+  .inner {
+    input {
+      width: 329px;
+    }
+    input.submit-form {
+      width: auto;
+      right: -20px;
+    }
+  }
+}
+
 /* ========= network stuff ========= */
 .network_details {
 
