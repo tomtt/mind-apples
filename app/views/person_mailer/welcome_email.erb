@@ -1,24 +1,23 @@
-Hello.
+﻿Hello.
 
 Thanks for taking the Mindapples Test at mindapples.org.
 
-Here are the activities you said are good for your mind:
+Here are the things you said are good for your mind:
 
 <%- @mindapples.each do |mindapple| -%>
- * <%= mindapple.suggestion %>
+<%= mindapple.suggestion %>
 <%- end -%>
 
-Your suggestions will be added to the Mindapples website, and we'll use them to help other people find mindapples that work for them and come up with their own 5-a-days. So, thank you!
+Your suggestions will be added to the community to help other people find new things that work for them. So thank you!
 
-We also want to help you practice your mindapples, so we've made you a personal page at:
+We've also made you your very own Mindapples page at:
 <%= @personal_page_url %>
 
 You can edit it any time via the link above, and share this link with your friends too.
 
-Thanks for being part of Mindapples. We'll be in touch from time to time with updates to the site and the project. In the meantime, why not follow our progress at http://blog.mindapples.org, get involved at http://mindapples.org/grow, or drop us a line any time at hello@mindapples.org.
+Thanks for being part of Mindapples. We'll be in touch from time to time with updates about the project. You can also follow our progress at http://blog.mindapples.org, get involved at http://mindapples.org/grow, or drop us a line any time at hello@mindapples.org.
 
 Best wishes,
-
 Andy
 
 --
