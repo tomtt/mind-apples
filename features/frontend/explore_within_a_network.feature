@@ -28,7 +28,8 @@ Feature: Explore network within a network
     And I fill in "Find new things to do" with "park"
     And I press "Find"
     
-    Then I should see "Here are the mindapples for the 4Beauty network"
+    Then I should see "This page only shows mindapples in the 4Beauty community that contain"
+
     And I should see "feeding deer in the park"
     And I should not see "running on the beach"
     And I should not see "gathering leaves in the park"
