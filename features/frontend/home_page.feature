@@ -5,17 +5,6 @@ Feature: Mindapples Home Page
   As a user
   I want to see the Mindapples home page
 
-  Scenario: As a curious cat I can see the What? section
-    When I go to the homepage
-    Then I should see the "green_question_mark.png" image with alt "question mark"
-    And I should see "What are your mindapples?"
-    And I should see the "green_comment_bubble.png" image with alt "comment bubble"
-    And I should see "Tell us what you do"
-    And I should see the "two_green_arrows.png" image with alt "two arrows"
-    And I should see "Find new things to do" 
-    And I should see the "green_heart.png" image with alt "heart"
-    And I should see "Love your mind"
-
   Scenario: As a curious cat I can see the 5 a day section
     When I go to the homepage
     Then I should see "What are your mindapples?"
