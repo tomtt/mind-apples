@@ -21,3 +21,16 @@ Feature: Only an admin can access the cms
     Given I am not logged in
     When I go to the CMS page
     Then I should be on the login page
+
+  Scenario: Seeing how many people an mindapples there are
+    Given I am an admin
+    And my login is "andy"
+    And my mindapples are:
+    | suggestion                       |
+    | wrestling with bears in the park |
+    | eating ice cream                 |
+    | running naked in the park        |
+
+    And I am logged in
+    When I go to the CMS page
+    And I should see "There are 1 people with 3 mindapples between them"    

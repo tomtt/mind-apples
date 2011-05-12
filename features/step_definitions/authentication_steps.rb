@@ -35,6 +35,13 @@ Given /^my mindapple is "([^\"]*)"$/ do |mindapple|
   Factory(:mindapple, :suggestion => mindapple,  :person => @me_person)
 end
 
+Given /^my mindapples are:$/ do |mindapples|
+  @me_person.mindapples.delete_all
+  mindapples.rows.each do |mindapple|
+    Factory(:mindapple, :suggestion => mindapple.first,  :person => @me_person)
+  end
+end
+
 Given /^I am logged in$/ do
   @me_person ||= Factory.create(:person)
   Given 'my password is "drowssap"'
