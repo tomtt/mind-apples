@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   before_filter :redirect_if_migrating_to_heroku
+  before_filter :http_auth_when_on_staging
 
   # rescue_from Exception, :with => :render_500
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
@@ -25,6 +26,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def http_auth_when_on_staging
+    if request.host =~ /staging/
+      authenticate_or_request_with_http_basic do |username, password|
+        MD5.new(username) == "de7e2387e909e44c6464cf801203b3c7" && MD5.new(password) == "19b5e81413e74a9105712cc970cd98e3"
+      end
+    end
+  end
 
   def redirect_if_migrating_to_heroku
     if MIGRATING_TO_HEROKU &&
