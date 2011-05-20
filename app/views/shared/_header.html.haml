@@ -1,4 +1,7 @@
 #header
+  - if request.host =~ /staging/
+    .staging_banner
+      Staging
   %a.logo{:href => root_path}
     %img{:src => "/images/header/main_logo.png", :alt => "Mindapples - love your mind?"}
   = render :partial => 'shared/login_controls'

@@ -1084,3 +1084,10 @@ pre {
   padding-right: 7px;
   padding-bottom: 37px;
   color: red; }
+
+.staging_banner {
+  font-size: 4em;
+  position: absolute;
+  left: 422px;
+  top: 53px;
+}
