@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem "rails", "2.3.4"
 gem "mysql"
-gem "authlogic"
+gem "authlogic", "2.1.6"
 gem "fastercsv"
 gem "haml"
 gem "feedtools"

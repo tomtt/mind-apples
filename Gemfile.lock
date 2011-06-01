@@ -172,7 +172,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest
-  authlogic
+  authlogic (= 2.1.6)
   autotest-rails
   aws-s3
   capybara
