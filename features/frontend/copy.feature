@@ -167,7 +167,7 @@ Feature: Proper layouts structure
    When I go to the "Hire us" page
    Then I should see "Research" in the sub nav
    When I follow "Research"
-   Then I should see "Research services" in the h1
+   Then I should see "Research and consultancy" in the h1
    And I should be on "/services/research"
 
  Scenario: Training hire us link
