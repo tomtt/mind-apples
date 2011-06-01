@@ -16,7 +16,6 @@ Rails::Initializer.run do |config|
   config.gem 'uuidtools'
   config.gem 'will_paginate'
   config.gem 'paperclip'
-  config.gem 'hassle'
   config.gem 'hoptoad_notifier'
 
   # Settings in config/environments/* take precedence over those specified here.
