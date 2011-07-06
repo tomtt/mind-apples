@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110327163728) do
+ActiveRecord::Schema.define(:version => 20110706112028) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(:version => 20110327163728) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "login",                     :default => "",    :null => false
-    t.string   "crypted_password",          :default => "",    :null => false
-    t.string   "password_salt",             :default => "",    :null => false
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token",         :default => "",    :null => false
     t.string   "single_access_token",       :default => "",    :null => false
     t.string   "perishable_token",          :default => "",    :null => false
@@ -96,7 +96,11 @@ ActiveRecord::Schema.define(:version => 20110327163728) do
     t.string   "ethnicity"
     t.string   "import_s3_etag"
     t.string   "type_description"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
   end
+
+  add_index "people", ["oauth_token"], :name => "index_people_on_oauth_token"
 
   create_table "people_imports", :force => true do |t|
     t.text     "s3_etag"
