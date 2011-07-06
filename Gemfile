@@ -14,7 +14,8 @@ gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
 gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
 gem "oauth"
-gem "authlogic-oauth", :require => "authlogic_oauth"
+gem "oauth2"
+gem "authlogic-connect"
 
 group :development, :test do
   gem "heroku"
