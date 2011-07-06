@@ -28,6 +28,8 @@ GEM
     activesupport (2.3.4)
     authlogic (2.1.6)
       activesupport
+    authlogic-oauth (1.0.8)
+      activesupport
     autotest-rails (4.1.0)
       ZenTest
     aws-s3 (0.6.2)
@@ -100,6 +102,7 @@ GEM
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
     nokogiri (1.4.4)
+    oauth (0.4.5)
     paperclip (2.3.8)
       activerecord
       activesupport
@@ -179,6 +182,7 @@ PLATFORMS
 DEPENDENCIES
   ZenTest (= 4.5.0)
   authlogic (= 2.1.6)
+  authlogic-oauth
   autotest-rails (= 4.1.0)
   aws-s3 (= 0.6.2)
   capybara (= 0.4.0)
@@ -197,6 +201,7 @@ DEPENDENCIES
   method_info (= 0.1.11)
   mocha (= 0.9.8)
   mongrel (= 1.1.5)
+  oauth
   paperclip (= 2.3.8)
   pg
   pickle (= 0.4.4)

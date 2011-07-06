@@ -13,6 +13,8 @@ gem "hoptoad_notifier", '2.3.12'
 gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
 gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
+gem "oauth"
+gem "authlogic-oauth", :require => "authlogic_oauth"
 
 group :development, :test do
   gem "heroku"
