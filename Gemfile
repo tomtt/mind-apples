@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", "2.3.4"
-gem "mysql"
+gem "pg"
 gem "authlogic", "2.1.6"
 gem "fastercsv"
 gem "haml"
@@ -13,11 +13,11 @@ gem "hoptoad_notifier"
 gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
 gem "taps", "~> 0.3.22"
 gem "aws-s3"
-gem "pg"
 
 group :development, :test do
   gem "heroku"
   gem "capybara"
+  gem "webrat"
   gem "database_cleaner"
   gem "cucumber-rails"
   gem "cucumber"

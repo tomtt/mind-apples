@@ -99,7 +99,6 @@ GEM
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
-    mysql (2.8.1)
     nokogiri (1.4.4)
     paperclip (2.3.8)
       activerecord
@@ -161,6 +160,10 @@ GEM
       sqlite3-ruby (~> 1.2)
     term-ansicolor (1.0.5)
     uuidtools (2.1.1)
+    webrat (0.7.3)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
     will_paginate (2.3.15)
     xml-simple (1.0.14)
     xpath (0.1.2)
@@ -191,7 +194,6 @@ DEPENDENCIES
   method_info
   mocha
   mongrel
-  mysql
   paperclip
   pg
   pickle
@@ -204,4 +206,5 @@ DEPENDENCIES
   taps (~> 0.3.22)
   term-ansicolor
   uuidtools
+  webrat
   will_paginate
