@@ -1,7 +1,8 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 require 'authlogic'
-
+require 'oauth'
+require 'authlogic_oauth'
 class ApplicationController < ActionController::Base
   MIGRATING_TO_HEROKU = false
 

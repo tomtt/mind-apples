@@ -14,7 +14,9 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => "pages", :action => "home"
   map.login '/login', :controller => "user_sessions", :action => "new"
   map.logout '/logout', :controller => "user_sessions", :action => "destroy"
-
+  map.twitter_login '/twitter_login', :controller => "user_sessions", :action => "twitter_login"
+  map.twitter_callback '/twitter_callback', :controller => "user_sessions", :action => "twitter_callback"
+  
   # Individual pages
   map.about '/about', :controller => "pages", :action => "about"
   map.team '/about/team', :controller => "pages", :action => "about_team"
