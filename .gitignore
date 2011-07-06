@@ -4,6 +4,7 @@ config/database.yml
 .#*
 *.cache
 *.log
+.bundle/*
 .DS_Store
 db/cstore/**
 doc/api
