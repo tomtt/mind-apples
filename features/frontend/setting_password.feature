@@ -6,15 +6,16 @@ Feature: Setting a password
   I want to be able to set a password that I can use to edit my page
 
   Scenario: Setting a password from the personal page editing form
-    When I go to the homepage
+   When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I press "Go"
-    And I fill in "person[password]" with "opensesame"
-    And I fill in "person[password_confirmation]" with "opensesame"
     And I check "person_policy_checked"
     And I press "Submit"
-    Then I should see "My five a day"
-    And I should see "Thanks for sharing your mindapples!"
+   Then I should see "Thanks for sharing your mindapples!"
+   When I fill in "person[password]" with "opensesame"
+    And I fill in "person[password_confirmation]" with "opensesame"
+    And I press "Submit"
+   Then I should see "My five a day"
 
   Scenario: Setting a password through an email
     Given I have access to the inbox of "lucy@example.com"

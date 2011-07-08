@@ -615,7 +615,8 @@ body {
         width: 22px;
         position: absolute; }
       .take_the_test .the_test .inner .five_things {
-        padding: 0 60px; }
+        padding: 0 60px;
+        margin-bottom: 30px; }
         .take_the_test .the_test .inner .five_things .description {
           background: url("/images/arrows/white_right_curve_south_east.png") no-repeat right top;
           padding-right: 45px;
@@ -661,20 +662,42 @@ body {
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
-        .take_the_test .the_test .inner .account_details .form_input .label-radio-person_public_profile {
+        .take_the_test .the_test .inner .form_input .label-radio-person_public_profile {
           font-weight: normal;
           font-size: 1.04em; }
-        .take_the_test .the_test .inner .account_details .policy_check {
+        .take_the_test .the_test .inner .email_opt_in {
+          margin-bottom: 16px; }
+          .take_the_test .the_test .inner .email_opt_in {
+            color: #515152; }
+          .take_the_test .the_test .inner .email_opt_in p {
+            display: block;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 4px; }
+        .take_the_test .the_test .inner .policy_check {
           background: url("/images/layout/bg-policy.png") no-repeat left top;
           padding: 23px 16px;
           width: 275px;
-          margin-bottom: 0px; }
-          .take_the_test .the_test .inner .account_details .policy_check a {
+          height: 66px; }
+          .take_the_test .the_test .inner .information_usage {
+            font-size: 1.6em;
+            font-weight: bold;
+            line-height: 1.2;
+            padding-top: 4px; }
+          .take_the_test .the_test .inner .policy_check label {
+            padding-right: 20px;
+            width: 230px;
+            float:right;
+            font-size: 1.3em;
+            margin-top: -10px;
+            margin-bottom: 10px; }
+          .take_the_test .the_test .inner .policy_check a {
             color: #E0EDCC;
             text-decoration: none; }
-          .take_the_test .the_test .inner .account_details .policy_check .form_input input[type=checkbox] {
+          .take_the_test .the_test .inner .policy_check .form_input input[type=checkbox] {
             float: left; }
-          .take_the_test .the_test .inner .account_details .policy_check .form_input .label-checkbox {
+          .take_the_test .the_test .inner .policy_check .form_input .label-checkbox {
             margin-top: -5px;
             font-size: 1.45em;
             line-height: 1.5em;

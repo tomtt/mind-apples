@@ -1,0 +1,22 @@
+- content_for :head do
+  = set_focus_to_id('person_email')
+
+.take_the_test
+  .inner
+    = render :partial => 'networks/network_details'
+
+    %h2.light_bg
+      Join the mindapples community
+    %p.intro
+      Now that you've let us know the things that you do to keep a healthy mind, why not join our community. Share your mindapples, find out what your friends like to do too.
+    
+    
+    - form_for resource, :html => { :class => "survey", :multipart => true} do |form|
+      = error_messages_for(:person, :header_message => header_error_message(resource.errors.count), :message => "")
+      = hidden_field_tag 'register_form', true
+      
+      .the_test
+        .inner
+          = render(:partial => 'account_details', :locals => {:form => form, :registration_page => true })
+          = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
+          %div.clear

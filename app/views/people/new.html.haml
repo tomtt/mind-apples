@@ -1,3 +1,7 @@
+- content_for :head do
+  = set_focus_to_id('person_mindapples_attributes_0_suggestion')
+  
+  
 .take_the_test
   .inner
     = render :partial => 'networks/network_details'
@@ -17,3 +21,4 @@
     %p.intro
       If eating five fruit and veg a day is good for our bodies, what about our minds? Share the 5-a-day for your mind and tell us what you do that's good for your mind.
     = render(:partial => 'form')
+    

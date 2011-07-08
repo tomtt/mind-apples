@@ -4,7 +4,7 @@ gem "rails", "2.3.4"
 gem "pg"
 gem "authlogic", "2.1.6"
 gem "fastercsv", '1.5.3'
-gem "haml", '3.0.25'
+gem "haml", '3.0.12'
 gem "feedtools", '0.2.29'
 gem "uuidtools", '2.1.1'
 gem "will_paginate", '2.3.15'
@@ -26,13 +26,13 @@ group :development, :test do
   gem 'treetop', '1.4.9'
   gem "spork"
   gem "launchy"
-  gem "factory_girl", "1.3.2", :git => "https://github.com/thoughtbot/factory_girl.git", :branch => "1.3.x"
-  gem "pickle", '0.4.4'
+  gem "factory_girl", "1.2.1"
+  gem "pickle", '0.2.10'
   gem "string_to_editor", '0.0.2'
   gem "method_info", '0.1.11'
   gem "mongrel", '1.1.5'
   gem "term-ansicolor", '1.0.5'
-  gem "email_spec", '1.0.0'
+  gem "email_spec", '0.6.3'
   gem "mocha", '0.9.8'
 end
 

@@ -19,7 +19,7 @@ Feature: Profile photo
   Scenario: As a social butterfly I can add a photo
     Given I am on my edit page
     And I fill all mandatory fields
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should not see the default profile picture
     And I should not see "Remove this picture"
     And I should see "person[avatar]" field
@@ -32,7 +32,7 @@ Feature: Profile photo
     Given profile for "gandy" with picture "smile.jpg"
     When I am on my edit page
     And I fill all mandatory fields
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
     And I should see "Remove this picture"
@@ -46,7 +46,7 @@ Feature: Profile photo
     Given profile for "gandy" with picture "smile.jpg"
     When I am on my edit page
     And I fill all mandatory fields
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
     And I should see "Remove this picture"
@@ -59,7 +59,7 @@ Feature: Profile photo
   Scenario: As a social butterfly I am not able upload photo bigger than 500 kb
     Given I am on my edit page
     And I fill all mandatory fields
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should not see the default profile picture
     And I should see "person[avatar]" field
     When I upload the picture "wallpaper.jpg"
@@ -72,7 +72,7 @@ Feature: Profile photo
     Given profile for "gandy" with picture "smile.jpg"
     When I am on my edit page
     And I fill all mandatory fields
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
     And I should see "Remove this picture"
@@ -86,7 +86,7 @@ Feature: Profile photo
 
   Scenario: As a social butterfly I can't see new picture in edit form when some error occur
     Given I am on my edit page
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should see "person[avatar]" field
     And I should not see "Remove this picture"
     And I upload the picture "smile.jpg"
@@ -99,7 +99,7 @@ Feature: Profile photo
   Scenario: As a social butterfly I can't see newly uploaded picture in edit form when some error occur
     Given profile for "gandy" with picture "smile.jpg"
     When I am on my edit page
-    And I should see "Smile please. Choose a profile picture."
+    And I should see "Profile picture."
     And I should see a profile picture "smile.jpg"
     And I should see "person[avatar]" field
     And I should see "Remove this picture"

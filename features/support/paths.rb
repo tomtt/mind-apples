@@ -18,6 +18,9 @@ module NavigationHelpers
       admin_root_path
     when /^the "take the test" page$/
       new_person_path
+    when /^the "register" page for person "([^\"]*)"$/
+      p = Person.find_by_name $1
+      register_person_path(p)
     when /^the full form page$/
       '/people/new'
     when /^the "about" page$/

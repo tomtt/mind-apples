@@ -48,11 +48,13 @@ Feature: Handle taken email gracefully
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I press "Go"
-    And I fill in "Join us. Choose a username." with "banana_man"
+    Then I should be on the "take the test" page
+    And I check "person_policy_checked"
+    When I press "Submit"
+    And I fill in "Username." with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
-    And I check "person_policy_checked"
-    And I fill in "E-mail us" with ""
+    And I fill in "Email" with ""
     And I press "Submit"
     And I should not see "Thank you for sharing your mindapples."
     Then I should not see "That email address is already taken. Please choose again."
@@ -62,11 +64,13 @@ Feature: Handle taken email gracefully
     When I go to the homepage
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Wrestling with bears"
     And I press "Go"
-    And I fill in "Join us. Choose a username." with "banana_man"
+    Then I should be on the "take the test" page
+    And I check "person_policy_checked"
+    When I press "Submit"
+    And I fill in "Username." with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
-    And I check "person_policy_checked"
-    And I fill in "E-mail us" with "asas"
+    And I fill in "Email" with "asas"
     And I press "Submit"
     And I should not see "Thank you for sharing your mindapples."
     Then I should see "That doesn't look like a valid e-mail address. Please try again."

@@ -18,7 +18,6 @@ describe PeopleController do
     end
   end
 
-
   def do_request
     get 'show', :id => 'param_value'
   end
@@ -147,6 +146,8 @@ describe PeopleController do
         mock_avatar = mock('avatar', :url => 'avatar_url')
         mock_person.stubs(:avatar).returns(mock_avatar)
         mock_person.stubs(:avatar=)
+        mock_person.stubs(:attributes=)
+        mock_person.stubs(:valid?)
 
         put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
       end
@@ -399,7 +400,7 @@ describe PeopleController do
         PageCode.stubs(:code).returns('genlogin')
         UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
         post(:create, "person" => {"login" => ''})
-        response.should redirect_to(edit_person_path(controller.resource))
+        response.should redirect_to(register_person_path(controller.resource))
       end
 
       it "show page if params contains pid" do
@@ -594,6 +595,11 @@ describe PeopleController do
       it "dont save nil checkbox param as true" do
         post(:update, "person" => {})
         params['person']['policy_checked'].should be_nil
+      end
+      
+      it "should set the flash message correctly if the update comes from the register form" do
+        post(:update, "person" => {"login" => 'gandy', 'policy_checked' => "1"}, "register_form" => "true")
+        flash[:notice].should == "Thanks for registering your Mindapples page"
       end
     end
   end
@@ -887,5 +893,12 @@ describe PeopleController do
       assigns[:favourites].size.should == person.liked_mindapples.size
     end
   end
-
+  
+  describe "register" do
+    it "should redirect the user to root if the the user is not logged in" do
+      person = Factory.create(:person, :email => "e@mail.com", :login => 'login_test')
+      get :register, :id => person.login
+      response.should redirect_to(root_path)
+    end
+  end
 end

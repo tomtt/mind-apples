@@ -13,5 +13,6 @@
         = person_form.hidden_field(:network_url, :value => @network.url)
       - elsif params[:network]
         = person_form.hidden_field(:network_url, :value => params[:network])
-      = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
+      -unless person_form.object.new_record?
+        = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
       %div.clear

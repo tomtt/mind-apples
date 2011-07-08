@@ -29,8 +29,9 @@ class ApplicationController < ActionController::Base
   private
 
   def http_auth_when_on_staging
-    if request.host =~ /staging/
+    if request.host =~ /staging/ && !ENV["disable_http_auth"]
       authenticate_or_request_with_http_basic do |username, password|
+        require "md5"
         MD5.new(username) == "de7e2387e909e44c6464cf801203b3c7" && MD5.new(password) == "19b5e81413e74a9105712cc970cd98e3"
       end
     end

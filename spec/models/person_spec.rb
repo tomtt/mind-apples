@@ -47,6 +47,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Person do
+  context "validations" do
+    it "should validate length of password" do
+      us = Factory.build :person
+      us.password = "abc"
+      us.password_confirmation = "abc"
+      us.valid?
+      us.errors.should_not be_nil
+      us.errors.on(:password).should include("Please choose a valid password (minimum is 4 characters)")
+    end
+  end
+  
   describe "ensuring correct number of mindapples" do
     it "should assign five mindapples if it has none" do
       person = Person.new

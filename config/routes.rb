@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resources :people, :as => "person", :except => [:index]
   map.connect '/person/:id/favourites', :controller => 'people', :action => 'favourites'
-
+  map.register_person '/person/:id/register', :controller => 'people', :action => 'register'
   map.resources :password_resets
 
   # Named routes

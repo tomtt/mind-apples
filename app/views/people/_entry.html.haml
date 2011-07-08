@@ -20,7 +20,7 @@
     = form.label :occupation, "Your thing. <span class='description'>What's your occupation, paid or not?</span>"
     = form.text_field :occupation
   .col_even
-    = form.label :location, "Passport control. <span class='description'>Which country are you from?</span>"
+    = form.label :location, "Passport."
     = form.text_field :location
   .col_full.health_check
     = form.label :health_check, "Health check. <span class='description'>How would you rate your mental health? </span><span class='description_highlight'>(1 is bad, 5 good)</span>"
@@ -38,46 +38,19 @@
   .col_even
     = form.label :name, "Be proud. <span class='description'>What's your name? </span><br/><span class='description_highlight'>(very optional)</span>"
     = form.text_field :name
+  - if form.object.new_record?
+    .col_odd
+      %p.information_usage We will use this information to find out... to research... to collate... to put together recommendations... make suggestions to others, we will not use your name or email address in doing so.
+    .col_even
+      .form_input.email_opt_in
+        %p Read all about it.
+        = form.check_box(:email_opt_in, :class => 'email_opt_in')
+        = form.label :email_opt_in, "Want to recieve our newsletter", :class => 'label-radio label-radio-person_public_profile'
+      .form_input.policy_check
+        = form.check_box(:policy_checked, :class => 'policy_checkbox')
+        = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
+    = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
   %div.clear
 
-.row_odd.account_details
-  .arrow_lead_in
-  -if form.object.login_set_by_user?
-    .col_odd.hide
-      = form.text_field :login
-  -else
-    .col_odd
-      = form.label :login, "Join us. <span class='description'>Choose a username.</span>"
-      = form.text_field :login
-  .col_even
-    = form.label :password, "Smile please. <span class='description'>Choose a profile picture.</span>"
-    = form.file_field :avatar
-    - if resource.avatar.exists?
-      = image_tag resource.avatar.url(:medium)
-      %input{:type=>"checkbox", :name=>"delete_avatar", :value=>1, :checked=>false} Remove this picture.
-  .col_odd
-    %input{:type=>"hidden", :name=>"pid", :value=>resource.id}
-    = form.label :password, "Don't go! <span class='description'>Pick a password to edit your page.</span>"
-    -if form.object.login_set_by_user?
-      = form.password_field :password
-    -else
-      = form.password_field :password, :value=>''
-  .col_even
-    = form.label :password_confirmation, "<span class='description'>And again with the password please.</span>"
-    -if form.object.login_set_by_user?
-      = form.password_field :password_confirmation
-    -else
-      = form.password_field :password_confirmation, :value=>''
-  .col_odd
-    = form.label :public_profile, "Show yourself. <span class='description'>Can other people see your profile?</span>"
-    .form_input
-      = form.radio_button(:public_profile, true)
-      = form.label "public_profile_true", "I'm happy to make my identity public.", :class => 'label-radio label-radio-person_public_profile'
-      %br
-      = form.radio_button(:public_profile, false)
-      = form.label "public_profile_false", "No, I want to stay anonymous please", :class => 'label-radio label-radio-person_public_profile'
-  .col_even.policy_check
-    .form_input
-      = form.check_box(:policy_checked, :class => 'policy_checkbox')
-      = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
-  %div.clear
+- unless form.object.new_record?
+  = render :partial => 'account_details', :locals => { :form => form, :registration_page => false}

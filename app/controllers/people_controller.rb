@@ -3,7 +3,7 @@ require 'sha1'
 class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
   before_filter :set_fields_to_create_valid_person, :only => [:create]
-  before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update]
+  before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update, :register]
   before_filter :redirect_unless_profile_page_is_public, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
   before_filter :assign_network, :only => [:new]
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
 
   def update
     self.resource = find_resource
-    self.resource.protected_login= (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
+    self.resource.protected_login = (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
 
     if password_invalid?
       @resource_saved = false
@@ -34,6 +34,10 @@ class PeopleController < ApplicationController
     else
       @resource_saved = resource.update_attributes(params[resource_name])
     end
+  end
+  
+  def register
+    self.resource = find_resource
   end
 
   response_for :show, :new, :edit do |format|
@@ -47,7 +51,11 @@ class PeopleController < ApplicationController
       update_logged_user
       delete_profile_picture unless params['delete_avatar'].nil?
       format.html do
-        flash[:notice] = "Thank you for updating your Mindapples page."
+        if params[:register_form]
+          flash[:notice] = "Thanks for registering your Mindapples page"
+        else
+          flash[:notice] = "Thank you for updating your Mindapples page."
+        end
         redirect_to resource_path
       end
       format.js
@@ -67,7 +75,7 @@ class PeopleController < ApplicationController
           login_as_new_user
           flash[:message] = 'Thanks for sharing your mindapples!'
           if @generated_login && params[:pid].nil?
-            redirect_to edit_resource_path(resource)
+            redirect_to register_resource_path(resource)
           else
             redirect_to resource_path(resource)
           end
@@ -138,9 +146,12 @@ class PeopleController < ApplicationController
   end
   
   def password_invalid?
+    # TODO: refactor validations onto the model level not the controller level if possible
     person = Person.find_by_id(params[:pid])
 
     if person && !person.login_set_by_user? && person.login !=  params["person"]["login"] && params["person"]["password"].blank?
+      resource.attributes = params["person"]
+      resource.valid?
       resource.errors.add('Please', " choose a valid password (minimum is 4 characters)")
       return true
     end

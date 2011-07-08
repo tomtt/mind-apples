@@ -7,14 +7,11 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'haml'
-  config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
-  config.gem 'email_spec', :version => "=0.6.3"
-  config.gem 'mocha'
-  config.gem 'pickle'
-  config.gem 'feedtools', :lib => 'feed_tools', :source => 'http://gems.github.com' 
-  config.gem 'uuidtools'
-  config.gem 'will_paginate'
+  #TODO: These gems have been left here so that gems are 'required' early enough to be picked up in tests
+  # We should be expicitly calling require in the initialisers if possible
+  config.gem 'haml', :version => '3.0.12'
+  
+
   config.gem 'paperclip'
   config.gem 'hoptoad_notifier'
 

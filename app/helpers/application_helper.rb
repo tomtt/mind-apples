@@ -49,4 +49,8 @@ module ApplicationHelper
     return "Oh dear, there were #{errors_count} problems:" if errors_count > 1
     "Oh dear, there was a problem:"
   end
+  
+  def set_focus_to_id(id)
+    javascript_tag("$('##{id}').focus()");
+  end
 end
