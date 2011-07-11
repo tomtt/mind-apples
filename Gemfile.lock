@@ -70,7 +70,7 @@ GEM
     gem_plugin (0.2.3)
     gherkin (2.3.10)
       json (>= 1.4.6)
-    haml (3.0.12)
+    haml (3.1.2)
     heroku (2.3.6)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -175,7 +175,7 @@ DEPENDENCIES
   fakeweb (= 1.2.8)
   fastercsv (= 1.5.3)
   feedtools (= 0.2.29)
-  haml (= 3.0.12)
+  haml (= 3.1.2)
   heroku
   hoptoad_notifier (= 2.3.12)
   launchy
