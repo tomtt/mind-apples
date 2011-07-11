@@ -51,6 +51,14 @@
         = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
     = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
   %div.clear
+  
+  - form_for UserSession.new, :url => user_session_path, :html => { :method => :post, :class => "authentication_form" } do |f|
+    = f.error_messages
+    / authentication_type should be "user" or "session", based on controller
+    = oauth_login_hidden_input
+    = image_tag "/images/icons/twitter.png"
+    = radio_button_tag :oauth_provider, 'twitter'
+    = submit_tag "Login", :class => :submit
 
 - unless form.object.new_record?
   = render :partial => 'account_details', :locals => { :form => form, :registration_page => false}
