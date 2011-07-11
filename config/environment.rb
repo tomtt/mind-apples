@@ -11,7 +11,6 @@ Rails::Initializer.run do |config|
   # These should be moved out of the environment
   config.gem 'haml', :version => '3.0.12'
   config.gem 'paperclip'
-  config.gem 'hoptoad_notifier'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
