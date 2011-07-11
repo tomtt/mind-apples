@@ -24,3 +24,4 @@ script/s3_server
 script/s3_console
 rerun.txt
 .bundle
+config/authlogic.yml
