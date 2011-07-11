@@ -34,6 +34,7 @@ group :development, :test do
   gem "term-ansicolor", '1.0.5'
   gem "email_spec", '0.6.3'
   gem "mocha", '0.9.8'
+  gem 'fakeweb', '1.2.8'
 end
 
 group :dev_extra do
