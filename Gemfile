@@ -15,7 +15,7 @@ gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
 gem "nokogiri", '1.5.0'
 
-group :development, :test do
+group :development, :test, :cucumber do
   gem "heroku"
   gem "capybara", '0.4.0'
   gem "webrat", '0.7.3'
