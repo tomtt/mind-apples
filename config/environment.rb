@@ -7,11 +7,9 @@ RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  #TODO: These gems have been left here so that gems are 'required' early enough to be picked up in tests
-  # We should be expicitly calling require in the initialisers if possible
+  # TODO: For some reason i cannot require these gems in the initialisers.
+  # These should be moved out of the environment
   config.gem 'haml', :version => '3.0.12'
-  
-
   config.gem 'paperclip'
   config.gem 'hoptoad_notifier'
 
