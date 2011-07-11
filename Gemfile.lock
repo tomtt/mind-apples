@@ -182,6 +182,7 @@ DEPENDENCIES
   method_info (= 0.1.11)
   mocha (= 0.9.8)
   mongrel (= 1.1.5)
+  nokogiri (= 1.5.0)
   paperclip (= 2.3.8)
   pg
   pickle (= 0.2.10)
