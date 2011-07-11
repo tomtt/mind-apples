@@ -19,9 +19,10 @@ group :development, :test do
   gem "capybara", '0.4.0'
   gem "webrat", '0.7.3'
   gem "database_cleaner", '0.6.0'
-  gem "cucumber-rails", '0.3.2'
   gem "cucumber", '0.10.0'
+  gem "cucumber-rails", '0.3.2'
   gem "cuke-inspector", '0.0.8'
+  gem 'rspec', '1.3.0'
   gem "rspec-rails", "1.3.2"
   gem 'treetop', '1.4.9'
   gem "spork"
@@ -35,6 +36,8 @@ group :development, :test do
   gem "email_spec", '0.6.3'
   gem "mocha", '0.9.8'
   gem 'fakeweb', '1.2.8'
+  gem 'polyglot'
+  gem 'rake', '0.8.7'
 end
 
 group :dev_extra do

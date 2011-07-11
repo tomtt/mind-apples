@@ -1,6 +1,5 @@
 @pivotal_3999918
 
-#Homepage copy check
 Feature: Proper layouts structure
   In order to explain why Mindapples
   As the evil overlord
