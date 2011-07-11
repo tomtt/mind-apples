@@ -4,7 +4,7 @@ gem "rails", "2.3.4"
 gem "pg"
 gem "authlogic", "2.1.6"
 gem "fastercsv", '1.5.3'
-gem "haml", '3.0.12'
+gem "haml", '3.1.2'
 gem "feedtools", '0.2.29'
 gem "uuidtools", '2.1.1'
 gem "will_paginate", '2.3.15'
