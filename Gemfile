@@ -15,6 +15,10 @@ gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
 gem "nokogiri", '1.5.0'
 
+gem "oauth"
+gem "oauth2"
+gem "authlogic-connect", '0.0.5.1'
+
 group :development, :test, :cucumber do
   gem "heroku"
   gem "capybara", '0.4.0'
