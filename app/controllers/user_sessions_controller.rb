@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  resources_controller_for :user_session, :singleton => true, :load_enclosing => false
+  resources_controller_for :user_session, :except => :create, :singleton => true, :load_enclosing => false
 
   # before_filter :require_no_user, :only => [:new, :create]
   before_filter :logout_if_current_user, :only => [:create]
@@ -25,23 +25,30 @@ class UserSessionsController < ApplicationController
   #   end
   # end
 
-  response_for :create do |format|
-    format.html do
-      if @resource_saved
-        flash[:notice] = "Login successful!"
-        if network = Network.find_by_id(params["network_id"])
-          redirect_back_or_default network_path(network)
-        else
-          redirect_back_or_default person_path(resource.person)
-        end
-      else
-        if params[:network_id]
-          @network = Network.find_by_id(params[:network_id])
-        end
-        render :action => :new
-      end
-    end
+  def create
+    @user_session = UserSession.new(params[:user_session])
+    @resource_saved = @user_session.save
+    
+    respond_to do |format|
+       format.html do
+         if @resource_saved
+           flash[:notice] = "Login successful!"
+           if network = Network.find_by_id(params["network_id"])
+             redirect_back_or_default network_path(network)
+           else
+             redirect_back_or_default person_path(resource.person)
+           end
+         else
+           if params[:network_id]
+             @network = Network.find_by_id(params[:network_id])
+           end
+           render :action => :new
+         end
+       end
+     end
   end
+
+ 
 
   def destroy
     @last_logged_in_user_id = current_user.to_param
