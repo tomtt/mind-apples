@@ -4,8 +4,9 @@ class UserSessionsController < ApplicationController
   # before_filter :require_no_user, :only => [:new, :create]
   before_filter :logout_if_current_user, :only => [:create]
   before_filter :require_user, :only => :destroy
+  skip_before_filter :http_auth_when_on_staging, :only => [:create]
 
-  # def create
+  # def create_from_oauth
   #   @user_session = UserSession.new(params[:user_session])
   #   # uses a block to prevent double render error...
   #   # because oauth and openid use redirects
