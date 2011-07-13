@@ -44,6 +44,11 @@ module ApplicationHelper
     '<a href="http://twitter.com/home?status=I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+http%3A%2F%2Fbit.ly%2Fc5Ylta" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter.png" alt="twitter" /></a>
      <a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url='+root_url+'" id="addthis_button_facebook"  target="_blank"><img src="/images/icons/facebook.png" alt="facebook" /></a>'
   end
+  
+  def share_this_icons_large
+    '<a href="http://api.addthis.com/oexchange/0.8/offer?url='+root_url+'" id="addthis_button_facebook"  target="_blank"><img src="/images/icons/facebook_large.png" alt="facebook" /></a>
+    <a href="http://twitter.com/home?status=I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+http%3A%2F%2Fbit.ly%2Fc5Ylta" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter_large.png" alt="twitter" /></a>'
+  end
 
   def header_error_message(errors_count)
     return "Oh dear, there were #{errors_count} problems:" if errors_count > 1

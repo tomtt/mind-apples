@@ -37,6 +37,16 @@ describe ApplicationHelper do
     end
   end
   
+  describe "share_this_icons_large" do
+    it "returns code for twitter sharing" do
+      share_this_icons_large.should include('http://twitter.com/home?status=')
+    end
+
+    it "returns code for facebook sharing" do
+      share_this_icons_large.should include('http://api.addthis.com/oexchange/0.8/forward/facebook/offer')
+    end
+  end
+  
   describe "render proper error header" do
     it "for 1 error" do
       header_error_message(1).should == "Oh dear, there was a problem:"

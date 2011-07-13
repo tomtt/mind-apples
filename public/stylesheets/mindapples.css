@@ -12,6 +12,10 @@ ul {
 .git-version {
   display: none; }
 
+a#share_on_social_media {
+  display: none;
+}
+
 .simple_button_1 {
   height: 24px;
   line-height: 24px;
@@ -1119,12 +1123,28 @@ pre {
 
 
 /* Light box */
-
-#fancybox-inner {
-    width: auto!important;
-    height: auto!important;
+#fancybox-content #share {
+  font-family: helvetica, arial, sans;
 }
-#fancybox-wrap{
-    width: auto!important;
-    height: auto!important;
+#fancybox-content #share h1 {
+    background: url(/images/headings/green_bg.png) repeat-x;
+    color: #fff;
+    font-weight: normal;
+    line-height: 37px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+#fancybox-content #share p {
+    color: #067D29;
+    font-weight: normal;
+    font-size: 2.0em;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+#fancybox-content #share div.share_icons {
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
 }
