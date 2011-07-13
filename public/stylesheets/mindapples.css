@@ -1114,3 +1114,17 @@ pre {
   left: 422px;
   top: 53px;
 }
+
+
+
+
+/* Light box */
+
+#fancybox-inner {
+    width: auto!important;
+    height: auto!important;
+}
+#fancybox-wrap{
+    width: auto!important;
+    height: auto!important;
+}
