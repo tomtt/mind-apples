@@ -51,6 +51,6 @@ module ApplicationHelper
   end
   
   def set_focus_to_id(id)
-    javascript_tag("$('##{id}').focus()");
+    javascript_tag("$().ready(function(){ $('##{id}').focus() });");
   end
 end
