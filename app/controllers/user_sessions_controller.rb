@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  resources_controller_for :user_session, :except => :create, :singleton => true, :load_enclosing => false
+  resources_controller_for :user_session, :except => [:create], :singleton => true, :load_enclosing => false
 
   # before_filter :require_no_user, :only => [:new, :create]
   before_filter :logout_if_current_user, :only => [:create]
@@ -24,21 +24,18 @@ class UserSessionsController < ApplicationController
   #     end
   #   end
   # end
-
+  
   def create
     debugger
     @user_session = UserSession.new(params[:user_session])
-    @resource_saved = @user_session.save
-    
-    
-    
-    
-    
+    # @resource_saved = @user_session.save    
     @user_session.save do |result|
+      # Find or create the user based on the session (result)
       if result
         flash[:notice] = "Login successful!"
-        redirect_to current_user ? profile_url(current_user) : login_url
+        # redirect_to current_user ? person_path(current_user)
       else
+        debugger
         if @user_session.errors.on(:user)
           # if we set error on the base object, likely it's because we didn't find a user
           render :action => :confirm
@@ -48,23 +45,23 @@ class UserSessionsController < ApplicationController
       end
     end
     
-    respond_to do |format|
-       format.html do
-         if @resource_saved
-           flash[:notice] = "Login successful!"
-           if network = Network.find_by_id(params["network_id"])
-             redirect_back_or_default network_path(network)
-           else
-             redirect_back_or_default person_path(resource.person)
-           end
-         else
-           if params[:network_id]
-             @network = Network.find_by_id(params[:network_id])
-           end
-           render :action => :new
-         end
-       end
-     end
+    # respond_to do |format|
+    #    format.html do
+    #      if @resource_saved
+    #        flash[:notice] = "Login successful!"
+    #        if network = Network.find_by_id(params["network_id"])
+    #          redirect_back_or_default network_path(network)
+    #        else
+    #          redirect_back_or_default person_path(resource.person)
+    #        end
+    #      else
+    #        if params[:network_id]
+    #          @network = Network.find_by_id(params[:network_id])
+    #        end
+    #        render :action => :new
+    #      end
+    #    end
+    #  end
   end
 
  

@@ -17,7 +17,7 @@ gem "nokogiri", '1.5.0'
 
 gem "oauth"
 gem "oauth2"
-gem "authlogic-connect", '0.0.5.1'
+gem "authlogic-connect", '0.0.6'
 
 group :development, :test, :cucumber do
   gem "heroku"
