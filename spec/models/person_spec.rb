@@ -506,6 +506,18 @@ describe Person do
         person.liked_mindapples.should include(mindapple1)
         person.liked_mindapples.should include(mindapple2)
       end
+      
+      it "should have many authorizations" do
+        person = Factory.create(:person)
+        auth1 = Factory.build(:authorization, :person => person)
+        auth2 = Factory.build(:authorization, :person => person)
+        auth3 = Factory.build(:authorization, :person => person)
+        person.authorizations << auth1
+        person.authorizations << auth2
+        person.authorizations << auth3
+        person.authorizations.should include(auth1, auth2, auth3)
+        person.authorizations.count.should == 3
+      end
 
     end
   end

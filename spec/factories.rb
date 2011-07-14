@@ -34,3 +34,9 @@ end
 Factory.define :mindapple do |m|
   m.association :person, :factory => :person
 end
+
+Factory.define :authorization do |a|
+  a.association :person, :factory => :person
+  a.provider    "twitter"
+  a.sequence(:uid) { |n| "#{n}12345678" }
+end

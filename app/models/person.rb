@@ -68,6 +68,7 @@ class Person < ActiveRecord::Base
   before_validation :unset_password_confirmation_if_password_is_not_set
 
   belongs_to :network
+  has_many :authorizations
 
   attr_protected :role
 
