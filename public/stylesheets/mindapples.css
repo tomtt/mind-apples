@@ -1124,20 +1124,21 @@ pre {
 
 /* Light box */
 #fancybox-outer {
-  background-color: transparent;
+  background: transparent;
 }
-#fancybox-content #share {
-  font-family: helvetica, arial, sans;
+
+#fancybox-content #share_bg_top {
+  background: url(/images/layout/bg_top_share.png) no-repeat;
 }
 
 #fancybox-content #share {
-    background: url(/images/layout/bg_top_share.png) no-repeat;
-    background-color: none;
+    background-color: white;
     color: #fff;
     font-weight: normal;
     line-height: 37px;
     margin-bottom: 15px;
     padding: 0 15px;
+    font-family: helvetica, arial, sans;
 }
 
 #fancybox-content #share h1 {
@@ -1154,6 +1155,7 @@ pre {
     font-size: 2.0em;
     margin-bottom: 15px;
     padding: 0 15px;
+    background: transparent;
 }
 
 #fancybox-content #share div.share_icons {
