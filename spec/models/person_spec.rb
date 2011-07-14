@@ -42,6 +42,7 @@
 #  ethnicity                 :string(255)
 #  import_s3_etag            :string(255)
 #  type_description          :string(255)
+#  email_opt_in              :boolean
 #
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
