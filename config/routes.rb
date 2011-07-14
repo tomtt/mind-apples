@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.contact '/about/contact', :controller => "pages", :action => "contact"
   map.media '/about/media', :controller => "pages", :action => "media"
   map.debug '/debug', :controller => "pages", :action => "debug"
+  map.share '/share', :controller => "pages", :action => "share_on_social_media"
 
   # map.fives '/fives', :controller => "pages", :action => "five"
   map.pledge '/pledge', :controller => "pages", :action => "pledge"

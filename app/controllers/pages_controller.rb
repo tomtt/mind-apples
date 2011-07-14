@@ -37,6 +37,10 @@ class PagesController < ApplicationController
     session[:suggestions] = params[:person][:mindapples_attributes] if params[:person] && params[:person][:mindapples_attributes]
     redirect_to new_person_path
   end
+  
+  def share_on_social_media
+    render :layout => false
+  end
 
   private
 

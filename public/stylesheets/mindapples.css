@@ -12,6 +12,10 @@ ul {
 .git-version {
   display: none; }
 
+a#share_on_social_media {
+  display: none;
+}
+
 .simple_button_1 {
   height: 24px;
   line-height: 24px;
@@ -1113,4 +1117,49 @@ pre {
   position: absolute;
   left: 422px;
   top: 53px;
+}
+
+
+
+
+/* Light box */
+#fancybox-outer {
+  background: transparent;
+}
+
+#fancybox-content #share_bg_top {
+  background: url(/images/layout/bg_top_share.png) no-repeat;
+}
+
+#fancybox-content #share {
+    background-color: white;
+    color: #fff;
+    font-weight: normal;
+    line-height: 37px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    font-family: helvetica, arial, sans;
+}
+
+#fancybox-content #share h1 {
+    background: url(/images/headings/green_bg.png) repeat-x;
+    font-weight: normal;
+    line-height: 37px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+#fancybox-content #share p {
+    color: #067D29;
+    font-weight: normal;
+    font-size: 2.0em;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    background: transparent;
+}
+
+#fancybox-content #share div.share_icons {
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
 }
