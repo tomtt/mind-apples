@@ -1,0 +1,9 @@
+connect:
+  twitter:
+    key: "YH7ajAJOz65C8I5PVoGA"
+    secret: "R57Sxk6iDsEFfROcg17syrwnwWTwmltlxQeMdB7F5qo"
+    label: "Twitter"
+  facebook:
+    key: "my_key"
+    secret: "my_secret"
+    label: "Facebook"
