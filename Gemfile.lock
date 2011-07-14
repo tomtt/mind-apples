@@ -20,6 +20,7 @@ GEM
       activesupport (= 2.3.9)
     activesupport (2.3.9)
     addressable (2.2.6)
+    annotate (2.4.0)
     archive-tar-minitar (0.5.2)
     authlogic (2.1.6)
       activesupport
@@ -201,6 +202,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest (= 4.5.0)
+  annotate
   authlogic (= 2.1.6)
   autotest-rails (= 4.1.0)
   aws-s3 (= 0.6.2)
