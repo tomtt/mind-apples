@@ -26,8 +26,27 @@ class UserSessionsController < ApplicationController
   # end
 
   def create
+    debugger
     @user_session = UserSession.new(params[:user_session])
     @resource_saved = @user_session.save
+    
+    
+    
+    
+    
+    @user_session.save do |result|
+      if result
+        flash[:notice] = "Login successful!"
+        redirect_to current_user ? profile_url(current_user) : login_url
+      else
+        if @user_session.errors.on(:user)
+          # if we set error on the base object, likely it's because we didn't find a user
+          render :action => :confirm
+        else
+          render :action => :new
+        end
+      end
+    end
     
     respond_to do |format|
        format.html do
