@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gem "rails", "2.3.9"
 gem "pg"
 gem "authlogic", "2.1.6"
+gem "omniauth", "0.1.6"
 gem "fastercsv", '1.5.3'
 gem "haml", '3.1.2'
 gem "feedtools", '0.2.29'
