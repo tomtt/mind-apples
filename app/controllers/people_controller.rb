@@ -71,14 +71,12 @@ class PeopleController < ApplicationController
   response_for :create do |format|
     if @resource_saved
       format.html do
-        if @resource_saved
-          login_as_new_user
-          flash[:message] = 'Thanks for sharing your mindapples!'
-          if @generated_login && params[:pid].nil?
-            redirect_to register_resource_path(resource)
-          else
-            redirect_to resource_path(resource)
-          end
+        login_as_new_user
+        flash[:message] = 'Thanks for sharing your mindapples!'
+        if @generated_login && params[:pid].nil?
+          redirect_to register_resource_path(resource)
+        else
+          redirect_to resource_path(resource)
         end
       end
     else
