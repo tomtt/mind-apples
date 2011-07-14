@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "2.3.4"
+gem "rails", "2.3.9"
 gem "pg"
 gem "authlogic", "2.1.6"
 gem "fastercsv", '1.5.3'
@@ -11,13 +11,12 @@ gem "will_paginate", '2.3.15'
 gem "paperclip", '2.3.8'
 gem "hoptoad_notifier", '2.3.12'
 gem "tabnav", :git => "https://github.com/unboxed/tabnav.git"
-gem "taps", "~> 0.3.22"
+gem "taps", "~> 0.3.23"
 gem "aws-s3", '0.6.2'
-gem "nokogiri", '1.5.0'
+gem "nokogiri", '1.4.2'
 
 group :development, :test, :cucumber do
   gem "heroku"
-  gem "capybara", '0.4.0'
   gem "webrat", '0.7.3'
   gem "database_cleaner", '0.6.0'
   gem "cucumber", '0.10.0'
@@ -42,7 +41,8 @@ group :development, :test, :cucumber do
 end
 
 group :dev_extra do
-  gem 'ruby-debug'
+  gem 'ruby-debug', :platform => :ruby_18
+  gem 'ruby-debug19', :platform => :ruby_19
   gem "autotest-rails", '4.1.0'
   gem "ZenTest", '4.5.0'
 end
