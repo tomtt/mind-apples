@@ -1120,45 +1120,54 @@ pre {
 }
 
 
-
+/* Share on social media */
 
 /* Light box */
 #fancybox-outer {
   background: transparent;
 }
 
-#fancybox-content #share_bg_top {
-  background: url(/images/layout/bg_top_share.png) no-repeat;
+#share_bg_top {
+  background: url("/images/layout/bg_top_share.png") no-repeat scroll 0 0 transparent;
+  height: 30px;
+  width: 600px;
 }
 
-#fancybox-content #share {
-    background-color: white;
-    color: #fff;
-    font-weight: normal;
-    line-height: 37px;
-    margin-bottom: 15px;
-    padding: 0 15px;
-    font-family: helvetica, arial, sans;
+#share {
+  background-color: white;
+  color: #fff;
+  width: 570px;
+  font-weight: normal;
+  line-height: 37px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  font-family: helvetica, arial, sans;
 }
 
-#fancybox-content #share h1 {
-    background: url(/images/headings/green_bg.png) repeat-x;
-    font-weight: normal;
-    line-height: 37px;
-    margin-bottom: 15px;
-    padding: 0 15px;
+#share h1 {
+  background: url(/images/headings/green_bg.png) repeat-x;
+  font-weight: normal;
+  line-height: 37px;
+  margin-bottom: 15px;
+  padding: 0 15px;
 }
 
-#fancybox-content #share p {
-    color: #067D29;
-    font-weight: normal;
-    font-size: 2.0em;
-    margin-bottom: 15px;
-    padding: 0 15px;
-    background: transparent;
+#share a#close {
+  position: relative;
+  top: -47px;
+  left: 536px;
 }
 
-#fancybox-content #share div.share_icons {
+#share p {
+  color: #067D29;
+  font-weight: normal;
+  font-size: 2.0em;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  background: transparent;
+}
+
+#share div.share_icons {
   margin-left: auto;
   margin-right: auto;
   width: 150px;
