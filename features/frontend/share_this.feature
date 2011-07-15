@@ -11,10 +11,10 @@ Feature: As a Social Butterfly I would like to invite others to MA by posting to
     And my password is "cybersecret"
     And I log in
 
-  Scenario: I can share something through facebook
-    When I go to "/person/visible_ninja"
-    And I should see "addthis_button_twitter" image link with "http://twitter.com/home?status=I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+http%3A%2F%2Fbit.ly%2Fc5Ylta" url
-
   Scenario: I can share something through twitter
     When I go to "/person/visible_ninja"
-    And I should see "addthis_button_facebook" image link
+    And I should see a link to "http://twitter.com/share"
+    
+  # Scenario: I can share something through twitter
+  #   When I go to "/person/visible_ninja"
+  #   And I should see "addthis_button_facebook" image link
