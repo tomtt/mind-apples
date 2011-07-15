@@ -99,9 +99,9 @@
 	right: -15px;
 	width: 30px;
 	height: 30px;
-	background: transparent url('fancybox/fancybox.png') -40px 0px;
+	background: transparent url('/images/fancybox/fancy_close.png') -40px 0px;
 	cursor: pointer;
-	z-index: 1103;
+	z-index: 9103;
 	display: none;
 }
 
@@ -357,3 +357,13 @@
 .fancybox-ie #fancybox-bg-sw { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='fancybox/fancy_shadow_sw.png', sizingMethod='scale'); }
 .fancybox-ie #fancybox-bg-w { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='fancybox/fancy_shadow_w.png', sizingMethod='scale'); }
 .fancybox-ie #fancybox-bg-nw { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='fancybox/fancy_shadow_nw.png', sizingMethod='scale'); }
+
+
+
+/* CUSTOM STYLES */
+
+#fancybox-close {
+  background-position: -30px 0;
+  right: 30px;
+  top: 45px;
+}
