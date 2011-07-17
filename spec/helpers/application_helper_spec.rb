@@ -29,11 +29,11 @@ describe ApplicationHelper do
     
   describe "share_this_icons" do
     it "returns code for twitter sharing" do
-      share_this_icons.should include('http://twitter.com/home?status=')
+      share_this_icons.should include('<a href="http://twitter.com/share?url=')
     end
 
     it "returns code for facebook sharing" do
-      share_this_icons.should include('http://api.addthis.com/oexchange/0.8/forward/facebook/offer')
+      share_this_icons.should include("<script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script>")
     end
   end
   

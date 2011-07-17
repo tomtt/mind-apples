@@ -2,7 +2,8 @@
   = stylesheet_link_tag "jquery.fancybox-1.3.4"
   = javascript_include_tag "jquery.fancybox-1.3.4.pack"
   = javascript_include_tag "http://platform.twitter.com/widgets.js"
-
+  %meta{ :property => "og:title", :content => "Mindapples - #{resource.name}" }
+  %meta{ :property => "og:url", :content => "current.url" } 
 .user
   - render_tabnav :sub do
     - add_tab do |t|
@@ -31,8 +32,7 @@
           .go
             = link_to image_tag('/images/buttons/go.png', :title => "Take the test"), new_person_path
       
-    %div{ :class => "aside share" }
-    = link_to "Tweet these mindapples", "http://twitter.com/share", :class => "twitter-share-button"
+    = share_this_icons
   .sub_central
     .inner
       %ol

@@ -41,8 +41,13 @@ module ApplicationHelper
   end
 
   def share_this_icons
-    '<a href="http://twitter.com/home?status=I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+http%3A%2F%2Fbit.ly%2Fc5Ylta" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter.png" alt="twitter" /></a>
-     <a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url='+root_url+'" id="addthis_button_facebook"  target="_blank"><img src="/images/icons/facebook.png" alt="facebook" /></a>'
+    twitter_url = "http://twitter.com/share"
+    twitter_url = twitter_url+"?url=#{CGI.escape(request.url)}"
+    twitter_url = twitter_url+""
+    html = "<div class='aside share'>"
+    html = html+link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button") 
+    html = html+"<div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{CGI.escape(request.url)}' send='false' layout='standard' width='450' show_faces='false' font=''></fb:like>"
+    html = html+"</div>"
   end
   
   def share_this_icons_large
