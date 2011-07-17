@@ -17,5 +17,5 @@ class Authorization < ActiveRecord::Base
   
   validates_presence_of :uid, :person_id
   validates_inclusion_of :provider, :in => VALID_PROVIDERS
-  validates_uniqueness_of :provider, :scope => [:uid, :person_id]
+  validates_uniqueness_of :uid, :scope => :provider
 end

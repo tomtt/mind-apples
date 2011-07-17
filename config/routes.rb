@@ -75,7 +75,11 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :people_imports
     admin.resources :people
   end
-
+  
+  # Callbacks
+  map.callback "/auth/:provider/callback", :controller => "authorizations", :action => "create"
+  map.failure "/auth/failure", :controller => "authorizations", :action => "failure"
+  
   # Generic routes
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
