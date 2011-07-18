@@ -22,7 +22,6 @@ class PasswordResetsController < ApplicationController
   def update
     @person.password = params[:person][:password]
     @person.password_confirmation = params[:person][:password_confirmation]
-    @person.save
     if @person.save
       reset_user_session
       flash[:notice] = "Password successfully updated"

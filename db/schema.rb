@@ -11,6 +11,14 @@
 
 ActiveRecord::Schema.define(:version => 20110718082820) do
 
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
     t.string   "title"
@@ -97,7 +105,6 @@ ActiveRecord::Schema.define(:version => 20110718082820) do
     t.string   "import_s3_etag"
     t.string   "type_description"
     t.boolean  "email_opt_in"
-    t.string   "one_line_bio"
     t.boolean  "shared_mindapples",         :default => true,  :null => false
   end
 

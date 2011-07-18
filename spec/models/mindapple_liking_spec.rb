@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: mindapple_likings
+#
+#  id           :integer         not null, primary key
+#  mindapple_id :integer
+#  person_id    :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require 'spec_helper'
 
 describe MindappleLiking do

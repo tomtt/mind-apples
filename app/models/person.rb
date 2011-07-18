@@ -42,6 +42,7 @@
 #  ethnicity                 :string(255)
 #  import_s3_etag            :string(255)
 #  type_description          :string(255)
+#  email_opt_in              :boolean
 #
 
 require "authlogic"
@@ -67,6 +68,7 @@ class Person < ActiveRecord::Base
   before_validation :unset_password_confirmation_if_password_is_not_set
 
   belongs_to :network
+  has_many :authorizations
 
   attr_protected :role
 
