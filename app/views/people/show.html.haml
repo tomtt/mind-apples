@@ -37,9 +37,9 @@
     .inner
       %ol
         = render(resource.mindapples)
-
-:javascript
-  $(document).ready(function() {
-    $("body").append("<a href='/share' id='share_on_social_media'>Shere your mind apples with friends</a>");
-    $("#share_on_social_media").fancybox().trigger('click');
-  });
+- if current_user && current_user == resource && resource.shared_mindapples?
+  :javascript
+    $(document).ready(function() {
+      $("body").append("<a href='/share' id='share_on_social_media'>Shere your mind apples with friends</a>");
+      $("#share_on_social_media").fancybox().trigger('click');
+    });

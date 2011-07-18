@@ -13,6 +13,8 @@ class Mindapple < ActiveRecord::Base
   belongs_to :person
   has_many :mindapple_likings
   has_many :fans, :through => :mindapple_likings
+  
+  after_save :set_shared_mindapples
 
   def self.most_liked(max)
     most_liked_within_context(Mindapple, max)
@@ -52,6 +54,13 @@ class Mindapple < ActiveRecord::Base
       :conditions => ["people_for_belonging_to_network.network_id = %d", network ? network.id : -1]
     }
   }
+  
+  def set_shared_mindapples
+    if self.person
+      self.person.shared_mindapples = false
+      self.person.save
+    end
+  end
 
   private
 

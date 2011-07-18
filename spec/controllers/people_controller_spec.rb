@@ -37,6 +37,12 @@ describe PeopleController do
           get 'show', :id => @person.login
           flash[:notice].should == nil
         end
+        
+        it "sets 'shared_mindapples? on the resource to true" do
+          get 'show', :id => @person.login
+          @person.reload
+          @person.shared_mindapples?.should == true
+        end
       end
 
       shared_examples_for "The user is not the owner of a profile page" do

@@ -261,5 +261,14 @@ describe Mindapple do
       Mindapple.belonging_to_network(nil).should == []
     end
   end
+  
+  describe "set_mindapples_shared" do
+    it "should set the mindapples_shared? field on a user to true if the mindapple is created" do
+      person = Factory.create(:person)
+      mindapple = Factory.create(:mindapple, :person => person)
+      person.reload
+      person.shared_mindapples?.should == false
+    end
+  end
 end
 
