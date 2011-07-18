@@ -66,9 +66,8 @@ class Person < ActiveRecord::Base
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
   before_validation :unset_password_confirmation_if_password_is_not_set
-
   belongs_to :network
-  has_many :authorizations
+  has_many :authorizations, :dependent => :destroy
 
   attr_protected :role
 

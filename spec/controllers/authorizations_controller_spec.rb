@@ -1,7 +1,11 @@
 require 'spec_helper'
+require 'authlogic/test_case'
 
 describe AuthorizationsController do
-
+  before do
+    activate_authlogic
+  end
+  
   describe "create" do
     before :each do
       @person = Factory.create(:person)
@@ -13,7 +17,7 @@ describe AuthorizationsController do
         },
         :uid => @uid
       })
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] # = {
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
     end
     
     context "given the user is already logged in" do
@@ -23,8 +27,9 @@ describe AuthorizationsController do
       
       context "given an authorization exists for the current user" do
         it "should set the flash message" do
+          @person.authorizations.create(:provider => 'twitter', :uid => @uid)
           get :create
-          flash[:notice].should == "You have already authorized your twitter account"
+          flash[:notice].should == "You have already authorized your twitter account."
           response.should redirect_to(person_path(@person))
         end
       end
@@ -32,7 +37,7 @@ describe AuthorizationsController do
       context "given an authorization does not exist for the current user" do
         it "should set the flash message" do
           get :create
-          flash[:notice].should == "Successfully added twitter authentication"
+          flash[:notice].should == "Successfully added twitter authentication."
           response.should redirect_to(person_path(@person))
         end
         
@@ -52,7 +57,7 @@ describe AuthorizationsController do
       
       context "given an authorization exists with the correct uid and provider" do
         before :each do
-          current_user.authorizations.expects.(:create).with(:provider => "twitter", :uid => @uid)
+          Factory.create(:authorization, :person => @person, :provider => "twitter", :uid => @uid)
         end
         
         it "should set the flash message" do
@@ -68,55 +73,12 @@ describe AuthorizationsController do
         end
       end
       
-      context "given an authorization cannot be found with the correct uid and provider" do
-        it "should create the user"
-        it "should create an authorization for the user"
-        it "should set the user session"
-      end
-    end
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    context "if the the user is already logged in" do
-      it "should create an authorization for the current user" do
-        controller.expects(:current_user).times(3).returns(@person)
-        get :create
-        @person.reload
-        @person.authorizations.find_by_provider_and_uid("twitter", @uid).should_not be_nil
-        response.should redirect_to(person_path(@person))
-      end
-      
-      it "should set the flash notice" do
-        controller.expects(:current_user).times(3).returns(@person)
-        post :create
-        flash[:notice].should == "Successfully added twitter authentication"
-        response.should redirect_to(person_path(@person))
-      end
-      
-    end
-  
-    context "if the user is not logged in" do
-      context "and the user exists in the database" do
-        it "should set the flash notice" do
-          flash[:notice].should == "Welcome back Twitter user"
+      context "given an authorization cannot be found with the correct uid and provider" do        
+        it "should set the flash message and redirect to the Take the test page" do
+          get :create
+          flash[:notice].should == "We are sorry twitter user, you must first fill in your mindapples before you can create an account."
+          response.should redirect_to(new_person_path)
         end
-      
-        it "should create a user session with the user in the database"
-      end
-    
-      context "and the user does not exist in the database" do
-        it "should set the flash notice" do
-          flash[:notice].should == "Welcome Twitter user. Your account has been created."
-        end
-      
-        it "should create a new user with the details from the provider"
-        it "should create a user session with the new user"
       end
     end
   end
