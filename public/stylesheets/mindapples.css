@@ -488,7 +488,8 @@ body {
 
 .left_column {
   float: left;
-  width: 165px; }
+  width: 165px;
+  margin-left: 10px; }
 
 .right_column {
   float: right;
