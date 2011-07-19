@@ -65,7 +65,7 @@ body {
   color: #40863e;
   text-decoration: none; }
 .content a:hover {
-  text-decoration: underline; }
+  text-decoration: none; }
 
 .clear {
   clear: both; }
