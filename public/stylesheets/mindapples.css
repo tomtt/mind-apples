@@ -226,7 +226,7 @@ body {
   .nav_bar .share_buttons {
     float: right;
     margin-top: 3px;
-    margin-right: 60px;
+    margin-right: 30px;
     color: white;
     z-index: 2;
     position: relative; }
@@ -248,6 +248,8 @@ body {
         background: url(/images/nav_bar/social-flickr.png) no-repeat center center; }
       .nav_bar .share_buttons li a.delicious {
         background: url(/images/nav_bar/social-delicious.png) no-repeat center center; }
+      .nav_bar .share_buttons li a.linked_in {
+        background: url(/images/nav_bar/social-linkedin.png) no-repeat center center; }
   .nav_bar #main_tabnav ul {
     margin-left: 15px;
     height: 47px; }
