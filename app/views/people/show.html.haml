@@ -16,7 +16,7 @@
     %p
       -if resource.name
         = resource.name
-      -else
+      -elsif resource.login_set_by_user?
         = resource.login
       - if current_user && current_user == resource
         = link_to 'Edit', edit_person_path(resource)
