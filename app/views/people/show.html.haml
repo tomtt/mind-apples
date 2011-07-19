@@ -39,9 +39,12 @@
     .inner
       %ol
         = render(resource.mindapples)
-- if current_user && current_user == resource && resource.shared_mindapples?
+        
+- if current_user && current_user == resource && !resource.shared_mindapples?
   :javascript
     $(document).ready(function() {
       $("body").append("<a href='/share' id='share_on_social_media'>Shere your mind apples with friends</a>");
       $("#share_on_social_media").fancybox().trigger('click');
     });
+  
+  - current_user.update_attributes :shared_mindapples => true
