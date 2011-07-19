@@ -51,10 +51,6 @@ describe AuthorizationsController do
     end
     
     context "given the user is not already logged in" do
-      before :each do
-        controller.stubs(:current_user).returns(false)
-      end
-      
       context "given an authorization exists with the correct uid and provider" do
         before :each do
           Factory.create(:authorization, :person => @person, :provider => "twitter", :uid => @uid)
