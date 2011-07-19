@@ -892,16 +892,19 @@ label {
     right: 20px; }
 
 .mindapple {
-  margin-bottom: 15px;
-  list-style: none; }
+  margin-bottom: 10px;
+  padding-top: 5px;
+  list-style: none; 
+  background: url(/images/layout/mindapple_border_top.png) no-repeat;
+  background-position: 54px -3px;}
   .mindapple img {
     display: block;
     float: left; }
   .mindapple > div {
     background: url(/images/green_apple.png) no-repeat left bottom;
+    background-position: 15px 15px;
     border: 2px solid #009523;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
+    border-top: 0px;
     margin-left: 55px;
     padding: 10px 15px 10px 80px; }
   .mindapple span {
@@ -912,7 +915,13 @@ label {
     margin: 0; }
   .mindapple .apple {
     margin-bottom: 1em; }
-  .mindapple .when, .mindapple .social {
+  .mindapple .when {
+    color: #999;
+    margin: 0; }
+    .mindapple .when span {
+      color: #007D00;
+      display: inline; }
+  .mindapple .social {
     color: #6d6f72;
     margin: 0; }
   .mindapple .social {
