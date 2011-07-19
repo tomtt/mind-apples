@@ -14,7 +14,10 @@
   .left_column
     %img{ :src => resource.avatar.url(:medium) }
     %p
-      = resource
+      -if resource.name
+        = resource.name
+      -else
+        = resource.login
       - if current_user && current_user == resource
         = link_to 'Edit', edit_person_path(resource)
     %p{ :class => 'one_line_bio' }

@@ -120,5 +120,4 @@ describe PeopleHelper do
     end
 
   end
-
 end

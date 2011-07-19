@@ -8,7 +8,7 @@
   -else
     .col_full
       = form.label :login, "Username."
-      = form.text_field :login
+      = form.text_field :login, :value => ''
   .col_odd
     %input{:type=>"hidden", :name=>"pid", :value=>resource.id}
     = form.label :password, "Password."
