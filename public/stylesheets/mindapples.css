@@ -267,7 +267,7 @@ body {
         font-size: 1.2em;
         color: white;
         text-decoration: none; }
-    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
+    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active, .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
       width: 71px;
       background-image: url(/images/nav_bar/home_active.png); }
     .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active, .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
@@ -276,7 +276,7 @@ body {
     .nav_bar #main_tabnav ul .blog a.active, .nav_bar #main_tabnav ul .blog span.active {
       width: 58px;
       background-image: url(/images/nav_bar/blog_active.png); }
-    .nav_bar #main_tabnav ul .person a.active, .nav_bar #main_tabnav ul .person span.active, .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .grow span.active {
+    .nav_bar #main_tabnav ul .person a.active, .nav_bar #main_tabnav ul .person span.active, .nav_bar #main_tabnav ul .grow span.active {
       width: 116px;
       background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
     .nav_bar #main_tabnav ul .my_network {
