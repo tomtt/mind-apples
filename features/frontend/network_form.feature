@@ -23,8 +23,8 @@ Feature: Networks: custom form
     And I select "35-44" from "person[age]"
     And I fill in "Passport" with "UK"
     And I fill in "Your thing" with "Marketeer extraordinaire"
-    And I fill in "Be proud" with "Marla Arson"
-    And I fill in "E-mail us" with "marla@example.com"
+    And I fill in "Your name" with "Marla Arson"
+    And I fill in "Email address" with "marla@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should be on the "register" page for person "Marla Arson"
@@ -51,7 +51,7 @@ Feature: Networks: custom form
 
   Scenario: Person first forgets to agree to t&c
     When I go to "/in/bill-hicks-marketeers" 
-    And I fill in "E-mail us" with "marla@example.com"
+    And I fill in "Email address" with "marla@example.com"
     And I press "Submit"
     And I check "person_policy_checked"
     And I press "Submit"

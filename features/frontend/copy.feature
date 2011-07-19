@@ -23,7 +23,7 @@ Feature: Proper layouts structure
     And I should see "What else do you need to look after your mind?"
 
     And I should not see "Leave your e-mail and we'll send you occasional messages. "
-    And I should see "E-mail us! Leave your e-mail and we'll post you your mindapples. (never made public)"
+    And I should see "Email address. Leave your e-mail and we'll post you your mindapples. (never made public)"
 
     And I should not see "Once more with the password please, in case of typos..."
     And I should see "Confirm password"

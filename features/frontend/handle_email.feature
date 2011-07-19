@@ -8,7 +8,7 @@ Feature: Handle taken email gracefully
   Scenario: Filling in your five a day with already taken email
     Given person exists with email: "lucy@example.com"
     When I go to the "take the test" page
-    And I fill in "E-mail us" with "lucy@example.com"
+    And I fill in "Email address" with "lucy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     Then I should see "That e-mail address is already taken. Please choose again."
@@ -22,7 +22,7 @@ Feature: Handle taken email gracefully
     And my braindump is "I love Mindapples"
     When I log in
     And I follow "edit"
-    And I fill in "E-mail us" with "lucy@example.com"
+    And I fill in "Email address" with "lucy@example.com"
     And I check "person_policy_checked"
     And I press "Submit"
     And I should not see "Thank you for sharing your mindapples."
@@ -37,8 +37,8 @@ Feature: Handle taken email gracefully
     And my braindump is "I love Mindapples"
     When I log in
     And I follow "edit"
-    And I fill in "E-mail us" with "lucy@example.com"
-    And I fill in "Be proud. What's your name? (very optional)" with "Anna Karenina"
+    And I fill in "Email address" with "lucy@example.com"
+    And I fill in "Your name" with "Anna Karenina"
     And I check "person_policy_checked"
     And I press "Submit"
     And I should not see "Thank you for sharing your mindapples."
@@ -57,7 +57,7 @@ Feature: Handle taken email gracefully
     And I fill in "Email" with ""
     And I press "Submit"
     And I should not see "Thank you for sharing your mindapples."
-    Then I should not see "That email address is already taken. Please choose again."
+    Then I should not see "That e-mail address is already taken. Please choose again."
     Then I should see "We need your email address to create your account."
 
   Scenario: Editing your five with validate email format
@@ -75,5 +75,5 @@ Feature: Handle taken email gracefully
     And I should not see "Thank you for sharing your mindapples."
     Then I should see "That doesn't look like a valid e-mail address. Please try again."
     Then I should not see "We need your email address to create your account."
-    Then I should not see "That email address is already taken. Please choose again."
+    Then I should not see "That e-mail address is already taken. Please choose again."
 

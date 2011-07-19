@@ -17,10 +17,10 @@
     .form_input
       = form.select :age, [["(This helps us compare generations...)", ""], "Under 16", "16-24", "25-34", "35-44", "45-54", "55-64", "65 or over"]
   .col_odd
-    = form.label :occupation, "Your thing. <span class='description'>What's your occupation, paid or not?</span>"
+    = form.label :occupation, "Your thing. <span class='description'>What's your occupation?</span>"
     = form.text_field :occupation
   .col_even
-    = form.label :location, "Passport."
+    = form.label :location, "Passport. <span class='description'>Which country are you from?</span>"
     = form.text_field :location
   .col_full.health_check
     = form.label :health_check, "Health check. <span class='description'>How would you rate your mental health? </span><span class='description_highlight'>(1 is bad, 5 good)</span>"
@@ -33,11 +33,11 @@
       = form.radio_button("health_check", "5", :class => 'label-radio')
       = form.label "health_check_5", "5 (Ommm)", :class => 'label-radio'
   .col_odd
-    = form.label :email, "E-mail us! <span class='description'>Leave your e-mail and we'll post you your mindapples. </span><span class='description_highlight'>(never made public)</span>"
-    = form.text_field :email
-  .col_even
-    = form.label :name, "Be proud. <span class='description'>What's your name? </span><br/><span class='description_highlight'>(very optional)</span>"
+    = form.label :name, "Your name.<br/><span class='description_highlight'>(very optional)</span>"
     = form.text_field :name
+  .col_even
+    = form.label :email, "Email address. <span class='description'>Leave your e-mail and we'll post you your mindapples. </span><span class='description_highlight'>(never made public)</span>"
+    = form.text_field :email
   - if form.object.new_record?
     .col_odd
       %p.information_usage We will use this information to find out... to research... to collate... to put together recommendations... make suggestions to others, we will not use your name or email address in doing so.
@@ -45,10 +45,10 @@
       .form_input.email_opt_in
         %p Read all about it.
         = form.check_box(:email_opt_in, :class => 'email_opt_in')
-        = form.label :email_opt_in, "Want to recieve our newsletter", :class => 'label-radio label-radio-person_public_profile'
+        = form.label :email_opt_in, "Want to recieve our newsletter", :class => 'label-checkbox'
       .form_input.policy_check
         = form.check_box(:policy_checked, :class => 'policy_checkbox')
-        = form.label :policy_checked, "Yes yes, of course I accept the <a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
+        = form.label :policy_checked, "Yes yes, of course I accept the <br /><a href=\"/terms\" title=\"Terms of Service\" target=\"_blank\">Terms & Conditions</a>",:class => 'label-checkbox'
     = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
   %div.clear
 

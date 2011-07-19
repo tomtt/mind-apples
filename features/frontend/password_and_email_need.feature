@@ -114,7 +114,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     And I am on my edit page
     And I am logged in
     And I fill in "Username" with "andyyy"
-    And I fill in "E-mail us! Leave your e-mail and we'll post you your mindapples. (never made public)" with "andy@example.com"
+    And I fill in "Email address. Leave your e-mail and we'll post you your mindapples. (never made public)" with "andy@example.com"
     And I press "Submit"
     Then I should see "Oh dear, there was a problem:"
     And I should see a "person[email]" text field containing "andy@example.com"

@@ -104,7 +104,7 @@ Feature: Personal page
 
   Scenario: Person sets his name
     When I follow "Edit"
-    And I fill in "Be proud. What's your name" with "Bob the Builder"
+    And I fill in "Your name" with "Bob the Builder"
     And I press "Submit"
     Then I should see "My five a day"
 

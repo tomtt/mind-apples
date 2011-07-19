@@ -42,7 +42,7 @@ a#share_on_social_media {
   background-image: url(/images/icons/small_white_arrow.png);
   background-repeat: no-repeat;
   background-position: right center;
-  background-color: #067D29; }
+  background-color: #007D00; }
 
 .background {
   position: absolute;
@@ -504,14 +504,14 @@ body {
   .take_the_test .intro {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #067D29;
+    color: #007D00;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
   .take_the_test .network_header {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #067D29;
+    color: #007D00;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
@@ -662,27 +662,32 @@ body {
           font-size: 1em; }
       .take_the_test .the_test .inner .account_details {
           padding: 20px 30px 0 60px;
-          width:610px;
+          width: 610px; }
+        .take_the_test .the_test .inner .account_details label.public_profile{
+          font-size: 1.04em;
+        }
+        .take_the_test .the_test .inner .account_details input#person_login {
+          width: 580px;
         }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
         .take_the_test .the_test .inner .form_input .label-radio-person_public_profile {
           font-weight: normal;
-          font-size: 1.04em; }
+          font-size: 1.04em;
+          color: white; }
         .take_the_test .the_test .inner .email_opt_in {
-          margin-bottom: 16px; }
-          .take_the_test .the_test .inner .email_opt_in {
-            color: #515152; }
+          margin-bottom: 6px; }
           .take_the_test .the_test .inner .email_opt_in p {
             display: block;
             font-size: 1.3em;
             font-weight: bold;
             margin-bottom: 10px;
-            margin-top: 4px; }
+            margin-top: 4px;
+            color: white; }
+          .take_the_test .the_test .inner .email_opt_in label {
+            font-weight: normal; }
         .take_the_test .the_test .inner .policy_check {
-          background: url("/images/layout/bg-policy.png") no-repeat left top;
-          padding: 23px 16px;
           width: 275px;
           height: 66px; }
           .take_the_test .the_test .inner .information_usage {
@@ -690,26 +695,14 @@ body {
             font-weight: bold;
             line-height: 1.2;
             padding-top: 4px; }
-          .take_the_test .the_test .inner .policy_check label {
-            padding-right: 20px;
-            width: 230px;
-            float:right;
-            font-size: 1.3em;
-            margin-top: -10px;
-            margin-bottom: 10px; }
           .take_the_test .the_test .inner .policy_check a {
             color: #E0EDCC;
             text-decoration: none; }
-          .take_the_test .the_test .inner .policy_check .form_input input[type=checkbox] {
-            float: left; }
-          .take_the_test .the_test .inner .policy_check .form_input .label-checkbox {
-            margin-top: -5px;
-            font-size: 1.45em;
-            line-height: 1.5em;
-            display: block;
-            float: left;
-            width: 93%;
-            padding-left: 6px; }
+          .take_the_test .the_test .inner .policy_check.form_input .label-checkbox {
+            font-weight: normal; }
+            .take_the_test .the_test .inner .policy_check.form_input .label-checkbox a{
+              text-decoration: underline;
+              padding-left: 15px; }
 
 /* Page Elements */
 input[type=text], input[type=password] {
@@ -1063,11 +1056,11 @@ dl.mindapples_definition {
 .network_details .text {
   width: 315px; }
   .network_details .text h1 {
-    color: #067D29;
+    color: #007D00;
     font-size: 2em;
     margin-bottom: 25px; }
   .network_details .text p {
-    color: #067D29;
+    color: #007D00;
     font-size: 1.3em;
     line-height: 1.35em;
     font-weight: bold;
@@ -1160,7 +1153,7 @@ pre {
 }
 
 #share p {
-  color: #067D29;
+  color: #007D00;
   font-weight: normal;
   font-size: 2.0em;
   margin-bottom: 15px;
