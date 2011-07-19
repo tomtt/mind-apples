@@ -18,7 +18,7 @@
       - if current_user && current_user == resource
         = link_to 'Edit', edit_person_path(resource)
     %p{ :class => 'one_line_bio' }
-      = resource.one_line_bio
+      = resource.one_line_bio unless resource.one_line_bio.nil?
 
   .right_column
     - if(!current_user)
