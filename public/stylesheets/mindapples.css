@@ -875,7 +875,7 @@ label {
     font-size: 1.3em;
     padding: 10px 50px 20px 0; }
   .five-a-day li {
-    background: url(/images/white_apple.png) no-repeat 0 4px;
+    background: url(/images/white_apple.png) no-repeat -1px 5px;
     color: #009523;
     font-weight: bold;
     list-style-position: inside;
@@ -884,6 +884,7 @@ label {
     border: none;
     font-size: 1.5em;
     margin-left: 13px;
+    margin-bottom: 0;
     padding: 2px;
     width: 290px; }
   .five-a-day input[type=image] {
@@ -1034,7 +1035,7 @@ dl.mindapples_definition {
   font-family: 'times new roman', sans-serif;
   width: 426px;
   height: 142px;
-  margin: 26px 0 15px 13px;
+  margin: 6px 0 15px 0;
   background-image: url(/images/content/definition_bg.jpg);
   font-size: 27px;
   line-height: 1.2em;
