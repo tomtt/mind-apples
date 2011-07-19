@@ -29,7 +29,7 @@ Feature: Proper layouts structure
     And I should see "Confirm password"
 
     And I should not see "Yes, I'm happy to make my profile public on Mindapples.org"
-    And I should see "Show yourself. Can other people see your profile?"
+    And I should see "Are you happy for other people to see your profile?"
 
     And I should not see "Where do you live?"
     And I should see "Passport."
