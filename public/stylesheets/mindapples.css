@@ -1048,10 +1048,14 @@ dl.mindapples_definition {
   dl.mindapples_definition dt {
     font-weight: bold; }
     dl.mindapples_definition dt .phonetics {
-      font-weight: normal; }
+      font-weight: normal;
+      color: #333; }
     dl.mindapples_definition dt .type {
       font-weight: normal;
-      font-style: italic; }
+      font-style: italic;
+      color: #333; }
+  dl.mindapples_definition dd {
+    color: #333; }
 
 .small_search_box {
   width: 398px; }
