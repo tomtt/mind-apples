@@ -51,6 +51,7 @@ Feature: Asking for five a day
     And the "Your name" field should contain "Andy Gibson"
     And I fill in "Username" with "AndyG"
     And I upload the picture "smile2.jpg"
+    And I fill in "One line Bio" with "This is my autboiagraphy and bizzle."
     And I fill in "Password" with "Secret"
     And I fill in "Confirm password" with "Secret"
     And I choose "person_public_profile_true"
@@ -72,6 +73,7 @@ Feature: Asking for five a day
     And I should see a "person[occupation]" text field containing "social guru"
     And I should see a "person[name]" text field containing "Andy Gibson"
     And I should see a "person[email]" text field containing "andy@example.com"
+    And the "One line bio" field should contain "This is my autboiagraphy and bizzle."
 
     And I should receive an email
     When I open the email

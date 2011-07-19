@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110718082820) do
+ActiveRecord::Schema.define(:version => 20110719084045) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(:version => 20110718082820) do
     t.string   "import_s3_etag"
     t.string   "type_description"
     t.boolean  "email_opt_in"
-    t.string   "one_line_bio"
     t.boolean  "shared_mindapples",         :default => true,  :null => false
+    t.string   "one_line_bio"
   end
 
   create_table "people_imports", :force => true do |t|

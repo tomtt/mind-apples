@@ -15,7 +15,7 @@ Feature: Personal page
     And I press "Log in"
 
   Scenario: Person logs in and sees his page and the page is public 
-    Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks"
+    Given a person "SocialButterfly" exists with public_profile: true, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks", one_line_bio: "Lots of stuff about me"
     When I follow "Log out"
     When I go to the login page
     And I fill in "Login" with "butterfly"
@@ -24,6 +24,7 @@ Feature: Personal page
     And I should see "My five a day"
     Then I should not see a link to "go"
     And I should not see "and pick your 5-a-day. "
+    And I should see "Lots of stuff about me"
 
   Scenario: Person logs in and sees his page and the page is not public
     Given a person "SocialButterfly" exists with public_profile: false, login: "butterfly", password: "sosocial", password_confirmation: "sosocial", braindump: "Mindapples rocks"
