@@ -45,8 +45,9 @@ module ApplicationHelper
     twitter_url = twitter_url+"?url=#{CGI.escape(request.url)}"
     twitter_url = twitter_url+""
     html = "<div class='aside share'>"
-    html = html+link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button") 
-    html = html+"<div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{CGI.escape(request.url)}' send='false' layout='standard' width='450' show_faces='false' font=''></fb:like>"
+    html = html+ "<h3>Share this</h3>"
+    html = html+ "<div class='twitter'>" + link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button") + "</div>"
+    html = html+ "<div class='facebook'><div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{CGI.escape(request.url)}'; send='false' layout='button_count' width='450' show_faces='false' font=''></fb:like></div>"
     html = html+"</div>"
   end
   

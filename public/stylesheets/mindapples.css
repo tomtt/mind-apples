@@ -1192,3 +1192,21 @@ pre {
   margin-right: auto;
   width: 150px;
 }
+.aside.share {
+  border: 1px solid #999;
+  padding: 10px;
+}
+
+.aside.share h3 { 
+ font-weight: normal;
+ margin-bottom: 20px; 
+}
+
+.aside.share .twitter {
+  margin-bottom: 20px;
+}
+
+.aside.share .facebook {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
