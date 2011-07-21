@@ -99,3 +99,7 @@ Then /^I should see the "([^\"]*)" sized "([^\"]*)" image attachment for the ([^
   expected_image_path = record.send(attachment_name).url(size.to_sym)
   response.should have_xpath("//img[@src='#{expected_image_path}']")
 end
+
+Then /^I should see a facebook button$/ do
+  response.should have_xpath("//div[@id='fb-root']")
+end

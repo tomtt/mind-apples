@@ -41,14 +41,23 @@ module ApplicationHelper
   end
 
   def share_this_icons
-    twitter_url = "http://twitter.com/share"
-    twitter_url = twitter_url+"?url=#{CGI.escape(request.url)}"
-    twitter_url = twitter_url+""
-    html = "<div class='aside share'>"
-    html = html+ "<h3>Share this</h3>"
-    html = html+ "<div class='twitter'>" + link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button") + "</div>"
-    html = html+ "<div class='facebook'><div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{CGI.escape(request.url)}'; send='false' layout='button_count' width='450' show_faces='false' font=''></fb:like></div>"
-    html = html+"</div>"
+    text        = "I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+"
+    url         = CGI.escape(request.url)
+    twitter_url = "http://twitter.com/share?url=#{url}&text=#{text}"
+    
+    twitter_button  = link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button")
+    fb_button       = "<div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{url}'; send='false' layout='button_count' width='450' show_faces='false' font=''></fb:like>"
+    
+    
+    share_this = content_tag :div, :class => "aside share" do
+      content_tag( :h3, "Share this" ) +
+      content_tag( :div, :class => "twitter") do
+        twitter_button
+      end +
+      content_tag( :div, :class => "facebook") do
+        fb_button
+      end
+    end
   end
   
   def share_this_icons_large

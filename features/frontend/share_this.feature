@@ -15,6 +15,6 @@ Feature: As a Social Butterfly I would like to invite others to MA by posting to
     When I go to "/person/visible_ninja"
     And I should see a link to "http://twitter.com/share"
     
-  # Scenario: I can share something through twitter
-  #   When I go to "/person/visible_ninja"
-  #   And I should see "addthis_button_facebook" image link
+  Scenario: I can share something through twitter
+    When I go to "/person/visible_ninja"
+    And I should see a facebook button
