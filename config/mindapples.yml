@@ -3,7 +3,7 @@ development:
 production: &PRO
   host: mindapples.org
 staging: &PRO
-  host: mindapples.staging.unboxedconsulting.com
+  host: mindapples-staging.heroku.com
 test:
   <<: *PRO
 cucumber:
