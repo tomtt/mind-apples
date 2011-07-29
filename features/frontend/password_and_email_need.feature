@@ -9,7 +9,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     When I go to the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     When I press "Submit"
     Then I should not see "My five a day"
 
@@ -17,7 +17,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     When I go to the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     When I press "Submit"
@@ -27,7 +27,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
     When I go to the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "Email" with "andy@example.com"
     When I press "Submit"
     Then I should not see "My five a day"
@@ -43,7 +43,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
 
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     When I press "Submit"
     Then I should not see "My five a day"
 
@@ -57,7 +57,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
 
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     When I press "Submit"
@@ -74,7 +74,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
 
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "s"
     And I fill in "person[password_confirmation]" with "s"
     And I fill in "Email" with "andy@example.com"
@@ -90,7 +90,7 @@ Feature:  As a social butterfly/little miss bashful I have to fill in email/pass
 
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "supersecret"
     And I fill in "person[password_confirmation]" with "supersecret"
     And I fill in "Email" with "andy@example.com"
