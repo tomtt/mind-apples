@@ -268,7 +268,7 @@ class PeopleController < ApplicationController
     avatar = person.avatar
 
     if avatar.url == Person.new.avatar.url
-      resource.avatar = Person.new.avatar
+      resource.avatar = nil
     else
       resource.avatar = avatar
     end
