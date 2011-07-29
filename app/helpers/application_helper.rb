@@ -41,7 +41,8 @@ module ApplicationHelper
   end
 
   def share_this_icons
-    text        = "I%27ve+just+shared+my+Mindapples+5-a-day.+What+five+things+do+YOU+do+to+look+after+your+mind%3F+"
+    # CGI.escape has a habit of replacing spaces with plus signs, so we manually convert them to %20 entities
+    text        = CGI.escape("I've just shared my Mindapples 5-a-day. What five things do YOU do to look after your mind? ").gsub("+", "%20")
     url         = CGI.escape(request.url)
     twitter_url = "http://twitter.com/share?url=#{url}&text=#{text}"
     
