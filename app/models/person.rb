@@ -82,7 +82,7 @@ class Person < ActiveRecord::Base
   has_many :liked_mindapples, :through => :mindapple_likings
 
   # paperclip
-  has_attached_file :avatar, :styles => { :medium => "150x150<>", :thumb => "40x40<>" }, :default_url => DEFAULT_IMAGE_URL
+  has_attached_file :avatar, :styles => { :medium => "150x150<>", :small => "70x70<>", :thumb => "40x40<>" }, :default_url => DEFAULT_IMAGE_URL
 
   #attach file validation from paper clip is not used here, because we can't use :"avatar.size" for specification of error message format.
   validates_inclusion_of :"avatar_file_size", :in => 0..512000, :unless => Proc.new { |person| person.avatar.original_filename.nil? }, :message => :"avatar.size"
