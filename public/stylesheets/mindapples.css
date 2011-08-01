@@ -785,11 +785,10 @@ label {
   margin: 0 7px 0 9px; }
 
 .simple_form_box {
-  margin: 20px auto 0;
+  margin: 20px 0 10px 5px;
   font-size: 1.2em;
   line-height: 1.65em;
   width: 540px;
-  margin-bottom: 20px;
   background-image: url(/images/layout/bg-form-box-top.png);
   background-repeat: no-repeat;
   background-position: top; }
@@ -813,7 +812,8 @@ label {
       right: 20px; }
 
 .promotion {
-  padding-left: 5px;
+  width: 420px;
+  margin-left: 5px;
   margin-bottom: 10px; }
   .promotion img {
     padding: 4px;
