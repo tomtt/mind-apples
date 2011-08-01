@@ -8,3 +8,6 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+# Load paperclip tasks (as they aren't included by default)
+Dir["#{Gem.searcher.find('paperclip').full_gem_path}/lib/tasks/*.rake"].each { |ext| load ext }
