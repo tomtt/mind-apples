@@ -52,11 +52,13 @@ module ApplicationHelper
     
     share_this = content_tag :div, :class => "aside share" do
       content_tag( :h3, "Share this" ) +
-      content_tag( :div, :class => "twitter") do
-        twitter_button
-      end +
-      content_tag( :div, :class => "facebook") do
-        fb_button
+      content_tag(:div, :class => "inner") do
+        content_tag( :div, :class => "twitter") do
+          twitter_button
+        end +
+        content_tag( :div, :class => "facebook") do
+          fb_button
+        end
       end
     end
   end

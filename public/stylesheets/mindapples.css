@@ -1197,14 +1197,25 @@ pre {
   margin-right: auto;
   width: 150px;
 }
+
 .aside.share {
+  width: 160px;
   border: 1px solid #D0D0D0;
-  padding: 10px;
+  border-top: none;
 }
 
-.aside.share h3 { 
- font-weight: normal;
- margin-bottom: 20px; 
+.aside.share h3 {
+  background: url(/images/headings/green_bg_small.png) no-repeat;
+  line-height: 37px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.aside.share .inner {
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 .aside.share .twitter {
