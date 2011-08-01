@@ -51,7 +51,7 @@ Feature: Handle taken email gracefully
     Then I should be on the "take the test" page
     And I check "person_policy_checked"
     When I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I fill in "Email" with ""
@@ -67,7 +67,7 @@ Feature: Handle taken email gracefully
     Then I should be on the "take the test" page
     And I check "person_policy_checked"
     When I press "Submit"
-    And I fill in "Username." with "banana_man"
+    And I fill in "person[login]" with "banana_man"
     And I fill in "person[password]" with "secretsuper"
     And I fill in "person[password_confirmation]" with "secretsuper"
     And I fill in "Email" with "asas"

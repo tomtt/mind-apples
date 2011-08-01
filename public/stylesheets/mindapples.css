@@ -188,8 +188,8 @@ body {
       margin-top: 3px;
       color: white;
       overflow: hidden;
-      padding: 10px 50px 30px;
-      width: 1340px;
+      padding-top: 10px;
+      width: 1004px;
       margin-left: auto;
       margin-right: auto;}
       .outer_page_wrapper .inner_page_wrapper #footer .site-credits ul {
@@ -671,14 +671,19 @@ body {
           padding: 20px 30px 0 60px;
           width: 610px; }
         .take_the_test .the_test .inner .account_details label.public_profile{
-          font-size: 1.04em;
-        }
+          font-size: 1.04em; }
         .take_the_test .the_test .inner .account_details input#person_login {
-          width: 580px;
-        }
+          width: 580px; }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
+		.take_the_test .the_test .inner .account_details .profile_picture {
+			float: right;
+			width: 200px; }
+		.take_the_test .the_test .inner .account_details input#person_avatar {
+			width: 200px;
+			padding-left: 0;
+			padding-right: 0; }
         .take_the_test .the_test .inner .form_input .label-radio-person_public_profile {
           font-weight: normal;
           font-size: 1.04em;
