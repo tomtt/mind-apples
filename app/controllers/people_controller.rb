@@ -51,10 +51,10 @@ class PeopleController < ApplicationController
       update_logged_user
       delete_profile_picture unless params['delete_avatar'].nil?
       format.html do
-        if params[:register_form]
-          flash[:notice] = "Thanks for registering your Mindapples page"
+        flash[:notice] = if params[:register_form]
+          "Thanks for registering your Mindapples page"
         else
-          flash[:notice] = "Thank you for updating your Mindapples page."
+          "Thank you for updating your Mindapples page."
         end
         redirect_to resource_path
       end

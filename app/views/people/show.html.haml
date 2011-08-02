@@ -36,13 +36,13 @@
             What do you do to look after your mind?
           .go
             = link_to image_tag('/images/buttons/go.png', :title => "Take the test"), new_person_path
-      
+
     = share_this_icons
   .sub_central
     .inner
       %ol
         = render(resource.mindapples)
-        
+
 - if current_user && current_user == resource && !resource.shared_mindapples?
   :javascript
     $(document).ready(function() {
