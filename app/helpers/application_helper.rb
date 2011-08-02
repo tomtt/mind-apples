@@ -52,11 +52,13 @@ module ApplicationHelper
     
     share_this = content_tag :div, :class => "aside share" do
       content_tag( :h3, "Share this" ) +
-      content_tag( :div, :class => "twitter") do
-        twitter_button
-      end +
-      content_tag( :div, :class => "facebook") do
-        fb_button
+      content_tag(:div, :class => "inner") do
+        content_tag( :div, :class => "twitter") do
+          twitter_button
+        end +
+        content_tag( :div, :class => "facebook") do
+          fb_button
+        end
       end
     end
   end
@@ -73,5 +75,9 @@ module ApplicationHelper
   
   def set_focus_to_id(id)
     javascript_tag("$().ready(function(){ $('##{id}').focus() });");
+  end
+
+  def facebook_like_box
+    %q{<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fmindapples&amp;width=400&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23d0d0d0&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:258px;" allowTransparency="true"></iframe>}
   end
 end

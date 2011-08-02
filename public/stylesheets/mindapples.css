@@ -716,6 +716,45 @@ body {
               text-decoration: underline;
               padding-left: 15px; }
 
+/* CSS 2.1 hack that removes the fullstop from a 'decimal' list counter
+   under IE8 and above, i.e. turns the list
+    1. ---
+    2. ---
+  into
+    1  ---
+    2  ---
+*/
+ol.no_fullstop {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+ol.no_fullstop > li:before {
+  content: counter(customcounter) " ";
+  counter-increment: customcounter;
+  font-weight: bold;
+  width: 3em;
+}
+
+.the_test ol.no_fullstop > li:before {
+  position: relative;
+  left: 2px;
+  bottom: 1px;
+}
+
+ol.no_fullstop:first-child {
+  counter-reset: customcounter;
+}
+
+/* Fix for IE6 and IE7: still displays the fullstop */
+ol.no_fullstop {
+  *list-style-type: decimal;
+}
+
+.the_test ol.no_fullstop > li:before {
+  *position: inherit;
+}
+
 /* Page Elements */
 input[type=text], input[type=password] {
   border: 1px solid #ccc;
@@ -789,7 +828,7 @@ label {
   font-size: 1.2em;
   line-height: 1.65em;
   width: 540px;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
   background-image: url(/images/layout/bg-form-box-top.png);
   background-repeat: no-repeat;
   background-position: top; }
@@ -812,8 +851,13 @@ label {
       position: absolute;
       right: 20px; }
 
+.right_column_wide .simple_form_box {
+  margin: 20px 0 10px 5px;
+}
+
 .promotion {
-  padding-left: 5px;
+  width: 420px;
+  margin-left: 5px;
   margin-bottom: 10px; }
   .promotion img {
     padding: 4px;
@@ -1016,7 +1060,7 @@ h2 span {
 .top_apples, .most_recent {
   margin-top: 45px; }
 
-.top_apples h2 {
+.most_recent h2 {
   background-image: url(/images/headings/red_bg.png); }
 
 .main_content {
@@ -1197,14 +1241,25 @@ pre {
   margin-right: auto;
   width: 150px;
 }
+
 .aside.share {
+  width: 160px;
   border: 1px solid #D0D0D0;
-  padding: 10px;
+  border-top: none;
 }
 
-.aside.share h3 { 
- font-weight: normal;
- margin-bottom: 20px; 
+.aside.share h3 {
+  background: url(/images/headings/green_bg_small.png) no-repeat;
+  line-height: 37px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.aside.share .inner {
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 .aside.share .twitter {

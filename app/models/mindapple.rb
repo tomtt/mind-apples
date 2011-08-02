@@ -14,7 +14,7 @@ class Mindapple < ActiveRecord::Base
   has_many :mindapple_likings
   has_many :fans, :through => :mindapple_likings
   
-  after_save :set_shared_mindapples
+  after_create :set_shared_mindapples
 
   def self.most_liked(max)
     most_liked_within_context(Mindapple, max)
