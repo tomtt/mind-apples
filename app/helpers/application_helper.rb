@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def show_flashes
     return '' unless flash.length > 0
-    output = %Q[div id="flashes" style="display:inherit;">\n]
+    output = %Q[<div id="flashes" style="display:inherit;">\n]
     flash.each do |key, value|
       output += content_tag('div', value.to_s, :class => "flash_#{key.to_s}")
     end
