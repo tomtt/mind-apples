@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def show_flashes
     return '' unless flash.length > 0
-    output = "<div id=\"flashes\" style=\"display:inherit;\">\n"
+    output = %Q[div id="flashes" style="display:inherit;">\n]
     flash.each do |key, value|
       output += content_tag('div', value.to_s, :class => "flash_#{key.to_s}")
     end
@@ -78,6 +78,10 @@ module ApplicationHelper
   end
 
   def facebook_like_box
-    %q{<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fmindapples&amp;width=400&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23d0d0d0&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:258px;" allowTransparency="true"></iframe>}
+    %q[<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fmindapples&amp;width=400&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23d0d0d0&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:400px; height:258px;" allowTransparency="true"></iframe>]
+  end
+
+  def twitter_feed_box
+    render "shared/twitter_feed"
   end
 end
