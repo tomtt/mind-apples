@@ -716,6 +716,45 @@ body {
               text-decoration: underline;
               padding-left: 15px; }
 
+/* CSS 2.1 hack that removes the fullstop from a 'decimal' list counter
+   under IE8 and above, i.e. turns the list
+    1. ---
+    2. ---
+  into
+    1  ---
+    2  ---
+*/
+ol.no_fullstop {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+ol.no_fullstop > li:before {
+  content: counter(customcounter) " ";
+  counter-increment: customcounter;
+  font-weight: bold;
+  width: 3em;
+}
+
+.the_test ol.no_fullstop > li:before {
+  position: relative;
+  left: 2px;
+  bottom: 1px;
+}
+
+ol.no_fullstop:first-child {
+  counter-reset: customcounter;
+}
+
+/* Fix for IE6 and IE7: still displays the fullstop */
+ol.no_fullstop {
+  *list-style-type: decimal;
+}
+
+.the_test ol.no_fullstop > li:before {
+  *position: inherit;
+}
+
 /* Page Elements */
 input[type=text], input[type=password] {
   border: 1px solid #ccc;
