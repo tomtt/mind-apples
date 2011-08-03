@@ -642,6 +642,7 @@ body {
           margin-bottom: 15px; }
         .take_the_test .the_test .inner .five_things li {
           background: url(/images/green_whole_apple.png) no-repeat 0 5px;
+          *background-position: 0 10px; /* Hack for IE6+ */
           color: white;
           font-weight: bold;
           list-style-position: inside;
@@ -746,13 +747,9 @@ ol.no_fullstop:first-child {
   counter-reset: customcounter;
 }
 
-/* Fix for IE6 and IE7: still displays the fullstop */
+/* Fix for IE6 and IE7: still display the full stop */
 ol.no_fullstop {
   *list-style-type: decimal;
-}
-
-.the_test ol.no_fullstop > li:before {
-  *position: inherit;
 }
 
 /* Page Elements */
@@ -930,6 +927,7 @@ label {
     padding: 10px 50px 20px 0; }
   .five-a-day li {
     background: url(/images/white_apple.png) no-repeat -1px 5px;
+    *background-position: 0 5px; /* IE6+ hack */
     color: #009523;
     font-weight: bold;
     list-style-position: inside;
