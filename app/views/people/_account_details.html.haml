@@ -24,11 +24,11 @@
       = form.password_field :password_confirmation, :value=>''
   -if registration_page
     .col_odd
-      = form.label :email, "Email address."
-      = form.text_field :email
-    .col_even
       = form.label :name, "Your name."
       = form.text_field :name
+    .col_even
+      = form.label :email, "Email address."
+      = form.text_field :email
   .col_odd
     = form.label :avatar, "Profile picture."
     = image_tag resource.avatar.url(:small)

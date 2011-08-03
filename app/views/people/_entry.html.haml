@@ -33,11 +33,11 @@
       = form.radio_button("health_check", "5", :class => 'label-radio')
       = form.label "health_check_5", "5 (Ommm)", :class => 'label-radio'
   .col_odd
-    = form.label :email, "Email address. <span class='description'>Leave your e-mail and we'll post you your mindapples. </span><span class='description_highlight'>(never made public)</span>"
-    = form.text_field :email
-  .col_even
     = form.label :name, "Your name.<br/><span class='description_highlight'>(very optional)</span>"
     = form.text_field :name
+  .col_even
+    = form.label :email, "Email address. <span class='description'>Leave your e-mail and we'll post you your mindapples. </span><span class='description_highlight'>(never made public)</span>"
+    = form.text_field :email
   - if form.object.new_record?
     .col_odd
       %p.information_usage We will use this information to inspire others to take better care of their minds. By hitting 'Submit' you give Mindapples the right to publish your suggestions anonymously, online and offline. Hope that's ok.
