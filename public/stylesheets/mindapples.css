@@ -752,7 +752,7 @@ ol.no_fullstop {
 }
 
 .the_test ol.no_fullstop > li:before {
-  *position: inherit;
+  *position: static;
 }
 
 /* Page Elements */
