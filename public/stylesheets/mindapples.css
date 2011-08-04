@@ -548,6 +548,9 @@ body {
       position: relative;
       display: block;
        }
+      .take_the_test .the_test .inner.register {
+        background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
+      }
       .take_the_test .the_test .inner h1 {
         font-size: 2.3em; }
       .take_the_test .the_test .inner input[type=text], .take_the_test .the_test .inner input[type=password] {
@@ -594,7 +597,8 @@ body {
       .take_the_test .the_test .inner .col_full {
         clear: both;
         display: block;
-        margin-bottom: 40px; }
+        margin-bottom: 40px;
+        width: 584px; }
       .take_the_test .the_test .inner .col_odd {
         margin-bottom: 40px;
         margin-right: 20px;
@@ -671,10 +675,34 @@ body {
       .take_the_test .the_test .inner .account_details {
           padding: 20px 30px 0 60px;
           width: 610px; }
-        .take_the_test .the_test .inner .account_details label.public_profile{
-          font-size: 1.04em; }
-        .take_the_test .the_test .inner .account_details input#person_login {
-          width: 580px; }
+        .take_the_test .the_test .inner .account_details h3.create_account {
+          font-size: 1.3em;
+          font-weight: bold;
+        }
+        .take_the_test .the_test .inner .account_details h3.create_account .description {
+          font-size: 0.7em;
+          font-weight: normal;
+          line-height: 1em;
+          margin-left: 0.5em;
+        }
+          .take_the_test .the_test .inner .account_details h3.create_account .description a {
+            color: white;
+            text-decoration: underline;
+          }
+        .take_the_test .the_test .inner .account_details label.public_profile {
+          font-size: 1.04em;
+        }
+        .take_the_test .the_test .inner .account_details .login label.main {
+          margin-bottom: 0;
+        }
+        .take_the_test .the_test .inner .account_details .login label.url {
+          display: inline;
+        }
+        .take_the_test .the_test .inner .account_details .login input {
+          width: 370px;
+          float: right;
+          display: inline;
+        }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
@@ -1039,7 +1067,7 @@ label {
 h2 {
   background: url(/images/headings/green_bg.png) no-repeat left center;
   color: #fff;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 37px;
   margin-bottom: 15px;
   padding: 0 15px; }

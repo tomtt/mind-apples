@@ -1,51 +1,59 @@
 .row_odd.account_details
+  %h3.create_account
+    Create an account with us below
+    %span.description
+      No thanks, I'll
+      = link_to 'skip this step', resource_path
+      for now.
   - unless registration_page
     .arrow_lead_in
-  -if form.object.login_set_by_user?
+  - if form.object.login_set_by_user?
     .col_full.hide
-      = form.label :login, "Username."
+      = form.label :login, "Username"
       = form.text_field :login
-  -else
-    .col_full
-      = form.label :login, "Username. <span class='description'>What would you like the address to your page to be?</span>"
+  - else
+    .col_odd
+    .col_full.login
+      = form.label :login, "Choose a username", :class => "main"
+      = form.label :login, "mindapples.org/person/", :class => "url"
       = form.text_field :login, :value => ''
+  - if registration_page
+    .col_odd
+      = form.label :name, "Your name"
+      = form.text_field :name
+    .col_even
+      = form.label :email, "Email address"
+      = form.text_field :email
   .col_odd
     %input{:type=>"hidden", :name=>"pid", :value=>resource.id}
-    = form.label :password, "Password."
-    -if form.object.login_set_by_user?
+    = form.label :password, "Password"
+    - if form.object.login_set_by_user?
       = form.password_field :password
     -else
       = form.password_field :password, :value=>''
   .col_even
-    = form.label :password_confirmation, "Confirm password."
-    -if form.object.login_set_by_user?
+    = form.label :password_confirmation, "Confirm password"
+    - if form.object.login_set_by_user?
       = form.password_field :password_confirmation
     -else
       = form.password_field :password_confirmation, :value=>''
-  -if registration_page
-    .col_odd
-      = form.label :name, "Your name."
-      = form.text_field :name
-    .col_even
-      = form.label :email, "Email address."
-      = form.text_field :email
   .col_odd
-    = form.label :avatar, "Profile picture."
+    = form.label :one_line_bio, "A little bit about you..."
+    = form.text_area :one_line_bio, :maxlength => 140, :rows => 5, :cols => 34
+  .col_even
+    = form.label :avatar, "Profile picture"
     = image_tag resource.avatar.url(:small)
     .profile_picture
       - unless resource.avatar.exists?
         %span.description
-          Here is your holding image!
+          Is this what you look like?
           %br
-          Would you like to change it?
-      = form.file_field :avatar
+          Thought not. Upload a picture.
+      = form.file_field :avatar, :size  => 15
       - if resource.avatar.exists?
         .form_input
           %input{ :type=>"checkbox", :id => "delete_avatar", :name=>"delete_avatar", :value=>1, :checked => false }
           %label.label-radio.label-radio-person_public_profile{:for => "delete_avatar"} Remove this picture.
-  .col_even
-    = form.label :one_line_bio, "A little about you... <span class='description'>(Optional)</span>"
-    = form.text_area :one_line_bio, :maxlength => 140, :rows => 5, :cols => 34
   .col_odd
     = form.label :public_profile, "Are you happy for other people to see your profile?", :class => 'public_profile'
     .form_input
@@ -54,7 +62,7 @@
       %br
       = form.radio_button(:public_profile, false)
       = form.label "public_profile_false", "No no, I want to stay anonymous", :class => 'label-radio label-radio-person_public_profile'
-  -unless registration_page
+  - unless registration_page
     .col_even
       .form_input.email_opt_in
         %p Read all about it.

@@ -6,17 +6,16 @@
     = render :partial => 'networks/network_details'
 
     %h2.light_bg
-      Join the community
+      Create your page
     %p.intro
-      Grab your place in the Mindapples community. Keep a record of your mindapples, get your own mindapples
-      page and collect more weird and wonderful things to do for your mind. It's completely free to join!
+      Want to edit your mindapples later? Create your page and join the community. (Yes, it's free!)
 
-    - form_for resource, :html => { :class => "survey", :multipart => true} do |form|
+    - form_for resource, :html => { :class => "survey", :multipart => true } do |form|
       = error_messages_for(:person, :header_message => header_error_message(resource.errors.count), :message => "")
       = hidden_field_tag 'register_form', true
 
       .the_test
-        .inner
-          = render(:partial => 'account_details', :locals => {:form => form, :registration_page => true })
+        .inner.register
+          = render(:partial => 'account_details', :locals => { :form => form, :registration_page => true })
           = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"
           %div.clear

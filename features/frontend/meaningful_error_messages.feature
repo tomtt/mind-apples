@@ -19,7 +19,7 @@ Feature: Meaningful error messages
     Given I am on the "take the test" page
     And I check "person_policy_checked"
     When I press "Submit"
-    And I fill in "Username" with "gandy"
+    And I fill in "Choose a username" with "gandy"
     When I press "Submit"
     Then I should not see "There were problems with the following fields:"
     And I should not see "Email We need your email address to create your account."
@@ -36,7 +36,7 @@ Feature: Meaningful error messages
     And I am on the "take the test" page
     And I check "person_policy_checked"
     When I press "Submit"
-    And I fill in "Username" with "gandy"
+    And I fill in "Choose a username" with "gandy"
     And I fill in "Email" with "mindapple@min.com"
     When I press "Submit"
     Then I should see "That e-mail address is already taken. Please choose again."
@@ -46,7 +46,7 @@ Feature: Meaningful error messages
     Given I am on the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username" with "gandy"
+    And I fill in "Choose a username" with "gandy"
     And I fill in "Email" with "mindapple@min.com"
     And I fill in "Password" with "somesecretpassword"
     And I fill in "Confirm password" with ""
@@ -58,7 +58,7 @@ Feature: Meaningful error messages
     Given I am on the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username" with "gandy"
+    And I fill in "Choose a username" with "gandy"
     And I fill in "Email" with "mindapple@min.com"
     And I fill in "Password" with "somesecretpassword"
     And I fill in "Confirm password" with "something different"
@@ -70,7 +70,7 @@ Feature: Meaningful error messages
     Given I am on the "take the test" page
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "Username" with "gandy"
+    And I fill in "Choose a username" with "gandy"
     And I fill in "Email" with "mindapple@min.com"
     And I fill in "Password" with ""
     And I fill in "Confirm password" with ""
