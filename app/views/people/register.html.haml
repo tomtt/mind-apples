@@ -1,5 +1,5 @@
 - content_for :head do
-  = set_focus_to_id('person_email')
+  = set_focus_to_id('person_login')
 
 .take_the_test
   .inner
@@ -14,7 +14,7 @@
       = error_messages_for(:person, :header_message => header_error_message(resource.errors.count), :message => "")
       = hidden_field_tag 'register_form', true
 
-      .the_test
+      .the_test.register
         .inner.register
           = render(:partial => 'account_details', :locals => { :form => form, :registration_page => true })
           = image_submit_tag '/images/buttons/submit.png', :class => "submit-form", :alt => "Submit"

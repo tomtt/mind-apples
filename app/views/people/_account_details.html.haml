@@ -1,11 +1,12 @@
 .row_odd.account_details
-  %h3.create_account
-    Create an account with us below
-    %span.description
-      No thanks, I'll
-      = link_to 'skip this step', resource_path
-      for now.
-  - unless registration_page
+  - if registration_page
+    %h3.create_account
+      Create an account with us below
+      %span.description
+        No thanks, I'll
+        = link_to 'skip this step', resource_path
+        for now.
+  - else
     .arrow_lead_in
   - if form.object.login_set_by_user?
     .col_full.hide
@@ -22,7 +23,7 @@
       = form.label :name, "Your name"
       = form.text_field :name
     .col_even
-      = form.label :email, "Email address"
+      = form.label :email, "Email"
       = form.text_field :email
   .col_odd
     %input{:type=>"hidden", :name=>"pid", :value=>resource.id}
@@ -49,7 +50,7 @@
           Is this what you look like?
           %br
           Thought not. Upload a picture.
-      = form.file_field :avatar, :size  => 15
+      = form.file_field :avatar, :size  => 10
       - if resource.avatar.exists?
         .form_input
           %input{ :type=>"checkbox", :id => "delete_avatar", :name=>"delete_avatar", :value=>1, :checked => false }
