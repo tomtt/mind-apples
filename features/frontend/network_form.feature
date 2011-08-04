@@ -31,7 +31,7 @@ Feature: Networks: custom form
     And I should see "Thanks for sharing your mindapples"
     And the "Email" field should contain "marla@example.com"
     And the "Your name" field should contain "Marla Arson"
-    And I fill in "Username" with "MarlaA"
+    And I fill in "Choose a username" with "MarlaA"
     And I upload the picture "smile2.jpg"
     And I fill in "Password" with "Secret"
     And I fill in "Confirm password" with "Secret"

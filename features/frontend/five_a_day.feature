@@ -49,7 +49,7 @@ Feature: Asking for five a day
     And I should see "Thanks for sharing your mindapples"
     And the "Email" field should contain "andy@example.com"
     And the "Your name" field should contain "Andy Gibson"
-    And I fill in "Username" with "AndyG"
+    And I fill in "Choose a username" with "AndyG"
     And I upload the picture "smile2.jpg"
     And I fill in "person[one_line_bio]" with "This is my autobiography and bizzle."
     And I fill in "Password" with "Secret"
@@ -73,7 +73,7 @@ Feature: Asking for five a day
     And I should see a "person[occupation]" text field containing "social guru"
     And I should see a "person[name]" text field containing "Andy Gibson"
     And I should see a "person[email]" text field containing "andy@example.com"
-    And the "A little about you... (Optional)" field should contain "This is my autobiography and bizzle."
+    And the "A little bit about you..." field should contain "This is my autobiography and bizzle."
 
     And I should receive an email
     When I open the email
