@@ -543,6 +543,9 @@ body {
     font-size: 1.1em; 
     position: relative;
     min-width: 0; }
+  .take_the_test .the_test.register {
+    background: url(/images/layout/bg-top-row_even-the-test.png) no-repeat top center;
+  }
     .take_the_test .the_test .inner {
       background: url(/images/layout/bg-mid-the-test.png) repeat-y center top;
       position: relative;
