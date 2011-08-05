@@ -972,9 +972,13 @@ label {
     padding: 2px;
     width: 290px; }
   .five-a-day input[type=image] {
-    bottom: -70px;
     position: absolute;
+    bottom: -70px;
     right: 20px; }
+  .five-a-day input[type=image] { /* IE7 hack */
+    *bottom: 0;
+    *top: 335px;
+  }
 
 .mindapple {
   margin-bottom: 10px;
