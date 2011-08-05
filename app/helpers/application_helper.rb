@@ -42,13 +42,12 @@ module ApplicationHelper
 
   def share_this_icons
     # CGI.escape has a habit of replacing spaces with plus signs, so we manually convert them to %20 entities
-    text        = CGI.escape("I've just shared my Mindapples 5-a-day. What five things do YOU do to look after your mind? ").gsub("+", "%20")
+    text        = CGI.escape("What's the 5-a-day for your mind? Time to share your #mindapples!").gsub("+", "%20")
     url         = CGI.escape(request.url)
     twitter_url = "http://twitter.com/share?url=#{url}&text=#{text}"
     
     twitter_button  = link_to("Tweet these mindapples", twitter_url, :class => "twitter-share-button")
     fb_button       = "<div id='fb-root'></div><script src='http://connect.facebook.net/en_US/all.js#xfbml=1'></script><fb:like href='#{url}'; send='false' layout='button_count' width='450' show_faces='false' font=''></fb:like>"
-    
     
     share_this = content_tag :div, :class => "aside share" do
       content_tag( :h3, "Share this" ) +
