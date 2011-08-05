@@ -42,7 +42,8 @@
     = form.text_area :one_line_bio, :maxlength => 140, :rows => 5, :cols => 34
   .col_even
     = form.label :avatar, "Profile picture"
-    = image_tag resource.avatar.url(:small)
+    / TODO: change this to url(:small) once all avatars have been resized
+    = image_tag resource.avatar.url(:medium), :width => 70, :height => 70
     .profile_picture
       - unless resource.avatar.exists?
         %span.description
