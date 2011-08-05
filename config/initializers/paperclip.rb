@@ -5,10 +5,6 @@ if Rails.env.production? || Rails.env.staging? || ENV['S3_ENABLED'] == "TRUE"
     :access_key_id => ENV['S3_KEY'],
     :secret_access_key => ENV['S3_SECRET']
   }
-  
-  # Save attachments under an environment-specific directory to
-  # avoid uploading to the same paths as production
-  path = Rails.env.production? ? "" : "#{Rails.env}/"
-  path += ":attachment/:id/:style.:extension"
-  Paperclip::Attachment.default_options[:path] = path
+
+  Paperclip::Attachment.default_options[:path] = ":attachment/:id/:style.:extension"
 end
