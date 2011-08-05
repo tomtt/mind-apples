@@ -100,3 +100,11 @@ Feature: Asking for five a day
     And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
     And I follow "Terms & Conditions"
     Then I should see "our Web Site at mindapples.org you signify"
+
+  Scenario: Skipping the second registration form
+    When I go to the "take the test" page
+    And I fill in "person[mindapples_attributes][0][suggestion]" with "Writing Cucumber tests"
+    And I check "person_policy_checked"
+    And I press "Submit"
+    And I follow "skip this step"
+    Then I should see "My five a day"

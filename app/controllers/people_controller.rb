@@ -38,6 +38,7 @@ class PeopleController < ApplicationController
   
   def register
     self.resource = find_resource
+    redirect_to edit_resource_path if self.resource.login_set_by_user?
   end
 
   response_for :show, :new, :edit do |format|
@@ -62,8 +63,9 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     else
       validate_image
-      format.html { render :action => "edit" }
-      format.js   { render :action => "edit" }
+      action = params[:register_form] ? "register" : "edit"
+      format.html { render :action => action }
+      format.js   { render :action => action }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
     end
   end
@@ -208,7 +210,7 @@ class PeopleController < ApplicationController
         redirect_to root_path
       end
     else
-      # we do nothing as find_resource called render_404 
+      # we do nothing as find_resource called render_404
     end
   end
   

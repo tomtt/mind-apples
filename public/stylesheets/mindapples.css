@@ -681,6 +681,7 @@ body {
         .take_the_test .the_test .inner .account_details h3.create_account {
           font-size: 1.3em;
           font-weight: bold;
+          margin-bottom: 40px;
         }
         .take_the_test .the_test .inner .account_details h3.create_account .description {
           font-size: 0.7em;
