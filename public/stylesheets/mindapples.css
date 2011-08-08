@@ -696,6 +696,9 @@ body {
         .take_the_test .the_test .inner .account_details label.public_profile {
           font-size: 1.04em;
         }
+        .take_the_test .the_test .inner .account_details .login {
+          *margin-bottom: 0;
+        }
         .take_the_test .the_test .inner .account_details .login label.main {
           margin-bottom: 0;
         }
@@ -706,14 +709,26 @@ body {
           width: 370px;
           float: right;
           display: inline;
+          *position: relative;
+          *bottom: 30px;
         }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
-		.take_the_test .the_test .inner .account_details .profile_picture {
+    .take_the_test .the_test .inner .account_details .password_confirmation {
+      *margin-top: 10px;
+    }
+    .take_the_test .the_test .inner .account_details .profile_picture {
+      *margin-top: 10px;
+    }
+    .take_the_test .the_test .inner .account_details .profile_picture img {
+      float: left;
+      *margin-top: 5px;
+    }
+		.take_the_test .the_test .inner .account_details .profile_picture .text {
 			float: right;
 			width: 200px; }
-		.take_the_test .the_test .inner .account_details input#person_avatar {
+		.take_the_test .the_test .inner .account_details .profile_picture input#person_avatar {
 			width: 200px;
 			padding-left: 0;
 			padding-right: 0; }
