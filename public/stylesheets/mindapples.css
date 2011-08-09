@@ -649,7 +649,6 @@ body {
           margin-bottom: 15px; }
         .take_the_test .the_test .inner .five_things li {
           background: url(/images/green_whole_apple.png) no-repeat 0 5px;
-          *background-position: 0 10px; /* Hack for IE6+ */
           color: white;
           font-weight: bold;
           list-style-position: inside;
@@ -696,9 +695,6 @@ body {
         .take_the_test .the_test .inner .account_details label.public_profile {
           font-size: 1.04em;
         }
-        .take_the_test .the_test .inner .account_details .login {
-          *margin-bottom: 0;
-        }
         .take_the_test .the_test .inner .account_details .login label.main {
           margin-bottom: 0;
         }
@@ -709,21 +705,12 @@ body {
           width: 370px;
           float: right;
           display: inline;
-          *position: relative;
-          *bottom: 30px;
         }
         .take_the_test .the_test .inner .account_details .arrow_lead_in {
           top: -20px;
           left: 24px; }
-    .take_the_test .the_test .inner .account_details .password_confirmation {
-      *margin-top: 10px;
-    }
-    .take_the_test .the_test .inner .account_details .profile_picture {
-      *margin-top: 10px;
-    }
     .take_the_test .the_test .inner .account_details .profile_picture img {
       float: left;
-      *margin-top: 5px;
     }
 		.take_the_test .the_test .inner .account_details .profile_picture .text {
 			float: right;
@@ -974,7 +961,6 @@ label {
     padding: 10px 50px 20px 0; }
   .five-a-day li {
     background: url(/images/white_apple.png) no-repeat -1px 5px;
-    *background-position: 0 5px; /* IE6+ hack */
     color: #009523;
     font-weight: bold;
     list-style-position: inside;
@@ -990,10 +976,6 @@ label {
     position: absolute;
     bottom: -70px;
     right: 20px; }
-  .five-a-day input[type=image] { /* IE7 hack */
-    *bottom: 0;
-    *top: 335px;
-  }
 
 .mindapple {
   margin-bottom: 10px;
@@ -1001,7 +983,6 @@ label {
   list-style: none; 
   background: url(/images/layout/mindapple_border_top.png) no-repeat;
   background-position: 54px -3px;
-  *background-position: 54px 15px; /* IE7 hack */
 }
   .mindapple img {
     display: block;

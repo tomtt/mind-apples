@@ -1,0 +1,57 @@
+/* Miscellaneous IE7 fixes */
+
+.user .sub_tabnav {
+  background-position: 177px 100%;
+}
+
+.user .sub_tabnav ul {
+  padding-left: 10px;
+  background-position: 15px bottom;
+}
+
+.take_the_test .the_test .inner .five_things li {
+  background-position: 0 10px;
+}
+
+.take_the_test .the_test .inner .account_details .login {
+  margin-bottom: 0;
+}
+
+.take_the_test .the_test .inner .account_details .login input {
+  position: relative;
+  bottom: 30px;
+}
+
+.take_the_test .the_test .inner .account_details .password_confirmation {
+  margin-top: 10px;
+}
+
+.take_the_test .the_test .inner .account_details .profile_picture {
+  margin-top: 10px;
+}
+
+.take_the_test .the_test .inner .account_details .profile_picture img {
+  margin-top: 5px;
+}
+
+.five-a-day li {
+  background-position: 0 5px;
+}
+
+.five-a-day input[type=image] {
+  bottom: 0;
+  top: 335px;
+}
+
+.mindapple {
+  background-position: 54px 15px;
+}
+
+.mindapple img {
+  position: relative;
+  top: 20px;
+}
+
+.top_apples h2, .most_recent h2 {
+  margin-bottom: 0;
+}
