@@ -1000,7 +1000,9 @@ label {
   padding-top: 5px;
   list-style: none; 
   background: url(/images/layout/mindapple_border_top.png) no-repeat;
-  background-position: 54px -3px;}
+  background-position: 54px -3px;
+  *background-position: 54px 15px; /* IE7 hack */
+}
   .mindapple img {
     display: block;
     float: left; }
