@@ -984,6 +984,9 @@ label {
   background: url(/images/layout/mindapple_border_top.png) no-repeat;
   background-position: 54px -3px;
 }
+  .narrow .mindapple { /* Used on the Explore page */
+    width: 522px;
+  }
   .mindapple img {
     display: block;
     float: left; }

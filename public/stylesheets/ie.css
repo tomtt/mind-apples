@@ -44,14 +44,10 @@
 }
 
 .mindapple {
-  background-position: 54px 15px;
+  width: 518px;
 }
 
 .mindapple img {
   position: relative;
   top: 20px;
-}
-
-.top_apples h2, .most_recent h2 {
-  margin-bottom: 0;
 }

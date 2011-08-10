@@ -20,7 +20,7 @@
     %h3
       =@search_message.to_s
 
-  %ul
+  %ul.narrow
     = render :partial => 'mindapples/mindapple', :collection => @mindapples
 -if @mindapples
   - if @network
