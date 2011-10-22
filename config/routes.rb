@@ -27,7 +27,9 @@ ActionController::Routing::Routes.draw do |map|
   map.share '/share', :controller => "pages", :action => "share_on_social_media"
 
   # map.fives '/fives', :controller => "pages", :action => "five"
-  map.pledge '/pledge', :controller => "pages", :action => "pledge"
+  # map.pledge '/pledge', :controller => "pages", :action => "pledge"
+  map.feedback '/feedback', :controller => "pages", :action => "feedback"
+  map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
 
   map.grow '/grow', :controller => "pages", :action => "join_us"
   map.join_us '/grow/join_us', :controller => "pages", :action => "join_us"
@@ -38,7 +40,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.links '/links', :controller => "pages", :action => "links"
   map.media '/media', :controller => "pages", :action => "media"
+  map.contact '/contact', :controller => "pages", :action => "contact"
   map.terms '/terms', :controller => "pages", :action => "terms"
+  map.feedback '/feedback', :controller => "pages", :action => "feedback"
+  map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
 
   map.services '/services', :controller => "pages", :action => "services"
   map.individuals '/services/individuals', :controller => "pages", :action => "individuals"
