@@ -26,10 +26,18 @@ ActionController::Routing::Routes.draw do |map|
   map.debug '/debug', :controller => "pages", :action => "debug"
   map.share '/share', :controller => "pages", :action => "share_on_social_media"
 
-  # map.fives '/fives', :controller => "pages", :action => "five"
-  # map.pledge '/pledge', :controller => "pages", :action => "pledge"
-  map.feedback '/feedback', :controller => "pages", :action => "feedback"
-  map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
+  map.services '/services', :controller => "pages", :action => "services"
+  map.individuals '/services/individuals', :controller => "pages", :action => "individuals"
+  map.workplaces '/services/workplaces', :controller => "pages", :action => "workplaces"
+  map.schools '/services/schools', :controller => "pages", :action => "schools"
+  map.universities '/services/universities', :controller => "pages", :action => "universities"
+  map.communities '/services/communities', :controller => "pages", :action => "communities"
+  map.healthcare '/services/healthcare', :controller => "pages", :action => "healthcare"
+  map.engagement '/services/engagement', :controller => "pages", :action => "engagement"
+  map.testimonials '/services/testimonials', :controller => "pages", :action => "testimonials"
+  map.research '/services/research', :controller => "pages", :action => "research"
+  map.training '/services/training', :controller => "pages", :action => "training"
+  map.wellbeing_programmes '/services/wellbeing_programmes', :controller => "pages", :action => "wellbeing_programmes"
 
   map.grow '/grow', :controller => "pages", :action => "join_us"
   map.join_us '/grow/join_us', :controller => "pages", :action => "join_us"
@@ -44,22 +52,10 @@ ActionController::Routing::Routes.draw do |map|
   map.terms '/terms', :controller => "pages", :action => "terms"
   map.feedback '/feedback', :controller => "pages", :action => "feedback"
   map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
-
-  map.services '/services', :controller => "pages", :action => "services"
-  map.individuals '/services/individuals', :controller => "pages", :action => "individuals"
-  map.workplaces '/services/workplaces', :controller => "pages", :action => "workplaces"
-  map.schools '/services/schools', :controller => "pages", :action => "schools"
-  map.universities '/services/universities', :controller => "pages", :action => "universities"
-  map.communities '/services/communities', :controller => "pages", :action => "communities"
-  map.healthcare '/services/healthcare', :controller => "pages", :action => "healthcare"
-  map.engagement '/services/engagement', :controller => "pages", :action => "engagement"
-  map.testimonials '/services/testimonials', :controller => "pages", :action => "testimonials"
-  map.research '/services/research', :controller => "pages", :action => "research"
-  map.training '/services/training', :controller => "pages", :action => "training"
-  map.wellbeing_programmes '/services/wellbeing_programmes', :controller => "pages", :action => "wellbeing_programmes"
-
   map.privacy '/privacy', :controller => "pages", :action => "privacy"
   map.thebigtreat '/thebigtreat', :controller => "pages", :action => "bigtreat"
+  map.feedyourhead '/feedyourhead', :controller => "pages", :action => "feedyourhead"
+  map.mindcider '/mindcider', :controller => "pages", :action => "mindcider"
 
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'

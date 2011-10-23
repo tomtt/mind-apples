@@ -2,25 +2,29 @@
   Mindapples services
   
 %p
-  Mindapples is a social enterprise that offers clients a unique way to promote mental wellbeing and self-management. We offer a new route into this difficult topic for employers, healthcare providers, charities and brands, and deliver a range of services to help people learn to take better care of their minds. 
+  We sell engagement and training services to inspire people to think positively about the health of their minds, and learn how to take better care of themselves. We work with clients as diverse as Mind, British Gas, Roche Products, NHS Lambeth and the BBC to promote workplace resilience, psychological wellbeing and public health.
 
 %p
-  Our learning-based behaviour change model, developed following several years' research into education, psychology and behavioural science, empowers individuals to reflect on their actions, make more informed choices to maintain their health, and develop their own tools for lasting self-management. We can 
-  = link_to 'engage all kinds of people', engagement_path
-  in mental wellbeing, 
-  = link_to 'analyse their views', research_path
-  to inform strategic decision-making, and 
-  = link_to 'train individuals and groups', training_path 
-  to take control of their mental wellbeing. Through this, we aim to move people from being passive and dependent, to being active, independent, and ultimately interdependent.
+  %b
+    = link_to('Make an enquiry now', contact_path)
+  , or read more about our services via the links below.
+
+  %ul
+    %li 
+    = link_to 'Engagement', engagement_path
+    %li 
+    = link_to 'Training', training_path 
+    %li 
+    = link_to 'Research and analysis', research_path
+    %li 
+    = link_to 'Wellbeing Programmes', wellbeing_programmes_path 
   
 %p
-  We do all this using a combination of nifty social marketing and engagement techniques and the latest scalable digital tools. All our services are informed by a rigorous 
-  = link_to 'psychological and educational evidence base', evidence_path
+  All our services are delivered by experienced communications practitioners, informed by a rigorous 
+  = link_to 'psychological and educational research', evidence_path
   and supported by our
-  = link_to 'academic and healthcare partners', partnerships_path
-  , Kings Health Partners, South London and Maudsley NHS Trust and the Institute of Psychiatry at Kings College London. And since all our services collect suggestions for our wider campaign, and generate revenue to fund our work, by hiring us you’ll also be contributing to our overall objective of promoting mentally healthy living and working for everyone, worldwide.
+  = link_to ('academic and healthcare partners', partnerships_path) + "."  
   
 %p  
-  %i
-    Find out more about our services using the links above, or to discuss working with us, please e-mail 
-    = link_to('hello@mindapples.org', 'mailto:hello@mindapples.org') + "."
+  %b
+    = link_to('Contact us now to build a package that suits your needs', contact_path)
