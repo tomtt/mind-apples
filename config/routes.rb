@@ -45,10 +45,10 @@ ActionController::Routing::Routes.draw do |map|
   map.partnerships '/grow/partnerships', :controller => "pages", :action => "partnerships"
   map.volunteer '/grow/volunteer', :controller => "pages", :action => "volunteer"
   map.grow_your_own '/grow/grow_your_own', :controller => "pages", :action => "grow_your_own"
+  map.network '/grow/network', :controller => "pages", :action => "network"
+  map.shop '/grow/shop', :controller => "pages", :action => "shop"
 
   map.links '/links', :controller => "pages", :action => "links"
-  map.media '/media', :controller => "pages", :action => "media"
-  map.contact '/contact', :controller => "pages", :action => "contact"
   map.terms '/terms', :controller => "pages", :action => "terms"
   map.feedback '/feedback', :controller => "pages", :action => "feedback"
   map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
@@ -56,7 +56,14 @@ ActionController::Routing::Routes.draw do |map|
   map.thebigtreat '/thebigtreat', :controller => "pages", :action => "bigtreat"
   map.feedyourhead '/feedyourhead', :controller => "pages", :action => "feedyourhead"
   map.mindcider '/mindcider', :controller => "pages", :action => "mindcider"
+  map.appleaday '/appleaday', :controller => "pages", :action => "appleaday"
 
+  # Shortcut links
+  map.shop '/shop', :controller => "pages", :action => "shop"
+  map.media '/media', :controller => "pages", :action => "media"
+  map.contact '/contact', :controller => "pages", :action => "contact"
+  map.donate '/donate', :controller => "pages", :action => "donate"
+  
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'
   map.unlike '/person/unlikes/:id', :controller => 'people', :action => 'unlikes'
 
