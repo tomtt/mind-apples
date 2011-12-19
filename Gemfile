@@ -39,6 +39,7 @@ group :development, :test, :cucumber do
   gem 'fakeweb', '1.2.8'
   gem 'polyglot'
   gem 'rake', '0.8.7'
+  gem 'annotate'
 end
 
 group :dev_extra do

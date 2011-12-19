@@ -19,6 +19,7 @@ GEM
     activeresource (2.3.4)
       activesupport (= 2.3.4)
     activesupport (2.3.4)
+    annotate (2.4.0)
     authlogic (2.1.6)
       activesupport
     autotest-rails (4.1.0)
@@ -162,6 +163,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest (= 4.5.0)
+  annotate
   authlogic (= 2.1.6)
   autotest-rails (= 4.1.0)
   aws-s3 (= 0.6.2)
