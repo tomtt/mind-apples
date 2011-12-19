@@ -68,7 +68,7 @@ GEM
       uuidtools (>= 1.0.0)
     ffi (1.0.9)
     gem_plugin (0.2.3)
-    gherkin (2.3.10)
+    gherkin (2.3.7)
       json (>= 1.4.6)
     haml (3.1.2)
     heroku (2.3.6)
