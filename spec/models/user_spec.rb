@@ -33,17 +33,64 @@ describe User do
       @user.should be_valid
     end
 
-    it "should require a login" do
-      @user.login = ''
-      @user.should_not be_valid
-      @user.errors_on(:login).should_not be_blank
+    describe "on login" do
+      it "should be required" do
+        @user.login = ''
+        @user.should_not be_valid
+        @user.errors_on(:login).should_not be_blank
+      end
+      it "should be unique" do
+        Factory.create(:user, :login => 'wibble')
+        @user.login = 'wibble'
+        @user.should_not be_valid
+        @user.errors_on(:login).should_not be_blank
+      end
     end
 
-    it "should require an email" do
-      @user.email = ''
-      @user.should_not be_valid
-      @user.errors_on(:email).should_not be_blank
+    describe "on email" do
+      it "should be required" do
+        @user.email = ''
+        @user.should_not be_valid
+        @user.errors_on(:email).should_not be_blank
+      end
+      it "should be unique" do
+        Factory.create(:user, :email => 'me@example.com')
+        @user.email = 'me@example.com'
+        @user.should_not be_valid
+        @user.errors_on(:email).should_not be_blank
+      end
+
+      it "should look like an email address" do
+        [
+          "applemind.com",
+          "apple@.com",
+          "@mind.com",
+          "asdas@mind"
+        ].each do |em|
+          @user.email = em
+          @user.should_not be_valid
+          @user.errors.on(:email).should_not be_blank
+        end
+        @user.email = 'me@me.com'
+        @user.should be_valid
+      end
     end
 
+    describe "on password" do
+      it "should be at least 4 characters long" do
+        @user.password = @user.password_confirmation = 'abc'
+        @user.should_not be_valid
+        @user.errors.on(:password).should include("Please choose a valid password (minimum is 4 characters)")
+
+        @user.password = @user.password_confirmation = 'abcd'
+        @user.should be_valid
+      end
+
+      it "should be confirmed" do
+        @user.password = 'wibble'
+        @user.should_not be_valid
+        @user.errors.on(:password).should_not be_blank
+      end
+    end
   end
 end
