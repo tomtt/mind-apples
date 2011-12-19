@@ -43,7 +43,7 @@ Feature: Personal page
     And I go to "/person/butterfly"
     And I should see a link to "go"
     And I should not see "and pick your 5-a-day. "
-	And I should see "What do you do to look after your mind?"
+    And I should see "What do you do to look after your mind?"
     And I should not see "You don't have permission to see this page"
 
   Scenario: Person views another's page and the page is not public
