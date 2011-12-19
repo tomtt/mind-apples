@@ -56,6 +56,18 @@ describe ApplicationController do
     end
   end
 
+  describe "logged_in?" do
+    it "should be true if current_user returns a user" do
+      controller.stubs(:current_user).returns(:a_user)
+      controller.send(:logged_in?).should == true
+    end
+
+    it "should be false if current_user returns nil" do
+      controller.stubs(:current_user).returns(nil)
+      controller.send(:logged_in?).should == false
+    end
+  end
+
   describe "require user" do
     describe "when not logged in" do
       before do

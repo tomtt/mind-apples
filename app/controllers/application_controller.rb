@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   filter_parameter_logging :password, :password_confirmation
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :logged_in?
 
   before_filter :redirect_if_migrating_to_heroku
   before_filter :http_auth_when_on_staging
@@ -58,6 +58,10 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.person
+  end
+
+  def logged_in?
+    !!current_user
   end
 
   def require_user
