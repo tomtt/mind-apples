@@ -47,8 +47,6 @@
 #  one_line_bio              :string(255)
 #
 
-require "authlogic"
-
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
