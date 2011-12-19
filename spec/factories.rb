@@ -11,14 +11,13 @@ Factory.define :blog_feed do |u|
   u.url "link to original source"
 end
 
+Factory.define :mindapple do |m|
+  m.association :person, :factory => :person
+end
+
 Factory.define :network do |n|
   n.sequence(:url) { |n| "network_#{n}" }
   n.sequence(:name) { |n| "network_#{n}" }
-end
-
-Factory.define :people_import do |i|
-  i.s3_key "/path/from/factory"
-  i.user_type_description "Factory description"
 end
 
 Factory.define :person do |u|
@@ -31,6 +30,7 @@ Factory.define :person do |u|
   u.email {|n| "#{n}mind@apple.com" }
 end
 
-Factory.define :mindapple do |m|
-  m.association :person, :factory => :person
+Factory.define :people_import do |i|
+  i.s3_key "/path/from/factory"
+  i.user_type_description "Factory description"
 end
