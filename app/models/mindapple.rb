@@ -2,11 +2,12 @@
 #
 # Table name: mindapples
 #
-#  id         :integer         not null, primary key
-#  suggestion :text
-#  person_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id                      :integer         not null, primary key
+#  suggestion              :text
+#  person_id               :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  mindapple_likings_count :integer
 #
 
 class Mindapple < ActiveRecord::Base

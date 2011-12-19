@@ -42,6 +42,9 @@
 #  ethnicity                 :string(255)
 #  import_s3_etag            :string(255)
 #  type_description          :string(255)
+#  email_opt_in              :boolean
+#  shared_mindapples         :boolean         default(TRUE), not null
+#  one_line_bio              :string(255)
 #
 
 require "authlogic"
