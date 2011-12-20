@@ -139,7 +139,7 @@ class Person < ActiveRecord::Base
   end
   
   def anonymous?
-    login =~ /\A#{Person::AUTOGEN_LOGIN_PREFIX}/
+    self.user_id.nil?
   end
 
   def is_admin?
@@ -170,11 +170,7 @@ class Person < ActiveRecord::Base
   end
 
   def to_param
-    if login.index(AUTOGEN_LOGIN_PREFIX)
-      '_' + page_code
-    else
-      login
-    end
+    anonymous? ? "_#{self.page_code}" : user.login
   end
 
   def unique_email?
