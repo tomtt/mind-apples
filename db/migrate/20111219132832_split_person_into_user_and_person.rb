@@ -2,6 +2,11 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
   
   class MyPerson < ActiveRecord::Base
     set_table_name 'people'
+    
+    def anonymous?
+      login =~ /\A#{Person::AUTOGEN_LOGIN_PREFIX}/
+    end
+    
   end
   
   class MyUser < ActiveRecord::Base
@@ -34,7 +39,7 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
     
     MyPerson.find_each do |person|
       # Do not migrate people if they have been auto-generated
-      next if person.login =~ /\A#{Person::AUTOGEN_LOGIN_PREFIX}/
+      next if person.anonymous?
       
       parameters = {}
       fields.each { |field| parameters[field] = person.send(field) }
