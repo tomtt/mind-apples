@@ -95,6 +95,15 @@ class Person < ActiveRecord::Base
 
   attr_protected :login, :page_code
 
+  def self.find_by_param!(param)
+    if param =~ /\A_(.*)\z/
+      self.find_by_page_code!($1)
+    else
+      u = User.find_by_login!(param)
+      raise ActiveRecord::RecordNotFound if u.person.nil?
+      u.person
+    end
+  end
 
   def self.new_with_mindapples(attributes = {})
     new(attributes).ensure_correct_number_of_mindapples
@@ -151,6 +160,7 @@ class Person < ActiveRecord::Base
     end
   end
 
+  # Deprecated, and will be removed.  Use find_by_param! above.
   def self.find_by_param(param)
     if param.index('_') == 0
       find_by_page_code(param[1..-1])
