@@ -5,7 +5,7 @@
 #  id                        :integer         not null, primary key
 #  name                      :string(255)
 #  email                     :text
-#  page_code                 :string(255)
+#  page_code                 :string(255)     not null
 #  braindump                 :text
 #  location                  :string(255)
 #  gender                    :string(255)
@@ -51,16 +51,71 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Person do
-  context "validations" do
-    it "should validate length of password" do
-      us = Factory.build :person
-      us.password = "abc"
-      us.password_confirmation = "abc"
-      us.valid?
-      us.errors.should_not be_nil
-      us.errors.on(:password).should include("Please choose a valid password (minimum is 4 characters)")
+  describe "validations" do
+    before :each do
+      @person = Factory.build(:person)
+    end
+
+    it "should have a valid factory" do
+      @person.should be_valid
+    end
+
+    context "on pagecode" do
+      it "should contain only allowed characters" do
+        [
+          "_underscore",
+          "space space",
+          "wi*r$dC.h%ar@s",
+        ].each do |string|
+          @person.page_code = string
+          @person.should_not be_valid
+          @person.errors.on(:page_code).should_not be_blank
+        end
+        @person.page_code = 'ALphAnuM3r1c'
+        @person.should be_valid
+      end
+
+      it "should be unique" do
+        Factory.create(:person, :page_code => 'wibble')
+        @person.page_code = 'wibble'
+        @person.should_not be_valid
+        @person.errors.on(:page_code).should_not be_blank
+      end
     end
   end
+
+  describe "setting page_code" do
+    it "should be generated on create if blank" do
+      person = Factory.build(:person)
+      person.page_code.should be_blank
+      person.save!
+      person.page_code.should_not be_blank
+    end
+
+    it "should take any assigned value if given" do
+      person = Factory.build(:person)
+      person.page_code = "wibble"
+      person.save!
+      person.page_code.should == "wibble"
+    end
+
+    it "should be protected from mass assign" do
+      person = Factory.build(:person, :page_code => 'abcdefgh')
+      person.update_attributes!(:page_code => 'dangermouse')
+      person.page_code.should == 'abcdefgh'
+    end
+  end
+
+  #context "validations" do
+    #it "should validate length of password" do
+      #us = Factory.build :person
+      #us.password = "abc"
+      #us.password_confirmation = "abc"
+      #us.valid?
+      #us.errors.should_not be_nil
+      #us.errors.on(:password).should include("Please choose a valid password (minimum is 4 characters)")
+    #end
+  #end
   
   describe "ensuring correct number of mindapples" do
     it "should assign five mindapples if it has none" do
@@ -196,14 +251,6 @@ describe Person do
       person = Factory(:person, :login => "applesmind", :email => 'apple@minds.com')
       person.login = 'pluk'
       person.save.should be_false
-    end
-  end
-
-  describe "setting page_code" do
-    it "should be protected from mass assign" do
-      person = Factory.build(:person, :page_code => 'abcdefgh')
-      person.update_attributes(:page_code => 'dangermouse')
-      person.page_code.should == 'abcdefgh'
     end
   end
 

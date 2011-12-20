@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111219132832) do
+ActiveRecord::Schema.define(:version => 20111220154543) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20111219132832) do
   create_table "people", :force => true do |t|
     t.string   "name"
     t.text     "email"
-    t.string   "page_code"
+    t.string   "page_code",                                    :null => false
     t.text     "braindump"
     t.string   "location"
     t.string   "gender"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20111219132832) do
     t.integer  "user_id"
   end
 
+  add_index "people", ["page_code"], :name => "index_people_on_page_code", :unique => true
   add_index "people", ["user_id"], :name => "index_people_on_user_id", :unique => true
 
   create_table "people_imports", :force => true do |t|

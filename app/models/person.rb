@@ -5,7 +5,7 @@
 #  id                        :integer         not null, primary key
 #  name                      :string(255)
 #  email                     :text
-#  page_code                 :string(255)
+#  page_code                 :string(255)     not null
 #  braindump                 :text
 #  location                  :string(255)
 #  gender                    :string(255)
@@ -51,8 +51,12 @@
 class Person < ActiveRecord::Base
   AUTOGEN_LOGIN_PREFIX = 'autogen_'
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
+
+  validates_format_of :page_code, :with => /\A[A-Za-z0-9]+\z/
+  validates_uniqueness_of :page_code
+  before_validation :generate_page_code
+
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
-  validates_presence_of :page_code
   validates_confirmation_of :password, :message => :"password_confirmation.dont_match"
 
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }, :message => :"email.blank"
@@ -232,6 +236,12 @@ class Person < ActiveRecord::Base
   end
 
   private
+
+  def generate_page_code
+    if self.page_code.blank?
+      self.page_code = Authlogic::Random.friendly_token
+    end
+  end
 
   def self.determine_avatars_to_update
     avatars_to_update = {}
