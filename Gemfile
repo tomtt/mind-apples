@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "2.3.4"
+gem "rails", "2.3.14"
 gem "pg"
 gem "authlogic", "2.1.6"
 gem "fastercsv", '1.5.3'
