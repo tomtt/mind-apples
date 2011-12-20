@@ -26,5 +26,10 @@ class User < ActiveRecord::Base
     config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
   end
 
+  # Associations
   has_one :person, :dependent => :nullify
+
+  # Validations
+  validates_format_of :login, :with => /\A[a-z0-9_-]+\z/, :message => 'should only contain alphanumeric characters, dashes or underscores'
+  validates_format_of :login, :with => /\A[^_]/, :message => 'should not start with an underscore'
 end
