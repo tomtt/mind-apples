@@ -45,6 +45,7 @@
 #  email_opt_in              :boolean
 #  shared_mindapples         :boolean         default(TRUE), not null
 #  one_line_bio              :string(255)
+#  user_id                   :integer
 #
 
 class Person < ActiveRecord::Base
@@ -84,6 +85,10 @@ class Person < ActiveRecord::Base
   has_many :mindapples, :dependent => :destroy
   has_many :mindapple_likings
   has_many :liked_mindapples, :through => :mindapple_likings
+
+  belongs_to :user
+  validates_uniqueness_of :user_id, :allow_nil => true
+  accepts_nested_attributes_for :user, :update_only => true
 
   # paperclip
   has_attached_file :avatar, :styles => { :medium => "150x150", :small => "70x70", :thumb => "40x40" }, :default_url => DEFAULT_IMAGE_URL

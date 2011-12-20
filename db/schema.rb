@@ -99,7 +99,10 @@ ActiveRecord::Schema.define(:version => 20111219132832) do
     t.boolean  "email_opt_in"
     t.boolean  "shared_mindapples",         :default => true,  :null => false
     t.string   "one_line_bio"
+    t.integer  "user_id"
   end
+
+  add_index "people", ["user_id"], :name => "index_people_on_user_id", :unique => true
 
   create_table "people_imports", :force => true do |t|
     t.text     "s3_etag"

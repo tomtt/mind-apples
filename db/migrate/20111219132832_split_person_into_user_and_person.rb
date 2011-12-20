@@ -56,6 +56,8 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
   end
   
   def self.up
+    add_column :people, :user_id, :integer
+    add_index :people, :user_id, :unique => true
     create_users_table
     move_people_data_to_users
     delete_redundant_columns_from_people
@@ -65,5 +67,7 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
     remove_index :users, :column => :email
     remove_index :users, :column => :login
     drop_table :users
+    remove_index :people, :column => :user_id
+    remove_column :people, :user_id
   end
 end

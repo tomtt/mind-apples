@@ -25,4 +25,6 @@ class User < ActiveRecord::Base
   acts_as_authentic do |config|
     config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
   end
+
+  has_one :person, :dependent => :nullify
 end

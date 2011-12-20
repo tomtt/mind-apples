@@ -93,4 +93,20 @@ describe User do
       end
     end
   end
+
+  describe "person association" do
+    it "should have_one person" do
+      user = Factory.create(:user)
+      person = Factory.create(:person, :user_id => user.id)
+      user.person.should == person
+    end
+
+    it "should dependant => :nullify the person" do
+      user = Factory.create(:user)
+      person = Factory.create(:person, :user_id => user.id)
+      user.destroy
+      person.reload
+      person.user_id.should == nil
+    end
+  end
 end

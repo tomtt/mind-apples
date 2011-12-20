@@ -45,6 +45,7 @@
 #  email_opt_in              :boolean
 #  shared_mindapples         :boolean         default(TRUE), not null
 #  one_line_bio              :string(255)
+#  user_id                   :integer
 #
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
@@ -567,6 +568,47 @@ describe Person do
       Factory.build(:person, :role => "").is_admin?.should == false
       Factory.build(:person, :role => "user").is_admin?.should == false
       Factory.build(:person, :role => "Admin").is_admin?.should == false
+    end
+  end
+
+  describe "user association" do
+    it "should belong_to a user" do
+      user = Factory.create(:user)
+      person = Factory.create(:person, :user_id => user.id)
+      person.user.should == user
+    end
+
+    it "should belong_to a unique user" do
+      user = Factory.create(:user)
+      person = Factory.create(:person, :user => user)
+      person2 = Factory.build(:person, :user => user)
+      person2.should_not be_valid
+      person2.errors.on(:user_id).should_not be_blank
+    end
+
+    it "should allow multiple people without a user" do
+      person = Factory.create(:person, :user => nil)
+      person2 = Factory.build(:person, :user => nil)
+      person2.should be_valid
+      person2.save.should be_true
+    end
+
+    describe "accepting nested attributes for user" do
+      it "should accept nested attributes for user" do
+        user = Factory.create(:user)
+        person = Factory.create(:person, :user => user)
+        person.update_attributes!(:user_attributes => {:email => 'wibble@example.com'})
+        user.reload
+        user.email.should == 'wibble@example.com'
+      end
+
+      it "should create a new user if one doesn't exist" do
+        person = Factory.create(:person)
+        lambda do
+          person.update_attributes!(:user_attributes => Factory.attributes_for(:user, :email => 'woo@example.com'))
+        end.should change(User, :count).by(1)
+        person.user.email.should == 'woo@example.com'
+      end
     end
   end
 end
