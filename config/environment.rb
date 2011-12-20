@@ -7,10 +7,6 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  # TODO: For some reason i cannot require these gems in the initialisers.
-  # These should be moved out of the environment
-  config.gem 'haml', :version => '3.1.2'
-  config.gem 'paperclip'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
