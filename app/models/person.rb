@@ -128,6 +128,10 @@ class Person < ActiveRecord::Base
     reset_perishable_token!
     PersonMailer.deliver_claim_your_page(self)
   end
+  
+  def anonymous?
+    login =~ /\A#{Person::AUTOGEN_LOGIN_PREFIX}/
+  end
 
   def is_admin?
     role == "admin"

@@ -243,6 +243,18 @@ describe Person do
     end
   end
 
+  describe "anonymous?" do
+    
+    it "should be true when login starts with Person::AUTOGEN_LOGIN_PREFIX" do
+      Factory.build(:person, :login => Person::AUTOGEN_LOGIN_PREFIX + 'meh').should be_anonymous
+    end
+    
+    it "should be false when login DOES NOT start with Person::AUTOGEN_LOGIN_PREFIX" do
+      Factory.build(:person, :login => 'meh').should_not be_anonymous
+    end
+    
+  end
+
   it "should return its param value when converted to string" do
     person = Factory.create(:person)
     person.to_s.should == person.to_param
