@@ -57,7 +57,6 @@ class Person < ActiveRecord::Base
   before_validation :generate_page_code
 
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
-  validates_confirmation_of :password, :message => :"password_confirmation.dont_match"
 
   validates_presence_of :email, :if => Proc.new { |person| person.login_set_by_user? }, :message => :"email.blank"
 
@@ -71,19 +70,11 @@ class Person < ActiveRecord::Base
 
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
-  before_validation :unset_password_confirmation_if_password_is_not_set
 
   belongs_to :network
 
   attr_protected :role
 
-  acts_as_authentic do |config|
-    config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
-    config.merge_validates_uniqueness_of_login_field_options :message => :"login.taken"
-    config.require_password_confirmation false
-    config.validate_email_field false
-  end
-  
   named_scope :anonymous, { :conditions => ["login LIKE ? " , "#{AUTOGEN_LOGIN_PREFIX}%"] }
 
   has_many :mindapples, :dependent => :destroy
@@ -104,8 +95,6 @@ class Person < ActiveRecord::Base
 
   attr_protected :login, :page_code
 
-  #because we need our own validation
-  attr_accessor :password_confirmation
 
   def self.new_with_mindapples(attributes = {})
     new(attributes).ensure_correct_number_of_mindapples
@@ -292,12 +281,6 @@ class Person < ActiveRecord::Base
       self.name = nil
     else
       self.name.strip!
-    end
-  end
-
-  def unset_password_confirmation_if_password_is_not_set
-    if self.password.nil? && self.password_confirmation.blank?
-      self.password_confirmation = nil
     end
   end
 end

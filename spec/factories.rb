@@ -22,8 +22,6 @@ end
 
 Factory.define :person do |u|
   u.sequence(:login) {|n| "user_#{n}" }
-  u.password              "letmein"
-  u.password_confirmation "letmein"
   u.public_profile true
   u.policy_checked nil
   u.email {|n| "#{n}mind@apple.com" }
