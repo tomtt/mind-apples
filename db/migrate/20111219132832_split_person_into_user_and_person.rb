@@ -45,9 +45,9 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
       
       parameters = {}
       @fields.each { |field| parameters[field] = person.send(field) }
-      MyUser.create!(parameters)
-
-      # PENDING: set up association between Person and User.
+      new_user = MyUser.create!(parameters)
+      
+      person.update_attributes!(:user_id => new_user.id)
     end
   end
   

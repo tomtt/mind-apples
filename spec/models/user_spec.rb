@@ -45,6 +45,22 @@ describe User do
         @user.should_not be_valid
         @user.errors_on(:login).should_not be_blank
       end
+
+      it "should not allow values that start with an underscore" do
+        @user.login = '_mylogin'
+        @user.should_not be_valid
+        @user.errors_on(:login).should_not be_blank
+      end
+
+      it "should only allow alphanumeric characters" do
+        non_alphanumeric = ['MyÁpples', 'With space', 'gimmethe$', 'example.com']
+        non_alphanumeric.each do |invalid|
+          @user.login = invalid
+          @user.should_not be_valid
+          @user.errors_on(:login).should_not be_blank
+        end
+      end
+
     end
 
     describe "on email" do
