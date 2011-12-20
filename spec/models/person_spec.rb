@@ -534,22 +534,6 @@ describe Person do
     end
   end
 
-  describe "create_with_random_password_and_login_and_page_code" do
-    before do
-      PageCode.stubs(:code).returns("page_code_stub")
-      # It's not the 20 that matters, only that the page_code and password are different
-      PageCode.stubs(:code).with(20).returns("password_stub")
-    end
-
-    subject { Person.create_with_random_password_and_login_and_page_code!(:name => "Bob") }
-    its(:name) { should == "Bob" }
-    its(:login) { should == "#{Person::AUTOGEN_LOGIN_PREFIX}page_code_stub" }
-    its(:page_code) { should == "page_code_stub" }
-    it "should have a generated password" do
-      subject.valid_password?("password_stub").should be_true
-    end
-  end
-
   it "can be updated without resetting the password" do
     person = Factory.create(:person, :password => "blurb", :password_confirmation => "blurb")
     lambda { person.update_attributes!(:braindump => "Boo") }.should_not raise_error

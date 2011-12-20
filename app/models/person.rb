@@ -179,21 +179,6 @@ class Person < ActiveRecord::Base
     person.nil? || person.id == self.id
   end
 
-  def self.create_with_random_password_and_login_and_page_code!(attributes)
-    page_code = PageCode.code
-    login = '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
-
-    password = PageCode.code(20)
-    attributes["password"] = password
-    attributes["password_confirmation"] = password
-
-    new_person = new(attributes)
-    new_person.protected_login = login
-    new_person.page_code = page_code
-    new_person.save!
-    new_person
-  end
-
   # This method is used when importing a person from a csv file. The keys are attribute names like
   # 'mindapples_attributes[3][suggestion]', the values are the corresponding values for those
   # attributes. The csv import code expects to get the new user returned if there were no errors, or
