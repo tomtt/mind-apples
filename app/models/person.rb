@@ -78,6 +78,8 @@ class Person < ActiveRecord::Base
     config.require_password_confirmation false
     config.validate_email_field false
   end
+  
+  named_scope :anonymous, { :conditions => ["login LIKE ? " , "#{AUTOGEN_LOGIN_PREFIX}%"] }
 
   has_many :mindapples, :dependent => :destroy
   has_many :mindapple_likings
