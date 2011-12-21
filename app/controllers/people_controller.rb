@@ -106,12 +106,7 @@ class PeopleController < ApplicationController
   protected
 
   def find_resource
-    person = params[:pid] ? Person.find(params[:pid]) : Person.find_by_param!(params["id"])
-    unless person
-      render_404
-    end
-
-    person
+    self.resource ||= params[:pid] ? Person.find(params[:pid]) : Person.find_by_param!(params["id"])
   end
 
   def new_resource(attributes = (params[resource_name] || {}))

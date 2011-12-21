@@ -860,11 +860,20 @@ describe PeopleController do
     end
   end
   
-  describe "register" do
-    it "should redirect the user to root if the the user is not logged in" do
-      person = Factory.create(:person, :email => "e@mail.com", :login => 'login_test')
-      get :register, :id => person.login
-      response.should redirect_to(root_path)
+  describe "find_resource" do
+    it "should cache the result" do
+      person = Factory.create(:person)
+      controller.stubs(:params).returns({"id" => person.to_param})
+      controller.send(:find_resource)
+      Person.expects(:find_by_param!).never
+      controller.send(:find_resource)
+    end
+
+    it "always returns the found resource" do
+      person = Factory.create(:person)
+      controller.stubs(:params).returns({"id" => person.to_param})
+      controller.send(:find_resource)
+      controller.send(:find_resource).should == person
     end
   end
 end
