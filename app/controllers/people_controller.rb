@@ -3,7 +3,7 @@ require 'sha1'
 class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
   before_filter :set_fields_to_create_valid_person, :only => [:create]
-  before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update, :register]
+  before_filter :redirect_unless_editable, :only => [:edit, :update, :register]
   before_filter :redirect_unless_visible, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
   before_filter :assign_network, :only => [:new]
@@ -187,10 +187,10 @@ class PeopleController < ApplicationController
                         :password_confirmation => resource.password)
   end
 
-  def redirect_unless_current_user_is_owner
-    unless current_user && current_user == self.find_resource
-      session[:return_to] = request.path
-      flash[:notice] = "You do not have permission to edit this page"
+  def redirect_unless_editable
+    person = self.find_resource
+    unless person.editable_by?(current_user)
+      flash[:notice] = "You don't have permission to edit this page"
       redirect_to root_path
     end
   end

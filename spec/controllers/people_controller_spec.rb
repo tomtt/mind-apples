@@ -106,14 +106,45 @@ describe PeopleController do
   end
 
   describe "edit" do
-    describe "when logged in as the user" do
+    describe "when logged in as a user" do
       before do
-        @mock_person = build_mock_person
-        controller.stubs(:current_user).returns @mock_person
-        Person.stubs(:find_by_param).returns(@mock_person)
+        @user = Factory.create(:user)
+        login_as(@user)
       end
 
-      it_should_behave_like "all actions finding a person"
+      describe "when editing my own profile" do
+        before :each do
+          @person = Factory.create(:person, :user => @user)
+        end
+
+        it "should render the edit template" do
+          get :edit, :id => @person.to_param
+          response.should be_success
+          response.should render_template('edit')
+        end
+
+        it "should assign the person" do
+          get :edit, :id => @person.to_param
+          assigns[:person].should == @person
+        end
+      end
+
+      describe "attempting to edit another user's profile" do
+        before :each do
+          user2 = Factory.create(:user)
+          @person = Factory.create(:person, :user => user2)
+        end
+
+        it "should set an error and redirect to root" do
+          get :edit, :id => @person.to_param
+          response.should redirect_to(root_path)
+          flash[:notice].should == "You don't have permission to edit this page"
+        end
+      end
+
+      describe "editing an anonymous profile" do
+        it "needs to be defined"
+      end
     end
 
     describe "when not logged in" do
@@ -124,9 +155,34 @@ describe PeopleController do
         Person.stubs(:find_by_param).with('some_login').returns(@mock_person)
       end
 
-      it "should set the return_to session value to the path for editing this user" do
-        get 'edit', :id => 'some_login'
-        session[:return_to].should == edit_person_path(@mock_person)
+      describe "editing an anonymous profile" do
+        before :each do
+          @person = Factory.create(:person)
+        end
+
+        it "should render the edit template" do
+          get :edit, :id => @person.to_param
+          response.should be_success
+          response.should render_template('edit')
+        end
+
+        it "should assign the person" do
+          get :edit, :id => @person.to_param
+          assigns[:person].should == @person
+        end
+      end
+
+      describe "editing a user's profile" do
+        before :each do
+          user = Factory.create(:user)
+          @person = Factory.create(:person, :user => user)
+        end
+
+        it "should set an error and redirect to root" do
+          get :edit, :id => @person.to_param
+          response.should redirect_to(root_path)
+          flash[:notice].should == "You don't have permission to edit this page"
+        end
       end
     end
   end
