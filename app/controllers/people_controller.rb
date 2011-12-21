@@ -79,10 +79,10 @@ class PeopleController < ApplicationController
   end
   
   def unlikes
-    if current_user
+    if logged_in?
       begin
-        @mindapple = Mindapple.find(params[:id])
-        unlike_mindapple
+        mindapple = Mindapple.find(params[:id])
+        unlike_mindapple(mindapple)
       rescue ActiveRecord::RecordNotFound
         flash_error_message(:notice, "Unknown mindapple, couldn't finish the operation", root_path)
       end
@@ -140,17 +140,16 @@ class PeopleController < ApplicationController
     redirect_to(redirection_target) if redirection_target
   end
 
-  def unlike_mindapple
-    if current_user.liked_mindapples.include?(@mindapple)
-      current_user.liked_mindapples.delete(@mindapple)
-      current_user.save
-      respond_to do |format|
-        format.js {render :partial => 'unlikes.js.rjs'}
-        format.html {redirect_to(root_path) }
-      end
-
-    else
+  def unlike_mindapple(mindapple)
+    person = current_user.person
+    unless person.liked_mindapples.include?(mindapple)
       flash_error_message(:notice, "You need to like a mindapple first before you can unlike it!", root_path)
+      return
+    end
+    person.liked_mindapples.delete(mindapple)
+    respond_to do |format|
+      format.js {render :partial => 'unlikes.js.rjs'}
+      format.html {redirect_to(root_path) }
     end
   end
 
