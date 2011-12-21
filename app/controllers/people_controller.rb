@@ -2,27 +2,12 @@ require 'sha1'
 
 class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
-  before_filter :set_fields_to_create_valid_person, :only => [:create]
   before_filter :redirect_unless_editable, :only => [:edit, :update, :register]
   before_filter :redirect_unless_visible, :only => [:show]
-  before_filter :convert_policy_checked_value, :only => [:create, :update]
   before_filter :assign_network, :only => [:new]
   before_filter :add_network_to_person_attributes, :only => [:create]
 
   include PeopleHelper
-
-  def create
-    self.resource = new_resource
-    self.resource.protected_login = params["person"]["login"]
-    self.resource.page_code = params["person"]["page_code"]
-
-    if params["person"]["login"] && params["person"]["email"] && params["person"]["password"]
-      @resource_saved = resource.save
-    elsif @generated_login
-      @resource_saved = resource.save
-    end
-    resource.login = '' if !@resource_saved && @generated_login
-  end
 
   def update
     self.resource = find_resource
@@ -67,14 +52,11 @@ class PeopleController < ApplicationController
   response_for :create do |format|
     if @resource_saved
       format.html do
-        if @resource_saved
-          login_as_new_user
-          flash[:message] = 'Thanks for sharing your mindapples!'
-          if @generated_login && params[:pid].nil?
-            redirect_to register_resource_path(resource)
-          else
-            redirect_to resource_path(resource)
-          end
+        flash[:message] = 'Thanks for sharing your mindapples!'
+        if self.resource.anonymous? && params[:pid].nil?
+          redirect_to register_resource_path(resource)
+        else
+          redirect_to resource_path(resource)
         end
       end
     else

@@ -488,110 +488,65 @@ describe PeopleController do
   end
 
   describe "create" do
-    it "should log the new person in" do
-      @mock_person = build_mock_person
-      Person.stubs(:new_with_mindapples).returns @mock_person
-      UserSession.expects(:create!)
-      post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
-    end
-
-    it "should generate a page code" do
-      PageCode.expects(:code).twice
-      post(:create, "person" => {})
-    end
-
-    it "should assign the code as the page code" do
-      @mock_person = build_mock_person
-      Person.stubs(:new_with_mindapples).returns @mock_person
-      UserSession.stubs(:create!)
-      PageCode.stubs(:code).returns 'abzABz09'
-      @mock_person.expects(:page_code=).with('abzABz09')
-      post(:create, "person" => {})
-    end
-
-    it "should set the login in a protected way on the created resource" do
-      @mock_person = build_mock_person
-      Person.stubs(:new_with_mindapples).returns @mock_person
-      Person.stubs(:find).returns @mock_person
-      @mock_person.stubs(:valid_password?).returns true
-      @mock_person.stubs(:changed?).returns false
-      @mock_person.stubs(:last_request_at)
-      @mock_person.stubs(:last_request_at=)
-      @mock_person.stubs(:persistence_token)
-      @mock_person.stubs(:avatar=)
-      @mock_person.expects(:protected_login=).with('gandy')
-      post(:create, "person" => {"login" => 'gandy'})
-    end
-
-    it "should generate a login if the login field is blank" do
-      PageCode.stubs(:code).returns('genlogin')
-      UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
-      post(:create, "person" => {"login" => ''})
-    end
-
-    context "with autogen login should redirect to" do
-      it "edit page if params didn't contains pid" do
-        PageCode.stubs(:code).returns('genlogin')
-        UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
-        post(:create, "person" => {"login" => ''})
-        response.should redirect_to(register_person_path(controller.resource))
+    context "with valid params" do
+      def do_create(params = {})
+        post :create, :person => {"policy_checked" => "1"}.merge(params)
       end
 
-      it "show page if params contains pid" do
-        PageCode.stubs(:code).returns('genlogin')
-        UserSession.expects(:create!).with has_entries(:login => Person::AUTOGEN_LOGIN_PREFIX + 'genlogin')
-        post(:create, "person" => {"login" => ''}, 'pid' => 123)
-        response.should redirect_to(person_path(controller.resource))
+      it "should create a new person" do
+        lambda do
+          do_create
+        end.should change(Person, :count).by(1)
+        Person.last.policy_checked.should == true
+      end
+
+      it "should redirect to the register page" do
+        do_create
+        person = Person.last
+        response.should redirect_to(register_person_path(person))
+      end
+
+      it "should add the network_id to the person if network_url param passed" do
+        network = Factory.create(:network, :url => 'wibble')
+        do_create "network_url" => 'wibble'
+        Person.last.network_id.should == network.id
+      end
+
+      it "should ignore the network_url param if no matching network is found" do
+        do_create "network_url" => 'wibble'
+        Person.last.network_id.should == nil
       end
     end
 
-    it "should assign the code as the autogen login if no login was passed" do
-      PageCode.stubs(:code)
-      PageCode.stubs(:code).returns 'abzABz09'
-      post(:create, "person" => {})
-      controller.resource.login.should == '%sabzABz09' % Person::AUTOGEN_LOGIN_PREFIX
-    end
+    context "with invalid params" do
+      def do_create(params = {})
+        post :create, :person => {"policy_checked" => "0", "name" => "fooey"}.merge(params)
+      end
 
-    it "should use a 20 character long code for the password and confirmation" do
-      PageCode.stubs(:code).returns 'abcdef'
-      PageCode.expects(:code).with(20).returns '20charlongpass'
-      post(:create, "person" => {})
-      controller.resource.password.should == '20charlongpass'
-      controller.resource.password_confirmation.should == '20charlongpass'
-    end
+      it "should not create a person" do
+        lambda do
+          do_create
+        end.should_not change(Person, :count)
+      end
 
-    it "should not set a default password if the password field was filled in" do
-      post(:create, "person" => { :password => 'mypass' })
-      controller.resource.password.should == 'mypass'
-    end
+      it "should re-render the edit template assigning the invalid person" do
+        do_create
+        response.should render_template('edit')
+        assigns[:person].policy_checked.should == false
+        assigns[:person].name.should == "fooey"
+      end
 
-    it "should not set a default password if the password confirmation field was filled in" do
-      post(:create, "person" => { :password_confirmation => 'mypass' })
-      controller.resource.password_confirmation.should == 'mypass'
-    end
+      it "should assign the network if network_url param is passed" do
+        network = Factory.create(:network, :url => 'wibble')
+        do_create "network_url" => 'wibble'
+        assigns[:network].should == network
+      end
 
-    it "should not set a default password if the login field was filled in" do
-      post(:create, "person" => { :login => 'mypass' })
-      controller.resource.password.should == nil
+      it "should ignore the network_url param if no matching network is found" do
+        do_create "network_url" => 'wibble'
+        assigns[:network].should == nil
+      end
     end
-
-    it "should set a default password if the password field was passed blank" do
-      PageCode.stubs(:code).returns 'default_password'
-      post(:create, "person" => { :password => '' })
-      controller.resource.password.should == 'default_password'
-    end
-
-    it "should set a default password if the password confirmation field was passed blank" do
-      PageCode.stubs(:code).returns 'default_password'
-      post(:create, "person" => { :password_confirmation => '' })
-      controller.resource.password_confirmation.should == 'default_password'
-    end
-
-    # it "don't validate email presence and uniquenes together" do
-    #   person = Factory(:person)
-    #   post(:create, "person" => { :email => '' })
-    #   flash.now[:message].should == 'noo'
-    # end
 
     it "should not allow a constructed form to create more than five mindapples" do
       post(:create, "person" =>
@@ -609,85 +564,9 @@ describe PeopleController do
       controller.resource.mindapples.size.should == 5
     end
 
-    describe "if user name is filled" do
-      it "only with filled email" do
-        person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode' })
-        Person.stubs(:new_with_mindapples).returns(person)
-        person.expects(:save).never
-        post(:create, "person" => {'login' => 'bigapple', 'password' => 'supersecret'})
-      end
-
-      it "only with filled password" do
-        person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode' })
-        Person.stubs(:new_with_mindapples).returns(person)
-        person.expects(:save).never
-        post(:create, "person" => {'login' => 'bigapple', 'email' => 'my@email.com', 'password' => nil})
-      end
-    end
-
-    it "delete genarated login from resource when validation fails" do
-      person = mock('person', { :protected_login= => 'login', :page_code= => 'pagecode',:save => false })
-      person.expects(:login=).once
-      Person.stubs(:new_with_mindapples).returns(person)
-
-      post(:create, "person" => {"login" => ''})
-    end
-
     it "does not use the role field if passed as a param" do
-      post(:create, "person" => {'login' => 'bigapple', "role" => "admin"})
+      post :create, "person" => {'name' => 'bigapple', "role" => "admin"} 
       assigns[:person].role.should be_nil
-    end
-
-    describe "when saved" do
-      before do
-        @mock_person = build_mock_person
-        @mock_person.stubs(:save).returns true
-        Person.stubs(:new_with_mindapples).returns(@mock_person)
-      end
-
-      it "should redirect to show page" do
-        UserSession.stubs(:create!)
-        post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
-        response.should redirect_to(person_path(controller.resource))
-      end
-
-      it "renders flash message" do
-        UserSession.stubs(:create!)
-        post(:create, "person" => {:login => 'appleBrain', :password => 'supersecret', :email => 'my@email.com'})
-        flash.now[:message].should == 'Thanks for sharing your mindapples!'
-      end
-    end
-
-    describe "when there are errors" do
-      before do
-        @mock_person = build_mock_person
-        @mock_person.stubs(:save).returns false
-        @mock_person.stubs(:avatar=)
-        @mock_person.stubs(:login=)
-        Person.stubs(:new_with_mindapples).returns(@mock_person)
-      end
-
-      it "should render 'edit'" do
-        post(:create, "person" => {})
-        response.should render_template('edit')
-      end
-
-      it "render 404 error page" do
-        get :show, :id => 'something'
-        response.should render_template('errors/error_404')
-      end
-    end
-
-    describe "setting the network from the network_url hidden field" do
-      it "associates the person with the network if a network url is passed" do
-        pending "can't seem to make this spec pass using mocha"
-        # Factory.create(:network, :url => "bhm", :id => 28)
-        # Person.expects(:new).returns mock('person') # .with(has_key(:network_id => 29))
-        # # Person.should_receive(:new).with(hash_including(:network_id => 28))
-        # post(:create, "person" => {}, "network_url" => "bhm")
-      end
-
-      it "needs more specs"
     end
   end
 
