@@ -57,8 +57,7 @@ class PeopleController < ApplicationController
 
   def favourites
     begin
-      person = Person.find_by_param(params[:id])
-      raise ActiveRecord::RecordNotFound if person.nil? 
+      person = find_resource
       @favourites = person.liked_mindapples.paginate(:page => params[:page], :per_page => 10)
     rescue ActiveRecord::RecordNotFound
       flash_error_message(:notice, "Unknown person, couldn't find its favourites", root_path)
