@@ -149,12 +149,10 @@ class Person < ActiveRecord::Base
   end
 
   def name_for_view
-    if name
+    if name.present?
       name
-    else
-      if login_set_by_user?
-        login
-      end
+    elsif ! anonymous?
+      user.login
     end
   end
 
