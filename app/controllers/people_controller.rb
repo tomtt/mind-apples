@@ -246,8 +246,9 @@ class PeopleController < ApplicationController
   def add_network_to_person_attributes
     if params[:person].has_key?("network_url")
       network_url = params["person"].delete("network_url")
-      @network = Network.find_by_url(network_url)
-      params["person"]["network_id"] = @network.id
+      if @network = Network.find_by_url(network_url)
+        params["person"]["network_id"] = @network.id
+      end
     end
   end
 end
