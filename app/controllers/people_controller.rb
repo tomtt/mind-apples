@@ -7,20 +7,12 @@ class PeopleController < ApplicationController
   before_filter :assign_network, :only => [:new]
   before_filter :add_network_to_person_attributes, :only => [:create]
 
-  include PeopleHelper
-
   def update
     self.resource = find_resource
-    self.resource.protected_login = (params["person"]["login"]).blank? ? current_user.login : params["person"]["login"]
-
-    if password_invalid?
-      @resource_saved = false
-      populate_resource(self.resource)
-    else
-      @resource_saved = resource.update_attributes(params[resource_name])
-    end
+    self.resource.avatar = nil if params[:delete_avatar] == "1"
+    @resource_saved = resource.update_attributes(params[resource_name])
   end
-  
+
   def register
     self.resource = find_resource
     redirect_to edit_resource_path unless self.resource.anonymous?
@@ -28,8 +20,6 @@ class PeopleController < ApplicationController
 
   response_for :update do |format|
     if @resource_saved
-      update_logged_user
-      delete_profile_picture unless params['delete_avatar'].nil?
       format.html do
         flash[:notice] = if params[:register_form]
           "Thanks for registering your Mindapples page"
@@ -41,7 +31,6 @@ class PeopleController < ApplicationController
       format.js
       format.xml  { head :ok }
     else
-      validate_image
       action = params[:register_form] ? "register" : "edit"
       format.html { render :action => action }
       format.js   { render :action => action }
@@ -113,32 +102,6 @@ class PeopleController < ApplicationController
     resource = Person.new_with_mindapples(attributes)
   end
   
-  def password_invalid?
-    # TODO: refactor validations onto the model level not the controller level if possible
-    person = Person.find_by_id(params[:pid])
-
-    if person && !person.login_set_by_user? && person.login !=  params["person"]["login"] && params["person"]["password"].blank?
-      resource.attributes = params["person"]
-      resource.valid?
-      resource.errors.add('Please', " choose a valid password (minimum is 4 characters)")
-      return true
-    end
-    false
-  end
-
-  def login_as_new_user
-    UserSession.create!(:login => params["person"]["login"],
-                        :password => params["person"]["password"],
-                        :password_confirmation => params["person"]["password_confirmation"])
-  end
-  
-  def update_logged_user
-    return if params["person"]["password"].blank?
-    UserSession.create!(:login => resource.login,
-                        :password => resource.password,
-                        :password_confirmation => resource.password)
-  end
-
   def redirect_unless_editable
     person = self.find_resource
     unless person.editable_by?(current_user)
@@ -194,23 +157,6 @@ class PeopleController < ApplicationController
   def delete_profile_picture
     resource.avatar.destroy
     resource.save
-  end
-
-  def validate_image
-    person = Person.find_by_id(params[:pid])
-
-    unless person
-      resource.avatar = Person.new.avatar
-      return
-    end
-
-    avatar = person.avatar
-
-    if avatar.url == Person.new.avatar.url
-      resource.avatar = nil
-    else
-      resource.avatar = avatar
-    end
   end
 
   def assign_network

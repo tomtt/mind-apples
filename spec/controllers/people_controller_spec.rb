@@ -148,13 +148,6 @@ describe PeopleController do
     end
 
     describe "when not logged in" do
-      before do
-        @mock_person = build_mock_person
-        @mock_person.stubs(:to_param).returns('some_login')
-        controller.stubs(:current_user).returns nil
-        Person.stubs(:find_by_param).with('some_login').returns(@mock_person)
-      end
-
       describe "editing an anonymous profile" do
         before :each do
           @person = Factory.create(:person)
@@ -257,197 +250,209 @@ describe PeopleController do
   end
 
   describe "update" do
-    describe "user with blank password" do
-      before(:each) do
-        @mock_person = build_mock_person
-        controller.stubs(:current_user).returns  @mock_person
-        Person.stubs(:find_by_param).returns  @mock_person
-        Person.stubs(:find_by_id).returns  @mock_person
-        Person.stubs(:find_resource).returns( @mock_person)
+    describe "for an anonymous profile" do
+      before :each do
+        @person = Factory.create(:person, :name => 'Fooey')
+      end
+      context "when populating user fields correctly" do
+        def do_update
+          put :update, :id => @person.to_param, :person => {
+            "name" => "Mr. Wibble",
+            "user_attributes" => Factory.attributes_for(:user, :login => 'wibble')
+          }
+        end
+
+        it "should update the person" do
+          do_update
+          @person.reload
+          @person.name.should == 'Mr. Wibble'
+        end
+
+        it "should create a new user linked to the person" do
+          lambda do
+            do_update
+          end.should change(User, :count).by(1)
+          @person.reload
+          @person.user.should be_a(User)
+          @person.user.login.should == 'wibble'
+        end
+
+        it "should log the user in" do
+          do_update
+          @person.reload
+          UserSession.find.record.should == @person.user
+        end
+
+        it "should redirect to the show action" do
+          do_update
+          @person.reload
+          response.should redirect_to(person_path(@person))
+        end
       end
 
-      it "fail if user is autogen with empty password and new login" do
-        mock_person = @mock_person
-        mock_person.stubs(:login_set_by_user?).returns false
-        mock_person.stubs(:errors).returns(mock('error', :add))
-        mock_person.stubs(:login).returns 'apple'
-        mock_person.stubs(:[]=)
+      context "when populating user fields incorrectly" do
+        def do_update(from_register = false)
+          params = {:id => @person.to_param, :person => {
+            "name" => "Mr. Wibble",
+            "user_attributes" => Factory.attributes_for(:user, :login => '', :email => 'wibble@example.com')
+          }}
+          params.merge!("register_form" => "true") if from_register
+          put :update, params
+        end
 
-        mock_avatar = mock('avatar', :url => 'avatar_url')
-        mock_person.stubs(:avatar).returns(mock_avatar)
-        mock_person.stubs(:avatar=)
-        mock_person.stubs(:attributes=)
-        mock_person.stubs(:valid?)
+        it "should not update the person" do
+          do_update
+          @person.reload
+          @person.name.should == 'Fooey'
+        end
 
-        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
+        it "should not create a user" do
+          lambda do
+            do_update
+          end.should_not change(User, :count)
+        end
+
+        it "should re-render the register view if coming from there" do
+          do_update(true)
+          response.should render_template('register')
+        end
+
+        it "should re-render the edit view otherwise" do
+          do_update
+          response.should render_template('edit')
+        end
+
+        it "should assign the invalid person with associated user" do
+          do_update
+          assigns[:person].should == @person
+          assigns[:person].name.should == 'Mr. Wibble'
+          assigns[:person].user.email.should == 'wibble@example.com'
+        end
       end
 
-      it "doesn't fail if user is autogen with empty password and old login" do
-        @mock_person.stubs(:login_set_by_user?).returns false
-        mock_error = mock('error')
-        mock_error.expects(:add).never.with('Please', " choose a valid password (minimum is 4 characters)")
-        @mock_person.stubs(:errors).returns(mock_error)
-        @mock_person.stubs(:login).returns 'gandy'
+      context "when not populating user fields" do
+        def do_update
+          put :update, :id => @person.to_param, :person => {
+            "name" => "Mr. Wibble",
+            "user_attributes" => {"login" => '', "email" => '', "password" => '', 'password_confirmation' => ''}
+          }
+        end
 
-        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
+        it "should update the person" do
+          do_update
+          @person.reload
+          @person.name.should == 'Mr. Wibble'
+        end
+
+        it "should not create a user" do
+          lambda do
+            do_update
+          end.should_not change(User, :count)
+          @person.reload
+          @person.user.should == nil
+        end
+
+        it "should redirect to the show action" do
+          do_update
+          response.should redirect_to(person_path(@person))
+        end
       end
 
-      it "doesn't fail if user is autogen with empty password" do
-        @mock_person.stubs(:login_set_by_user?).returns true
-        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com', 'password' => ''})
-      end
-    end
-
-    it "doesn't fail if autogen user with filled password" do
-      person = Factory(:person, :email => 'gandy@post.com', :login => 'autogen_abcdefgh', :page_code => 'abcdefgh')
-      put(:update, "person" => {"login" => 'autogen_abcdefgh', 'email' => 'gandy@post.com', 'passsword' => 'supersecret',  'password_confirmation' => 'supersecret'})
-    end
-
-    describe "when logged in as the updated user" do
-      before do
-        @mock_person = build_mock_person
-        controller.stubs(:current_user).returns @mock_person
-        Person.stubs(:find_by_param).returns @mock_person
-      end
-
-      it "should set the login in a protected way on the updated resource" do
-        PeopleController.any_instance.stubs(:password_invalid?).returns false
-        mock_person = @mock_person
-
-        mock_person.stubs(:avatar).returns('avatar')
-        mock_person.stubs(:avatar=)
-        mock_person.expects(:update_attributes)
-        mock_person.expects(:protected_login=).with('gandy')
-
-        Person.stubs(:find_by_param).returns mock_person
-        put(:update, "person" => {"login" => 'gandy', 'email' => 'gandy@post.com'})
-      end
-
-      it "should redirect to the show page" do
-        PeopleController.any_instance.stubs(:password_invalid?)
-        PeopleController.any_instance.stubs(:update_logged_user)
-        put(:update, "person" => {"login" => 'gandy', 'password' => 'asdasds'})
-        response.should redirect_to(person_path(@mock_person))
-      end
-
-      it "should flash a thank you message" do
-        PeopleController.any_instance.stubs(:password_invalid?)
-        put(:update, "person" => {"login" => 'gandy'})
-        flash[:notice].should =~ /thank you/i
-      end
-
-      it "find resource only for existed login" do
-        nil_person = mock('nil_person')
-        nil_person.stubs(:nil?).returns(true)
-        Person.stubs(:find_by_param).returns(nil_person)
-        mock_person = mock('person')
-        ApplicationController.any_instance.stubs(:current_user).returns(mock_person)
-
-        put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
-      end
-    end
-
-    describe "doesn't update image with invalid validation" do
-      before do
-        @mock_person = build_mock_person
-        controller.stubs(:current_user).returns @mock_person
-        Person.stubs(:find_by_param).returns @mock_person
-        PeopleController.any_instance.stubs(:password_invalid?).returns(mock)
-        PeopleController.any_instance.stubs(:populate_resource).once
-        @mock_person.stubs(:update_attributes).returns false
-        @mock_person.stubs(:login).returns 'applesmind'
-      end
-
-      it "and load previous picture for avatar" do
-        mock_person = @mock_person
-        mock_avatar = mock('avatar', :url => 'avatar_url')
-        mock_person.stubs(:avatar).returns(mock_avatar)
-        Person.stubs(:find_by_id).returns mock_person
-        mock_person.expects(:avatar=).with(mock_avatar)
-
-        put(:update, "person" => {'login'=>'gandy'})
-      end
-
-      it "and set default picture for avatar" do
-        mock_person = @mock_person
-        mock_person.expects(:avatar).returns(mock('avatar', :url => Person.new.avatar.url))
-        Person.stubs(:find_by_id).returns @mock_person
-        @mock_person.expects(:avatar=)
-
-        put(:update, "person" => {'login'=>'gandy'})
-      end
-
-    end
-
-    describe "udpate logged user and reset the session" do
-      before(:each) do
-        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
-        controller.stubs(:current_user).returns @person
-        Person.stubs(:find_by_param).returns @person
-      end
-
-      it "update user session on update" do
-        PeopleController.any_instance.stubs(:password_invalid?).returns false
-        controller.expects(:update_logged_user)
-        put(:update, "person" => {"login" => 'gandy'})
-      end
-
-      it "set new user session if password was updated" do
-        UserSession.expects(:create!).once.with(
-                    :login => 'gandy',
-                    :password => 'topsecret',
-                    :password_confirmation => 'topsecret')
-        put(:update, "person" => {"login" => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret'})
+      context "when logged in" do
+        it "needs to be defined"
       end
     end
 
-    describe "profile picture" do
-      before(:each) do
-        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
-        controller.stubs(:current_user).returns @person
-        Person.stubs(:find_by_param).returns @person
-        PeopleController.any_instance.stubs(:password_invalid?).returns false
-      end
+    describe "for a linked profile" do
+      context "when logged in as the profile owner" do
+        before :each do
+          @user = Factory.create(:user, :login => 'fooey')
+          login_as(@user)
+          @person = Factory.create(:person, :user => @user, :name => 'Fooey')
+        end
 
-      it "delete if delete_checkbox is in params" do
-         PeopleController.any_instance.expects(:delete_profile_picture).once
-         put(:update, "person" => {"login" => 'gandy'}, 'delete_avatar' => 1)
-      end
+        describe "with valid params" do
+          def do_update
+            put :update, :id => @person.to_param, :person => {"name" => "Mr. Wibble", "user_attributes" => {"login" => 'wibble'}}
+          end
 
-      it "don't delete if delete_checkbox is not int params" do
-         PeopleController.any_instance.expects(:delete_profile_picture).never
-         put(:update, "person" => {"login" => 'gandy'})
-      end
-    end
+          it "should update the person" do
+            do_update
+            @person.reload
+            @person.name.should == 'Mr. Wibble'
+          end
 
-    describe "when logged in as a different user as the updated one" do
-      before do
-        @logged_in_person = build_mock_person
-        controller.stubs(:current_user).returns @logged_in_person
-        @mock_person = build_mock_person
-        Person.stubs(:find_by_param).returns @mock_person
-      end
+          it "should update the user" do
+            do_update
+            @user.reload
+            @user.login.should == 'wibble'
+          end
 
-      it "should not update any attributes of the updated user" do
-        @mock_person.expects(:update_attributes).never
-        put(:update, "person" => {"login" => 'gandy'})
-      end
+          it "should redirect to the show action" do
+            do_update
+            @person.reload
+            response.should redirect_to(person_path(@person))
+          end
+        end
 
-      it "should not update the login of the updated user" do
-        @mock_person.expects(:protected_login=).never
-        put(:update, "person" => {"login" => 'gandy'})
-      end
+        describe "with invalid params" do
+          def do_update
+            put :update, :id => @person.to_param, :person => {"name" => "Mr. Wibble", "user_attributes" => {"login" => ''}}
+          end
 
-      it "should set the notice flash" do
-        put(:update, "person" => {"login" => 'gandy'})
-        flash[:notice].should == 'You do not have permission to edit this page'
-      end
+          it "should not update the person" do
+            do_update
+            @person.reload
+            @person.name.should == 'Fooey'
+          end
 
-      it "should redirect to the login page" do
-        put(:update, "person" => {"login" => 'gandy'})
-        response.should redirect_to(root_path)
+          it "should not update the user" do
+            do_update
+            @user.reload
+            @user.login.should == 'fooey'
+          end
+
+          it "should re-render the edit page assigning the invalid person" do
+            do_update
+            response.should render_template('edit')
+            assigns[:person].should == @person
+            assigns[:person].name.should == 'Mr. Wibble'
+            assigns[:person].user.login.should == ''
+          end
+        end
+
+        describe "deleting the avatar" do
+          before :each do
+            @person.update_attributes!(:avatar_file_name => 'foo.jpg', :avatar_file_size => 1234, :avatar_updated_at => 1.hour.ago, :avatar_content_type => 'image/jpeg')
+          end
+
+          it "should delete the avatar if requested" do
+            put :update, :id => @person.to_param, :person => {}, :delete_avatar => "1"
+            @person.reload
+            @person.avatar.file?.should == false
+          end
+
+          it "should leave the avatar otherwise" do
+            put :update, :id => @person.to_param, :person => {}, :delete_avatar => "0"
+            @person.reload
+            @person.avatar.file?.should == true
+          end
+
+        end
+      end # Logged in as owner
+
+      context "when not logged in as profile owner" do
+        it "should set an error and redirect to the root" do
+          user = Factory.create(:user)
+          login_as(user)
+          user2 = Factory.create(:user)
+          person = Factory.create(:person, :user => user2)
+          put :update, :id => person.to_param, :person => {"name" => 'Mr. Wibble'}
+          response.should redirect_to(root_path)
+          flash[:notice].should == "You don't have permission to edit this page"
+        end
       end
-    end
+    end # Linked profile
   end
 
   describe "new" do
