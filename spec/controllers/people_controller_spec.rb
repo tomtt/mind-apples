@@ -254,7 +254,6 @@ describe PeopleController do
         end
       end
     end
-
   end
 
   describe "update" do
@@ -452,35 +451,39 @@ describe PeopleController do
   end
 
   describe "new" do
-    before do
-      @mock_person = build_mock_person
-    end
-
-    it "should create a new person with mindapples" do
-      Person.expects(:new_with_mindapples)
+    it "should render the new template" do
       get :new
+      response.should be_success
+      response.should render_template('new')
     end
 
-    it "should have the new person as the resource" do
-      Person.stubs(:new_with_mindapples).returns @mock_person
+    it "should assign a new person with mindapples" do
+      Person.expects(:new_with_mindapples).returns(:person_with_mindapples)
       get :new
-      controller.resource.should == @mock_person
+      assigns[:person].should == :person_with_mindapples
     end
 
-    it "sets @network to nil if no network is passed" do
-      get :new
-      assigns[:network].should be_nil
+    context "handling network" do
+      it "sets @network to nil if no network is passed" do
+        get :new
+        assigns[:network].should be_nil
+      end
+
+      it "sets @network to the network if a known one is passed" do
+        network = Factory.create(:network)
+        get :new, :network => network.url
+        assigns[:network].should == network
+      end
+
+      it "renders a 404 if an unknown network is passed" do
+        get :new, :network => "froob"
+        response.code.should == "404"
+        response.should render_template('errors/error_404')
+      end
     end
 
-    it "sets @network to the network if a known one is passed" do
-      network = Factory.create(:network)
-      get :new, :network => network.url
-      assigns[:network].should == network
-    end
-
-    it "renders a 404 if an unknown network is passed" do
-      get :new, :network => "froob"
-      response.should render_template('errors/error_404')
+    context "when logged in" do
+      it "needs to be defined"
     end
   end
 

@@ -261,7 +261,7 @@ class PeopleController < ApplicationController
 
   def assign_network
     if params[:network]
-      @network = Network.find_by_url(params[:network]) or render_404
+      @network = Network.find_by_url!(params[:network])
     end
   end
 
