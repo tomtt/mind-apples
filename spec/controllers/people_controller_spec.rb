@@ -570,53 +570,6 @@ describe PeopleController do
     end
   end
 
-  describe "convert_policy_checked_value" do
-    context "create" do
-      it "save checked checkbox as true" do
-        post(:create, "person" => {'policy_checked' => "1"})
-        params['person']['policy_checked'].should == true
-      end
-
-      it "dont save unchecked checkbox as true" do
-        post(:create, "person" => {'policy_checked' => "0"})
-        params['person']['policy_checked'].should_not == true
-      end
-
-      it "dont save nil checkbox param as true" do
-        post(:create, "person" => {})
-        params['person']['policy_checked'].should be_nil
-      end
-    end
-
-    context "update" do
-      before do
-        @person = Factory(:person, :login => 'gandy', 'password' => 'topsecret', 'password_confirmation' => 'topsecret')
-        controller.stubs(:current_user).returns @person
-        Person.stubs(:find_by_param).returns @person
-      end
-
-      it "save checked checkbox as true" do
-        post(:update, "person" => {"login" => 'gandy', 'policy_checked' => "1"})
-        params['person']['policy_checked'].should == true
-      end
-
-      it "dont save unchecked checkbox as true" do
-        post(:update, "person" => {'policy_checked' => "0"})
-        params['person']['policy_checked'].should_not == true
-      end
-
-      it "dont save nil checkbox param as true" do
-        post(:update, "person" => {})
-        params['person']['policy_checked'].should be_nil
-      end
-      
-      it "should set the flash message correctly if the update comes from the register form" do
-        post(:update, "person" => {"login" => 'gandy', 'policy_checked' => "1"}, "register_form" => "true")
-        flash[:notice].should == "Thanks for registering your Mindapples page"
-      end
-    end
-  end
-
   describe "like mindapples actions" do
 
     before(:each) do

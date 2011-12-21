@@ -179,10 +179,6 @@ class PeopleController < ApplicationController
     end
   end
   
-  def convert_policy_checked_value
-    params['person']['policy_checked'] = true if params['person'] && params['person']['policy_checked'] == "1"
-  end
-  
   def like_mindapple
     if !current_user.mindapples.include?(@mindapple)
       if !current_user.liked_mindapples.include?(@mindapple)
