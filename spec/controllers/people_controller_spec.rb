@@ -13,67 +13,63 @@ describe PeopleController do
 
   shared_examples_for "all actions finding a person" do
     it "should find a person by param value" do
-      Person.expects(:find_by_param).with('param_value')
-      do_request
+      @person ||= Factory.create(:person)
+      get 'show', :id => @person.to_param
+      assigns[:person].should == @person
     end
-  end
-
-  def do_request
-    get 'show', :id => 'param_value'
   end
 
   describe "show" do
     it_should_behave_like "all actions finding a person"
 
+    shared_examples_for "The user is the owner of a profile page" do
+      it "should render the show template" do
+        get 'show', :id => @person.to_param
+        response.should be_success
+        response.should render_template('show')
+      end
+
+      it "doesn't display a flash error message" do
+        get 'show', :id => @person.to_param
+        flash[:notice].should == nil
+      end
+
+      it "sets 'shared_mindapples? on the resource to true" do
+        get 'show', :id => @person.to_param
+        @person.reload
+        @person.shared_mindapples?.should == true
+      end
+    end
+
+    shared_examples_for "The user is not the owner of a profile page" do
+      it "redirects to the home page" do
+        get 'show', :id => @person.to_param
+        response.should redirect_to(root_path)
+      end
+
+      it "displays a flash error message" do
+        get 'show', :id => @person.to_param
+        flash[:notice].should == "You don't have permission to see this page"
+      end
+    end
+
     describe "when logged in as the user" do
-
-      shared_examples_for "The user is the owner of a profile page" do
-        it "doesn't redirect to the home page" do
-          get 'show', :id => @person.login
-          response.should_not redirect_to(root_path)
-        end
-
-        it "doesn't display a flash error message" do
-          get 'show', :id => @person.login
-          flash[:notice].should == nil
-        end
-        
-        it "sets 'shared_mindapples? on the resource to true" do
-          get 'show', :id => @person.login
-          @person.reload
-          @person.shared_mindapples?.should == true
-        end
+      before :each do
+        @user = Factory.create(:user, :login => 'testThis')
+        login_as(@user)
       end
-
-      shared_examples_for "The user is not the owner of a profile page" do
-        it "redirects to the home page" do
-          get 'show', :id => @person.login
-          response.should redirect_to(root_path)
-        end
-
-        it "displays a flash error message" do
-          get 'show', :id => @person.login
-          flash[:notice].should == "You don't have permission to see this page"
-        end
-      end
-
 
       describe "when visiting my own page and the page is not public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
-          controller.stubs(:current_user).returns @person
-          Person.stubs(:find_by_param).returns(@person)
+          @person = Factory.create(:person, :user => @user, :public_profile => false)
         end
 
         it_should_behave_like "The user is the owner of a profile page"
-
       end
 
       describe "when visiting my own page and the page is public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => true)
-          controller.stubs(:current_user).returns @person
-          Person.stubs(:find_by_param).returns(@person)
+          @person = Factory.create(:person, :user => @user, :public_profile => true)
         end
 
         it_should_behave_like "The user is the owner of a profile page"
@@ -81,13 +77,10 @@ describe PeopleController do
     end
 
     describe "when not logged in as the user" do
-
       describe "when visiting a profile's page and the page is not public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
-          @person.stubs(:to_param).returns('testThis')
-          controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)
+          user = Factory.create(:user)
+          @person = Factory.create(:person, :user => user, :public_profile => false)
         end
 
         it_should_behave_like "The user is not the owner of a profile page"
@@ -95,10 +88,16 @@ describe PeopleController do
 
       describe "when visiting a profile's page and the page is public" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => true)
-          @person.stubs(:to_param).returns('testThis')
-          controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)
+          user = Factory.create(:user)
+          @person = Factory.create(:person, :user => user, :public_profile => true)
+        end
+
+        it_should_behave_like "The user is the owner of a profile page"
+      end
+
+      describe "when visiting an anonymous profile page" do
+        before(:each) do
+          @person = Factory.create(:person, :public_profile => false)
         end
 
         it_should_behave_like "The user is the owner of a profile page"

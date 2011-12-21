@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   resources_controller_for :people, :segment => 'person', :load_enclosing => false
   before_filter :set_fields_to_create_valid_person, :only => [:create]
   before_filter :redirect_unless_current_user_is_owner, :only => [:edit, :update, :register]
-  before_filter :redirect_unless_profile_page_is_public, :only => [:show]
+  before_filter :redirect_unless_visible, :only => [:show]
   before_filter :convert_policy_checked_value, :only => [:create, :update]
   before_filter :assign_network, :only => [:new]
   before_filter :add_network_to_person_attributes, :only => [:create]
@@ -90,11 +90,6 @@ class PeopleController < ApplicationController
     end
   end
 
-  alias_method :rc_show, :show
-  def show
-    rc_show
-  end
-
   def favourites
     begin
       person = Person.find_by_param(params[:id])
@@ -135,7 +130,7 @@ class PeopleController < ApplicationController
   protected
 
   def find_resource
-    person = params[:pid] ? Person.find(params[:pid]) : Person.find_by_param(params["id"])
+    person = params[:pid] ? Person.find(params[:pid]) : Person.find_by_param!(params["id"])
     unless person
       render_404
     end
@@ -199,18 +194,12 @@ class PeopleController < ApplicationController
       redirect_to root_path
     end
   end
-  
-  def redirect_unless_profile_page_is_public
+
+  def redirect_unless_visible
     person = self.find_resource
-    if(person)
-      if(current_user==person || person.public_profile || SHA1.sha1(params[:public_override]) == "e39e9114d3439a3440cac82351e6f1a8c757caa1")
-        return true
-      else
-        flash[:notice] = "You don't have permission to see this page"
-        redirect_to root_path
-      end
-    else
-      # we do nothing as find_resource called render_404
+    unless person.viewable_by?(current_user) or SHA1.sha1(params[:public_override]) == "e39e9114d3439a3440cac82351e6f1a8c757caa1"
+      flash[:notice] = "You don't have permission to see this page"
+      redirect_to root_path
     end
   end
   
