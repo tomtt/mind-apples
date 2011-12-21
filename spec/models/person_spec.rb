@@ -645,6 +645,13 @@ describe Person do
         end.should change(User, :count).by(1)
         person.user.email.should == 'woo@example.com'
       end
+
+      it "should ignore if all attributes are blank" do
+        person = Factory.create(:person)
+        lambda do
+          person.update_attributes!("user_attributes" => {"login" => '', "email" => '', "password" => '', 'password_confirmation' => ''})
+        end.should_not change(User, :count)
+      end
     end
   end
 

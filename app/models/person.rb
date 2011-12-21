@@ -81,7 +81,7 @@ class Person < ActiveRecord::Base
 
   belongs_to :user
   validates_uniqueness_of :user_id, :allow_nil => true
-  accepts_nested_attributes_for :user, :update_only => true
+  accepts_nested_attributes_for :user, :update_only => true, :reject_if => :all_blank
 
   # paperclip
   has_attached_file :avatar, :styles => { :medium => "150x150", :small => "70x70", :thumb => "40x40" }, :default_url => DEFAULT_IMAGE_URL
