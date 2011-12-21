@@ -153,11 +153,6 @@ class PeopleController < ApplicationController
     end
   end
 
-  def delete_profile_picture
-    resource.avatar.destroy
-    resource.save
-  end
-
   def assign_network
     if params[:network]
       @network = Network.find_by_url!(params[:network])
