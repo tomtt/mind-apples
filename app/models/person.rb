@@ -111,19 +111,6 @@ class Person < ActiveRecord::Base
     self
   end
 
-  def protected_login=(value)
-    unless login_set_by_user?
-      self.login = value
-    end
-  end
-
-  def login_set_by_user?
-    login &&
-      !login.blank? &&
-      login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code] &&
-      !errors["login"]
-  end
-
   def deliver_password_reset_instructions!
     reset_perishable_token!
     PersonMailer.deliver_set_password(self)
