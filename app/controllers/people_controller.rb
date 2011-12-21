@@ -131,25 +131,6 @@ class PeopleController < ApplicationController
     false
   end
 
-  def set_fields_to_create_valid_person
-    page_code = PageCode.code
-    params["person"]["page_code"] = page_code
-    login = params["person"]["login"]
-    if !login || login.blank?
-      @generated_login = true
-      params["person"]["login"] = '%s%s' % [Person::AUTOGEN_LOGIN_PREFIX, page_code]
-    end
-
-    stuff_in_password_fields =
-      (params["person"]["password"] || "") +
-      (params["person"]["password_confirmation"] || "")
-    if stuff_in_password_fields.blank? && login.blank?
-      password = PageCode.code(20)
-      params["person"]["password"] = password
-      params["person"]["password_confirmation"] = password
-    end
-  end
-
   def login_as_new_user
     UserSession.create!(:login => params["person"]["login"],
                         :password => params["person"]["password"],
