@@ -228,6 +228,14 @@ class Person < ActiveRecord::Base
     puts "HTTPError updating the avatar \"#{avatar_url}\" for person with id #{id}: #{person_url}"
   end
 
+  def viewable_by?(user)
+    self.public_profile or self.user == user
+  end
+
+  def editable_by?(user)
+    self.anonymous? or self.user == user
+  end
+
   private
 
   def generate_page_code

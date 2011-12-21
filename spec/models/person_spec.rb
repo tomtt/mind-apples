@@ -647,4 +647,60 @@ describe Person do
       end
     end
   end
+
+  describe "permissions" do
+    describe "viewable_by?" do
+      it "should be true for an anonymous public profile" do
+        user = Factory.create(:user)
+        person = Factory.create(:person, :public_profile => true)
+        person.viewable_by?(user).should == true
+        person.viewable_by?(nil).should == true
+      end
+
+      it "should be true for a linked public profile" do
+        user = Factory.create(:user)
+        user2 = Factory.create(:user)
+        person = Factory.create(:person, :user => user, :public_profile => true)
+        person.viewable_by?(user2).should == true
+        person.viewable_by?(nil).should == true
+      end
+
+      it "should be true for a private profile owned by the user" do
+        user = Factory.create(:user)
+        person = Factory.create(:person, :user => user, :public_profile => false)
+        person.viewable_by?(user).should == true
+      end
+
+      it "should be false for a private profile not owned by the user" do
+        user = Factory.create(:user)
+        user2 = Factory.create(:user)
+        person = Factory.create(:person, :user => user, :public_profile => false)
+        person.viewable_by?(user2).should == false
+        person.viewable_by?(nil).should == false
+      end
+    end
+
+    describe "editable_by?" do
+      it "should be true for an anonymous profile" do
+        user = Factory.create(:user)
+        person = Factory.create(:person)
+        person.editable_by?(user).should == true
+        person.editable_by?(nil).should == true
+      end
+
+      it "should be false for a profile owned by a different user" do
+        user = Factory.create(:user)
+        user2 = Factory.create(:user)
+        person = Factory.create(:person, :user => user)
+        person.editable_by?(user2).should == false
+        person.editable_by?(nil).should == false
+      end
+
+      it "should be true for a profile owned by the user" do
+        user = Factory.create(:user)
+        person = Factory.create(:person, :user => user)
+        person.editable_by?(user).should == true
+      end
+    end
+  end
 end
