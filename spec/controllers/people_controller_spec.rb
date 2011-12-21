@@ -576,103 +576,77 @@ describe PeopleController do
   end
 
   describe "like mindapples actions" do
-
-    before(:each) do
-      @person = Factory.create(:person, :email => "abcdef@ghijk.com")
-      @owned_mindapple = Factory.create(:mindapple)
-      @others_mindapple = Factory.create(:mindapple)
-
-      @person.mindapples << @owned_mindapple
-    end
-
     describe "like" do
       describe "when logged in" do
-
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
-          controller.stubs(:current_user).returns @person
-          Person.stubs(:find_by_param).returns(@person)
+          @user = Factory.create(:user)
+          login_as(@user)
+          @person = Factory.create(:person, :user => @user, :public_profile => false)
         end
 
         it "should be successful" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :id => mindapple
-
+          put :likes, :id => mindapple.to_param
           response.should be_success
         end
 
         it "adds a mindapple as liked by a user only if the user is not the owner" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :id => mindapple
-
+          put :likes, :id => mindapple.to_param
           @person.liked_mindapples.size.should == 1
         end
 
         it "doesn't add a mindapple more than once" do
-          mindapple = Factory.create(:mindapple)
+          mindapple = Factory.create(:mindapple, :person => @person)
           @person.liked_mindapples << mindapple
-
-          put :likes, :id => mindapple
-
+          put :likes, :id => mindapple.to_param
           @person.liked_mindapples.size.should == 1
         end
 
         it "redirects to the homepage if trying to add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-
-          put :likes, :id => mindapple
+          put :likes, :id => mindapple.to_param
           response.should redirect_to(root_path)
         end
 
         it "shows an error message if trying to add a mindapple more than once" do
           mindapple = Factory.create(:mindapple)
           @person.liked_mindapples << mindapple
-
-          put :likes, :id => mindapple
-
+          put :likes, :id => mindapple.to_param
           flash[:notice].should == "You can't like a mindapple more than once"
         end
 
         it "doesn't add a mindapple to a user's liked ones if the user is the owner of the mindapple" do
-          mindapple = Factory.create(:mindapple)
-          @person.mindapples << mindapple
-          put :likes, :id => mindapple
-
+          mindapple = Factory.create(:mindapple, :person => @person)
+          put :likes, :id => mindapple.to_param
           @person.liked_mindapples.should_not include(mindapple)
         end
 
         it "redirects to the homepage if the user tries to like one of its mindapples" do
-          mindapple = Factory.create(:mindapple)
-          @person.mindapples << mindapple
-          put :likes, :id => mindapple
-
+          mindapple = Factory.create(:mindapple, :person => @person)
+          put :likes, :id => mindapple.to_param
           response.should redirect_to(root_path)
         end
 
         it "shows an error message if the user tries to like one of its mindapples" do
-          mindapple = Factory.create(:mindapple)
-          @person.mindapples << mindapple
-          put :likes, :id => mindapple
-
+          mindapple = Factory.create(:mindapple, :person => @person)
+          put :likes, :id => mindapple.to_param
           flash[:notice].should == "Sorry, you can't like one of your own mindapples"
         end
 
         it "doesn't add a mindapple if it doesn't exist" do
           put :likes, :id => -1
-
           @person.liked_mindapples.should be_empty
         end
 
         it "redirects to the homepage if trying to add a mindapple that doesn't exist" do
           put :likes, :id => -1
-
           response.should redirect_to(root_path)
         end
 
         it "shows an error message if trying to add a mindapple that doesn't exist" do
           put :likes, :id => -1
-
           flash[:notice].should == "Unknown mindapple, couldn't finish the operation"
         end
 
@@ -680,49 +654,38 @@ describe PeopleController do
 
       describe "when not logged in" do
         before(:each) do
-          @person = Factory.create(:person, :login => 'testThis', :public_profile => false)
-          @person.stubs(:to_param).returns('testThis')
-          controller.stubs(:current_user).returns nil
-          Person.stubs(:find_by_param).with('testThis').returns(@person)
+          @person = Factory.create(:person, :public_profile => false)
         end
 
         it "redirects to the homepage" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :mindapple => mindapple
-
+          put :likes, :mindapple => mindapple.to_param
           response.should redirect_to(root_path)
         end
 
         it "shows an error message" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :mindapple => mindapple
-
+          put :likes, :mindapple => mindapple.to_param
           flash[:notice].should == "You must be logged in to like a mindapple"
         end
 
         it "doesn't add a mindapple as liked by a user that doesn't own the mindapple" do
           mindapple = Factory.create(:mindapple)
-          put :likes, :mindapple => mindapple
-
+          put :likes, :mindapple => mindapple.to_param
           @person.liked_mindapples.should be_empty
         end
 
         it "doesn't add a mindapple to a user's liked ones when the user owns the mindapple" do
-          mindapple = Factory.create(:mindapple)
-          @person.mindapples << mindapple
-          put :likes, :mindapple => mindapple
-
+          mindapple = Factory.create(:mindapple, :person => @person)
+          put :likes, :mindapple => mindapple.to_param
           @person.liked_mindapples.should_not include(mindapple)
         end
 
         it "doesn't add a mindapple if it doesn't exist" do
           put :likes, :mindapple => -1
-
           @person.liked_mindapples.should be_empty
         end
-
       end
-
     end
 
     describe "unlike" do

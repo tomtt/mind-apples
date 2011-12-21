@@ -66,10 +66,10 @@ class PeopleController < ApplicationController
   end
 
   def likes
-    if current_user
+    if logged_in?
       begin
-        @mindapple = Mindapple.find(params[:id])
-        like_mindapple
+        mindapple = Mindapple.find(params[:id])
+        like_mindapple(mindapple)
       rescue ActiveRecord::RecordNotFound
         flash_error_message(:notice, "Unknown mindapple, couldn't finish the operation", root_path)
       end
@@ -118,20 +118,20 @@ class PeopleController < ApplicationController
     end
   end
   
-  def like_mindapple
-    if !current_user.mindapples.include?(@mindapple)
-      if !current_user.liked_mindapples.include?(@mindapple)
-        current_user.liked_mindapples << @mindapple
-        current_user.save
-        respond_to do |format|
-          format.js {render :partial => 'likes.js.rjs'}
-          format.html {redirect_to(root_path) }
-        end
-      else
-        flash_error_message(:notice, "You can't like a mindapple more than once", root_path)
-      end
-    else
+  def like_mindapple(mindapple)
+    person = current_user.person
+    if person.mindapples.include?(mindapple)
       flash_error_message(:notice, "Sorry, you can't like one of your own mindapples", root_path)
+      return
+    end
+    if person.liked_mindapples.include?(mindapple)
+      flash_error_message(:notice, "You can't like a mindapple more than once", root_path)
+      return
+    end
+    person.liked_mindapples << mindapple
+    respond_to do |format|
+      format.js {render :partial => 'likes.js.rjs'}
+      format.html {redirect_to(root_path) }
     end
   end
 
