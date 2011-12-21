@@ -38,13 +38,7 @@ class PeopleController < ApplicationController
   
   def register
     self.resource = find_resource
-    redirect_to edit_resource_path if self.resource.login_set_by_user?
-  end
-
-  response_for :show, :new, :edit do |format|
-    format.html
-    format.js
-    format.xml
+    redirect_to edit_resource_path unless self.resource.anonymous?
   end
 
   response_for :update do |format|

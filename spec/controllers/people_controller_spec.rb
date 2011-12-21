@@ -187,6 +187,76 @@ describe PeopleController do
     end
   end
 
+  describe "register" do
+    describe "when logged in" do
+      before :each do
+        @user = Factory.create(:user)
+        login_as(@user)
+      end
+
+      describe "for my profile" do
+        before :each do
+          @person = Factory.create(:person, :user => @user)
+        end
+
+        it "should redirect to the edit page" do
+          get :register, :id => @person.to_param
+          response.should redirect_to(edit_person_path(@person))
+        end
+      end
+
+      describe "for another user's profile" do
+        before :each do
+          user2 = Factory.create(:user)
+          @person = Factory.create(:person, :user => user2)
+        end
+
+        it "should set an error and redirect to root" do
+          get :register, :id => @person.to_param
+          response.should redirect_to(root_path)
+          flash[:notice].should == "You don't have permission to edit this page"
+        end
+      end
+
+      describe "for an anonymous profile" do
+        it "needs to be defined"
+      end
+    end
+
+    describe "when not logged in" do
+      describe "for an anonymous profile" do
+        before :each do
+          @person = Factory.create(:person)
+        end
+
+        it "should render the register template" do
+          get :register, :id => @person.to_param
+          response.should be_success
+          response.should render_template('register')
+        end
+
+        it "should assign the person" do
+          get :register, :id => @person.to_param
+          assigns[:person].should == @person
+        end
+      end
+
+      describe "for another user's profile" do
+        before :each do
+          user = Factory.create(:user)
+          @person = Factory.create(:person, :user => user)
+        end
+
+        it "should set an error and redirect to root" do
+          get :register, :id => @person.to_param
+          response.should redirect_to(root_path)
+          flash[:notice].should == "You don't have permission to edit this page"
+        end
+      end
+    end
+
+  end
+
   describe "update" do
     describe "user with blank password" do
       before(:each) do
