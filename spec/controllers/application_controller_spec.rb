@@ -35,21 +35,21 @@ describe ApplicationController do
     end
 
     it "should expose the current user session as @current_user_session" do
-      mock_user_session = mock_model(UserSession, :person => nil)
+      mock_user_session = mock_model(UserSession, :record => nil)
       UserSession.expects(:find).returns(mock_user_session)
       get 'authenticated'
       assigns[:current_user_session].should == mock_user_session
     end
 
     it "should find the current user" do
-      mock_user_session = mock_model(UserSession, :person => :mock_user)
+      mock_user_session = mock_model(UserSession, :record => :mock_user)
       UserSession.expects(:find).returns(mock_user_session)
-      mock_user_session.expects(:person)
+      mock_user_session.expects(:record)
       get 'authenticated'
     end
 
     it "should expose the current user as @current_user" do
-      mock_user_session = mock_model(UserSession, :person => :mock_user)
+      mock_user_session = mock_model(UserSession, :record => :mock_user)
       UserSession.expects(:find).returns(mock_user_session)
       get 'authenticated'
       assigns[:current_user].should == :mock_user
@@ -92,7 +92,7 @@ describe ApplicationController do
 
     describe "when logged in" do
       before do
-        UserSession.expects(:find).returns mock_model(UserSession, :person => :mock_user)
+        UserSession.expects(:find).returns mock_model(UserSession, :record => :mock_user)
       end
 
       it "should render 'shh. secret'" do
@@ -116,7 +116,7 @@ describe ApplicationController do
 
     describe "when logged in" do
       before do
-        UserSession.expects(:find).returns mock_model(UserSession, :person => :mock_user)
+        UserSession.expects(:find).returns mock_model(UserSession, :record => :mock_user)
       end
 
       it "should store the current location" do
