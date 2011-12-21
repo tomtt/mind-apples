@@ -225,24 +225,6 @@ describe Person do
     end
   end
 
-  describe  "uniqueness of login" do
-    it "is valid if there is no same login" do
-      Factory.create(:person, :login => "pluk").should be_valid
-    end
-
-    it "is invalid if there is same login" do
-      Factory(:person, :login => 'pluk')
-      Factory.build(:person, :login => "pluk").should_not be_valid
-    end
-
-    it "is invalid for update if ther is same login" do
-      Factory(:person, :login => 'pluk')
-      person = Factory(:person, :login => "applesmind", :email => 'apple@minds.com')
-      person.login = 'pluk'
-      person.save.should be_false
-    end
-  end
-
   describe "to_param" do
     it "should return the user's login if it has a linked user" do
       user = Factory.create(:user, :login => 'fooey')
@@ -388,18 +370,6 @@ describe Person do
 
   it "should not be valid if it does not have a page code" do
     Factory.build(:person, :page_code => nil).should_not be_valid
-  end
-
-  it "should not be valid if its login starts with an underscore" do
-    Factory.build(:person, :login => '_starts_with_underscore').should_not be_valid
-  end
-
-  it "should not be valid if its login is blank" do
-    Factory.build(:person, :login => '          ').should_not be_valid
-  end
-
-  it "should not be valid if it starts with space" do
-    Factory.build(:person, :login => '    bobby').should_not be_valid
   end
 
   it "should not store a blank name" do
