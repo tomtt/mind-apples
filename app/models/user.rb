@@ -30,6 +30,6 @@ class User < ActiveRecord::Base
   has_one :person, :dependent => :nullify
 
   # Validations
-  validates_format_of :login, :with => /\A[a-z0-9_-]+\z/, :message => 'should only contain alphanumeric characters, dashes or underscores'
+  validates_format_of :login, :with => /\A[a-z0-9_-]+\z/i, :message => 'should only contain alphanumeric characters, dashes or underscores'
   validates_format_of :login, :with => /\A[^_]/, :message => 'should not start with an underscore'
 end

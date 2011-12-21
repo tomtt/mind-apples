@@ -59,6 +59,8 @@ describe User do
           @user.should_not be_valid
           @user.errors_on(:login).should_not be_blank
         end
+        @user.login = 'Alpha-Num_3r1c'
+        @user.should be_valid
       end
 
     end
