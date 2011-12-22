@@ -52,7 +52,9 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
   end
   
   def self.delete_redundant_columns_from_people
-    # TBC, we are going to have to keep email and login, though.
+    @fields.reject { |field| [:login, :email].include?(field) }.each do |field|
+      remove_column :people, field
+    end
   end
   
   def self.up
