@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220154543) do
+ActiveRecord::Schema.define(:version => 20111222142308) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20111220154543) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "login",                                        :null => false
+    t.string   "login"
     t.string   "crypted_password",                             :null => false
     t.string   "password_salt",                                :null => false
     t.string   "persistence_token",                            :null => false
