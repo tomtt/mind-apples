@@ -7,7 +7,7 @@ module PeopleHelper
   end
 
   def person_link(mindapple)
-    if mindapple.person.login_set_by_user? && ( mindapple.person.public_profile == true || match_logger_user?( mindapple.person))
+    if mindapple.person.anonymous? && ( mindapple.person.public_profile == true || match_logger_user?( mindapple.person))
       name = mindapple.person.name || mindapple.person.login
       link_to name, person_path(mindapple.person)
     elsif mindapple.person.name.blank? || mindapple.person.public_profile == false
