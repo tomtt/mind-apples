@@ -13,11 +13,6 @@ class PeopleController < ApplicationController
     @resource_saved = resource.update_attributes(params[resource_name])
   end
 
-  def register
-    self.resource = find_resource
-    redirect_to edit_resource_path unless self.resource.anonymous?
-  end
-
   response_for :update do |format|
     if @resource_saved
       format.html do
@@ -36,6 +31,11 @@ class PeopleController < ApplicationController
       format.js   { render :action => action }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }
     end
+  end
+
+  def register
+    self.resource = find_resource
+    redirect_to edit_resource_path unless self.resource.anonymous?
   end
 
   response_for :create do |format|
