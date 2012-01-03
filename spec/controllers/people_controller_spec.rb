@@ -110,9 +110,10 @@ describe PeopleController do
           response.should render_template('edit')
         end
 
-        it "should assign the person" do
+        it "should assign the person, and not clobber the user" do
           get :edit, :id => @person.to_param
           assigns[:person].should == @person
+          assigns[:person].user.should == @user
         end
       end
 
@@ -146,9 +147,11 @@ describe PeopleController do
           response.should render_template('edit')
         end
 
-        it "should assign the person" do
+        it "should assign the person, and build an associated user" do
           get :edit, :id => @person.to_param
           assigns[:person].should == @person
+          assigns[:person].user.should be_a(User)
+          assigns[:person].user.should be_new_record
         end
       end
 
@@ -215,9 +218,11 @@ describe PeopleController do
           response.should render_template('register')
         end
 
-        it "should assign the person" do
+        it "should assign the person and build a new user" do
           get :register, :id => @person.to_param
           assigns[:person].should == @person
+          assigns[:person].user.should be_a(User)
+          assigns[:person].user.should be_new_record
         end
       end
 

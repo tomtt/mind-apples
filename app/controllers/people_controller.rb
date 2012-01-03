@@ -7,6 +7,11 @@ class PeopleController < ApplicationController
   before_filter :assign_network, :only => [:new]
   before_filter :add_network_to_person_attributes, :only => [:create]
 
+  def edit
+    super
+    resource.build_user if resource.user.nil?
+  end
+
   def update
     self.resource = find_resource
     self.resource.avatar = nil if params[:delete_avatar] == "1"
@@ -36,6 +41,7 @@ class PeopleController < ApplicationController
   def register
     self.resource = find_resource
     redirect_to edit_resource_path unless self.resource.anonymous?
+    self.resource.build_user
   end
 
   response_for :create do |format|
