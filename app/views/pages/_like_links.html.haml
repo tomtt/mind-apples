@@ -1,8 +1,8 @@
 - if mindapple.fans.size > 0
   %p= "#{mindapple.fans.size} #{mindapple.fans.size == 1 ? 'person likes' : 'people like'} this"
 
-- if current_user
-  - if !current_user.liked_mindapples.include?(mindapple) && !current_user.mindapples.include?(mindapple)
+- if current_person
+  - if !current_person.liked_mindapples.include?(mindapple) && !current_person.mindapples.include?(mindapple)
     = link_to_remote("like", {:url=>{:controller => 'people', :action => 'likes', :id => mindapple.id}}, :href=>"/person/likes/#{mindapple.id}", :method=>'put', :class => "like")
-  - if current_user.liked_mindapples.include?(mindapple)
+  - if current_person.liked_mindapples.include?(mindapple)
     = link_to_remote("unlike", {:url=>{:controller => 'people', :action => 'unlikes', :id => mindapple.id}}, :href=>"/person/unlikes/#{mindapple.id}", :method=>'put', :class => "unlike")
