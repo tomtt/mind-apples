@@ -21,7 +21,6 @@ Factory.define :network do |n|
 end
 
 Factory.define :person do |u|
-  u.sequence(:login) {|n| "user_#{n}" }
   u.public_profile true
   u.policy_checked nil
   u.email {|n| "#{n}mind@apple.com" }

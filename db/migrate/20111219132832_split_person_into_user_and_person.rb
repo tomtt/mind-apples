@@ -49,13 +49,14 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
     end
 
     # delete_redundant_columns_from_people
-    @fields.reject { |field| [:login, :email].include?(field) }.each do |field|
+    @fields.reject { |field| [:email].include?(field) }.each do |field|
       remove_column :people, field
     end
   end
 
   def self.down
     # re-add columns without null constraints
+    add_column :people, "login", :string, :default => "", :null => false
     add_column :people, "crypted_password", :string
     add_column :people, "password_salt", :string
     add_column :people, "persistence_token", :string

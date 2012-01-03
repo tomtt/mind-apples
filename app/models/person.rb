@@ -15,7 +15,6 @@
 #  tags                      :string(255)
 #  created_at                :datetime
 #  updated_at                :datetime
-#  login                     :string(255)     default("")
 #  has_received_welcome_mail :boolean
 #  public_profile            :boolean         default(TRUE)
 #  policy_checked            :boolean
@@ -68,7 +67,7 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :mindapples
 
-  attr_protected :login, :page_code
+  attr_protected :page_code
 
   def self.find_by_param!(param)
     if param =~ /\A_(.*)\z/

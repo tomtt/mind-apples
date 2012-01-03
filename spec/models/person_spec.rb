@@ -15,7 +15,6 @@
 #  tags                      :string(255)
 #  created_at                :datetime
 #  updated_at                :datetime
-#  login                     :string(255)     default("")
 #  has_received_welcome_mail :boolean
 #  public_profile            :boolean         default(TRUE)
 #  policy_checked            :boolean
@@ -152,9 +151,7 @@ describe Person do
   end
 
   it "password_saved is false in default" do
-    person = Factory(:person, :login => 'testme')
-    person.password_saved.should be_false
-    Person.find_by_login('testme').password_saved.should be_false
+    Person.new.password_saved.should be_false
   end
 
   describe "to_param" do
@@ -272,7 +269,7 @@ describe Person do
     end
 
     it "is saved as non public if is public_profile set to false" do
-      person = Factory.create(:person, :login => 'ed_bever', :public_profile => false)
+      person = Factory.create(:person, :public_profile => false)
       person.public_profile.should == false
     end
   end
