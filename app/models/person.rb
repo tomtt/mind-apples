@@ -15,7 +15,7 @@
 #  tags                      :string(255)
 #  created_at                :datetime
 #  updated_at                :datetime
-#  login                     :string(255)
+#  login                     :string(255)     default("")
 #  has_received_welcome_mail :boolean
 #  public_profile            :boolean         default(TRUE)
 #  policy_checked            :boolean

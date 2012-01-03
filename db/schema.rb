@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20111222142308) do
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "login"
+    t.string   "login",                     :default => ""
     t.boolean  "has_received_welcome_mail"
     t.boolean  "public_profile",            :default => true
     t.boolean  "policy_checked"
