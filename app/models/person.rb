@@ -26,7 +26,6 @@
 #  avatar_updated_at         :datetime
 #  respondent_id             :integer
 #  network_id                :integer
-#  role                      :string(255)
 #  ethnicity                 :string(255)
 #  import_s3_etag            :string(255)
 #  type_description          :string(255)
@@ -111,10 +110,6 @@ class Person < ActiveRecord::Base
   
   def anonymous?
     self.user_id.nil?
-  end
-
-  def is_admin?
-    role == "admin"
   end
 
   def to_s

@@ -19,6 +19,7 @@
 #  last_login_ip       :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  role                :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -32,4 +33,8 @@ class User < ActiveRecord::Base
   # Validations
   validates_format_of :login, :with => /\A[a-z0-9_-]+\z/i, :message => 'should only contain alphanumeric characters, dashes or underscores'
   validates_format_of :login, :with => /\A[^_]/, :message => 'should not start with an underscore'
+
+  def is_admin?
+    role == "admin"
+  end
 end

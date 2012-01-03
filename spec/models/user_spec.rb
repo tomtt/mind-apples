@@ -19,6 +19,7 @@
 #  last_login_ip       :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  role                :string(255)
 #
 
 require 'spec_helper'
@@ -125,6 +126,22 @@ describe User do
       user.destroy
       person.reload
       person.user_id.should == nil
+    end
+  end
+
+  describe "is_admin?" do
+    it "is false if the user does not have a role specified" do
+      Factory.build(:user, :role => nil).is_admin?.should == false
+    end
+
+    it "is true if the user has 'admin' as its role" do
+      Factory.build(:user, :role => "admin").is_admin?.should == true
+    end
+
+    it "is false if the user has something else than 'admin' as its role" do
+      Factory.build(:user, :role => "").is_admin?.should == false
+      Factory.build(:user, :role => "user").is_admin?.should == false
+      Factory.build(:user, :role => "Admin").is_admin?.should == false
     end
   end
 end
