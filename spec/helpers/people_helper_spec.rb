@@ -15,6 +15,26 @@ describe PeopleHelper do
     end
   end
 
+  describe "current_person" do
+    it "should return nil when not logged in" do
+      helper.stubs(:current_user).returns(nil)
+      helper.current_person.should == nil
+    end
+
+    it "should return the person belonging to the logged in user" do
+      user = Factory.create(:user)
+      person = Factory.create(:person, :user => user)
+      helper.stubs(:current_user).returns(user)
+      helper.current_person.should == person
+    end
+
+    it "should return nil when logged in as a user with no person" do
+      user = Factory.create(:user)
+      helper.stubs(:current_user).returns(user)
+      helper.current_person.should == nil
+    end
+  end
+
   describe "person_link" do
     before :each do
       helper.stubs(:current_user).returns(nil)

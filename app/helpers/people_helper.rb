@@ -22,6 +22,10 @@ module PeopleHelper
     !! current_user and person.user == current_user
   end
 
+  def current_person
+    current_user.try(:person)
+  end
+
   def suggestion(position)
     return '' unless session[:suggestions][position.to_s]
     person_suggestion = session[:suggestions][position.to_s]["suggestion"]
