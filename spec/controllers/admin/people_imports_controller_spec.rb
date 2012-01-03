@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Admin::PeopleImportsController do
   context "when logged in as admin" do
     before :each do
-      @admin_person = Factory.create(:person, :role => "admin")
+      @admin_person = Factory.create(:user, :role => "admin")
       login_as(@admin_person)
     end
 
