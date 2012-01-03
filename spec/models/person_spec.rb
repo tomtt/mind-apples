@@ -123,6 +123,49 @@ describe Person do
     end
   end
 
+  describe "email duplication handling" do
+    describe "populating email from user" do
+      it "should assign the user's email to the person on save" do
+        user = Factory.build(:user, :email => 'user@example.com')
+        person = Factory.build(:person)
+        person.user = user
+        person.save!
+        person.email.should == 'user@example.com'
+      end
+    end
+
+    describe "forwarding email assignment to user" do
+      it "should set the email on the person if anonymous" do
+        person = Factory.build(:person, :email => 'foo@example.com')
+        person.email = 'bar@example.com'
+        person.email.should == 'bar@example.com'
+      end
+
+      it "should set the email on the associated user" do
+        user = Factory.build(:user, :email => 'user@example.com')
+        person = Factory.build(:person, :email => 'person@example.com')
+        person.user = user
+        person.email = 'bar@example.com'
+        user.email.should == 'bar@example.com'
+        person.email.should == 'person@example.com'
+      end
+    end
+
+    describe "building a new user" do
+      it "should assign the person's email to the user" do
+        person = Factory.build(:person, :email => 'person@example.com')
+        person.build_user
+        person.user.email.should == 'person@example.com'
+      end
+
+      it "should allow passing in an email for the user" do
+        person = Factory.build(:person, :email => 'person@example.com')
+        person.build_user(:email => 'user@example.com')
+        person.user.email.should == 'user@example.com'
+      end
+    end
+  end
+
   describe "ensuring correct number of mindapples" do
     it "should assign five mindapples if it has none" do
       person = Person.new

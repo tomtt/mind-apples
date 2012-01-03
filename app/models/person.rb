@@ -69,6 +69,22 @@ class Person < ActiveRecord::Base
 
   attr_protected :page_code
 
+  before_validation :maybe_populate_email_from_user
+
+  def email=(new_value)
+    if self.user.nil?
+      write_attribute('email', new_value)
+    else
+      self.user.email = new_value
+    end
+  end
+
+  def build_user_with_defaults(*attrs)
+    build_user_without_defaults(*attrs)
+    self.user.email ||= self.email
+  end
+  alias_method_chain :build_user, :defaults
+
   def self.find_by_param!(param)
     if param =~ /\A_(.*)\z/
       self.find_by_page_code!($1)
@@ -184,6 +200,12 @@ class Person < ActiveRecord::Base
   def generate_page_code
     if self.page_code.blank?
       self.page_code = Authlogic::Random.friendly_token
+    end
+  end
+
+  def maybe_populate_email_from_user
+    if self.user
+      write_attribute('email', self.user.email)
     end
   end
 
