@@ -24,8 +24,14 @@
 
 class User < ActiveRecord::Base
   acts_as_authentic do |config|
-    config.merge_validates_length_of_password_field_options :message => "Please choose a valid password (minimum is 4 characters)"
+    config.merge_validates_length_of_email_field_options :if => Proc.new { |user| user.email.present? }
+    config.merge_validates_format_of_email_field_options :if => Proc.new { |user| user.email.present? }
+    config.merge_validates_uniqueness_of_email_field_options :message => :"email.unique"
+    config.merge_validates_length_of_password_field_options :message => :"password.length"
+    config.merge_validates_length_of_password_confirmation_field_options :if => Proc.new { false }
+    config.merge_validates_confirmation_of_password_field_options :message => :"password_confirmation.dont_match"
   end
+  validates_presence_of :email, :message => :"email.blank"
 
   # Associations
   has_one :person, :dependent => :nullify

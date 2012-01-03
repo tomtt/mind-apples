@@ -43,8 +43,8 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
 
-  validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique"
-  validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format"
+  validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique", :if => Proc.new {|p| p.user.nil? }
+  validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format", :if => Proc.new {|p| p.user.nil? }
 
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank

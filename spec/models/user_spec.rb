@@ -99,7 +99,7 @@ describe User do
       it "should be at least 4 characters long" do
         @user.password = @user.password_confirmation = 'abc'
         @user.should_not be_valid
-        @user.errors.on(:password).should include("Please choose a valid password (minimum is 4 characters)")
+        @user.errors.on(:password).should_not be_blank
 
         @user.password = @user.password_confirmation = 'abcd'
         @user.should be_valid

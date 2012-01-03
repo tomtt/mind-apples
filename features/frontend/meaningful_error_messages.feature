@@ -32,7 +32,7 @@ Feature: Meaningful error messages
     And I should see "Please choose a valid password (minimum is 4 characters)"
 
   Scenario: "As a social butterfly I should see meaningful error messages for email taken error"
-    Given a person exists with email: "mindapple@min.com"
+    Given a user exists with email: "mindapple@min.com"
     And I am on the "take the test" page
     And I check "person_policy_checked"
     When I press "Submit"

@@ -85,6 +85,15 @@ describe Person do
         @person.should be_valid
       end
 
+      it "should skip the email format validation if not anonymous" do
+        # To prevent duplication of the User error messages
+        user = Factory.build(:user)
+        @person.user = user
+        @person.email = 'example.com' # sets email on both user and person
+        @person.should_not be_valid
+        @person.errors.count.should == 1 # Only the error on the user
+      end
+
       it "should be unique" do
         Factory.create(:person, :email => 'foo@example.com')
         @person.email = 'foo@example.com'
@@ -97,6 +106,15 @@ describe Person do
         @person.email = ''
         @person.should be_valid
         @person.save.should be_true
+      end
+
+      it "should skip the email uniqueness validation if not anonymous" do
+        # To prevent duplication of the User error messages
+        Factory.create(:person, :email => 'foo@example.com')
+        user = Factory.build(:user)
+        @person.user = user
+        @person.email = 'foo@example.com' # sets email on both user and person
+        @person.should be_valid
       end
     end
   end
@@ -202,6 +220,13 @@ describe Person do
       user = Factory.create(:user, :login => 'fooey')
       person = Factory.create(:person, :user => user)
       person.to_param.should == 'fooey'
+    end
+
+    it "should return the page_code prefixed with _ if it has an unsaved linked user" do
+      user = Factory.build(:user, :login => 'fooey')
+      person = Factory.create(:person)
+      person.user = user
+      person.to_param.should == "_#{person.page_code}"
     end
 
     it "should return the page_code prefixed with _ if it has no linked user" do

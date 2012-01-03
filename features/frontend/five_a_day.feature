@@ -84,10 +84,10 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I check "person_policy_checked"
     And I press "Submit"
-    And I fill in "person[password_confirmation]" with "shhh"
+    And I fill in "Password" with "shhh"
     And I press "Submit"
     Then I should see "Looks like your password and confirmation don't match"
-    And I should not see a "person[password_confirmation]" password field containing "shhh"
+    And I should not see a "Password" password field containing "shhh"
 
   Scenario: Filling in the test correctly from the take the test page but without agreeing the policy
     When I go to the "take the test" page
