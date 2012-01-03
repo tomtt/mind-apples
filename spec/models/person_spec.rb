@@ -348,60 +348,62 @@ describe Person do
       person = Factory.build(:person, :email => 'andy@example.com')
       PersonMailer.expects(:deliver_welcome_email).with(person)
       person.save!
+      person.has_received_welcome_mail.should == true
     end
 
     it "should not be sent when created without an email address" do
-      Person.any_instance.stubs(:login_set_by_user?).returns(false)
       person = Factory.build(:person, :email=> '')
       PersonMailer.expects(:deliver_welcome_email).never
       person.save!
+      person.has_received_welcome_mail.should be_false
     end
 
     it "should be sent when an email address is set" do
-      Person.any_instance.stubs(:login_set_by_user?).returns(false)
       person = Factory.create(:person, :email => '')
+      person.has_received_welcome_mail.should be_false
       PersonMailer.expects(:deliver_welcome_email).with(person)
-      person.update_attributes(:email => 'andy@example.com')
+      person.update_attributes!(:email => 'andy@example.com')
+      person.has_received_welcome_mail.should == true
     end
 
     it "should not be sent when no email address is set" do
-      person = Factory.create(:person)
+      person = Factory.create(:person, :email => '')
       PersonMailer.expects(:deliver_welcome_email).never
-      person.update_attributes(:email => '')
+      person.update_attributes!(:email => '')
+      person.has_received_welcome_mail.should be_false
     end
 
     it "should not be sent if a welcome email was already sent" do
       person = Factory.create(:person, :has_received_welcome_mail => true)
       PersonMailer.expects(:deliver_welcome_email).never
-      person.update_attributes(:email => 'aaa@example.com')
+      person.update_attributes!(:email => 'aaa@example.com')
     end
 
     it "should not be sent if the email address is unset" do
       person = Factory.create(:person, :email => 'andy@example.com')
       PersonMailer.expects(:deliver_welcome_email).never
-      person.update_attributes(:email => '')
+      person.update_attributes!(:email => '')
     end
 
     it "should only be sent once" do
       person = Factory.create(:person, :email => 'andy@example.com')
       PersonMailer.expects(:deliver_welcome_email).never
-      person.update_attributes(:email => 'something_else@example.com')
+      person.update_attributes!(:email => 'something_else@example.com')
     end
 
     it "should not be sent if the person has invalid fields" do
-      person = Factory.create(:person)
+      person = Factory.create(:person, :email => '')
       PersonMailer.expects(:deliver_welcome_email).never
-      person.update_attributes(:email => 'andy@example.com',
-                               :password => 'bla1234',
-                               :password_confirmation => 'foo1234')
+      person.update_attributes(:email => 'andy@example.com', :policy_checked => false)
+      person.has_received_welcome_mail.should be_false
     end
 
     it "should not be sent if the person was imported from survey monkey" do
       person = Factory.build(:person, :email => 'andy@example.com', :respondent_id => 123)
       PersonMailer.expects(:deliver_welcome_email).never
       person.save!
+      person.has_received_welcome_mail.should be_false
     end
-
   end
 
   describe "delivering password reset instructions" do

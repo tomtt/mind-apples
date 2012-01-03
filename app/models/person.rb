@@ -244,7 +244,7 @@ class Person < ActiveRecord::Base
   end
 
   def maybe_send_welcome_email
-    if !email.blank? && !has_received_welcome_mail && !respondent_id
+    if ! has_received_welcome_mail and email.present? and respondent_id.blank?
       PersonMailer.deliver_welcome_email(self)
       self.has_received_welcome_mail = true
     end
