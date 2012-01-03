@@ -150,4 +150,18 @@ describe User do
       Factory.build(:user, :role => "Admin").is_admin?.should == false
     end
   end
+
+  describe "delivering password reset instructions" do
+    it "should reset the perishable token" do
+      user = Factory.create(:user)
+      user.expects(:reset_perishable_token!)
+      user.deliver_password_reset_instructions!
+    end
+
+    it "should send out the email with instruction on how to set a password" do
+      user = Factory.create(:user)
+      PersonMailer.expects(:deliver_set_password).with(user)
+      user.deliver_password_reset_instructions!
+    end
+  end
 end

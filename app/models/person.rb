@@ -96,11 +96,6 @@ class Person < ActiveRecord::Base
     self
   end
 
-  def deliver_password_reset_instructions!
-    reset_perishable_token!
-    PersonMailer.deliver_set_password(self)
-  end
-
   def deliver_claim_your_page_instructions!
     reset_perishable_token!
     PersonMailer.deliver_claim_your_page(self)

@@ -405,20 +405,6 @@ describe Person do
     end
   end
 
-  describe "delivering password reset instructions" do
-    it "should reset the perishable token" do
-      person = Factory.create(:person)
-      person.expects(:reset_perishable_token!)
-      person.deliver_password_reset_instructions!
-    end
-
-    it "should send out the email with instruction on how to set a password" do
-      person = Factory.create(:person)
-      PersonMailer.expects(:deliver_set_password).with(person)
-      person.deliver_password_reset_instructions!
-    end
-  end
-
   describe "new with mindapples" do
     it "should have 5 mindapples" do
       person = Person.new_with_mindapples

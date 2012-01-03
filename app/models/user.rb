@@ -39,4 +39,9 @@ class User < ActiveRecord::Base
   def is_admin?
     role == "admin"
   end
+
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    PersonMailer.deliver_set_password(self)
+  end
 end
