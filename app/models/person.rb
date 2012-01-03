@@ -111,15 +111,6 @@ class Person < ActiveRecord::Base
     end
   end
 
-  # Deprecated, and will be removed.  Use find_by_param! above.
-  def self.find_by_param(param)
-    if param.index('_') == 0
-      find_by_page_code(param[1..-1])
-    else
-      find_by_login(param)
-    end
-  end
-
   def to_param
     anonymous? ? "_#{self.page_code}" : user.login
   end

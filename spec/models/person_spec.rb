@@ -231,30 +231,6 @@ describe Person do
     end
   end
 
-  describe "old finding by param" do
-    before do
-      @person = Factory.create(:person,
-                               :login => 'frooble',
-                               :page_code => 'wibble')
-    end
-
-    it "should find by login if the id does not start with an underscore" do
-      Person.find_by_param('frooble').should == @person
-    end
-
-    it "should not find by login if the id starts with an underscore" do
-      Person.find_by_param('_frooble').should be_nil
-    end
-
-    it "should find by page code if the id starts with an underscore" do
-      Person.find_by_param('_wibble').should == @person
-    end
-
-    it "should not find by page code if the id does not start with an underscore" do
-      Person.find_by_param('wibble').should be_nil
-    end
-  end
-
   describe "anonymous?" do
     it "should be true if the person has no linked user" do
       person = Factory.create(:person)
