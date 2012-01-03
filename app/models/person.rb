@@ -44,7 +44,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
 
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique"
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true, :message => :"email.format"
+  validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format"
 
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
