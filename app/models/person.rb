@@ -36,7 +36,6 @@
 #
 
 class Person < ActiveRecord::Base
-  AUTOGEN_LOGIN_PREFIX = 'autogen_'
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
 
   validates_format_of :page_code, :with => /\A[A-Za-z0-9]+\z/
@@ -48,15 +47,10 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique"
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true, :message => :"email.format"
 
-  validate :login_can_not_start_with_autogen_string_unless_page_code_matches
-  # validates_length_of :login, :minimum => 1, :if => Proc.new { |person| debugger;person.login_set_by_user?}, :on => :update, :message => :"email.format"
-
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
 
   belongs_to :network
-
-  named_scope :anonymous, { :conditions => ["login LIKE ? " , "#{AUTOGEN_LOGIN_PREFIX}%"] }
 
   has_many :mindapples, :dependent => :destroy
   has_many :mindapple_likings
@@ -235,15 +229,6 @@ class Person < ActiveRecord::Base
     if ! has_received_welcome_mail and email.present? and respondent_id.blank?
       PersonMailer.deliver_welcome_email(self)
       self.has_received_welcome_mail = true
-    end
-  end
-
-  def login_can_not_start_with_autogen_string_unless_page_code_matches
-    if login && login.index(AUTOGEN_LOGIN_PREFIX) == 0 && login != '%s%s' % [AUTOGEN_LOGIN_PREFIX, page_code]
-      if login_changed?
-        self.login = login_was
-      end
-      errors.add('login', "can not start with '#{AUTOGEN_LOGIN_PREFIX}'")
     end
   end
 

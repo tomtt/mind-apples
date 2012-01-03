@@ -39,7 +39,7 @@ class SplitPersonIntoUserAndPerson < ActiveRecord::Migration
     # move_people_data_to_users
     MyPerson.find_each do |person|
       # Do not migrate people if they have been auto-generated
-      next if person.login =~ /\A#{Person::AUTOGEN_LOGIN_PREFIX}/
+      next if person.login =~ /\Aautogen_/
       
       parameters = {}
       @fields.each { |field| parameters[field] = person.send(field) }
