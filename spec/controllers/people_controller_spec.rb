@@ -1,26 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PeopleController do
-  def build_mock_person
-    mock_person = mock_model(Person,
-                             :ensure_correct_number_of_mindapples => nil,
-                             :protected_login= => nil,
-                             :page_code= => nil,
-                             :save => true,
-                             :update_attributes => true)
-    mock_person
-  end
 
-  shared_examples_for "all actions finding a person" do
+  describe "show" do
     it "should find a person by param value" do
       @person ||= Factory.create(:person)
       get 'show', :id => @person.to_param
       assigns[:person].should == @person
     end
-  end
-
-  describe "show" do
-    it_should_behave_like "all actions finding a person"
 
     shared_examples_for "The user is the owner of a profile page" do
       it "should render the show template" do
