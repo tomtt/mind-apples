@@ -113,6 +113,12 @@ describe User do
     end
   end
 
+  it "role should be attr_protected" do
+    user = Factory.create(:user)
+    user.update_attributes(:role => 'admin')
+    user.role.should_not == 'admin'
+  end
+
   describe "person association" do
     it "should have_one person" do
       user = Factory.create(:user)

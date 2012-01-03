@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   validates_format_of :login, :with => /\A[a-z0-9_-]+\z/i, :message => 'should only contain alphanumeric characters, dashes or underscores'
   validates_format_of :login, :with => /\A[^_]/, :message => 'should not start with an underscore'
 
+  attr_protected :role
+
   def is_admin?
     role == "admin"
   end

@@ -56,8 +56,6 @@ class Person < ActiveRecord::Base
 
   belongs_to :network
 
-  attr_protected :role
-
   named_scope :anonymous, { :conditions => ["login LIKE ? " , "#{AUTOGEN_LOGIN_PREFIX}%"] }
 
   has_many :mindapples, :dependent => :destroy

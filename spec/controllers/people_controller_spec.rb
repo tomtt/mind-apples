@@ -568,11 +568,6 @@ describe PeopleController do
            })
       controller.resource.mindapples.size.should == 5
     end
-
-    it "does not use the role field if passed as a param" do
-      post :create, "person" => {'name' => 'bigapple', "role" => "admin"} 
-      assigns[:person].role.should be_nil
-    end
   end
 
   describe "like mindapples actions" do
