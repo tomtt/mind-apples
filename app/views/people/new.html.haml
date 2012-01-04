@@ -5,8 +5,8 @@
 .take_the_test
   .inner
     = render :partial => 'networks/network_details'
-    - if current_user
-      - name_for_view = current_user.name_for_view
+    - if current_person
+      - name_for_view = current_person.name_for_view
       - if name_for_view
         - name = "'%s'." % name_for_view
       - else
@@ -15,10 +15,9 @@
         You're already logged in as
         = name
         You can still take the Mindapples Test again below, but we'll have to make you a new account. Or, just
-        = link_to("edit your Mindapples Page here", edit_person_path(current_user)) + "."
+        = link_to("edit your Mindapples Page here", edit_person_path(current_person)) + "."
     %h2.light_bg
       Take the Mindapples test
     %p.intro
       If eating five fruit and veg a day is good for our bodies, what about our minds? Share the 5-a-day for your mind and tell us what you do that's good for your mind.
     = render :partial => 'form'
-    
