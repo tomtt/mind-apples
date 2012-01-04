@@ -6,8 +6,8 @@
 
 .col_10of16
   .inner
-    = form_tag password_resets_path
-    = label_tag 'email', 'Enter your email to receive instructions on how to set your password'
-    = text_field_tag 'email'
-    = submit_tag 'Send email'
+    - form_tag password_resets_path do
+      = label_tag 'email', 'Enter your email to receive instructions on how to set your password'
+      = text_field_tag 'email'
+      = submit_tag 'Send email'
     
