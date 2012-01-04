@@ -20,7 +20,6 @@ Feature: Asking for five a day
     And I fill in "person[mindapples_attributes][4][suggestion]" with "Tidying and filing"
     And I press "Go"
     Then I should see "Yes yes, of course I accept the Terms & Conditions"
-    # And the "Join us. Choose a username." field should not contain "autogen"
     And I should see a "person[mindapples_attributes][0][suggestion]" text field containing "Wrestling with bears"
     And I should see a "person[mindapples_attributes][1][suggestion]" text field containing "Being in nature"
     And I should see a "person[mindapples_attributes][2][suggestion]" text field containing "Interesting conversation"
