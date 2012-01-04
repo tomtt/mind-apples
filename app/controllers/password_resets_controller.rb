@@ -7,9 +7,8 @@ class PasswordResetsController < ApplicationController
   end
   
   def create
-    @person = Person.find_by_email(params[:email])
-    if @person
-      @person.deliver_password_reset_instructions!
+    if user = User.find_by_email(params[:email])
+      user.deliver_password_reset_instructions!
       flash[:notice] = "Instructions to reset your password have been emailed to you. " +
         "Please check your email."
       redirect_to root_path
@@ -20,13 +19,15 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    @person.password = params[:person][:password]
-    @person.password_confirmation = params[:person][:password_confirmation]
-    @person.save
-    if @person.save
-      reset_user_session
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+    if @user.save
       flash[:notice] = "Password successfully updated"
-      redirect_to edit_person_path(@person)
+      if @user.person
+        redirect_to edit_person_path(@user.person)
+      else
+        redirect_to root_path
+      end
     else
       render :action => :edit
     end
@@ -35,17 +36,13 @@ class PasswordResetsController < ApplicationController
   private
 
   def load_user_using_perishable_token
-    @person = Person.find_using_perishable_token(params[:id])
-    unless @person
+    @user = User.find_using_perishable_token(params[:id])
+    unless @user
       flash[:notice] = "We're sorry, but we could not locate your account. " +
         "If you are having issues try copying and pasting the URL " +
         "from your email into your browser or restarting the " +
         "reset password process."
       redirect_to root_path
     end
-  end
-  
-  def reset_user_session
-     UserSession.create(@person, true)
   end
 end

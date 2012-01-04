@@ -1,30 +1,22 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PasswordResetsController do
-  def create_mock_person
-    mock_person = mock_model(Person,
-                             :password= => nil,
-                             :password_confirmation= => nil,
-                             :save => nil)
-    mock_person
-  end
-
   shared_examples_for "all actions loading a person using perishable token" do
-    it "should find a person by persishable token" do
-      Person.expects(:find_using_perishable_token).with('param_value')
+    it "should find a user by persishable token" do
+      User.expects(:find_using_perishable_token).with('param_value')
       do_request
     end
 
-    it "should expose the found person as @person" do
-      mock_person = create_mock_person
-      Person.stubs(:find_using_perishable_token).returns(mock_person)
+    it "should expose the found person as @user" do
+      user = Factory.create(:user)
+      User.stubs(:find_using_perishable_token).returns(user)
       do_request
-      assigns[:person].should == mock_person
+      assigns[:user].should == user
     end
 
     describe "when no person was found" do
       before do
-        Person.stubs(:find_using_perishable_token).returns nil
+        User.stubs(:find_using_perishable_token).returns(nil)
       end
 
       it "should notify the user" do
@@ -42,7 +34,7 @@ describe PasswordResetsController do
   describe "index" do
     it "redirects to login" do
       get :index
-      response.should be_redirect
+      response.should redirect_to(login_path)
     end
   end
 
@@ -50,50 +42,37 @@ describe PasswordResetsController do
     before do
       @email = "frooble@example.com"
     end
-
     def do_create
-      post(:create, "email" => @email)
+      post :create, "email" => @email
     end
 
-    it "should find a person by email" do
-      Person.expects(:find_by_email).with(@email)
-      do_create
-    end
-
-    it "should expose the found person" do
-      mock_person = mock_model(Person, :deliver_password_reset_instructions! => nil)
-      Person.stubs(:find_by_email).returns mock_person
-      do_create
-      assigns[:person].should == mock_person
-    end
-
-    describe "for user with email address" do
-      before do
-        @mock_person = mock_model(Person, :deliver_password_reset_instructions! => nil)
-        Person.stubs(:find_by_email).returns @mock_person
+    context "with a matching user" do
+      before :each do
+        @user = Factory.create(:user, :email => @email)
       end
 
-      it "should deliver password reset instructions" do
-        @mock_person.expects(:deliver_password_reset_instructions!)
+      it "should deliver the password_reset instructions to the user" do
+        User.stubs(:find_by_email).with(@email).returns(@user)
+        @user.expects(:deliver_password_reset_instructions!)
         do_create
       end
 
-      it "should notify the user that an email has been sent" do
+      it "should set an info message" do
         do_create
         flash[:notice].should =~ /instructions to reset your password have been emailed to you/i
       end
 
-      it "should redirect to the homepage" do
+      it "should redirect to the root" do
         do_create
         response.should redirect_to(root_path)
       end
     end
 
-    describe "when there is no user with email address" do
-      before do
-        Person.stubs(:find_by_email).returns nil
-      end
+    context "with no matching user, but a matching person" do
+      it "needs to be defined"
+    end
 
+    context "with no matching user or person" do
       it "should notify the user that there is no such email address" do
         do_create
         flash[:notice].should =~ /no user was found/i
@@ -115,8 +94,8 @@ describe PasswordResetsController do
 
     describe "when a person was found" do
       before do
-        @mock_person = mock_model(Person)
-        Person.stubs(:find_using_perishable_token).returns @mock_person
+        @user = Factory.create(:user)
+        User.stubs(:find_using_perishable_token).returns(@user)
       end
 
       it "should render edit" do
@@ -128,68 +107,63 @@ describe PasswordResetsController do
 
   describe "update" do
     def do_request
-      put :update, :id => 'param_value', :person => {}
+      put :update, :id => 'param_value', :user => {}
     end
 
     it_should_behave_like "all actions loading a person using perishable token"
 
     describe "when a person was found" do
       before do
-        @mock_person = create_mock_person
-        Person.stubs(:find_using_perishable_token).returns @mock_person
+        @user = Factory.create(:user, :password => 'old_password', :password_confirmation => 'old_password')
+        User.stubs(:find_using_perishable_token).returns(@user)
       end
 
-      it "should set the password and confirmation and save" do
-        @mock_person.expects(:password=).with('betterpassword')
-        @mock_person.expects(:password_confirmation=).with('betterpassword')
-        @mock_person.expects(:save)
-        put(:update,
-            :id => 'param_value',
-            :person => {
-              :password => 'betterpassword',
-              :password_confirmation => 'betterpassword'
-            })
-      end
-
-      describe "when the person is saved successfully" do
-        before do
-          @mock_person.stubs(:save).returns true
+      context "with valid params" do
+        def do_update
+          put :update, :id => 'param_value', :user => {"password" => 'new_password', "password_confirmation" => 'new_password'}
         end
 
-        it "should notify the user" do
-          UserSession.stubs(:create)
-          do_request
-          flash[:notice].should =~ /password successfully updated/i
+        it "should update the user's password" do
+          do_update
+          @user.reload
+          @user.valid_password?('new_password').should be_true
         end
 
-        it "should redirect to the person's account editing page" do
-          UserSession.stubs(:create)
-          do_request
-          response.should redirect_to(edit_person_path(@mock_person))
+        it "should log the user in" do
+          do_update
+          ses = UserSession.find()
+          ses.should_not be_nil
+          ses.record.should == @user
         end
-        
-        it "should reset the user session" do
-          UserSession.expects(:create).with(@mock_person, true)
 
-          @mock_person.expects(:password=).with('betterpassword')
-          @mock_person.expects(:password_confirmation=).with('betterpassword')
-          @mock_person.expects(:save).returns(true)
-          
-          put :update, :id => 'param_value', :person => {
-              :password => 'betterpassword',
-              :password_confirmation => 'betterpassword'
-            }
+        it "should redirect to the person edit page if the user has a person" do
+          person = Factory.create(:person, :user => @user)
+          do_update
+          response.should redirect_to(edit_person_path(person))
+        end
+
+        it "should redirect to root path if the user has no person" do
+          do_update
+          response.should redirect_to(root_path)
         end
       end
 
-      describe "when the person could not be saved" do
-        before do
-          @mock_person.stubs(:save).returns false
+      context "with invalid params" do
+        def do_update
+          put :update, :id => 'param_value', :user => {"password" => 'new_password', "password_confirmation" => 'something_else'}
         end
 
-        it "should render edit" do
-          do_request
-          response.should render_template(:edit)
+        it "should not update the user's password" do
+          do_update
+          @user.reload
+          @user.valid_password?('new_password').should be_false
+          @user.valid_password?('old_password').should be_true
+        end
+
+        it "should re-render the edit page, assigning the user" do
+          do_update
+          response.should render_template('edit')
+          assigns[:user].should == @user
         end
       end
     end
