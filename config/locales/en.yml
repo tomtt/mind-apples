@@ -12,7 +12,8 @@ en:
           unique: "That e-mail address is already taken. Please choose again."
           format: "That doesn't look like a valid e-mail address. Please try again."
         login:
-          format: "Sorry, usernames cannot begin with an underscore. Please choose again."
+          format: "Sorry, usernames can only contain letters, numbers, dash and underscore. Please choose again."
+          underscore: "Sorry, usernames cannot begin with an underscore. Please choose again."
           taken: "That username has already been taken. Please choose again."
         password:
           length: "Please choose a valid password (minimum is 4 characters)"

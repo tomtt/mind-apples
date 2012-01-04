@@ -24,21 +24,22 @@
 
 class User < ActiveRecord::Base
   acts_as_authentic do |config|
+    # login
+    config.merge_validates_format_of_login_field_options :with => /\A[a-z0-9_-]+\z/i, :message => :"login.format"
+    # email
     config.merge_validates_length_of_email_field_options :if => Proc.new { |user| user.email.present? }
     config.merge_validates_format_of_email_field_options :if => Proc.new { |user| user.email.present? }
     config.merge_validates_uniqueness_of_email_field_options :message => :"email.unique"
+    # password
     config.merge_validates_length_of_password_field_options :message => :"password.length"
     config.merge_validates_length_of_password_confirmation_field_options :if => Proc.new { false }
     config.merge_validates_confirmation_of_password_field_options :message => :"password_confirmation.dont_match"
   end
+  validates_format_of :login, :with => /\A[^_]/, :message => :"login.underscore"
   validates_presence_of :email, :message => :"email.blank"
 
   # Associations
   has_one :person, :dependent => :nullify
-
-  # Validations
-  validates_format_of :login, :with => /\A[a-z0-9_-]+\z/i, :message => 'should only contain alphanumeric characters, dashes or underscores'
-  validates_format_of :login, :with => /\A[^_]/, :message => 'should not start with an underscore'
 
   attr_protected :role
 
