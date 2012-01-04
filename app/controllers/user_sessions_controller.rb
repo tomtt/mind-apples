@@ -12,8 +12,8 @@ class UserSessionsController < ApplicationController
         if network = Network.find_by_id(params["network_id"])
           redirect_back_or_default network_path(network)
         else
-          if current_user.person
-            redirect_back_or_default person_path(current_user.person)
+          if resource.record.person
+            redirect_back_or_default person_path(resource.record.person)
           else
             redirect_back_or_default root_path
           end
