@@ -21,9 +21,6 @@ Factory.define :network do |n|
 end
 
 Factory.define :person do |u|
-  u.public_profile true
-  u.policy_checked nil
-  u.sequence(:email) {|n| "#{n}mind@apple.com" }
 end
 
 Factory.define :people_import do |i|

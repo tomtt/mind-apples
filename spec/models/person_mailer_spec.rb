@@ -13,7 +13,7 @@ describe PersonMailer do
 
   describe "mindapples email" do
     before do
-      @person = Factory.create :person
+      @person = Factory.create(:person, :email => 'test@example.com')
     end
 
     it "should have 'Your Mindapples' in the subject" do
@@ -22,7 +22,6 @@ describe PersonMailer do
     end
 
     it "should be sent to the person's email address" do
-      @person.email = 'test@example.com'
       mail = PersonMailer.deliver_welcome_email(@person)
       mail.should deliver_to('test@example.com')
     end
