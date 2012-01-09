@@ -442,6 +442,14 @@ describe Person do
     end
   end
 
+  describe "deliver_claim_your_page_instructions" do
+    it "should deliver the claim_your_page email passing self" do
+      person = Factory.create(:person)
+      PersonMailer.expects(:deliver_claim_your_page).with(person)
+      person.deliver_claim_your_page_instructions!
+    end
+  end
+
   describe "new with mindapples" do
     it "should have 5 mindapples" do
       person = Person.new_with_mindapples

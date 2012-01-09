@@ -40,4 +40,25 @@ describe PersonMailer do
       mail.body.should include("http://#{Mindapples::Config['host']}/person/#{@person.to_param}")
     end
   end
+
+  describe "claim_your_page" do
+    before :each do
+      @person = Factory.create(:person, :email => 'test@example.com')
+    end
+
+    it "should have 'Claim your page on the new Mindapples website!' in the subject" do
+      mail = PersonMailer.create_claim_your_page(@person)
+      mail.subject.should == 'Claim your page on the new Mindapples website!'
+    end
+
+    it "should be sent to the person's email address" do
+      mail = PersonMailer.create_claim_your_page(@person)
+      mail.should deliver_to('test@example.com')
+    end
+
+    it "should contain a link to the person's register page, including the host" do
+      mail = PersonMailer.create_claim_your_page(@person)
+      mail.body.should include("http://#{Mindapples::Config['host']}/person/#{@person.to_param}/register")
+    end
+  end
 end

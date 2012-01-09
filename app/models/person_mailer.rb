@@ -14,7 +14,7 @@ class PersonMailer < ActionMailer::Base
     subject 'Claim your page on the new Mindapples website!'
     recipients person.email
     from       SENDER_EMAIL
-    body       :edit_password_reset_url => edit_password_reset_url(person.perishable_token, :host => Mindapples::Config['host'])
+    body       :register_url => register_person_url(person, :host => Mindapples::Config['host'])
   end
 
   def set_password(person)
