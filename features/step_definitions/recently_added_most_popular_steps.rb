@@ -1,5 +1,5 @@
 Then /^I (should(?: not)?) see mindapples id for "([^\"]*)" at mindapple section$/ do |expectation, email|
-  person = Person.find_by_email(email)
+  person = Person.find_by_email!(email)
   mindapples_id = person.mindapples.first.id
 
   case expectation
