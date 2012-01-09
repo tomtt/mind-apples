@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |config|
     # login
     config.merge_validates_format_of_login_field_options :with => /\A[a-z0-9_-]+\z/i, :message => :"login.format"
+    config.merge_validates_uniqueness_of_login_field_options :message => :"login.taken"
     # email
     config.merge_validates_length_of_email_field_options :if => Proc.new { |user| user.email.present? }
     config.merge_validates_format_of_email_field_options :if => Proc.new { |user| user.email.present? }, :message => :"email.format"
