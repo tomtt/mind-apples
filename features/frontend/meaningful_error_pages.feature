@@ -5,6 +5,7 @@ Feature: Meaningful error pages
   As the evil overlord
   I want a meaningful 404/422/500 page
 
+  @allow-rescue
   Scenario: visiting a non-existant page
     When I go to "/person/visible_ninja"
     Then the response status should be 404
