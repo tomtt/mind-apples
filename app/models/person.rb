@@ -187,6 +187,17 @@ class Person < ActiveRecord::Base
     puts "HTTPError updating the avatar \"#{avatar_url}\" for person with id #{id}: #{person_url}"
   end
 
+  # Reverts to the previously saved version of avatar, discarding an assigned, but unsaved one.
+  def revert_avatar
+    if self.avatar.dirty?
+      self.avatar_file_name = avatar_file_name_was
+      self.avatar_content_type = avatar_content_type_was
+      self.avatar_file_size = avatar_file_size_was
+      self.avatar_updated_at = avatar_updated_at_was
+      @_paperclip_attachments.delete(:avatar) # Clear the cached instance of Paperclip::Attachment
+    end
+  end
+
   def viewable_by?(user)
     self.public_profile or self.user == user
   end

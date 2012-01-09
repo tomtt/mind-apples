@@ -611,4 +611,40 @@ describe Person do
       end
     end
   end
+
+  describe "revert_avatar" do
+    before :each do
+      @person = Factory.create(:person)
+    end
+
+    it "should revert to the saved version of the avatar" do
+      @person.avatar = File.open(Rails.root.join('features', 'upload-files', 'smile.jpg'))
+      @person.save!
+      orig_url = @person.avatar.url
+
+      @person.avatar = File.open(Rails.root.join('features', 'upload-files', 'smile2.jpg'))
+      @person.revert_avatar
+      @person.avatar.url.should == orig_url
+      @person.avatar.should_not be_dirty
+    end
+
+    it "should revert to the default avatar if there was no previously saved avatar" do
+      orig_url = @person.avatar.url
+
+      @person.avatar = File.open(Rails.root.join('features', 'upload-files', 'smile2.jpg'))
+      @person.revert_avatar
+      @person.avatar.url.should == orig_url
+      @person.avatar.should_not be_dirty
+    end
+
+    it "should do nothing if the avatar is saved" do
+      @person.avatar = File.open(Rails.root.join('features', 'upload-files', 'smile.jpg'))
+      @person.save!
+      orig_url = @person.avatar.url
+
+      @person.revert_avatar
+      @person.avatar.url.should == orig_url
+      @person.avatar.should_not be_dirty
+    end
+  end
 end
