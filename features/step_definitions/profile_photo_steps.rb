@@ -25,6 +25,6 @@ end
 
 Given /^profile for "([^\"]*)" with picture "([^\"]*)"$/ do |login, image_name|
   img_path = File.join(RAILS_ROOT, 'features', 'upload-files', image_name)
-  Person.find_by_login(login).update_attribute(:avatar, File.new(img_path, "r"))
+  User.find_by_login!(login).person.update_attributes!(:avatar => File.new(img_path, "r"))
 end
 

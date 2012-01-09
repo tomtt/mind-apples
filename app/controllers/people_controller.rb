@@ -31,6 +31,7 @@ class PeopleController < ApplicationController
       format.js
       format.xml  { head :ok }
     else
+      self.resource.revert_avatar
       action = params[:register_form] ? "register" : "edit"
       format.html { render :action => action }
       format.js   { render :action => action }
@@ -55,6 +56,7 @@ class PeopleController < ApplicationController
         end
       end
     else
+      self.resource.revert_avatar
       format.html { render :action => "edit" }
       format.js   { render :action => "edit" }
       format.xml  { render :xml => resource.errors, :status => :unprocessable_entity }

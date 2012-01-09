@@ -320,6 +320,12 @@ describe PeopleController do
           assigns[:person].name.should == 'Mr. Wibble'
           assigns[:person].user.email.should == 'wibble@example.com'
         end
+
+        it "should revert the avatar on the person" do
+          Person.stubs(:find_by_param!).returns(@person)
+          @person.expects(:revert_avatar)
+          do_update
+        end
       end
 
       context "when not populating user fields" do
@@ -410,6 +416,12 @@ describe PeopleController do
             assigns[:person].should == @person
             assigns[:person].name.should == 'Mr. Wibble'
             assigns[:person].user.login.should == ''
+          end
+
+          it "should revert the avatar on the person" do
+            Person.stubs(:find_by_param!).returns(@person)
+            @person.expects(:revert_avatar)
+            do_update
           end
         end
 
@@ -531,6 +543,13 @@ describe PeopleController do
         response.should render_template('edit')
         assigns[:person].policy_checked.should == false
         assigns[:person].name.should == "fooey"
+      end
+
+      it "should revert the avatar on the person" do
+        person = stub(:save => false)
+        controller.stubs(:new_resource).returns(person)
+        person.expects(:revert_avatar)
+        do_create
       end
 
       it "should assign the network if network_url param is passed" do
