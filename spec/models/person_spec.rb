@@ -18,7 +18,6 @@
 #  has_received_welcome_mail :boolean
 #  public_profile            :boolean         default(TRUE)
 #  policy_checked            :boolean
-#  password_saved            :boolean         default(FALSE)
 #  avatar_file_name          :string(255)
 #  avatar_content_type       :string(255)
 #  avatar_file_size          :integer
@@ -209,10 +208,6 @@ describe Person do
       person = Person.new
       person.ensure_correct_number_of_mindapples.should == person
     end
-  end
-
-  it "password_saved is false in default" do
-    Person.new.password_saved.should be_false
   end
 
   describe "to_param" do

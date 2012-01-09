@@ -18,7 +18,6 @@
 #  has_received_welcome_mail :boolean
 #  public_profile            :boolean         default(TRUE)
 #  policy_checked            :boolean
-#  password_saved            :boolean         default(FALSE)
 #  avatar_file_name          :string(255)
 #  avatar_content_type       :string(255)
 #  avatar_file_size          :integer

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103120153) do
+ActiveRecord::Schema.define(:version => 20120109144048) do
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20120103120153) do
   create_table "people", :force => true do |t|
     t.string   "name"
     t.text     "email"
-    t.string   "page_code",                                    :null => false
+    t.string   "page_code",                                   :null => false
     t.text     "braindump"
     t.string   "location"
     t.string   "gender"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20120103120153) do
     t.boolean  "has_received_welcome_mail"
     t.boolean  "public_profile",            :default => true
     t.boolean  "policy_checked"
-    t.boolean  "password_saved",            :default => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -83,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20120103120153) do
     t.string   "import_s3_etag"
     t.string   "type_description"
     t.boolean  "email_opt_in"
-    t.boolean  "shared_mindapples",         :default => true,  :null => false
+    t.boolean  "shared_mindapples",         :default => true, :null => false
     t.string   "one_line_bio"
     t.integer  "user_id"
   end
