@@ -46,7 +46,7 @@ module NavigationHelpers
     when /^full form edit page$/
       '/person'
     when /^my favourite mindapples page$/
-      "/person/#{@me_person.login}/favourites"
+      "/person/#{@me_person.to_param}/favourites"
     when /^the network page for "(.*)"$/
       network_path(Network.find_by_url($1))
     when /^"(.*)\" edit page$/

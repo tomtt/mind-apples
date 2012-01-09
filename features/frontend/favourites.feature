@@ -22,7 +22,7 @@ Feature: Favourite Mindapples
     And I should be on "/person/test_login/favourites"
 
   Scenario: seeing my favourites mindapples on proper url address
-    Given person "test_user" exists with email: "test@example.com", login: "autogen_abcdrf", page_code: "abcdrf"
+    Given person "test_user" exists with email: "test@example.com", page_code: "abcdrf"
     And person: "test_user" has 12 liked mindapples
     And I have a personal page
     And my login is "autogen_abcdrf"
