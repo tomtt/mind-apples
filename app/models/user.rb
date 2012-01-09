@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     config.merge_validates_format_of_login_field_options :with => /\A[a-z0-9_-]+\z/i, :message => :"login.format"
     # email
     config.merge_validates_length_of_email_field_options :if => Proc.new { |user| user.email.present? }
-    config.merge_validates_format_of_email_field_options :if => Proc.new { |user| user.email.present? }
+    config.merge_validates_format_of_email_field_options :if => Proc.new { |user| user.email.present? }, :message => :"email.format"
     config.merge_validates_uniqueness_of_email_field_options :message => :"email.unique"
     # password
     config.merge_validates_length_of_password_field_options :message => :"password.length"
