@@ -218,3 +218,11 @@ Feature: Personal page
     And I am on my edit page
     When I press "Submit"
     Then I should see "Thank you for updating your Mindapples page."
+
+  Scenario: Anonymous user visiting his page can edit it
+    Given a person exists with page_code: "sadfkjlhasfyq3f", email: "andy@example.com"
+    When I go to "/person/_sadfkjlhasfyq3f"
+    Then I should see "Edit" link with "/person/_sadfkjlhasfyq3f/edit" url
+    When I follow "Edit"
+    Then I should see "Edit your page"
+    And the "Email" field should contain "andy@example.com"

@@ -18,7 +18,7 @@
         = resource.name
       -elsif ! resource.anonymous?
         = resource.user.login
-      - if current_person == resource
+      - if resource.editable_by?(current_user)
         = link_to 'Edit', edit_person_path(resource)
     %p{ :class => 'one_line_bio' }
       = resource.one_line_bio unless resource.one_line_bio.nil?
