@@ -125,7 +125,8 @@ class Person < ActiveRecord::Base
   end
 
   def to_param
-    anonymous? ? "_#{self.page_code}" : user.login
+    # we need to use login_was so that we don't generate routes using an unsaved/invalid login.
+    anonymous? ? "_#{self.page_code}" : user.login_was
   end
 
   def unique_email?

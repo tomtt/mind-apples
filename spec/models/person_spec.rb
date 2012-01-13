@@ -217,6 +217,13 @@ describe Person do
       person.to_param.should == 'fooey'
     end
 
+    it "should return the saved login, instead of any unsaved changes" do
+      user = Factory.create(:user, :login => 'fooey')
+      person = Factory.create(:person, :user => user)
+      user.login = "fido"
+      person.to_param.should == 'fooey'
+    end
+
     it "should return the page_code prefixed with _ if it has an unsaved linked user" do
       user = Factory.build(:user, :login => 'fooey')
       person = Factory.create(:person)
