@@ -1256,6 +1256,10 @@ pre {
   padding: 0 15px;
 }
 
+#share a {
+  color: #40863e;
+}
+
 #share a#close {
   position: relative;
   top: -47px;
