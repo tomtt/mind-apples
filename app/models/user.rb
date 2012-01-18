@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     PersonMailer.deliver_set_password(self)
   end
+
+  def self.find_by_login_or_email(login_or_email)
+    self.find_by_login(login_or_email) || self.find_by_email(login_or_email)
+  end
 end

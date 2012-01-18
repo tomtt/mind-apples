@@ -15,6 +15,18 @@ Feature: Personal page
     And I should not see "and pick your 5-a-day. "
     And I should see "Lots of stuff about me"
 
+  Scenario: Person logs in using his email and sees his page
+    Given a user exists with login: "butterfly", email: "social@example.com", password: "sosocial", password_confirmation: "sosocial"
+    And a person "SocialButterfly" exists with public_profile: true, user: that user, braindump: "Mindapples rocks", one_line_bio: "Lots of stuff about me"
+    When I go to the login page
+    And I fill in "Login" with "social@example.com"
+    And I fill in "Password" with "sosocial"
+    And I press "Log in"
+    Then I should see "My five a day"
+    And I should not see a link to "go"
+    And I should not see "and pick your 5-a-day. "
+    And I should see "Lots of stuff about me"
+
   Scenario: Person logs in and sees his page and the page is not public
     Given a user exists with login: "butterfly", password: "sosocial", password_confirmation: "sosocial"
     And a person "SocialButterfly" exists with public_profile: false, user: that user, braindump: "Mindapples rocks", one_line_bio: "Lots of stuff about me"

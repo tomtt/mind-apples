@@ -119,6 +119,25 @@ describe User do
     user.role.should_not == 'admin'
   end
 
+  describe "find_by_login_or_email" do
+    before :each do
+      @u1 = Factory.create(:user, :login => "alpha", :email => "alpha@example.com")
+      @u2 = Factory.create(:user, :login => "bravo", :email => "charlie@example.com")
+    end
+
+    it "should return the user with a matching login" do
+      User.find_by_login_or_email("bravo").should == @u2
+    end
+
+    it "should return the user with a matching email" do
+      User.find_by_login_or_email("alpha@example.com").should == @u1
+    end
+
+    it "should return nil if no user matches" do
+      User.find_by_login_or_email("charlie").should == nil
+    end
+  end
+
   describe "person association" do
     it "should have_one person" do
       user = Factory.create(:user)
