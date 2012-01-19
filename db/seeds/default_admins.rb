@@ -8,12 +8,12 @@ module DefaultAdminSeeds
   def self.seed_all
     admin_emails = ["mindapples@tomtenthij.nl", "andy@mindapples.org"]
     admin_emails.each do |email|
-      user = Person.find_by_email(email)
+      user = User.find_by_email(email)
       if user
         user.role = "admin"
         if user.changed?
-          puts "Gave admin priviledges to user with email '#{email}'"
           user.save!
+          puts "Gave admin priviledges to user with email '#{email}'"
         end
       else
         puts "Could not find user with email '#{email}'"
