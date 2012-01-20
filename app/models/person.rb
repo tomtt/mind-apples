@@ -45,8 +45,8 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique", :if => Proc.new {|p| p.user.nil? }
   validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format", :if => Proc.new {|p| p.user.nil? }
 
-  before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
+  after_save :maybe_send_welcome_email
 
   belongs_to :network
 
@@ -146,7 +146,7 @@ class Person < ActiveRecord::Base
     end
 
     begin
-      return create_with_random_password_and_login_and_page_code!(attributes)
+      return Person.create!(attributes)
     rescue => e
       return "#{attributes['email']} (#{attributes['name']}): Error: #{e.to_s}"
     end
