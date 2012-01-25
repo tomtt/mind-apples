@@ -141,8 +141,8 @@ class Person < ActiveRecord::Base
   def self.create_from_keys_and_values(keys, values, attributes = {})
     begin
       attributes.merge!(ModelAttributes.construct(keys, values))
-    rescue ArgumentError
-      @results << "Parse error: #{e.to_s}"
+    rescue ArgumentError => e
+      return "Parse error: #{e.to_s}"
     end
 
     begin
