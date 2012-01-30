@@ -45,8 +45,8 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique", :if => Proc.new {|p| p.user.nil? }
   validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format", :if => Proc.new {|p| p.user.nil? }
 
+  before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
-  after_save :maybe_send_welcome_email
 
   belongs_to :network
 
@@ -250,7 +250,7 @@ class Person < ActiveRecord::Base
   def maybe_send_welcome_email
     if ! has_received_welcome_mail and email.present? and respondent_id.blank?
       PersonMailer.deliver_welcome_email(self)
-      self.update_attributes(:has_received_welcome_mail => true)
+      self.has_received_welcome_mail = true
     end
   end
 
