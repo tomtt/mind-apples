@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109144048) do
+ActiveRecord::Schema.define(:version => 20120208125356) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blog_feeds", :force => true do |t|
     t.string   "author"
@@ -100,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20120109144048) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                              :null => false
+    t.string   "email"
     t.string   "login",                              :null => false
     t.string   "crypted_password",                   :null => false
     t.string   "password_salt",                      :null => false
