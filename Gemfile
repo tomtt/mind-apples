@@ -1,8 +1,10 @@
 source "http://rubygems.org"
 
 gem "rails", "2.3.14"
+gem "mysql"
 gem "pg"
 gem "authlogic", "2.1.6"
+gem "omniauth", "0.2.6"
 gem "fastercsv", '1.5.3'
 gem "haml", '3.1.2'
 gem "feedtools", '0.2.29'
@@ -12,7 +14,7 @@ gem "paperclip", '2.3.8'
 gem "hoptoad_notifier", '2.3.12'
 gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
-gem "nokogiri", '1.5.0'
+gem "nokogiri", '1.4.2'
 
 group :development, :test, :cucumber do
   gem "heroku"
