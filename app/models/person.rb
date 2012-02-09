@@ -36,26 +36,25 @@
 class Person < ActiveRecord::Base
   DEFAULT_IMAGE_URL = "/images/icons/missing_:style.jpg"
 
-  validates_format_of :page_code, :with => /\A[A-Za-z0-9]+\z/
-  validates_uniqueness_of :page_code
   before_validation :generate_page_code
-
-  validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
-
-  validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique", :if => Proc.new {|p| p.user.nil? }
-  validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format", :if => Proc.new {|p| p.user.nil? }
-
   before_save :maybe_send_welcome_email
   before_save :ensure_name_is_not_blank
 
-  belongs_to :network
+  validates_format_of :page_code, :with => /\A[A-Za-z0-9]+\z/
+  validates_uniqueness_of :page_code
+  validates_presence_of :policy_checked, :unless => Proc.new { |person| person.policy_checked.nil? }, :message => :"policy_checked.blank"
+  validates_uniqueness_of :email, :allow_nil => true, :allow_blank => true, :message => :"email.unique", :if => Proc.new {|p| p.user.nil? }
+  validates_format_of :email, :with => Authlogic::Regex.email, :allow_blank => true, :message => :"email.format", :if => Proc.new {|p| p.user.nil? }
+  validates_uniqueness_of :user_id, :allow_nil => true
 
+  belongs_to :network
+  belongs_to :user
   has_many :mindapples, :dependent => :destroy
   has_many :mindapple_likings
   has_many :liked_mindapples, :through => :mindapple_likings
 
-  belongs_to :user
-  validates_uniqueness_of :user_id, :allow_nil => true
+ 
+
   accepts_nested_attributes_for :user, :update_only => true, :reject_if => :all_blank
 
   # paperclip
@@ -205,6 +204,10 @@ class Person < ActiveRecord::Base
     self.anonymous? or self.user == user
   end
 
+  def self.create_from_hash(hash, user= nil)
+    self.create(:user_id => user.id, :name => hash['user_info']['name'], :location => hash['user_info']['location'], :policy_checked => true )
+  end
+  
   private
 
   def generate_page_code
