@@ -1,5 +1,8 @@
 .row_odd.account_details
   - if registration_page
+    %p.social_networks
+      = link_to image_tag("icons/connect_with_facebook.png"),"/auth/facebook"
+      = link_to image_tag("icons/connect_with_twitter.png"), "/auth/twitter"
     %h3.create_account
       Create an account with us below
       %span.description

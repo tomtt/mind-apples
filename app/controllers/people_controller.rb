@@ -40,6 +40,7 @@ class PeopleController < ApplicationController
   end
 
   def register
+    cookies[:page_code] = self.resource.page_code
     self.resource = find_resource
     redirect_to edit_resource_path unless self.resource.anonymous?
     self.resource.build_user
