@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :mindapples, :as => "fives"
 
   map.resources :blog_feeds
+  # Omniauth routing
+  map.callback "/auth/:provider/callback", :controller => "authentications", :action => "create"
+  map.failure "/auth/failure", :controller => "authentications", :action => "failure"
+  map.callback "/auth/:provider", :controller => "authentications", :action => "blank"
 
   # Resources
   map.resource :user_session
