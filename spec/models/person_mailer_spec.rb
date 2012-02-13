@@ -13,7 +13,8 @@ describe PersonMailer do
 
   describe "mindapples email" do
     before do
-      @person = Factory.create(:person, :email => 'test@example.com')
+      @user = Factory.create(:user, :email => "test@example.com")
+      @person = Factory.create(:person, :user => @user)
     end
 
     it "should have 'Your Mindapples' in the subject" do
@@ -43,7 +44,8 @@ describe PersonMailer do
 
   describe "claim_your_page" do
     before :each do
-      @person = Factory.create(:person, :email => 'test@example.com')
+      @user = Factory.create(:user, :email => 'test@example.com')
+      @person = Factory.create(:person, :user => @user)
     end
 
     it "should have 'Claim your page on the new Mindapples website!' in the subject" do

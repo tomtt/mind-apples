@@ -34,3 +34,8 @@ Factory.define :user do |u|
   u.password              "letmein"
   u.password_confirmation "letmein"
 end
+
+Factory.define :authentication do |a|
+  a.provider "Twitter"
+  a.sequence(:uid)  {|n| "123456#{n}" }
+end
