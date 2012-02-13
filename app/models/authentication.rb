@@ -5,9 +5,9 @@ class Authentication < ActiveRecord::Base
     find_by_provider_and_uid(hash['provider'], hash['uid'])
   end
 
-  def self.create_from_hash(hash, user = nil, person = nil)
+  def self.create_from_hash(hash, person, user = nil)
     user ||= User.create_from_hash(hash)
-    person.save(:user_id => user.id, :policy_checked => true, :validate => false )
+    person = Person.update_from_user_and_hash(user, hash, person)
     Authentication.create(:user_id => user.id, :uid => hash['uid'], :provider => hash['provider'])
   end
 end
