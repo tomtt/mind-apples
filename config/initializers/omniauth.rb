@@ -6,7 +6,7 @@ ActionController::Dispatcher.middleware.use OmniAuth::Builder do
   #  facebook_options = {:client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}, :scope => ''}
 
   provider :twitter, 'YH7ajAJOz65C8I5PVoGA', 'R57Sxk6iDsEFfROcg17syrwnwWTwmltlxQeMdB7F5qo'
-  provider :facebook, 'APP_ID', 'APP_SECRET' #, facebook_options
+  provider :facebook, '293236320740802', '2b7eb29d7b8599aebca8e81a0b059838' #, facebook_options
 
   # provider :open_id,  OpenID::Store::Filesystem.new('/tmp')
 end

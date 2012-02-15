@@ -54,6 +54,15 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:twitter, {
+                             'uid' => '1234567',
+                             'user_info' => {
+                               'name' => 'Test User', 
+                               'location' => 'a place'
+                             }
+                           })
 end
 
 include PostgresOnlyPend
