@@ -36,10 +36,6 @@ module ApplicationHelper
     end
   end
 
-  def git_info
-    '<div class="git-version">version: ' + Git.master_head_sha1 + '</div>'
-  end
-
   def share_this_icons
     # CGI.escape has a habit of replacing spaces with plus signs, so we manually convert them to %20 entities
     text        = CGI.escape("What's the 5-a-day for your mind? Time to share your #mindapples!").gsub("+", "%20")
