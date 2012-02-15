@@ -204,8 +204,10 @@ class Person < ActiveRecord::Base
     self.anonymous? or self.user == user
   end
 
-  def self.create_from_hash(hash, user= nil)
-    self.create(:user_id => user.id, :name => hash['user_info']['name'], :location => hash['user_info']['location'], :policy_checked => true )
+  def self.update_from_user_and_hash(user, hash, person)
+    person = Person.find(person)
+    person.update_attributes(:user_id => user.id,  :name => hash['user_info']['name'])
+    person.save(false)
   end
   
   private

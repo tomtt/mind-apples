@@ -60,14 +60,14 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_hash(hash)
-    random_pass = Authlogic::Random.friendly_token
-    single_access = Authlogic::Random.friendly_token
-    user = User.new(:login => hash['user_info']['name'].scan(/[a-zA-Z0-9_]/).to_s.downcase,  
-                    :password => random_pass.to_s, 
-                    :password_confirmation => random_pass.to_s,
-                    :single_access_token => single_access)
-    user.save(false)
-    user.reset_persistence_token!
-    user
+      random_pass = Authlogic::Random.friendly_token
+      single_access = Authlogic::Random.friendly_token
+      user = User.new(:login => hash['user_info']['name'].scan(/[a-zA-Z0-9_]/).to_s.downcase,  
+                      :password => random_pass.to_s, 
+                      :password_confirmation => random_pass.to_s,
+                      :single_access_token => single_access)
+      user.save(false)
+      user.reset_persistence_token!
+      user
   end
 end
