@@ -12,11 +12,9 @@
 ActiveRecord::Schema.define(:version => 20120208125356) do
 
   create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "user_id"
+    t.string  "provider"
+    t.string  "uid"
   end
 
   create_table "blog_feeds", :force => true do |t|
