@@ -1,0 +1,9 @@
+development:
+  app_id: 293236320740802
+  app_secret: 2b7eb29d7b8599aebca8e81a0b059838
+staging:
+  app_id: 149521741834368
+  app_secret: 56c6eba1e8effa37c8e38c7d3fa6a5f7
+production:
+  app_id: 230909540287081
+  app_secret: fc7f5d1b4ddfc0d25b95a7a9f94480bf
