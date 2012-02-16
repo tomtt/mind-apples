@@ -34,4 +34,9 @@ class AuthenticationsController < ApplicationController
     flash[:notice] =  "Sorry, you didn't Authorize"
     redirect_to root_url
   end
+  
+  def blank
+    flash[:notice] "Not Found"
+    redirect_to root_url
+  end
 end
