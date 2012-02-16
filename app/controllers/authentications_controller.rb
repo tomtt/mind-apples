@@ -36,7 +36,7 @@ class AuthenticationsController < ApplicationController
   end
   
   def blank
-    flash[:notice] "Not Found"
+    flash[:notice] = "Not Found"
     redirect_to root_url
   end
 end
