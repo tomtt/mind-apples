@@ -203,6 +203,13 @@ class Person < ActiveRecord::Base
   def editable_by?(user)
     self.anonymous? or self.user == user
   end
+  
+  def self.create_dummy_person(page_code)
+    person = Person.new
+    person.page_code = page_code
+    person.save(false)
+    person
+  end
 
   def self.update_from_user_and_hash(user, hash, person)
     person = Person.find(person)
