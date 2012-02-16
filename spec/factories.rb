@@ -20,7 +20,8 @@ Factory.define :network do |n|
   n.sequence(:name) { |n| "network_#{n}" }
 end
 
-Factory.define :person do |u|
+Factory.define :person do |p|
+
 end
 
 Factory.define :people_import do |i|
