@@ -14,7 +14,12 @@ class AuthenticationsController < ApplicationController
     else
       user = User.find_by_login(auth['user_info']['name'].scan(/[a-zA-Z0-9_]/).to_s.downcase)
       if user.blank?
-        person = Person.find_by_page_code(cookies[:page_code].to_s)
+        if cookies[:page_code].nil?
+          page_code = Authlogic::Random.friendly_token
+          person = Person.create_dummy_person(page_code)
+        else
+          person = Person.find_by_page_code(cookies[:page_code].to_s)
+        end
         @new_auth = Authentication.create_from_hash(auth, person)
         notice = "Welcome, your account has been created."
         user = @new_auth.user

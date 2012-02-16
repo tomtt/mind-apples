@@ -34,11 +34,11 @@ class Mindapple < ActiveRecord::Base
     # to Heroku.
     # Details: http://awesomeful.net/posts/72-postgresql-s-group-by
 
-#     Mindapple.find(:all, :group => "mindapples.person_id",
-#                          :order => "created_at DESC",
-#                    :limit => max)
+     Mindapple.find(:all, :group => "mindapples.person_id",
+                          :order => "created_at DESC",
+                    :limit => max)
 
-    Mindapple.find_by_sql("select * from (select distinct on (person_id) mindapples.* from mindapples where not suggestion = '') as temp order by created_at DESC limit #{max};")
+#    Mindapple.find_by_sql("select * from (select distinct on (person_id) mindapples.* from mindapples where not suggestion = '') as temp order by created_at DESC limit #{max};")
   end
 
   named_scope :search_by_suggestion, lambda {|searched_string| {
