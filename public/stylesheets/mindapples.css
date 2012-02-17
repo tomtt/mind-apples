@@ -894,6 +894,9 @@ label .description {
    background-image: url(/images/layout/bg-form-box-main.png);
    background-repeat: no-repeat;
    background-position: bottom; }
+.simple_form_box .inner h3{
+   margin-bottom: 10px;
+}
 .simple_form_box .inner input[type=text], .simple_form_box .inner input[type=password] {
    width: 90%;
    margin: 2px 0 8px; }
