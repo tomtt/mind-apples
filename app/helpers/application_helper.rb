@@ -63,8 +63,8 @@ module ApplicationHelper
   end
   
   def share_this_icons_large
-    '<a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url='+share_url+'" addthis:description="Have you shared Mindapples 5-a-day. Here are the five things I do to look after my mind" id="addthis_button_facebook"  target="_blank"><img src="/images/icons/facebook_large.png" alt="facebook" /></a>
-    <a href="http://twitter.com/home?status=Have+you+shared+&#64mindapples+5-a-day.+Here+are+the+five+things+I+do+to+look+after+my+mind+'+share_url+'" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter_large.png" alt="twitter" /></a>'
+    '<a href="http://api.addthis.com/oexchange/0.8/forward/facebook/offer?url='+share_url+'" target="_blank"><img src="/images/icons/facebook_large.png" alt="facebook" /></a>
+    <a href="http://twitter.com/home?status=Have+you+shared+your+&#64mindapples+5-a-day.+Here+are+the+five+things+I+do+to+look+after+my+mind+'+share_url+'" id="addthis_button_twitter" target="_blank"><img src="/images/icons/twitter_large.png" alt="twitter" /></a>'
   end
 
   def header_error_message(errors_count)
