@@ -12,7 +12,7 @@
       - t.html= {:class => 'show_mindapples show_my_fives'}
 
   .left_column
-    - if(resource.avatar_file_name.blank?)
+    - if( resource.avatar_file_name.blank? && !resource.external_avatar_url.blank? )
       %img{ :src => resource.external_avatar_url }
     - else
       %img{ :src => resource.avatar.url(:medium) }
