@@ -555,13 +555,24 @@ body {
    background: url(/images/layout/bg-mid-row_even-the-test.png) repeat-y center top;
 }
 .take_the_test .the_test .inner .social_networks {
-   height: 30px;
    margin-bottom: 30px;
+   height: auto;
+   display: block;
+   overflow: hidden;
+   width: 100%;  
 }
 .take_the_test .the_test .inner .social_networks a {
    display: block;
    float: left;
    margin-right: 10px;
+}
+.take_the_test .the_test .inner .social_networks span.permission{
+   float: left;
+   clear: both;
+   margin-top: 10px;
+   display: block;
+   width: 100%;
+   font-weight: bold;
 }
 .take_the_test .the_test .inner h1 {
    font-size: 2.3em; }
