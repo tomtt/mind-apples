@@ -213,7 +213,12 @@ class Person < ActiveRecord::Base
 
   def self.update_from_user_and_hash(user, hash, person)
     person = Person.find(person)
-    person.update_attributes(:user_id => user.id,  :name => hash['user_info']['name'])
+    person.update_attributes(:user_id => user.id,  
+                             :name => hash['user_info']['name'], 
+                             :one_line_bio => hash['user_info']['description'],
+                             :location => hash['user_info']['location'],
+                             :external_avatar_url => hash['user_info']['image']
+                             )
     person.save(false)
   end
   
