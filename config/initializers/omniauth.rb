@@ -9,6 +9,7 @@ ActionController::Dispatcher.middleware.use OmniAuth::Builder do
     provider :facebook, FACEBOOK['app_id'], FACEBOOK['app_secret']
   else
     provider :facebook, FACEBOOK['app_id'], FACEBOOK['app_secret'], {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+  end
 end
 
 # you will be able to access the above providers by the following url
