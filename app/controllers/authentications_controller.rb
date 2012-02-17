@@ -1,7 +1,7 @@
 class AuthenticationsController < ApplicationController
   def create
-
     auth = request.env["omniauth.auth"]
+
     @authentication = Authentication.find_from_hash(auth)
     if current_user
       notice = "Successfully added #{auth['provider']} authentication"
