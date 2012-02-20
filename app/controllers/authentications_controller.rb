@@ -13,7 +13,7 @@ class AuthenticationsController < ApplicationController
       user = @authentication.user
       UserSession.create(user, true)
     else
-      user = User.find_by_login(auth['user_info']['nickname'].downcase || auth['uid'])
+      user = User.find_by_login(User.nickname_or_uid_from_hash(auth))
       page_code = Authlogic::Random.friendly_token
       if user.blank?
         if cookies[:page_code].nil?

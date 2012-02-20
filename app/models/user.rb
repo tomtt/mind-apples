@@ -54,6 +54,11 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     PersonMailer.deliver_set_password(self)
   end
+  
+  def self.nickname_or_uid_from_hash(hash) 
+    user = !hash['user_info']['nickname'].blank? ? hash['user_info']['nickname'].downcase : hash['uid']
+    user
+  end
 
   def self.find_by_login_or_email(login_or_email)
     self.find_by_login(login_or_email) || self.find_by_email(login_or_email)
@@ -62,7 +67,7 @@ class User < ActiveRecord::Base
   def self.create_from_hash(hash)
       random_pass = Authlogic::Random.friendly_token
       single_access = Authlogic::Random.friendly_token
-      login = (hash['user_info']['nickname'].downcase || hash['uid'])
+      login = (self.nickname_or_uid_from_hash(hash))
       user = User.new(:login => login,  
                       :password => random_pass.to_s, 
                       :password_confirmation => random_pass.to_s,
