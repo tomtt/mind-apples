@@ -1,5 +1,6 @@
 class AuthenticationsController < ApplicationController
   def create
+    #raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
 
     @authentication = Authentication.find_from_hash(auth)
@@ -12,7 +13,7 @@ class AuthenticationsController < ApplicationController
       user = @authentication.user
       UserSession.create(user, true)
     else
-      user = User.find_by_login(auth['user_info']['nickname'].downcase)
+      user = User.find_by_login(auth['user_info']['nickname'].downcase || auth['uid'])
       page_code = Authlogic::Random.friendly_token
       if user.blank?
         if cookies[:page_code].nil?

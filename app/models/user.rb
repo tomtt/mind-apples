@@ -62,7 +62,8 @@ class User < ActiveRecord::Base
   def self.create_from_hash(hash)
       random_pass = Authlogic::Random.friendly_token
       single_access = Authlogic::Random.friendly_token
-      user = User.new(:login => hash['user_info']['nickname'].downcase,  
+      login = (hash['user_info']['nickname'].downcase || hash['uid'])
+      user = User.new(:login => login,  
                       :password => random_pass.to_s, 
                       :password_confirmation => random_pass.to_s,
                       :single_access_token => single_access)
