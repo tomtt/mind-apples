@@ -12,10 +12,10 @@ class AuthenticationsController < ApplicationController
       user = @authentication.user
       UserSession.create(user, true)
     else
-      user = User.find_by_login(auth['user_info']['name'].scan(/[a-zA-Z0-9_]/).to_s.downcase)
+      user = User.find_by_login(auth['user_info']['nickname'].downcase)
+      page_code = Authlogic::Random.friendly_token
       if user.blank?
         if cookies[:page_code].nil?
-          page_code = Authlogic::Random.friendly_token
           person = Person.create_dummy_person(page_code)
         else
           person = Person.find_by_page_code(cookies[:page_code].to_s)
@@ -26,7 +26,8 @@ class AuthenticationsController < ApplicationController
         UserSession.create(user, true)
         cookies.delete :page_code
       else
-        path = root_url
+        person = Person.create_dummy_person(page_code)
+        path = register_person_path(person)
         notice = "A user with the same login already exists"
       end
     end
