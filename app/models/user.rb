@@ -62,11 +62,12 @@ class User < ActiveRecord::Base
       if username.match(LOGIN_MATCHER)
         user = username
       else
-        user = username.scan(LOGIN_MATCHER).to_s
+        user = username.gsub(".", "")
       end
     else
       user = hash['uid']
     end
+    return user
   end
 
   def self.find_by_login_or_email(login_or_email)
