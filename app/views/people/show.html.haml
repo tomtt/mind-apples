@@ -3,7 +3,7 @@
   = javascript_include_tag "jquery.fancybox-1.3.4.pack"
   = javascript_include_tag "http://platform.twitter.com/widgets.js"
   %meta{ :property => "og:title", :content => "Mindapples - #{resource.name}" }
-  %meta{ :property => "og:url", :content => "current.url" } 
+  %meta{ :property => "og:url", :content => "current.url" }
 .user
   - render_tabnav :sub do
     - add_tab do |t|
@@ -32,7 +32,7 @@
         .inner
           .heading
             %span.prefix
-              Take the 
+              Take the
             %br
             Test
           %p
@@ -47,10 +47,12 @@
         = render(resource.mindapples)
 
 - if current_person && current_person == resource && !resource.shared_mindapples?
+  - current_person.update_attributes :shared_mindapples => true
+  - current_person.save(false)
   :javascript
     $(document).ready(function() {
-      $("body").append("<a href='/share' id='share_on_social_media'>Shere your mind apples with friends</a>");
+      $("body").append("<a href='/share' id='share_on_social_media'>Share your mind apples with friends</a>");
       $("#share_on_social_media").fancybox().trigger('click');
     });
-  
-  - current_person.update_attributes :shared_mindapples => true
+
+
