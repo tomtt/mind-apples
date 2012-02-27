@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   def create
-    #raise request.env["omniauth.auth"].to_yaml
+    raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
 
     @authentication = Authentication.find_from_hash(auth)
@@ -32,7 +32,7 @@ class AuthenticationsController < ApplicationController
         notice = "A user with the same login already exists"
       end
     end
-    
+
     flash[:notice] = notice
     redirect_to path || person_path(user.person)
   end
