@@ -23,10 +23,11 @@
 #
 
 class User < ActiveRecord::Base
+  LOGIN_MATCHER = /\A[a-z0-9_-]+\z/i
 
   acts_as_authentic do |config|
     # login
-    config.merge_validates_format_of_login_field_options :with => /\A[a-z0-9_-]+\z/i, :message => :"login.format"
+    config.merge_validates_format_of_login_field_options :with => LOGIN_MATCHER, :message => :"login.format"
     config.merge_validates_uniqueness_of_login_field_options :message => :"login.taken"
     # email
     config.merge_validates_length_of_email_field_options :if => Proc.new { |user| user.email.present? }
@@ -43,7 +44,7 @@ class User < ActiveRecord::Base
   # Associations
   has_one :person, :dependent => :nullify
   has_many :authentications
-  
+
   attr_protected :role
 
   def is_admin?
@@ -54,10 +55,18 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     PersonMailer.deliver_set_password(self)
   end
-  
-  def self.nickname_or_uid_from_hash(hash) 
-    user = !hash['user_info']['nickname'].blank? ? hash['user_info']['nickname'].downcase : hash['uid']
-    user
+
+  def self.nickname_or_uid_from_hash(hash)
+    if !hash['user_info']['nickname'].blank?
+      username = hash['user_info']['nickname']
+      if username.match(LOGIN_MATCHER)
+        user = username
+      else
+        user = username.scan(LOGIN_MATCHER).to_s
+      end
+    else
+      user = hash['uid']
+    end
   end
 
   def self.find_by_login_or_email(login_or_email)
@@ -68,8 +77,8 @@ class User < ActiveRecord::Base
       random_pass = Authlogic::Random.friendly_token
       single_access = Authlogic::Random.friendly_token
       login = (self.nickname_or_uid_from_hash(hash))
-      user = User.new(:login => login,  
-                      :password => random_pass.to_s, 
+      user = User.new(:login => login,
+                      :password => random_pass.to_s,
                       :password_confirmation => random_pass.to_s,
                       :single_access_token => single_access)
       user.save(false)

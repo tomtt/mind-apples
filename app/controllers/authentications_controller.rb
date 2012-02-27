@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   def create
-    raise request.env["omniauth.auth"].to_yaml
+    #raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
 
     @authentication = Authentication.find_from_hash(auth)
