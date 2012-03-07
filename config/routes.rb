@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # About pages
   map.about '/about', :controller => "pages", :action => "about"
-  map.team '/about/team', :controller => "pages", :action => "about_team"
+  map.team '/about/team', :controller => "pages", :action => "team"
   map.how_we_got_here '/about/how-we-got-here', :controller => "pages", :action => "how_we_got_here"
   map.organisation '/about/organisation', :controller => "pages", :action => "organisation"
   map.evidence '/about/evidence', :controller => "pages", :action => "evidence"
@@ -27,11 +27,11 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sales pages
   map.services '/services', :controller => "pages", :action => "services"
-  map.testimonials '/services/testimonials', :controller => "pages", :action => "testimonials"
   map.engagement '/services/engagement', :controller => "pages", :action => "engagement"
-  map.research '/services/research', :controller => "pages", :action => "research"
+  map.insights '/services/insights', :controller => "pages", :action => "insights"
   map.training '/services/training', :controller => "pages", :action => "training"
   map.programmes '/services/programmes', :controller => "pages", :action => "programmes"
+  map.testimonials '/services/testimonials', :controller => "pages", :action => "testimonials"
   map.appleaday '/services/appleaday', :controller => "pages", :action => "appleaday"
   map.tree '/services/tree', :controller => "pages", :action => "tree"
   map.yourmind '/services/yourmind', :controller => "pages", :action => "yourmind"
@@ -62,9 +62,10 @@ ActionController::Routing::Routes.draw do |map|
   map.mindcider '/mindcider', :controller => "pages", :action => "mindcider"
   
   # Research pages
-  map.feedback '/feedback', :controller => "pages", :action => "feedback"
-  map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
-  map.survey '/survey', :controller => "pages", :action => "survey"
+  map.research '/research', :controller => "pages", :action => "research"
+  map.feedback '/research/feedback', :controller => "pages", :action => "feedback"
+  map.satisfaction '/research/satisfaction', :controller => "pages", :action => "satisfaction"
+  map.survey '/research/survey', :controller => "pages", :action => "survey"
 
   # General
   map.terms '/terms', :controller => "pages", :action => "terms"
@@ -80,7 +81,9 @@ ActionController::Routing::Routes.draw do |map|
   map.jobs '/jobs', :controller => "pages", :action => "jobs"
   map.tree '/tree', :controller => "pages", :action => "tree"
   map.yourmind '/yourmind', :controller => "pages", :action => "yourmind"
-  map.wellbeing_programmes '/services/wellbeing_programmes', :controller => "pages", :action => "programmes"
+  map.feedback '/feedback', :controller => "pages", :action => "feedback"
+  map.satisfaction '/satisfaction', :controller => "pages", :action => "satisfaction"
+  map.survey '/survey', :controller => "pages", :action => "survey"
   
   # Techie things
   map.like '/person/likes/:id', :controller => 'people', :action => 'likes'

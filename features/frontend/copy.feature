@@ -106,7 +106,6 @@ Feature: Proper layouts structure
   Scenario: Unboxed logo
     When I go to the homepage
     And I should see "Unboxed Consulting" link with "http://www.unboxedconsulting.com" url
-    And I should see "UnLtd*" link with "http://www.unltd.org.uk" url
     And I should see "Nominet Trust" link with "http://www.nominettrust.org.uk" url
     Then I follow "Mindapples volunteers"
     And I should be on "/about/team"
@@ -120,7 +119,7 @@ Feature: Proper layouts structure
     And I should see "The idea"
     When I follow "Who we are"
     Then I should see "Andy Gibson"
-    And I should see "Tessy Britton"
+    And I should see "Esther King"
     And I should be on "/about/team"
 
   Scenario: The organisation menu link
@@ -134,7 +133,7 @@ Feature: Proper layouts structure
     When I go to the "about" page
     Then I should see "Evidence" in the sub nav
     When I follow "Evidence"
-    Then I should see "Mindapples evidence and approach" in the h1
+    Then I should see "The evidence for Mindapples" in the h1
     And I should be on "/about/evidence"
 
   Scenario: Contact menu link
@@ -157,29 +156,29 @@ Feature: Proper layouts structure
    When I go to the "Hire us" page
    Then I should see "Engagement" in the sub nav
    When I follow "Engagement"
-   Then I should see "Engagement services" in the h1
+   Then I should see "Engagement" in the h1
    And I should be on "/services/engagement"
 
  Scenario: Research hire us link
    When I go to the "Hire us" page
-   Then I should see "Research" in the sub nav
-   When I follow "Research"
-   Then I should see "Research and consultancy" in the h1
+   Then I should see "Insights" in the sub nav
+   When I follow "Insights"
+   Then I should see "Insights" in the h1
    And I should be on "/services/research"
 
  Scenario: Training hire us link
    When I go to the "Hire us" page
    Then I should see "Training" in the sub nav
    When I follow "Training"
-   Then I should see "Training and workshops" in the h1
+   Then I should see "Training" in the h1
    And I should be on "/services/training"
 
- Scenario: Wellbeing programmes hire us link
+ Scenario: Wellness programmes hire us link
    When I go to the "Hire us" page
-   Then I should see "Wellbeing programmes" in the sub nav
-   When I follow "Wellbeing programmes"
-   Then I should see "Wellbeing programmes" in the h1
-   And I should be on "/services/wellbeing_programmes"
+   Then I should see "Wellness programmes" in the sub nav
+   When I follow "Wellness programmes"
+   Then I should see "Wellness programmes" in the h1
+   And I should be on "/services/programmes"
 
  Scenario: Testimonials hire us link
    When I go to the "Hire us" page
@@ -198,11 +197,9 @@ Feature: Proper layouts structure
    When I follow "Partnerships"
    Then I should see "Partnerships" in the h1
    And I should be on "/grow/partnerships"
-
   
  Scenario: Grow your own link
    When I go to the "Join us" page
-
    Then I should see "Grow your own" in the sub nav
    When I follow "Grow your own"
    Then I should see "Grow your own mindapples" in the h1
