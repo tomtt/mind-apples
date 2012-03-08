@@ -1,40 +1,22 @@
-﻿.sub_tabnav.sub_tabnav
-  %ul
-    %li.about.about_idea
-      %a.about.about_idea{:href => "/about"} The idea
-    %li.about.about_team
-      %a.about.about_team{:href => "/about/team"} Who we are
-    %li.about.about_organisation
-      %a.about.about_organisation{:href => "/about/organisation"} Organisation
-    %li.about.about_evidence
-      %a.about.about_evidence{:href => "/about/evidence"} Evidence
-    %li.about.about_contact
-      %a.about.about_contact{:href => "/about/contact"} Contact
-    %li.about.about_media
-      %a.about.about_media{:href => "/about/media"} Media
+﻿%h1
+  Take our survey!
 
-.sub_central
-  .inner
+%p
+  We want to know more about our attitudes to mental health, and our knowledge about how to look after our minds. Please help our research by taking a minute or two to complete the questions below.
 
-    %h1
-      How much do you know about your mind?
+<script type="text/javascript">var host = (("https:" == document.location.protocol) ? "https://secure." : "http://");document.write(unescape("%3Cscript src='" + host + "wufoo.com/scripts/embed/form.js' type='text/javascript'%3E%3C/script%3E"));</script>
 
-    %p
-      We want to find out the general level of knowledge we have about our minds, and our attitudes to them. Please help contribute to this important piece of research by completing the questions below.
+<script type="text/javascript">
+var r7x2x3 = new WufooForm();
+r7x2x3.initialize({
+'userName':'mindapples', 
+'formHash':'r7x2x3', 
+'autoResize':true,
+'height':'260',
+'header':'show'});
+r7x2x3.display();
+</script>
 
-    <script type="text/javascript">var host = (("https:" == document.location.protocol) ? "https://secure." : "http://");document.write(unescape("%3Cscript src='" + host + "wufoo.com/scripts/embed/form.js' type='text/javascript'%3E%3C/script%3E"));</script>
-
-    <script type="text/javascript">
-    var r7x2x3 = new WufooForm();
-    r7x2x3.initialize({
-    'userName':'mindapples', 
-    'formHash':'r7x2x3', 
-    'autoResize':true,
-    'height':'260',
-    'header':'show'});
-    r7x2x3.display();
-    </script>
-    
-    %p
-      Your responses will be used anonymously by Mindapples and our academic partners to evaluate the impact of our work. We will never make your email address public, or give away your identity. For more information on how we use and store data, please refer to our
-      = link_to('Privacy Policy', privacy_path) + "."
+%p
+  Your responses will be used anonymously by Mindapples and our academic partners to evaluate the impact of our work. We will never make your email address public, or give away your identity. For more information on how we use and store data, please refer to our
+  = link_to('Privacy Policy', privacy_path) + "."

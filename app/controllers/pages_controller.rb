@@ -48,9 +48,9 @@ class PagesController < ApplicationController
     case action_name
     when "about", "team", "how_we_got_here", "organisation", "evidence", "contact", "media", "jobs", "terms", "privacy", "research", "survey", "satisfaction", "feedback"
       "about"
-    when "grow", "join_us", "partnerships", "volunteer", "donate", "grow_your_own", "shop", "events", "bigtreat", "feedyourhead", "mindcider"
+    when "grow", "join_us", "partnerships", "volunteer", "donate", "grow_your_own", "toolkits", "shop", "events", "bigtreat", "feedyourhead", "mindcider"
       "grow"
-    when "services", "engagement", "insights", "training", "programmes", "testimonials", "yourmind", "tree"
+    when "services", "engagement", "insights", "training", "programmes", "testimonials", "yourmind", "tree", "appleaday", "business"
       "services"
     else
       "application"
