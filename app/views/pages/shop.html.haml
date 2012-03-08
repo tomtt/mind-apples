@@ -1,26 +1,12 @@
-﻿.sub_tabnav.sub_tabnav
-  %ul
-    %li.grow.grow_join_us
-      %a.grow.grow_join_us{:href => "/grow"} Join us
-    %li.grow.grow_partnerships
-      %a.grow.grow_partnerships{:href => "/grow/partnerships"} Partnerships
-    %li.grow.grow_your_own
-      %a.grow.grow_your_own{:href => "/grow/grow_your_own"} Grow your own
-    %li.grow.grow_volunteer
-      %a.grow.grow_volunteer{:href => "/grow/volunteer"} Volunteer
+﻿%h1
+  Buy stuff!
 
-.sub_central
-  .inner
+%p
+  Impress your friends with new Mindapples stuff.
 
-    %h1
-      Buy stuff
+<script type='text/javascript' src='http://www.etsy.com/assets/js/etsy_mini_shop.js'></script><script type='text/javascript'>new Etsy.Mini(6627963,'gallery',3,4,0,'http://www.etsy.com');</script>
 
-    %p
-      Impress your friends and run your own events with new Mindapples stuff!
-
-    <script type='text/javascript' src='http://www.etsy.com/assets/js/etsy_mini_shop.js'></script><script type='text/javascript'>new Etsy.Mini(6627963,'gallery',3,4,0,'http://www.etsy.com');</script>
-
-    %p
-      Can't see what you're looking for here? 
-      = link_to('Drop us a line', contact_path)
-      and tell us what you want!
+%p
+  Can't see what you're looking for here? 
+  = link_to('Drop us a line', contact_path)
+  and tell us what you want!
