@@ -22,7 +22,7 @@ class AuthenticationsController < ApplicationController
           person = Person.find_by_page_code(cookies[:page_code].to_s)
         end
         @new_auth = Authentication.create_from_hash(auth, person)
-        notice = "Thanks for sharing your mindapples."
+        notice = "Thanks for sharing your mindapples! You're all signed up and ready to go."
         user = @new_auth.user
         UserSession.create(user, true)
         cookies.delete :page_code

@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   response_for :create do |format|
     if @resource_saved
       format.html do
-        flash[:message] = 'Thanks for sharing your mindapples!'
+        flash[:message] = "Thanks for sharing your mindapples! You're all signed up and ready to go."
         if self.resource.anonymous? && params[:pid].nil?
           redirect_to register_resource_path(resource)
         else
@@ -85,7 +85,7 @@ class PeopleController < ApplicationController
       flash_error_message(:notice, "You must be logged in to like a mindapple", root_path)
     end
   end
-  
+
   def unlikes
     if logged_in?
       begin
@@ -109,7 +109,7 @@ class PeopleController < ApplicationController
   def new_resource(attributes = (params[resource_name] || {}))
     resource = Person.new_with_mindapples(attributes)
   end
-  
+
   def redirect_unless_editable
     person = self.find_resource
     unless person.editable_by?(current_user)
@@ -125,7 +125,7 @@ class PeopleController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   def like_mindapple(mindapple)
     person = current_user.person
     if person.mindapples.include?(mindapple)
