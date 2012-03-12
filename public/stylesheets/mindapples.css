@@ -155,7 +155,7 @@ body {
 .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a:hover {
    background-color: white; }
 .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day h1 {
-   margin-bottom: 0.8em; 
+   margin-bottom: 0.8em;
    font-size:1.8em;}
 .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day h4 {
    font-size: 1.4em;
@@ -327,7 +327,7 @@ body {
    text-decoration: none; }
 .sub_tabnav ul .about a {
    padding-top: 13px;
-   padding-bottom: 12px;  
+   padding-bottom: 12px;
 }
 .sub_tabnav ul .about a.active {
    z-index: 7; }
@@ -540,7 +540,7 @@ body {
    padding-top: 40px;
    background: url(/images/layout/bg-top-the-test.png) no-repeat top center;
    color: #fff;
-   font-size: 1.1em; 
+   font-size: 1.1em;
    position: relative;
    min-width: 0; }
 .take_the_test .the_test.register {
@@ -559,7 +559,7 @@ body {
    height: auto;
    display: block;
    overflow: hidden;
-   width: 100%;  
+   width: 100%;
 }
 .take_the_test .the_test .inner .social_networks a {
    display: block;
@@ -572,7 +572,7 @@ body {
    margin-top: 10px;
    display: block;
    width: 100%;
-   font-weight: bold;
+   font-size: 0.8em;
 }
 .take_the_test .the_test .inner h1 {
    font-size: 2.3em; }
@@ -879,7 +879,7 @@ label .description {
    font-size: 1.2em;
    line-height: 1.65em;
    width: 540px;
-   margin-bottom: 20px;  
+   margin-bottom: 20px;
    background-image: url(/images/layout/bg-form-box-top.png);
    background-repeat: no-repeat;
    background-position: top; }
@@ -1003,7 +1003,7 @@ label .description {
 .mindapple {
    margin-bottom: 10px;
    padding-top: 5px;
-   list-style: none; 
+   list-style: none;
    background: url(/images/layout/mindapple_border_top.png) no-repeat;
    background-position: 54px -3px;
 }
