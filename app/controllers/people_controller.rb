@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
     if @resource_saved
       format.html do
         flash[:notice] = if params[:register_form]
-          "Thanks for registering your Mindapples page"
+          "Thanks for sharing your mindapples! You're all signed up and ready to go."
         else
           "Thank you for updating your Mindapples page."
         end
@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   response_for :create do |format|
     if @resource_saved
       format.html do
-        flash[:message] = "Thanks for sharing your mindapples! You're all signed up and ready to go."
+        flash[:message] = "Thanks for sharing your mindapples!"
         if self.resource.anonymous? && params[:pid].nil?
           redirect_to register_resource_path(resource)
         else
