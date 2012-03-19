@@ -18,12 +18,14 @@ ActionController::Routing::Routes.draw do |map|
   # About pages
   map.about '/about', :controller => "pages", :action => "about"
   map.team '/about/team', :controller => "pages", :action => "team"
+  map.partnerships '/about/partnerships', :controller => "pages", :action => "partnerships"
   map.how_we_got_here '/about/how-we-got-here', :controller => "pages", :action => "how_we_got_here"
   map.organisation '/about/organisation', :controller => "pages", :action => "organisation"
   map.evidence '/about/evidence', :controller => "pages", :action => "evidence"
   map.contact '/about/contact', :controller => "pages", :action => "contact"
   map.media '/about/media', :controller => "pages", :action => "media"
   map.jobs '/about/jobs', :controller => "pages", :action => "jobs"
+  map.faqs '/about/faqs', :controller => "pages", :action => "faqs"
 
   # Sales pages
   map.services '/services', :controller => "pages", :action => "services"
@@ -32,11 +34,11 @@ ActionController::Routing::Routes.draw do |map|
   map.training '/services/training', :controller => "pages", :action => "training"
   map.programmes '/services/programmes', :controller => "pages", :action => "programmes"
   map.testimonials '/services/testimonials', :controller => "pages", :action => "testimonials"
+
+  # Funnel pages
   map.appleaday '/services/appleaday', :controller => "pages", :action => "appleaday"
   map.tree '/services/tree', :controller => "pages", :action => "tree"
   map.yourmind '/services/yourmind', :controller => "pages", :action => "yourmind"
-
-  # Funnel pages
   map.individuals '/foryou', :controller => "pages", :action => "foryou"
   map.business '/business', :controller => "pages", :action => "business"
   map.schools '/schools', :controller => "pages", :action => "schools"
@@ -48,7 +50,6 @@ ActionController::Routing::Routes.draw do |map|
   map.grow '/grow', :controller => "pages", :action => "join_us"
   map.join_us '/grow/join_us', :controller => "pages", :action => "join_us"
   map.donate '/grow/donate', :controller => "pages", :action => "donate"
-  map.partnerships '/grow/partnerships', :controller => "pages", :action => "partnerships"
   map.volunteer '/grow/volunteer', :controller => "pages", :action => "volunteer"
   map.grow_your_own '/grow/grow_your_own', :controller => "pages", :action => "grow_your_own"
   map.events '/grow/events', :controller => "pages", :action => "events"

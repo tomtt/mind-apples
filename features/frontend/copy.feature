@@ -33,7 +33,7 @@ Feature: Proper layouts structure
 
     And I should not see "Where do you live?"
     And I should see "Passport."
-
+#
 # #Top menu links
 # 
   Scenario: About us menu link
@@ -74,7 +74,7 @@ Feature: Proper layouts structure
     When I go to the homepage
     And I should see "Blog"
     Then I follow "Blog"
-    And I should see "Blog" link with "http://mindapples.wordpress.com" url
+    And I should see "Blog" link with "http://blog.mindapples.org" url
   #Hope that's the right way to write the test for an external link
   
 # #Footer
@@ -93,25 +93,23 @@ Feature: Proper layouts structure
 
   Scenario: copyright
     Given I am on the homepage
-    And I should see "This site was built by Unboxed Consulting and the Mindapples volunteers, funded and supported by UnLtd and the Nominet Trust"
+    And I should see "This site was built by"
 
   Scenario: Privacy menu link
     When I go to the homepage
-    Then I should see "Privacy policy"
-    When I follow "Privacy policy"
-    Then I should see "Privacy policy"
+    Then I should see "Privacy"
+    When I follow "Privacy"
+    Then I should see "Privacy"
     And I should be on "/privacy"
     # New path for /privacy
 
   Scenario: Unboxed logo
     When I go to the homepage
-    And I should see "Unboxed Consulting" link with "http://www.unboxedconsulting.com" url
     And I should see "Nominet Trust" link with "http://www.nominettrust.org.uk" url
     Then I follow "Mindapples volunteers"
     And I should be on "/about/team"
 # 
 # #About us section menu
-# # NB. We haven't got a plan for section menus at the moment, so I've put them in the pages themselves for now...
 # 
   Scenario: Who we are menu link
     When I go to the "about" page
@@ -149,9 +147,9 @@ Feature: Proper layouts structure
     When I follow "Media"
     Then I should see "Mindapples in the media" in the h1
     And I should be on "/about/media"
-
 #
 #Hire us section menu
+#
  Scenario: Engagement hire us link
    When I go to the "Hire us" page
    Then I should see "Engagement" in the sub nav
@@ -187,16 +185,14 @@ Feature: Proper layouts structure
    Then I should see "What people say" in the h1
    And I should be on "/services/testimonials"
 #
-
-# 
 #Join us section menu
-
- Scenario: Partnerships link
+#
+ Scenario: Events link
    When I go to the "Join us" page
-   Then I should see "Partnerships" in the sub nav
-   When I follow "Partnerships"
-   Then I should see "Partnerships" in the h1
-   And I should be on "/grow/partnerships"
+   Then I should see "Events" in the sub nav
+   When I follow "Events"
+   Then I should see "Events" in the h1
+   And I should be on "/grow/events"
   
  Scenario: Grow your own link
    When I go to the "Join us" page
@@ -212,8 +208,3 @@ Feature: Proper layouts structure
    Then I should see "Volunteer with us" in the h1
    And I should be on "/grow/volunteer"
 
-  Scenario: The big treat page
-
-   When I go to the "big treat" page
-   Then I should see "The Big Treat" in the h1
-   And I should be on "/thebigtreat"

@@ -2,15 +2,16 @@
   .inner
     %ul
       %li= link_to 'Home', root_path
-      %li= link_to 'About Us', about_path
+      %li= link_to 'About us', about_path
       - unless current_user
         %li= link_to 'Take the test', new_person_path
       %li= link_to 'Explore', mindapples_path
       %li= link_to 'Hire us', services_path
       %li= link_to 'Join us', grow_path
-      %li= link_to 'Blog', 'http://mindapples.wordpress.com'
+      %li= link_to 'Blog', 'http://blog.mindapples.org'
       %li= link_to 'Terms & conditions', terms_path
-      %li= link_to 'Privacy policy', privacy_path
+      %li= link_to 'Privacy', privacy_path
+      %li= link_to 'Contact us', contact_path
   .site-credits
     %ul
       %li=  link_to 'Unboxed Consulting', 'http://www.unboxedconsulting.com', :class => "unboxed"
@@ -19,8 +20,8 @@
     %br.clear
     %p.footer_sentences
       This site was built by Unboxed Consulting and the
-      = link_to 'Mindapples volunteers, ', team_path
-      funded and supported by UnLtd and the Nominet Trust.
+      = link_to 'Mindapples volunteers', team_path
+      and supported by the Maudsley Charity and the Nominet Trust.
     %p.footer_sentences
-      Mindapples is an independent non-profit organisation registered in England and Wales number 07264252 and is not affiliated to the charity Mind.
+      Mindapples is an independent non-profit organisation registered in England and Wales number 07264252, VAT number 997836044, and is not affiliated to the charity Mind.
    
