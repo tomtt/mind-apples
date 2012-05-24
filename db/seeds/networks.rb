@@ -64,6 +64,27 @@ module NetworkSeeds
   }
 
   @@network_data << {
+    "name" => "Lovebox Festival",
+    "url" => "lovebox",
+    "description" => "<p>Did you share the 5-a-day for your mind at the Lovebox Festival? We've uploaded all your suggestions here so you can see what other festival-goers do to look after their minds.</p>",
+    "logo" => File.open(File.join(RAILS_ROOT, 'db', 'seeds', 'images', 'lovebox.jpg'))
+  }
+
+  @@network_data << {
+    "name" => "Isle of Wight Festival",
+    "url" => "isleofwight",
+    "description" => "<p>Did you share the 5-a-day for your mind at the Isle of Wight Festival? We've uploaded all your suggestions here so you can see what other festival-goers do to look after their minds.</p>",
+    "logo" => File.open(File.join(RAILS_ROOT, 'db', 'seeds', 'images', 'isleofwight.jpg'))
+  }
+
+  @@network_data << {
+    "name" => "Leeds Festival",
+    "url" => "leedsfest",
+    "description" => "<p>Did you share the 5-a-day for your mind at the Leeds Festival? We've uploaded all your suggestions here so you can see what other festival-goers do to look after their minds.</p>",
+    "logo" => File.open(File.join(RAILS_ROOT, 'db', 'seeds', 'images', 'leedsfest.jpg'))
+  }
+
+  @@network_data << {
     "name" => "Action for Happiness",
     "url" => "afh",
     "description" => "<p>Have you shared your mindapples? Tell us the 5-a-day for your mind here, and browse the suggestions to see what other people in the Action for Happiness community do to look after their minds.</p>",
@@ -89,6 +110,13 @@ module NetworkSeeds
     "url" => "roche",
     "description" => "<p>Have you shared your mindapples? Tell us the 5-a-day for your mind here, and browse the suggestions to see what other people at Roche do to look after their minds.</p>",
     "logo" => File.open(File.join(RAILS_ROOT, 'db', 'seeds', 'images', 'roche.jpg'))
+  }
+
+  @@network_data << {
+    "name" => "Medimmune",
+    "url" => "medimmune",
+    "description" => "<p>Have you shared your mindapples? Tell us the 5-a-day for your mind here, and browse the suggestions to see what other people at Roche do to look after their minds.</p>",
+    "logo" => File.open(File.join(RAILS_ROOT, 'db', 'seeds', 'images', 'MedImmune.jpg'))
   }
 
   @@network_data << {

@@ -17,7 +17,7 @@ class NetworksController < ApplicationController
   end
 
   def redirect_unless_user_is_admin
-    admin_users = %w{tomtt andy}
+    admin_users = %w{tomtt andy mindapples}
     redirect_to(root_path) unless current_user && admin_users.include?(current_user.login)
   end
 end
