@@ -27,7 +27,7 @@ Feature: Asking for five a day
 
   Scenario: Social Butterfly fills in the survey from the test page
     Given I have access to the inbox of "andy@example.com"
-    When I go to the "take the test" page
+    When I go to the "Your 5-a-day" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Playing the piano"
     And I fill in "person[mindapples_attributes][1][suggestion]" with "Being in nature"
     And I fill in "person[mindapples_attributes][2][suggestion]" with "Interesting conversation"
@@ -78,8 +78,8 @@ Feature: Asking for five a day
     When I open the email
     Then in the email subject I should see "Your Mindapples"
 
-  Scenario: Filling in the test incorrectly from the take the test page
-    When I go to the "take the test" page
+  Scenario: Filling in the test incorrectly from the Your 5-a-day page
+    When I go to the "Your 5-a-day" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I check "person_policy_checked"
     And I press "Submit"
@@ -88,20 +88,20 @@ Feature: Asking for five a day
     Then I should see "Looks like your password and confirmation don't match"
     And I should not see a "Password" password field containing "shhh"
 
-  Scenario: Filling in the test correctly from the take the test page but without agreeing the policy
-    When I go to the "take the test" page
+  Scenario: Filling in the test correctly from the Your 5-a-day page but without agreeing the policy
+    When I go to the "Your 5-a-day" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Slithering with snakes"
     And I press "Submit"
     Then I should see "Please keep our lawyers happy by ticking the box to say you agree to our terms and conditions."
 
   Scenario: Everybody can follow link to terms page from test page
-    When I go to the "take the test" page
+    When I go to the "Your 5-a-day" page
     And the "Yes yes, of course I accept the Terms & Conditions" checkbox should not be checked
     And I follow "Terms & Conditions"
     Then I should see "our Web Site at mindapples.org you signify"
 
   Scenario: Skipping the second registration form
-    When I go to the "take the test" page
+    When I go to the "Your 5-a-day" page
     And I fill in "person[mindapples_attributes][0][suggestion]" with "Writing Cucumber tests"
     And I check "person_policy_checked"
     And I press "Submit"

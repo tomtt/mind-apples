@@ -12,29 +12,14 @@
       - t.links_to root_path()
       - t.highlights_on :controller => :pages, :action => :home
       - t.html= {:class => 'home'}
-    - add_tab do |t|
-      - t.named 'About us'
-      - t.links_to about_path
-      - t.highlights_on :controller => :pages, :action => :about
-      - t.highlights_on :controller => :pages, :action => :team
-      - t.highlights_on :controller => :pages, :action => :organisation
-      - t.highlights_on :controller => :pages, :action => :evidence
-      - t.highlights_on :controller => :pages, :action => :contact
-      - t.highlights_on :controller => :pages, :action => :media
-      - t.html= {:class => 'about_us'}
     - unless current_user
       - add_tab do |t|
-        - t.named 'Take the test'
+        - t.named 'Your 5-a-day'
         - t.links_to new_person_path
         - t.highlights_on :controller => :people, :action => :new
         - t.html= {:class => 'person'}
     - add_tab do |t|
-      - t.named 'Explore'
-      - t.links_to mindapples_path
-      - t.highlights_on :controller => :mindapples, :action => :index, :network_id => ""
-      - t.html= {:class => 'five'}
-    - add_tab do |t|
-      - t.named 'Hire us'
+      - t.named 'Services'
       - t.links_to services_path
       - t.highlights_on :controller => :pages, :action => :services
       - t.highlights_on :controller => :pages, :action => :engagement
@@ -48,6 +33,16 @@
       - t.links_to grow_path
       - t.highlights_on :controller => :pages, :action => :join_us
       - t.html= {:class => 'grow'}
+    - add_tab do |t|
+      - t.named 'About us'
+      - t.links_to about_path
+      - t.highlights_on :controller => :pages, :action => :about
+      - t.highlights_on :controller => :pages, :action => :team
+      - t.highlights_on :controller => :pages, :action => :organisation
+      - t.highlights_on :controller => :pages, :action => :evidence
+      - t.highlights_on :controller => :pages, :action => :contact
+      - t.highlights_on :controller => :pages, :action => :media
+      - t.html= {:class => 'about_us'}
     - add_tab do |t|
       - t.named 'Blog'
       - t.links_to 'http://blog.mindapples.org'

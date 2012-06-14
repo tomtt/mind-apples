@@ -6,15 +6,17 @@ Feature: Footer menu
   As the evil overlord
   I want users to have a menu with links to all the pages
 
-  Scenario Outline: clicking al the links in the footer menu of a page
+  Scenario Outline: clicking all the links in the footer menu of a page
     When I go to the <page>
-    And I follow "Take the test"
+    And I follow "Your 5-a-day"
     And I go to the <page>
-    And I follow "Explore"
+    And I follow "Services"
     And I go to the <page>
     And I follow "Join us"
     And I go to the <page>
     And I follow "About us"
+    And I go to the <page>
+    And I follow "Contact"
     And I go to the <page>
     Then I should see a link to "blog.mindapples.org"
 
@@ -22,6 +24,7 @@ Feature: Footer menu
     | page                 |
     | homepage             |
     | "about" page         |
-    | "take the test" page |
-    | "fives" page         |
-    | "join us" page  |
+    | "services" page      |
+    | "Your 5-a-day" page  |
+    | "contact" page       |
+    | "grow" page          |

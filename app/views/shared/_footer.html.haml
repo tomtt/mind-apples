@@ -2,26 +2,27 @@
   .inner
     %ul
       %li= link_to 'Home', root_path
-      %li= link_to 'About us', about_path
       - unless current_user
-        %li= link_to 'Take the test', new_person_path
+        %li= link_to 'Your 5-a-day', new_person_path
       %li= link_to 'Explore', mindapples_path
-      %li= link_to 'Hire us', services_path
+      %li= link_to 'Services', services_path
       %li= link_to 'Join us', grow_path
+      %li= link_to 'About us', about_path
       %li= link_to 'Blog', 'http://blog.mindapples.org'
       %li= link_to 'Terms & conditions', terms_path
       %li= link_to 'Privacy', privacy_path
       %li= link_to 'Contact', contact_path
   .site-credits
-    %ul
-      %li=  link_to 'Unboxed Consulting', 'http://www.unboxedconsulting.com', :class => "unboxed"
-      %li=  link_to 'UnLtd*', 'http://www.unltd.org.uk', :class => "unltd"
-      %li=  link_to 'Nominet Trust', 'http://www.nominettrust.org.uk', :class => "nominet_trust"
-    %br.clear
     %p.footer_sentences
-      This site was built by Unboxed Consulting and the
+      This site was built by 
+      = link_to 'Unboxed Consulting', 'http://www.unboxedconsulting.com') 
+      and the
       = link_to 'Mindapples volunteers', team_path
-      and supported by the Maudsley Charity and the Nominet Trust.
+      and supported by the 
+      = link_to('Maudsley Charity', 'http://www.maudsleycharity.org.uk') + ","
+      = link_to('UnLtd*', 'http://www.unltd.org.uk')
+      and the 
+      = link_to('Nominet Trust', 'http://www.nominettrust.org.uk') + "."
     %p.footer_sentences
-      Mindapples is an independent non-profit organisation registered in England and Wales number 07264252, VAT number 997836044, and is not affiliated to the charity Mind.
+      Mindapples is a non-profit organisation registered in England and Wales number 07264252, VAT number 997836044, and is not affiliated to the charity Mind (although we do work with them sometimes).
    
