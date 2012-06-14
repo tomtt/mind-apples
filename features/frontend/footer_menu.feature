@@ -8,15 +8,15 @@ Feature: Footer menu
 
   Scenario Outline: clicking all the links in the footer menu of a page
     When I go to the <page>
-    And I follow "About us"
-    And I go to the <page>
     And I follow "Your 5-a-day"
     And I go to the <page>
-    And I follow "Hire us"
+    And I follow "Services"
     And I go to the <page>
-    And I follow "Help us grow"
+    And I follow "Join us"
     And I go to the <page>
-    And I follow "Shop"
+    And I follow "About us"
+    And I go to the <page>
+    And I follow "Contact"
     And I go to the <page>
     Then I should see a link to "blog.mindapples.org"
 
@@ -26,5 +26,5 @@ Feature: Footer menu
     | "about" page         |
     | "services" page      |
     | "Your 5-a-day" page  |
-    | "fives" page         |
+    | "contact" page       |
     | "grow" page          |
