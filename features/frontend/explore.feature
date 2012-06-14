@@ -2,7 +2,7 @@
 
 Feature: Explore page
   In order to search for mindapples
-  As the curios cat
+  As the curious cat
   I want search box and mindapples cloud
 
   Scenario: Searching for mindapples
