@@ -32,14 +32,7 @@
 
   .most_recent
     %h2
-      %span Most recent
+      %span Recent picks
 
     %ul
       = render :partial => 'mindapples/mindapple', :collection => @most_recent
-
-  .top_apples
-    %h2
-      %span Top &lsquo;apples
-
-    %ul
-      = render :partial => 'mindapples/mindapple', :collection => @most_liked
