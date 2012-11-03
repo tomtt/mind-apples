@@ -3,7 +3,7 @@
     .five-a-day
       .inner-top
         %h1 What are your mindapples?
-        %p What 5 things do you do every day, or regularly, to look after your mind...
+        %p What 5 things do you do every day, or regularly, to look after your mind?
 
         = render(:partial => '/people/mindapples_form', :locals => { :resource => @person })
         %div.clear
@@ -26,12 +26,12 @@
       a simple day-to-day activity that is good for the mind
 
   .promotional_video
-    %a{:href => "/services/training"}
-      %img{:alt => "Learn how to grow your mind with our new training programme", :width => "520", :height => "113", :src => "/images/content/promo-training.png", :border => "0"}
+    %a{:href => "/yourmind"}
+      %img{:alt => "Learn how your mind works with our new training programme", :width => "520", :height => "113", :src => "/images/content/promo-training.png", :border => "0"}
 
   .promotional_video
-    %a{:href => "/services/engagement"}
-      %img{:alt => "Hire a Mindapples tree, available all year round", :width => "520", :height => "115", :src => "/images/content/promo-tree.png", :border => "0"}
+    %a{:href => "/shop"}
+      %img{:alt => "Buy a Mindapples tree, perfect for schools and universities", :width => "520", :height => "115", :src => "/images/content/promo-tree.png", :border => "0"}
 
   = render :partial => 'blog_feeds/index'
 
