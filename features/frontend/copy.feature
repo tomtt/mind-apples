@@ -162,7 +162,7 @@ Feature: Proper layouts structure
    Then I should see "Insights" in the sub nav
    When I follow "Insights"
    Then I should see "Insights" in the h1
-   And I should be on "/services/research"
+   And I should be on "/services/insights"
 
  Scenario: Training hire us link
    When I go to the "Hire us" page
