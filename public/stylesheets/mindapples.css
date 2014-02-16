@@ -59,7 +59,7 @@ body {
   background-image: url(/images/layout/bg-mid.gif);
   background-position: center center;
   background-repeat: repeat-y;
-  background-color: #916F59; }
+  background-color: #ebebe4; }
 
 .content a {
   color: #40863e;
@@ -149,7 +149,7 @@ body {
           background-position: top; }
         .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a {
           color: #83ac44;
-          background-color: #CDE5AE;
+          background-color: #ebebe4;
           text-decoration: none;
           padding: 0 2px; }
         .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a:hover {
@@ -159,7 +159,7 @@ body {
           font-size:1.8em;}
         .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day h4 {
           font-size: 1.4em;
-          color: #CDE5AE; }
+          color: #ebebe4; }
     .outer_page_wrapper .inner_page_wrapper #footer .inner {
       width: 960px;
       padding: 0 22px;
@@ -479,7 +479,7 @@ body {
   .sub_central .inner {
     background: url(/images/layout/bg-center-content.png) repeat-y center top;
     padding: 1px 39px;
-    color: #666; }
+    color: #7d7d83; }
   .sub_central h1 {
     margin-bottom: 1em; }
   .sub_central p {
@@ -580,7 +580,7 @@ body {
         .take_the_test .the_test .inner label .description {
           font-size: 0.7em;
           font-weight: normal;
-          color: #CDE5AE; }
+          color: #ebebe4; }
         .take_the_test .the_test .inner label .description_highlight {
           font-size: 0.75em; }
       .take_the_test .the_test .inner .form_input {
@@ -618,9 +618,9 @@ body {
         position: relative;
         width: 580px; }
         .take_the_test .the_test .inner .row_odd label .description {
-          color: #515152; }
+          color: #444447; }
         .take_the_test .the_test .inner .row_odd .form_input .label-radio {
-          color: #515152; }
+          color: #444447; }
       .take_the_test .the_test .inner .row_even {
         clear: both;
         margin-top: 10px;
@@ -644,7 +644,7 @@ body {
           font-size: 1.35em;
           font-weight: bold;
           line-height: 1.4em;
-          color: #D9EDBC;
+          color: #ebebe4;
           margin-top: -10px;
           margin-bottom: 15px; }
         .take_the_test .the_test .inner .five_things li {
@@ -743,7 +743,7 @@ body {
             line-height: 1.2;
             padding-top: 4px; }
           .take_the_test .the_test .inner .policy_check a {
-            color: #E0EDCC;
+            color: #ebebe4;
             text-decoration: none; }
           .take_the_test .the_test .inner .policy_check.form_input .label-checkbox {
             font-weight: normal; }
@@ -851,7 +851,7 @@ label {
 #flashes {
   color: #40863e;
   padding: 5px 10px;
-  background-color: #E3F4CB;
+  background-color: #ebebe4;
   margin: 0 7px 0 9px; }
 
 .simple_form_box {
@@ -903,7 +903,7 @@ label {
     position: relative;
     padding: 10px 3px 100px;
     background: url(/images/layout/your_fives_bg-bottom.png) no-repeat left bottom;
-    color: #E3F4CB;
+    color: #ebebe4;
     font-size: 1.3em;
     font-weight: bold; }
     .your_fives_take .inner .heading {
@@ -946,7 +946,7 @@ label {
     background-position: top; }
   .five-a-day a {
     color: #83ac44;
-    background-color: #CDE5AE;
+    background-color: #ebebe4;
     text-decoration: none;
     padding: 0 2px; }
   .five-a-day a:hover {
@@ -956,7 +956,7 @@ label {
     margin-bottom: 0 !important; }
   .five-a-day p {
     background: url(/images/arrows/white_down.png) no-repeat right center;
-    color: #CDE5AE;
+    color: #ebebe4;
     font-size: 1.3em;
     padding: 10px 50px 20px 0; }
   .five-a-day li {
@@ -1006,13 +1006,13 @@ label {
   .mindapple .apple {
     margin-bottom: 1em; }
   .mindapple .when {
-    color: #999;
+    color: #7d7d83;
     margin: 0; }
     .mindapple .when span {
       color: #007D00;
       display: inline; }
   .mindapple .social {
-    color: #6d6f72;
+    color: #7d7d83;
     margin: 0; }
   .mindapple .social {
     overflow: hidden; }
@@ -1112,7 +1112,7 @@ h2 span {
   font-weight: bold;
   margin-top: 10px; }
 .user .left_column p.one_line_bio {
-  color: #999;
+  color: #7d7d83;
   font-weight: normal;
   font-size: 1.06em;
   margin-top: 10px; }
@@ -1133,13 +1133,13 @@ dl.mindapples_definition {
     font-weight: bold; }
     dl.mindapples_definition dt .phonetics {
       font-weight: normal;
-      color: #333; }
+      color: #444447; }
     dl.mindapples_definition dt .type {
       font-weight: normal;
       font-style: italic;
-      color: #333; }
+      color: #444447; }
   dl.mindapples_definition dd {
-    color: #333; }
+    color: #444447; }
 
 .small_search_box {
   width: 398px; }
@@ -1187,13 +1187,13 @@ dl.mindapples_definition {
 #news .news_item {
   margin-bottom: 1.5em; }
 #news h3 {
-  color: #555;
+  color: #444447;
   font-size: 1.5em;
   font-weight: normal;
   line-height: 1;
   padding: 0.5em 0; }
 #news p.meta {
-  color: #999; }
+  color: #7d7d83; }
 
 ul.bulleted {
   margin-left: 2em;
