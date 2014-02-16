@@ -28,7 +28,7 @@ a#share_on_social_media {
   background-image: url(/images/icons/small_white_arrow.png);
   background-repeat: no-repeat;
   background-position: right center;
-  background-color: #89C33E; }
+  background-color: #77b055; }
 
 .simple_button_2 {
   height: 24px;
@@ -42,7 +42,7 @@ a#share_on_social_media {
   background-image: url(/images/icons/small_white_arrow.png);
   background-repeat: no-repeat;
   background-position: right center;
-  background-color: #007D00; }
+  background-color: #40863e; }
 
 .background {
   position: absolute;
@@ -148,7 +148,7 @@ body {
           background-repeat: no-repeat;
           background-position: top; }
         .outer_page_wrapper .inner_page_wrapper .page_main .five-a-day a {
-          color: #83ac44;
+          color: #77b055;
           background-color: #ebebe4;
           text-decoration: none;
           padding: 0 2px; }
@@ -511,27 +511,27 @@ body {
   .take_the_test .intro {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #007D00;
+    color: #40863e;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
   .take_the_test .network_header {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #007D00;
+    color: #40863e;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
   .take_the_test .errorExplanation {
     padding: 10px 55px 20px;
-    color: red; }
+    color: cf4431; }
     .take_the_test .errorExplanation h2 {
       background: none;
       font-size: 1.2em;
       line-height: 1.1em;
       font-weight: bold;
       padding: 0;
-      color: red;
+      color: cf4431;
       margin-bottom: 10px; }
     .take_the_test .errorExplanation ul {
       font-size: 1.1em;
@@ -832,17 +832,17 @@ label {
 
 .errorExplanation {
   padding: 10px 55px;
-  border: 2px solid #FE0308;
+  border: 2px solid #cf4431;
   margin: 10px 0;
   background: #fff;
-  color: #FE0308; }
+  color: #cf4431; }
   .errorExplanation h2 {
     background: none;
     font-size: 1em;
     line-height: 1.1em;
     font-weight: bold;
     padding: 0;
-    color: #FE0308;
+    color: #cf4431;
     margin-bottom: 10px; }
   .errorExplanation ul {
     font-size: 1.1em;
@@ -945,7 +945,7 @@ label {
     background-repeat: no-repeat;
     background-position: top; }
   .five-a-day a {
-    color: #83ac44;
+    color: #77b055;
     background-color: #ebebe4;
     text-decoration: none;
     padding: 0 2px; }
@@ -961,7 +961,7 @@ label {
     padding: 10px 50px 20px 0; }
   .five-a-day li {
     background: url(/images/white_apple.png) no-repeat -1px 5px;
-    color: #009523;
+    color: #40863e;
     font-weight: bold;
     list-style-position: inside;
     padding: 5px 0 5px 8px; }
@@ -993,14 +993,14 @@ label {
   .mindapple > div {
     background: url(/images/green_apple.png) no-repeat left bottom;
     background-position: 15px 15px;
-    border: 2px solid #009523;
+    border: 2px solid #40863e;
     border-top: 0px;
     margin-left: 55px;
     padding: 10px 15px 10px 80px; }
   .mindapple span {
     display: block; }
   .mindapple .number {
-    color: #009523;
+    color: #40863e;
     font-size: 1.4em;
     margin: 0; }
   .mindapple .apple {
@@ -1009,7 +1009,7 @@ label {
     color: #7d7d83;
     margin: 0; }
     .mindapple .when span {
-      color: #007D00;
+      color: #40863e;
       display: inline; }
   .mindapple .social {
     color: #7d7d83;
@@ -1032,7 +1032,7 @@ label {
       text-indent: -9999px;
       width: 19px; }
   .mindapple a {
-    color: #009523;
+    color: #40863e;
     text-decoration: none; }
 
 /* Home page */
@@ -1042,7 +1042,7 @@ label {
   text-align: center; }
 
 .what_section li {
-  color: #009523;
+  color: #40863e;
   display: inline-block;
   font: bold 16px/1.25 "Helvetica Neue", Arial, sans-serif;
   list-style: none;
@@ -1082,7 +1082,7 @@ h2 {
   padding: 0 15px; }
 
 #errorExplanation h2 {
-  color: #FE0308; }
+  color: #cf4431; }
 
 h2.light_bg {
   background: url(/images/headings/light_green_bg.png) no-repeat left center; }
@@ -1166,11 +1166,11 @@ dl.mindapples_definition {
 .network_details .text {
   width: 315px; }
   .network_details .text h1 {
-    color: #007D00;
+    color: #40863e;
     font-size: 2em;
     margin-bottom: 25px; }
   .network_details .text p {
-    color: #007D00;
+    color: #40863e;
     font-size: 1.3em;
     line-height: 1.35em;
     font-weight: bold;
@@ -1214,7 +1214,7 @@ pre {
   padding-top: 24px;
   padding-right: 7px;
   padding-bottom: 37px;
-  color: red; }
+  color: cf4431; }
 
 .staging_banner {
   font-size: 4em;
@@ -1267,7 +1267,7 @@ pre {
 }
 
 #share p {
-  color: #007D00;
+  color: #40863e;
   font-weight: normal;
   font-size: 2.0em;
   margin-bottom: 15px;
