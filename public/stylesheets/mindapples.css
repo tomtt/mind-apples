@@ -42,7 +42,7 @@ a#share_on_social_media {
   background-image: url(/images/icons/small_white_arrow.png);
   background-repeat: no-repeat;
   background-position: right center;
-  background-color: #40863e; }
+  background-color: #2a832a; }
 
 .background {
   position: absolute;
@@ -62,7 +62,7 @@ body {
   background-color: #ebebe4; }
 
 .content a {
-  color: #40863e;
+  color: #2a832a;
   text-decoration: none; }
 .content a:hover {
   text-decoration: none; }
@@ -511,14 +511,14 @@ body {
   .take_the_test .intro {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #40863e;
+    color: #2a832a;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
   .take_the_test .network_header {
     padding: 0px 60px;
     margin-bottom: 27px;
-    color: #40863e;
+    color: #2a832a;
     font-size: 1.25em;
     font-weight: bold;
     line-height: 1.35em; }
@@ -796,8 +796,8 @@ input[type=text], input[type=password] {
   margin: 0 0 10px 0; }
 
 input[type=submit] {
-  border: 1px solid #40863e;
-  background-color: #40863e;
+  border: 1px solid #2a832a;
+  background-color: #2a832a;
   color: white;
   font-weight: bold;
   font-size: 1.2em;
@@ -849,7 +849,7 @@ label {
     list-style-type: disc; }
 
 #flashes {
-  color: #40863e;
+  color: #2a832a;
   padding: 5px 10px;
   background-color: #ebebe4;
   margin: 0 7px 0 9px; }
@@ -961,7 +961,7 @@ label {
     padding: 10px 50px 20px 0; }
   .five-a-day li {
     background: url(/images/white_apple.png) no-repeat -1px 5px;
-    color: #40863e;
+    color: #2a832a;
     font-weight: bold;
     list-style-position: inside;
     padding: 5px 0 5px 8px; }
@@ -993,14 +993,14 @@ label {
   .mindapple > div {
     background: url(/images/green_apple.png) no-repeat left bottom;
     background-position: 15px 15px;
-    border: 2px solid #40863e;
+    border: 2px solid #2a832a;
     border-top: 0px;
     margin-left: 55px;
     padding: 10px 15px 10px 80px; }
   .mindapple span {
     display: block; }
   .mindapple .number {
-    color: #40863e;
+    color: #2a832a;
     font-size: 1.4em;
     margin: 0; }
   .mindapple .apple {
@@ -1009,7 +1009,7 @@ label {
     color: #7d7d83;
     margin: 0; }
     .mindapple .when span {
-      color: #40863e;
+      color: #2a832a;
       display: inline; }
   .mindapple .social {
     color: #7d7d83;
@@ -1032,7 +1032,7 @@ label {
       text-indent: -9999px;
       width: 19px; }
   .mindapple a {
-    color: #40863e;
+    color: #2a832a;
     text-decoration: none; }
 
 /* Home page */
@@ -1042,7 +1042,7 @@ label {
   text-align: center; }
 
 .what_section li {
-  color: #40863e;
+  color: #2a832a;
   display: inline-block;
   font: bold 16px/1.25 "Helvetica Neue", Arial, sans-serif;
   list-style: none;
@@ -1107,7 +1107,7 @@ h2 span {
   display: block;
   padding: 4px; }
 .user .left_column p {
-  color: #40863e;
+  color: #2a832a;
   font-size: 1.3em;
   font-weight: bold;
   margin-top: 10px; }
@@ -1166,11 +1166,11 @@ dl.mindapples_definition {
 .network_details .text {
   width: 315px; }
   .network_details .text h1 {
-    color: #40863e;
+    color: #2a832a;
     font-size: 2em;
     margin-bottom: 25px; }
   .network_details .text p {
-    color: #40863e;
+    color: #2a832a;
     font-size: 1.3em;
     line-height: 1.35em;
     font-weight: bold;
@@ -1257,7 +1257,7 @@ pre {
 }
 
 #share a {
-  color: #40863e;
+  color: #2a832a;
 }
 
 #share a#close {
@@ -1267,7 +1267,7 @@ pre {
 }
 
 #share p {
-  color: #40863e;
+  color: #2a832a;
   font-weight: normal;
   font-size: 2.0em;
   margin-bottom: 15px;
