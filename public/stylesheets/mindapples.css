@@ -993,14 +993,14 @@ label {
   .mindapple > div {
     background: url(/images/green_apple.png) no-repeat left bottom;
     background-position: 15px 15px;
-    border: 2px solid #2a832a;
+    border: 2px solid #77b055;
     border-top: 0px;
     margin-left: 55px;
     padding: 10px 15px 10px 80px; }
   .mindapple span {
     display: block; }
   .mindapple .number {
-    color: #2a832a;
+    color: #77b055;
     font-size: 1.4em;
     margin: 0; }
   .mindapple .apple {
@@ -1032,7 +1032,7 @@ label {
       text-indent: -9999px;
       width: 19px; }
   .mindapple a {
-    color: #2a832a;
+    color: #77b055;
     text-decoration: none; }
 
 /* Home page */
