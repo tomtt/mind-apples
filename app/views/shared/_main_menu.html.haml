@@ -13,7 +13,7 @@
       - t.html= {:class => 'home'}
     - unless current_user
       - add_tab do |t|
-        - t.named 'Your 5-a-day'
+        - t.named 'Your mindapples'
         - t.links_to new_person_path
         - t.highlights_on :controller => :people, :action => :new
         - t.html= {:class => 'person'}
@@ -28,12 +28,12 @@
       - t.highlights_on :controller => :pages, :action => :testimonials
       - t.html= {:class => 'services'}
     - add_tab do |t|
-      - t.named 'Join us'
+      - t.named 'Community'
       - t.links_to grow_path
       - t.highlights_on :controller => :pages, :action => :join_us
       - t.html= {:class => 'grow'}
     - add_tab do |t|
-      - t.named 'About us'
+      - t.named 'About'
       - t.links_to about_path
       - t.highlights_on :controller => :pages, :action => :about
       - t.highlights_on :controller => :pages, :action => :team
@@ -43,7 +43,7 @@
       - t.highlights_on :controller => :pages, :action => :media
       - t.html= {:class => 'about_us'}
     - add_tab do |t|
-      - t.named 'Blog'
+      - t.named 'News'
       - t.links_to 'http://blog.mindapples.org'
       - t.html= {:class => 'blog'}
     - if current_person && current_person.network

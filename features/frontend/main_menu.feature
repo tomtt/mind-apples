@@ -9,17 +9,17 @@ Feature: Main menu
     When I go to the homepage
     Then only "Home" should be highlighted in the main menu
 
-    When I follow "Your 5-a-day"
-    Then only "Your 5-a-day" should be highlighted in the main menu
+    When I follow "Your mindapples"
+    Then only "Your mindapples" should be highlighted in the main menu
 
     When I follow "Services"
     Then only "Services" should be highlighted in the main menu
 
-    When I follow "Join us"
-    Then only "Join us" should be highlighted in the main menu
+    When I follow "Community"
+    Then only "Community" should be highlighted in the main menu
 
-    When I follow "About us"
-    Then only "About us" should be highlighted in the main menu
+    When I follow "About"
+    Then only "About" should be highlighted in the main menu
 
   Scenario: A logged in user belonging to a network goes to different pages and checks the highlighting in the menu bar
     Given a network exists with name: "4Beauty", description: "The 4Beauty form", url: "4beauty"
@@ -32,17 +32,17 @@ Feature: Main menu
     When I go to the homepage
     Then only "Home" should be highlighted in the main menu
 
-    When I follow "Your 5-a-day"
-    Then only "Your 5-a-day" should be highlighted in the main menu
+    When I follow "Your mindapples"
+    Then only "Your mindapples" should be highlighted in the main menu
 
     When I follow "Services"
     Then only "Services" should be highlighted in the main menu
 
-    When I follow "Join us"
-    Then only "Join us" should be highlighted in the main menu
+    When I follow "Community"
+    Then only "Community" should be highlighted in the main menu
 
-    When I follow "About us"
-    Then only "About us" should be highlighted in the main menu
+    When I follow "About"
+    Then only "About" should be highlighted in the main menu
 
     When I follow "My community"
     Then only "My community" should be highlighted in the main menu
