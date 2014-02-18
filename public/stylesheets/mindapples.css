@@ -271,10 +271,16 @@ body {
         font-size: 1.2em;
         color: white;
         text-decoration: none; }
-    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active, .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
+    .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active {
       width: 71px;
       background-image: url(/images/nav_bar/home_active.png); }
-    .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active, .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
+    .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
+      width: 71px;
+      background-image: url(/images/nav_bar/home_active.png); }
+    .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active {
+      width: 83px;
+      background-image: url(/images/nav_bar/about_us_active.png); }
+    .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
       width: 83px;
       background-image: url(/images/nav_bar/about_us_active.png); }
     .nav_bar #main_tabnav ul .blog a.active, .nav_bar #main_tabnav ul .blog span.active {
