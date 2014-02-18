@@ -42,7 +42,7 @@ a#share_on_social_media {
   background-image: url(/images/icons/small_white_arrow.png);
   background-repeat: no-repeat;
   background-position: right center;
-  background-color: #2a832a; }
+  background-color: #559f76; }
 
 .background {
   position: absolute;
@@ -1125,7 +1125,7 @@ dl.mindapples_definition {
   width: 426px;
   height: 142px;
   margin: 6px 0 15px 0;
-  background-image: url(/images/content/definition_bg.jpg);
+  background-image: url(/images/content/definition_bg.png);
   font-size: 27px;
   line-height: 1.2em;
   padding: 24px 60px 0 34px; }
