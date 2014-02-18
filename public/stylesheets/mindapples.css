@@ -272,23 +272,23 @@ body {
         color: white;
         text-decoration: none; }
     .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active {
-      width: 71px;
+      width: 72px;
       background-image: url(/images/nav_bar/home_active.png); }
-    .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
-      width: 112px;
+    .nav_bar #main_tabnav ul .person a.active, .nav_bar #main_tabnav ul .person span.active {
+      width: 150px;
+      background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
+    .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
+      width: 110px;
+      background-image: url(/images/nav_bar/services_active.png); }
+    .nav_bar #main_tabnav ul .grow a.active, .nav_bar #main_tabnav ul .grow span.active, .nav_bar #main_tabnav ul .five a.active, .nav_bar #main_tabnav ul .five span.active {
+      width: 110px;
       background-image: url(/images/nav_bar/get_involved_active.png); }
     .nav_bar #main_tabnav ul .about_us a.active, .nav_bar #main_tabnav ul .about_us span.active {
       width: 83px;
       background-image: url(/images/nav_bar/about_us_active.png); }
-    .nav_bar #main_tabnav ul .services a.active, .nav_bar #main_tabnav ul .services span.active {
-      width: 112px;
-      background-image: url(/images/nav_bar/services_active.png); }
     .nav_bar #main_tabnav ul .blog a.active, .nav_bar #main_tabnav ul .blog span.active {
       width: 58px;
       background-image: url(/images/nav_bar/blog_active.png); }
-    .nav_bar #main_tabnav ul .person a.active, .nav_bar #main_tabnav ul .person span.active, .nav_bar #main_tabnav ul .grow span.active {
-      width: 132px;
-      background: url(/images/nav_bar/person_active.png) no-repeat center bottom; }
     .nav_bar #main_tabnav ul .my_network {
       position: relative; }
       .nav_bar #main_tabnav ul .my_network a.active, .nav_bar #main_tabnav ul .my_network span.active {
