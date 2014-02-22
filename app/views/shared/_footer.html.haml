@@ -3,18 +3,18 @@
     %ul
       %li= link_to 'Home', root_path
       - unless current_user
-        %li= link_to 'Your 5-a-day', new_person_path
+        %li= link_to 'Your mindapples', new_person_path
       %li= link_to 'Explore', mindapples_path
       %li= link_to 'Services', services_path
-      %li= link_to 'Join us', grow_path
-      %li= link_to 'About us', about_path
-      %li= link_to 'Blog', 'http://blog.mindapples.org'
+      %li= link_to 'Community', grow_path
+      %li= link_to 'About', about_path
+      %li= link_to 'News', 'http://blog.mindapples.org'
       %li= link_to 'Terms & conditions', terms_path
       %li= link_to 'Privacy', privacy_path
       %li= link_to 'Contact us', contact_path
   .site-credits
     %p.footer_sentences
-      This site was built by 
+      This site was built by Tom Ten Thij, 
       = link_to('Unboxed Consulting', 'http://www.unboxedconsulting.com', :target => '_blank') 
       and the
       = link_to 'Mindapples volunteers', team_path

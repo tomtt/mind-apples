@@ -174,7 +174,8 @@ body {
     .outer_page_wrapper .inner_page_wrapper #footer li {
       display: inline;
       font-weight: bold;
-      font-size: 1.4em;
+      text-transform: uppercase;
+      font-size: 1.2em;
       list-style: none;
       margin: 0 10px; }
     .outer_page_wrapper .inner_page_wrapper #footer a {
@@ -184,7 +185,7 @@ body {
       padding-top: 4px; }
     .outer_page_wrapper .inner_page_wrapper #footer .site-credits {
       text-align: right;
-      font-size: 1.1em;
+      font-size: 1.2em;
       margin-top: 3px;
       color: white;
       overflow: hidden;
@@ -270,7 +271,8 @@ body {
         font-weight: bold;
         font-size: 1.2em;
         color: white;
-        text-decoration: none; }
+        text-decoration: none;
+        text-transform: uppercase; }
     .nav_bar #main_tabnav ul .home a.active, .nav_bar #main_tabnav ul .home span.active {
       width: 72px;
       background-image: url(/images/nav_bar/home_active.png); }
