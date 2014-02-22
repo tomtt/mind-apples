@@ -7,17 +7,17 @@
     - add_tab do |t|
       - t.named 'Training'
       - t.links_to :controller => :pages, :action => :training
-      - t.html= {:class => 'services services_training'}
+      - t.html= {:class => 'services services_research'}
     - add_tab do |t|
       - t.named 'Consulting'
       - t.links_to :controller => :pages, :action => :insights
-      - t.html= {:class => 'services services_research'}
+      - t.html= {:class => 'services services_training'}
     - add_tab do |t|
       - t.named 'Wellbeing programmes'
       - t.links_to :controller => :pages, :action => :programmes
       - t.html= {:class => 'services services_wellbeing_programmes'}
     - add_tab do |t|
-      - t.named 'Recent projects'
+      - t.named 'Case studies'
       - t.links_to :controller => :pages, :action => :testimonials
       - t.html= {:class => 'services services_testimonials'}
 
