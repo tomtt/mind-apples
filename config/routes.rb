@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.media '/about/media', :controller => "pages", :action => "media"
   map.jobs '/about/jobs', :controller => "pages", :action => "jobs"
   map.faqs '/about/faqs', :controller => "pages", :action => "faqs"
+  map.media '/about/projects', :controller => "pages", :action => "projects"
 
   # Sales pages
   map.services '/services', :controller => "pages", :action => "services"
