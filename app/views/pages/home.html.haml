@@ -1,7 +1,4 @@
 .right_column_wide
-  .promotion
-    %a{:href => "/grow/events"}
-      %img{:alt => "Foundations of mental wellbeing: a one-day course for HR professionals", :width => "390", :height => "245", :src => "/images/content/advert-hr-event.png", :border => "0"}
   - if current_user.nil?
     .five-a-day
       .inner-top
@@ -15,6 +12,9 @@
 
   .promotion
     = facebook_like_box
+  .promotion
+    <a class="twitter-timeline"  href="https://twitter.com/mindapples"  data-widget-id="437179320625152000">Tweets by @mindapples</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 .main_content
   %dl.mindapples_definition
