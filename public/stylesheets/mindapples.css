@@ -124,6 +124,7 @@ body {
       .outer_page_wrapper .inner_page_wrapper .page_main h1 {
         font-size: 2em;
         line-height: 1.4em;
+        font-family: "league-gothic",sans-serif;
       }
       .outer_page_wrapper .inner_page_wrapper .page_main .page_flip_top {
         width: 65px;
@@ -1083,7 +1084,9 @@ label {
 
 h2 {
   background: url(/images/headings/green_bg.png) no-repeat left center;
-  color: #fff;
+  color: #ebebe4;
+  font-family: "museo-slab",sans-serif;
+  font-size: 1.6em;
   font-weight: bold;
   line-height: 37px;
   margin-bottom: 15px;
