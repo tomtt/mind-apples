@@ -26,11 +26,19 @@
       - t.highlights_on :controller => :pages, :action => :training
       - t.highlights_on :controller => :pages, :action => :programmes
       - t.highlights_on :controller => :pages, :action => :testimonials
+      - t.highlights_on :controller => :pages, :action => :yourmind
+      - t.highlights_on :controller => :pages, :action => :business
       - t.html= {:class => 'services'}
     - add_tab do |t|
       - t.named 'Community'
       - t.links_to grow_path
       - t.highlights_on :controller => :pages, :action => :join_us
+      - t.highlights_on :controller => :pages, :action => :volunteer
+      - t.highlights_on :controller => :pages, :action => :partnerships
+      - t.highlights_on :controller => :pages, :action => :grow_your_own
+      - t.highlights_on :controller => :pages, :action => :events
+      - t.highlights_on :controller => :pages, :action => :shop
+      - t.highlights_on :controller => :pages, :action => :tree
       - t.html= {:class => 'grow'}
     - add_tab do |t|
       - t.named 'About'
@@ -38,6 +46,9 @@
       - t.highlights_on :controller => :pages, :action => :about
       - t.highlights_on :controller => :pages, :action => :team
       - t.highlights_on :controller => :pages, :action => :organisation
+      - t.highlights_on :controller => :pages, :action => :faqs
+      - t.highlights_on :controller => :pages, :action => :how_we_got_here
+      - t.highlights_on :controller => :pages, :action => :projects
       - t.highlights_on :controller => :pages, :action => :evidence
       - t.highlights_on :controller => :pages, :action => :contact
       - t.highlights_on :controller => :pages, :action => :media
