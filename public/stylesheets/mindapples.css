@@ -119,7 +119,7 @@ body {
       margin-bottom: 211px;
       padding-bottom: 60px;
       padding-top: 10px;
-      font-size: 1.2em;
+      font-size: 1.4em;
       line-height: 1.65em; }
       .outer_page_wrapper .inner_page_wrapper .page_main h1 {
         font-size: 2em;
@@ -269,7 +269,7 @@ body {
         text-align: center;
         font-family: helvetica neue, arial, sans;
         font-weight: bold;
-        font-size: 1.2em;
+        font-size: 1em;
         color: white;
         text-decoration: none;
         text-transform: uppercase; }
@@ -487,7 +487,7 @@ body {
   .sub_central .inner {
     background: url(/images/layout/bg-center-content.png) repeat-y center top;
     padding: 1px 39px;
-    color: #7d7d83; }
+    color: #444447; }
   .sub_central h1 {
     margin-bottom: 1em; }
   .sub_central p {
