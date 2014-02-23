@@ -125,6 +125,7 @@ body {
         font-size: 2.4em;
         line-height: 1.6em;
         font-family: "league-gothic",sans-serif;
+        font-weight: normal;
         text-transform: uppercase;
       }
       .outer_page_wrapper .inner_page_wrapper .page_main .page_flip_top {
@@ -1087,7 +1088,7 @@ h2 {
   background: url(/images/headings/green_bg.png) no-repeat left center;
   color: #ebebe4;
   font-family: "museo-slab",sans-serif;
-  font-size: 1.4em;
+  font-size: 1.3em;
   line-height: 37px;
   margin-bottom: 15px;
   padding: 0 15px; }
