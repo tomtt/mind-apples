@@ -187,10 +187,10 @@ body {
     .outer_page_wrapper .inner_page_wrapper #footer p.footer_sentences {
       padding-top: 4px; }
     .outer_page_wrapper .inner_page_wrapper #footer .site-credits {
-      text-align: right;
+      text-align: center;
       font-size: 1.2em;
       margin-top: 3px;
-      color: white;
+      color: #ebebe4;
       overflow: hidden;
       padding-top: 10px;
       width: 1004px;
