@@ -1200,10 +1200,16 @@ dl.mindapples_definition {
   margin-bottom: 1.5em; }
 #news h3 {
   color: #444447;
-  font-size: 1.5em;
+  font-family: "league-gothic",sans-serif;
+  font-size: 2.2em;
   font-weight: normal;
+  text-transform:uppercase;
   line-height: 1;
-  padding: 0.5em 0; }
+  padding: 0.5em 0; } 
+#news a,a.visited {
+  color: #444447; }
+#news a.hover,a.active {  
+  colour: #cf4431; }
 #news p.meta {
   color: #7d7d83; }
 
