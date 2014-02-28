@@ -22,17 +22,13 @@
   
 %p
   “I have worked with Mindapples for a number of years. Their message is simple and compelling and fit for purpose for any audience, particularly those organisations who want to unlock the potential within their people. Highly recommended.”
-  %br
   %b
     Patrick Watt, Director of Corporate Business, Bupa Health & Wellbeing
  
 %p
   %b
     If you know someone whose business needs a lift, drop us a line at 
-    = link_to('business@mindapples.org', 'business@mindapples.org') + "."  
-
-%p    
-  Here's what we offer to our commercial clients:
+    = link_to('business@mindapples.org', 'mailto:business@mindapples.org') + "."  
 
 %h2
   Health & wellness
@@ -50,13 +46,14 @@
 %p
   %i
     "Mindapples and its simple but effective concept of five a day is a great platform for sharing ideas and challenges us to help ourselves while taking control of our mental attitude and health."
-  %br
   %b
     Una Murphy, Manager, BBC Careerlink
 
 %p
   %b
     = link_to('Read more about our health & wellness services here', engagement_path)
+    or
+    = link_to('contact us to build a package that suits your needs', contact_path) + "."
 
 %h2
   Learning & development
@@ -67,17 +64,11 @@
 %p
   %i
     "The team enjoyed it and also got a lot out of it in terms of practical hints and tips and tools"
-  %br
   %b
     Lynne Baber, pricewaterhousecoopers
   
 %p
   %b
-    = link_to('Read more about our learning & development programmes here', engagement_path)  
-
-%p
-   
-  
-%p
-  %b
-    = link_to('Contact us now to build a package that suits your needs', contact_path) + "."
+    = link_to('Read more about our learning & development programmes here', training_path)  
+    or
+    = link_to('contact us to build a package that suits your needs', contact_path) + "."
