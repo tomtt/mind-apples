@@ -8,13 +8,13 @@ Feature: Footer menu
 
   Scenario Outline: clicking all the links in the footer menu of a page
     When I go to the <page>
-    And I follow "Your 5-a-day"
+    And I follow "Your mindapples"
     And I go to the <page>
     And I follow "Services"
     And I go to the <page>
-    And I follow "Join us"
+    And I follow "Campaign"
     And I go to the <page>
-    And I follow "About us"
+    And I follow "About"
     And I go to the <page>
     And I follow "Contact"
     And I go to the <page>

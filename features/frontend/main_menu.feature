@@ -15,8 +15,8 @@ Feature: Main menu
     When I follow "Services"
     Then only "Services" should be highlighted in the main menu
 
-    When I follow "Community"
-    Then only "Community" should be highlighted in the main menu
+    When I follow "Campaign"
+    Then only "Campaign" should be highlighted in the main menu
 
     When I follow "About"
     Then only "About" should be highlighted in the main menu
@@ -38,8 +38,8 @@ Feature: Main menu
     When I follow "Services"
     Then only "Services" should be highlighted in the main menu
 
-    When I follow "Community"
-    Then only "Community" should be highlighted in the main menu
+    When I follow "Campaign"
+    Then only "Campaign" should be highlighted in the main menu
 
     When I follow "About"
     Then only "About" should be highlighted in the main menu
