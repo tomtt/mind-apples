@@ -1,23 +1,23 @@
 - content_for :content do
   - render_tabnav :sub do
     - add_tab do |t|
-      - t.named 'Wellbeing'
+      - t.named 'Engagement'
       - t.links_to :controller => :pages, :action => :engagement
       - t.html= {:class => 'services services_engagement'}
     - add_tab do |t|
-      - t.named 'Learning'
+      - t.named 'Training'
       - t.links_to :controller => :pages, :action => :training
       - t.html= {:class => 'services services_research'}
     - add_tab do |t|
-      - t.named 'Consulting'
+      - t.named 'Consultancy'
       - t.links_to :controller => :pages, :action => :insights
       - t.html= {:class => 'services services_training'}
     - add_tab do |t|
-      - t.named 'Corporate programmes'
+      - t.named 'Wellness programmes'
       - t.links_to :controller => :pages, :action => :programmes
       - t.html= {:class => 'services services_wellbeing_programmes'}
     - add_tab do |t|
-      - t.named 'Case studies'
+      - t.named 'Testimonials'
       - t.links_to :controller => :pages, :action => :testimonials
       - t.html= {:class => 'services services_testimonials'}
 
