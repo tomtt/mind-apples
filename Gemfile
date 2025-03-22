@@ -12,7 +12,7 @@ gem "paperclip", '2.3.8'
 gem "hoptoad_notifier", '2.3.12'
 gem "taps", "~> 0.3.22"
 gem "aws-s3", '0.6.2'
-gem "nokogiri", '1.5.0'
+gem "nokogiri", '1.18.4'
 
 group :development, :test, :cucumber do
   gem "heroku"
